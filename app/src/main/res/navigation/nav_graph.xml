@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_fragment_home">
+
+    <fragment
+        android:id="@+id/nav_fragment_home"
+        android:name="com.example.chessmate.ui.fragment.HomeFragment"
+        android:label="@string/bottom_nav_home"
+        tools:layout="@layout/fragment_home"/>
+
+    <fragment
+        android:id="@+id/nav_fragment_puzzles"
+        android:name="com.example.chessmate.ui.fragment.PuzzlesFragment"
+        android:label="@string/bottom_nav_puzzles"
+        tools:layout="@layout/fragment_puzzles"/>
+
+    <fragment
+        android:id="@+id/nav_fragment_learn"
+        android:name="com.example.chessmate.ui.fragment.LearnFragment"
+        android:label="@string/bottom_nav_learn"
+        tools:layout="@layout/fragment_learn"/>
+
+    <fragment
+        android:id="@+id/nav_fragment_profile"
+        android:name="com.example.chessmate.ui.fragment.ProfileFragment"
+        android:label="@string/bottom_nav_profile"
+        tools:layout="@layout/fragment_profile"/>
+
+    <fragment
+        android:id="@+id/nav_fragment_more"
+        android:name="com.example.chessmate.ui.fragment.MoreFragment"
+        android:label="@string/bottom_nav_more"
+        tools:layout="@layout/fragment_more"/>
+
+</navigation>
