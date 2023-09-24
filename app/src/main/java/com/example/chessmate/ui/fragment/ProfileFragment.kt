@@ -22,10 +22,13 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+        return inflater.inflate(R.layout.fragment_profile, container, false)
+    }
+
+    override fun onResume() {
+        super.onResume()
         val textView: TextView = requireActivity().findViewById(R.id.main_toolbar_title)
         textView.text = getString(R.string.bottom_nav_profile)
-        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

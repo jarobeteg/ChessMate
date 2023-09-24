@@ -1,6 +1,5 @@
 package com.example.chessmate.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
@@ -9,7 +8,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.chessmate.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AbsThemeActivity() {
     private lateinit var navController : NavController
     private lateinit var bottomNavigationView : BottomNavigationView
     private lateinit var mainToolbar : Toolbar

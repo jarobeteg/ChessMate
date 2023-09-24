@@ -28,9 +28,12 @@ class MoreFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_more, container, false)
-        val textView: TextView = requireActivity().findViewById(R.id.main_toolbar_title)
-        textView.text = getString(R.string.bottom_nav_more)
+        return inflater.inflate(R.layout.fragment_more, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         val recyclerView: RecyclerView = view.findViewById(R.id.moreFragment_recyclerView)
         val items = listOf(
             Item("Settings Menu") { startActivity(SettingsActivity::class.java) }
@@ -38,7 +41,12 @@ class MoreFragment : Fragment() {
         val adapter = MoreAdapter(items)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
-        return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val textView: TextView? = requireActivity().findViewById(R.id.main_toolbar_title)
+        textView?.text = getString(R.string.bottom_nav_more)
     }
 
     private fun startActivity(activityClass: Class<*>){

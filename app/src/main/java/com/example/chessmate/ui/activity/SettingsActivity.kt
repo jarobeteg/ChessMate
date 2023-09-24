@@ -1,17 +1,17 @@
 package com.example.chessmate.ui.activity
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.example.chessmate.R
 
-class SettingsActivity : AppCompatActivity() {
+class SettingsActivity : AbsThemeActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        updateTheme()
         setContentView(R.layout.settings_activity)
         if (savedInstanceState == null) {
             supportFragmentManager

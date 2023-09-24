@@ -8,7 +8,6 @@ import com.example.chessmate.R
 
 class ThemeUtil (context: Context){
     private var context: Context
-    private var selectedTheme: Int = -1
 
     private lateinit var sharedPref: SharedPreferences
 
@@ -20,7 +19,7 @@ class ThemeUtil (context: Context){
         this.context = context
     }
 
-    fun setThemeType(){
+    fun setThemeType(): Int{
         sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
 
         val newThemeKey = context.getString(R.string.pref_theme_key)
@@ -31,7 +30,7 @@ class ThemeUtil (context: Context){
         val defaultColorValue = context.getString(R.string.default_color_value)
         val newColor = sharedPref.getString(newColorKey, defaultColorValue) ?: defaultColorValue
 
-        if (newTheme == themeDay) {
+        return if (newTheme == themeDay) {
             dayTheme(newColor)
         } else if (newTheme == themeNight) {
             nightTheme(newColor)
@@ -42,51 +41,37 @@ class ThemeUtil (context: Context){
                 dayTheme(newColor)
             }
         }else{
-            defaultTheme()
+            R.style.Theme_ChessMate_Light_Teal
         }
     }
 
-    private fun dayTheme(currentColor: String){
-        when (currentColor){
-            "teal" -> selectedTheme = R.style.Theme_ChessMate_Light_Teal
-            "indigo" -> selectedTheme = R.style.Theme_ChessMate_Light_Indigo
-            "purple" -> selectedTheme = R.style.Theme_ChessMate_Light_Purple
-            "blue" -> selectedTheme = R.style.Theme_ChessMate_Light_Blue
-            "green" -> selectedTheme = R.style.Theme_ChessMate_Light_Green
-            "amber" -> selectedTheme = R.style.Theme_ChessMate_Light_Amber
-            "red" -> selectedTheme = R.style.Theme_ChessMate_Light_Red
-            "orange" -> selectedTheme = R.style.Theme_ChessMate_Light_Orange
-            else -> defaultTheme()
+    private fun dayTheme(currentColor: String): Int{
+        return when (currentColor){
+            "teal" -> R.style.Theme_ChessMate_Light_Teal
+            "indigo" -> R.style.Theme_ChessMate_Light_Indigo
+            "purple" -> R.style.Theme_ChessMate_Light_Purple
+            "blue" -> R.style.Theme_ChessMate_Light_Blue
+            "green" -> R.style.Theme_ChessMate_Light_Green
+            "amber" -> R.style.Theme_ChessMate_Light_Amber
+            "red" -> R.style.Theme_ChessMate_Light_Red
+            "orange" -> R.style.Theme_ChessMate_Light_Orange
+            else -> R.style.Theme_ChessMate_Light_Teal
         }
-        setSelectedTheme()
     }
 
-    private fun nightTheme(currentColor: String){
-        when (currentColor){
-            "teal" -> selectedTheme = R.style.Theme_ChessMate_Dark_Teal
-            "indigo" -> selectedTheme = R.style.Theme_ChessMate_Dark_Indigo
-            "purple" -> selectedTheme = R.style.Theme_ChessMate_Dark_Purple
-            "blue" -> selectedTheme = R.style.Theme_ChessMate_Dark_Blue
-            "green" -> selectedTheme = R.style.Theme_ChessMate_Dark_Green
-            "amber" -> selectedTheme = R.style.Theme_ChessMate_Dark_Amber
-            "red" -> selectedTheme = R.style.Theme_ChessMate_Dark_Red
-            "orange" -> selectedTheme = R.style.Theme_ChessMate_Dark_Orange
-            else -> defaultTheme()
+    private fun nightTheme(currentColor: String): Int{
+        return when (currentColor){
+            "teal" -> R.style.Theme_ChessMate_Dark_Teal
+            "indigo" -> R.style.Theme_ChessMate_Dark_Indigo
+            "purple" -> R.style.Theme_ChessMate_Dark_Purple
+            "blue" -> R.style.Theme_ChessMate_Dark_Blue
+            "green" -> R.style.Theme_ChessMate_Dark_Green
+            "amber" -> R.style.Theme_ChessMate_Dark_Amber
+            "red" -> R.style.Theme_ChessMate_Dark_Red
+            "orange" -> R.style.Theme_ChessMate_Dark_Orange
+            else -> R.style.Theme_ChessMate_Light_Teal
         }
-        setSelectedTheme()
     }
-
-    private fun defaultTheme(){
-        selectedTheme = R.style.Theme_ChessMate_Light_Teal
-        setSelectedTheme()
-    }
-
-    private fun setSelectedTheme(){
-        val editor = sharedPref.edit()
-        editor.putInt("selectedTheme", selectedTheme)
-        editor.apply()
-    }
-
     private fun dayOrNight(): Boolean{
         return context.resources.configuration.uiMode == Configuration.UI_MODE_NIGHT_MASK
     }

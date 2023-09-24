@@ -22,10 +22,13 @@ class LearnFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_learn, container, false)
+        return inflater.inflate(R.layout.fragment_learn, container, false)
+    }
+
+    override fun onResume() {
+        super.onResume()
         val textView: TextView = requireActivity().findViewById(R.id.main_toolbar_title)
         textView.text = getString(R.string.bottom_nav_learn)
-        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
