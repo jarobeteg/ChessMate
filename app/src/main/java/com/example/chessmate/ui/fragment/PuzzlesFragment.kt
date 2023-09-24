@@ -27,8 +27,8 @@ class PuzzlesFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val textView: TextView = requireActivity().findViewById(R.id.main_toolbar_title)
-        textView.text = getString(R.string.bottom_nav_puzzles)
+        val textView: TextView? = requireActivity().findViewById(R.id.main_toolbar_title)
+        textView?.text = getString(R.string.bottom_nav_puzzles)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

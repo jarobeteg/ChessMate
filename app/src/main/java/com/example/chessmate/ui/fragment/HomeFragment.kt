@@ -27,8 +27,8 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val textView: TextView = requireActivity().findViewById(R.id.main_toolbar_title)
-        textView.text = getString(R.string.app_name)
+        val textView: TextView? = requireActivity().findViewById(R.id.main_toolbar_title)
+        textView?.text = getString(R.string.app_name)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

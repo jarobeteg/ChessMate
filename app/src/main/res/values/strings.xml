@@ -14,7 +14,7 @@
     <string name="general_header">General</string>
 
     <!--ListPreference Theme-->
-    <string name="theme_title">Theme Selection</string>
+    <string name="theme_title">App Theme Selection</string>
     <string name="theme_summary">Personalize your app\'s look and feel by choosing between different themes.</string>
     <string name="theme_day">Day</string>
     <string name="theme_night">Night</string>

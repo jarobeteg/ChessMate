@@ -27,8 +27,8 @@ class ProfileFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val textView: TextView = requireActivity().findViewById(R.id.main_toolbar_title)
-        textView.text = getString(R.string.bottom_nav_profile)
+        val textView: TextView? = requireActivity().findViewById(R.id.main_toolbar_title)
+        textView?.text = getString(R.string.bottom_nav_profile)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
