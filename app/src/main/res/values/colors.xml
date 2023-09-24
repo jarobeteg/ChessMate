@@ -3,6 +3,39 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#808080</color>
-    <color name="selected_icon_color">#0B4F6C</color>
-    <color name="nav_toolbar_color">#DCC7BE</color>
+    <color name="nav_toolbar_color">#333333</color>
+
+    <!--Theme colors-->
+    <!--Teal-->
+    <color name="tealPrimary">#008577</color>
+    <color name="tealPrimaryDark">#00574B</color>
+    <color name="tealAccent">#4DB6AC</color>
+    <!--Indigo-->
+    <color name="indigoPrimary">#3F51B5</color>
+    <color name="indigoPrimaryDark">#303F9F</color>
+    <color name="indigoAccent">#C5CAE9</color>
+    <!--Purple-->
+    <color name="purplePrimary">#9C27B0</color>
+    <color name="purplePrimaryDark">#7B1FA2</color>
+    <color name="purpleAccent">#E1BEE7</color>
+    <!--Blue-->
+    <color name="bluePrimary">#2196F3</color>
+    <color name="bluePrimaryDark">#1976D2</color>
+    <color name="blueAccent">#BBDEFB</color>
+    <!--Green-->
+    <color name="greenPrimary">#4CAF50</color>
+    <color name="greenPrimaryDark">#388E3C</color>
+    <color name="greenAccent">#C8E6C9</color>
+    <!--Amber-->
+    <color name="amberPrimary">#FFC107</color>
+    <color name="amberPrimaryDark">#FFA000</color>
+    <color name="amberAccent">#FFECB3</color>
+    <!--Red-->
+    <color name="redPrimary">#F44336</color>
+    <color name="redPrimaryDark">#D32F2F</color>
+    <color name="redAccent">#FFCDD2</color>
+    <!--Orange-->
+    <color name="orangePrimary">#FF9800</color>
+    <color name="orangePrimaryDark">#F57C00</color>
+    <color name="orangeAccent">#FFE0B2</color>
 </resources>

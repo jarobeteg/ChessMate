@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.example.chessmate.R
 import com.example.chessmate.ui.ViewModel.PuzzlesViewModel
 
@@ -21,7 +22,10 @@ class PuzzlesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_puzzles, container, false)
+        val view = inflater.inflate(R.layout.fragment_puzzles, container, false)
+        val textView: TextView = requireActivity().findViewById(R.id.main_toolbar_title)
+        textView.text = getString(R.string.bottom_nav_puzzles)
+        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

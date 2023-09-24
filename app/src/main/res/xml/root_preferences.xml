@@ -6,12 +6,22 @@
         app:iconSpaceReserved="false">
 
         <ListPreference
-            android:defaultValue="@string/default_theme"
+            android:defaultValue="@string/default_theme_value"
             android:entries="@array/pref_app_theme_entries"
             android:entryValues="@array/pref_app_theme_values"
             android:key="@string/pref_theme_key"
             app:title="@string/theme_title"
             app:summary="@string/theme_summary"
+            app:iconSpaceReserved="false"
+            />
+
+        <ListPreference
+            android:defaultValue="@string/default_color_value"
+            android:entries="@array/pref_app_color_entries"
+            android:entryValues="@array/pref_app_color_values"
+            android:key="@string/pref_color_key"
+            app:title="@string/color_title"
+            app:summary="@string/color_summary"
             app:iconSpaceReserved="false"
             />
 

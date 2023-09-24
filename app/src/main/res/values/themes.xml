@@ -1,9 +1,107 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.ChessMate" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:fontFamily">@font/custom_font</item>
     </style>
 
-    <style name="Theme.ChessMate" parent="Base.Theme.ChessMate" />
+    <style name="Theme.ChessMate" parent="Theme.Material3.DayNight.NoActionBar" />
+    <style name="Theme.ChessMate.Dark" parent="Theme.Material3.Dark.NoActionBar"/>
+
+    <!--Light themes-->
+    <style name="Theme.ChessMate.Light.Teal" parent="Theme.ChessMate">
+        <item name="colorPrimary">@color/tealPrimary</item>
+        <item name="colorPrimaryDark">@color/tealPrimaryDark</item>
+        <item name="colorAccent">@color/tealAccent</item>
+    </style>
+
+    <style name="Theme.ChessMate.Light.Indigo" parent="Theme.ChessMate">
+        <item name="colorPrimary">@color/indigoPrimary</item>
+        <item name="colorPrimaryDark">@color/indigoPrimaryDark</item>
+        <item name="colorAccent">@color/indigoAccent</item>
+    </style>
+
+    <style name="Theme.ChessMate.Light.Purple" parent="Theme.ChessMate">
+        <item name="colorPrimary">@color/purplePrimary</item>
+        <item name="colorPrimaryDark">@color/purplePrimaryDark</item>
+        <item name="colorAccent">@color/purpleAccent</item>
+    </style>
+
+    <style name="Theme.ChessMate.Light.Blue" parent="Theme.ChessMate">
+        <item name="colorPrimary">@color/bluePrimary</item>
+        <item name="colorPrimaryDark">@color/bluePrimaryDark</item>
+        <item name="colorAccent">@color/blueAccent</item>
+    </style>
+
+    <style name="Theme.ChessMate.Light.Green" parent="Theme.ChessMate">
+        <item name="colorPrimary">@color/greenPrimary</item>
+        <item name="colorPrimaryDark">@color/greenPrimaryDark</item>
+        <item name="colorAccent">@color/greenAccent</item>
+    </style>
+
+    <style name="Theme.ChessMate.Light.Amber" parent="Theme.ChessMate">
+        <item name="colorPrimary">@color/amberPrimary</item>
+        <item name="colorPrimaryDark">@color/amberPrimaryDark</item>
+        <item name="colorAccent">@color/amberAccent</item>
+    </style>
+
+    <style name="Theme.ChessMate.Light.Red" parent="Theme.ChessMate">
+        <item name="colorPrimary">@color/redPrimary</item>
+        <item name="colorPrimaryDark">@color/redPrimaryDark</item>
+        <item name="colorAccent">@color/redAccent</item>
+    </style>
+
+    <style name="Theme.ChessMate.Light.Orange" parent="Theme.ChessMate">
+        <item name="colorPrimary">@color/orangePrimary</item>
+        <item name="colorPrimaryDark">@color/orangePrimaryDark</item>
+        <item name="colorAccent">@color/orangeAccent</item>
+    </style>
+
+    <!--Dark themes-->
+    <style name="Theme.ChessMate.Dark.Teal" parent="Theme.ChessMate.Dark">
+        <item name="colorPrimary">@color/tealPrimary</item>
+        <item name="colorPrimaryDark">@color/tealPrimaryDark</item>
+        <item name="colorAccent">@color/tealAccent</item>
+    </style>
+
+    <style name="Theme.ChessMate.Dark.Indigo" parent="Theme.ChessMate.Dark">
+        <item name="colorPrimary">@color/indigoPrimary</item>
+        <item name="colorPrimaryDark">@color/indigoPrimaryDark</item>
+        <item name="colorAccent">@color/indigoAccent</item>
+    </style>
+
+    <style name="Theme.ChessMate.Dark.Purple" parent="Theme.ChessMate.Dark">
+        <item name="colorPrimary">@color/purplePrimary</item>
+        <item name="colorPrimaryDark">@color/purplePrimaryDark</item>
+        <item name="colorAccent">@color/purpleAccent</item>
+    </style>
+
+    <style name="Theme.ChessMate.Dark.Blue" parent="Theme.ChessMate.Dark">
+        <item name="colorPrimary">@color/bluePrimary</item>
+        <item name="colorPrimaryDark">@color/bluePrimaryDark</item>
+        <item name="colorAccent">@color/blueAccent</item>
+    </style>
+
+    <style name="Theme.ChessMate.Dark.Green" parent="Theme.ChessMate.Dark">
+        <item name="colorPrimary">@color/greenPrimary</item>
+        <item name="colorPrimaryDark">@color/greenPrimaryDark</item>
+        <item name="colorAccent">@color/greenAccent</item>
+    </style>
+
+    <style name="Theme.ChessMate.Dark.Amber" parent="Theme.ChessMate.Dark">
+        <item name="colorPrimary">@color/amberPrimary</item>
+        <item name="colorPrimaryDark">@color/amberPrimaryDark</item>
+        <item name="colorAccent">@color/amberAccent</item>
+    </style>
+
+    <style name="Theme.ChessMate.Dark.Red" parent="Theme.ChessMate.Dark">
+        <item name="colorPrimary">@color/redPrimary</item>
+        <item name="colorPrimaryDark">@color/redPrimaryDark</item>
+        <item name="colorAccent">@color/redAccent</item>
+    </style>
+
+    <style name="Theme.ChessMate.Dark.Orange" parent="Theme.ChessMate.Dark">
+        <item name="colorPrimary">@color/orangePrimary</item>
+        <item name="colorPrimaryDark">@color/orangePrimaryDark</item>
+        <item name="colorAccent">@color/orangeAccent</item>
+    </style>
 </resources>
