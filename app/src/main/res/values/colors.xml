@@ -6,36 +6,37 @@
     <color name="nav_toolbar_color">#333333</color>
 
     <!--Theme colors-->
+    <color name="lightThemeBackground">#F5F5F5</color>
     <!--Teal-->
-    <color name="tealPrimary">#008577</color>
-    <color name="tealPrimaryDark">#00574B</color>
-    <color name="tealAccent">#4DB6AC</color>
+    <color name="tealPrimary">#247B7B</color>
+    <color name="tealPrimaryDark">#0D5C63</color>
+    <color name="tealAccent">#44A1A0</color>
     <!--Indigo-->
-    <color name="indigoPrimary">#3F51B5</color>
-    <color name="indigoPrimaryDark">#303F9F</color>
-    <color name="indigoAccent">#C5CAE9</color>
-    <!--Purple-->
-    <color name="purplePrimary">#9C27B0</color>
-    <color name="purplePrimaryDark">#7B1FA2</color>
-    <color name="purpleAccent">#E1BEE7</color>
+    <color name="indigoPrimary">#820899</color>
+    <color name="indigoPrimaryDark">#700692</color>
+    <color name="indigoAccent">#B358B7</color>
+    <!--Dark Purple-->
+    <color name="darkPurplePrimary">#3F3244</color>
+    <color name="darkPurplePrimaryDark">#2F2235</color>
+    <color name="darkPurpleAccent">#60495A</color>
     <!--Blue-->
-    <color name="bluePrimary">#2196F3</color>
-    <color name="bluePrimaryDark">#1976D2</color>
-    <color name="blueAccent">#BBDEFB</color>
+    <color name="bluePrimary">#489FB5</color>
+    <color name="bluePrimaryDark">#16697A</color>
+    <color name="blueAccent">#82C0CC</color>
     <!--Green-->
-    <color name="greenPrimary">#4CAF50</color>
-    <color name="greenPrimaryDark">#388E3C</color>
-    <color name="greenAccent">#C8E6C9</color>
+    <color name="greenPrimary">#608437</color>
+    <color name="greenPrimaryDark">#31572C</color>
+    <color name="greenAccent">#709041</color>
     <!--Amber-->
-    <color name="amberPrimary">#FFC107</color>
-    <color name="amberPrimaryDark">#FFA000</color>
-    <color name="amberAccent">#FFECB3</color>
+    <color name="amberPrimary">#FFB700</color>
+    <color name="amberPrimaryDark">#FF9500</color>
+    <color name="amberAccent">#FFD000</color>
     <!--Red-->
-    <color name="redPrimary">#F44336</color>
-    <color name="redPrimaryDark">#D32F2F</color>
-    <color name="redAccent">#FFCDD2</color>
-    <!--Orange-->
-    <color name="orangePrimary">#FF9800</color>
-    <color name="orangePrimaryDark">#F57C00</color>
-    <color name="orangeAccent">#FFE0B2</color>
+    <color name="redPrimary">#C1121F</color>
+    <color name="redPrimaryDark">#9D0910</color>
+    <color name="redAccent">#C92E36</color>
+    <!--Pink-->
+    <color name="pinkPrimary">#FF4D6D</color>
+    <color name="pinkPrimaryDark">#C9184A</color>
+    <color name="pinkAccent">#FF8FA3</color>
 </resources>

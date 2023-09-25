@@ -27,12 +27,12 @@
     <string name="color_summary">Choose from eight different colors to customize the app\'s theme to your liking.</string>
     <string name="colorTeal">Teal</string>
     <string name="colorIndigo">Indigo</string>
-    <string name="colorPurple">Purple</string>
+    <string name="colorDarkPurple">Dark Purple</string>
     <string name="colorBlue">Blue</string>
     <string name="colorGreen">Green</string>
     <string name="colorAmber">Amber</string>
     <string name="colorRed">Red</string>
-    <string name="colorOrange">Orange</string>
+    <string name="colorPink">Pink</string>
     <string name="pref_color_key" translatable="false">app_color</string>
     <string name="default_color_value" translatable="false">teal</string>
 

@@ -49,12 +49,12 @@ class ThemeUtil (context: Context){
         return when (currentColor){
             "teal" -> R.style.Theme_ChessMate_Light_Teal
             "indigo" -> R.style.Theme_ChessMate_Light_Indigo
-            "purple" -> R.style.Theme_ChessMate_Light_Purple
+            "dark_purple" -> R.style.Theme_ChessMate_Light_DarkPurple
             "blue" -> R.style.Theme_ChessMate_Light_Blue
             "green" -> R.style.Theme_ChessMate_Light_Green
             "amber" -> R.style.Theme_ChessMate_Light_Amber
             "red" -> R.style.Theme_ChessMate_Light_Red
-            "orange" -> R.style.Theme_ChessMate_Light_Orange
+            "pink" -> R.style.Theme_ChessMate_Light_Pink
             else -> R.style.Theme_ChessMate_Light_Teal
         }
     }
@@ -63,12 +63,12 @@ class ThemeUtil (context: Context){
         return when (currentColor){
             "teal" -> R.style.Theme_ChessMate_Dark_Teal
             "indigo" -> R.style.Theme_ChessMate_Dark_Indigo
-            "purple" -> R.style.Theme_ChessMate_Dark_Purple
+            "dark_purple" -> R.style.Theme_ChessMate_Dark_DarkPurple
             "blue" -> R.style.Theme_ChessMate_Dark_Blue
             "green" -> R.style.Theme_ChessMate_Dark_Green
             "amber" -> R.style.Theme_ChessMate_Dark_Amber
             "red" -> R.style.Theme_ChessMate_Dark_Red
-            "orange" -> R.style.Theme_ChessMate_Dark_Orange
+            "pink" -> R.style.Theme_ChessMate_Dark_Pink
             else -> R.style.Theme_ChessMate_Light_Teal
         }
     }

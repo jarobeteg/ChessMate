@@ -4,7 +4,9 @@
         <item name="android:fontFamily">@font/custom_font</item>
     </style>
 
-    <style name="Theme.ChessMate" parent="Theme.Material3.DayNight.NoActionBar" />
+    <style name="Theme.ChessMate" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:colorBackground">@color/lightThemeBackground</item>
+    </style>
     <style name="Theme.ChessMate.Dark" parent="Theme.Material3.Dark.NoActionBar"/>
 
     <!--Light themes-->
@@ -20,10 +22,10 @@
         <item name="colorAccent">@color/indigoAccent</item>
     </style>
 
-    <style name="Theme.ChessMate.Light.Purple" parent="Theme.ChessMate">
-        <item name="colorPrimary">@color/purplePrimary</item>
-        <item name="colorPrimaryDark">@color/purplePrimaryDark</item>
-        <item name="colorAccent">@color/purpleAccent</item>
+    <style name="Theme.ChessMate.Light.DarkPurple" parent="Theme.ChessMate">
+        <item name="colorPrimary">@color/darkPurplePrimary</item>
+        <item name="colorPrimaryDark">@color/darkPurplePrimaryDark</item>
+        <item name="colorAccent">@color/darkPurpleAccent</item>
     </style>
 
     <style name="Theme.ChessMate.Light.Blue" parent="Theme.ChessMate">
@@ -50,10 +52,10 @@
         <item name="colorAccent">@color/redAccent</item>
     </style>
 
-    <style name="Theme.ChessMate.Light.Orange" parent="Theme.ChessMate">
-        <item name="colorPrimary">@color/orangePrimary</item>
-        <item name="colorPrimaryDark">@color/orangePrimaryDark</item>
-        <item name="colorAccent">@color/orangeAccent</item>
+    <style name="Theme.ChessMate.Light.Pink" parent="Theme.ChessMate">
+        <item name="colorPrimary">@color/pinkPrimary</item>
+        <item name="colorPrimaryDark">@color/pinkPrimaryDark</item>
+        <item name="colorAccent">@color/pinkAccent</item>
     </style>
 
     <!--Dark themes-->
@@ -69,10 +71,10 @@
         <item name="colorAccent">@color/indigoAccent</item>
     </style>
 
-    <style name="Theme.ChessMate.Dark.Purple" parent="Theme.ChessMate.Dark">
-        <item name="colorPrimary">@color/purplePrimary</item>
-        <item name="colorPrimaryDark">@color/purplePrimaryDark</item>
-        <item name="colorAccent">@color/purpleAccent</item>
+    <style name="Theme.ChessMate.Dark.DarkPurple" parent="Theme.ChessMate.Dark">
+        <item name="colorPrimary">@color/darkPurplePrimary</item>
+        <item name="colorPrimaryDark">@color/darkPurplePrimaryDark</item>
+        <item name="colorAccent">@color/darkPurpleAccent</item>
     </style>
 
     <style name="Theme.ChessMate.Dark.Blue" parent="Theme.ChessMate.Dark">
@@ -99,9 +101,9 @@
         <item name="colorAccent">@color/redAccent</item>
     </style>
 
-    <style name="Theme.ChessMate.Dark.Orange" parent="Theme.ChessMate.Dark">
-        <item name="colorPrimary">@color/orangePrimary</item>
-        <item name="colorPrimaryDark">@color/orangePrimaryDark</item>
-        <item name="colorAccent">@color/orangeAccent</item>
+    <style name="Theme.ChessMate.Dark.Pink" parent="Theme.ChessMate.Dark">
+        <item name="colorPrimary">@color/pinkPrimary</item>
+        <item name="colorPrimaryDark">@color/pinkPrimaryDark</item>
+        <item name="colorAccent">@color/pinkAccent</item>
     </style>
 </resources>

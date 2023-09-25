@@ -15,23 +15,23 @@
     <string-array name="pref_app_color_entries">
         <item>@string/colorTeal</item>
         <item>@string/colorIndigo</item>
-        <item>@string/colorPurple</item>
+        <item>@string/colorDarkPurple</item>
         <item>@string/colorBlue</item>
         <item>@string/colorGreen</item>
         <item>@string/colorAmber</item>
         <item>@string/colorRed</item>
-        <item>@string/colorOrange</item>
+        <item>@string/colorPink</item>
     </string-array>
 
     <string-array name="pref_app_color_values">
         <item>teal</item>
         <item>indigo</item>
-        <item>purple</item>
+        <item>dark_purple</item>
         <item>blue</item>
         <item>green</item>
         <item>amber</item>
         <item>red</item>
-        <item>orange</item>
+        <item>pink</item>
     </string-array>
     
 </resources>
