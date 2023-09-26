@@ -72,7 +72,8 @@ class ThemeUtil (context: Context){
             else -> R.style.Theme_ChessMate_Light_Teal
         }
     }
-    private fun dayOrNight(): Boolean{
-        return context.resources.configuration.uiMode == Configuration.UI_MODE_NIGHT_MASK
+    private fun dayOrNight(): Boolean {
+        return context.resources.configuration.uiMode and
+                Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
     }
 }

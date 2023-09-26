@@ -3,10 +3,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#808080</color>
-    <color name="nav_toolbar_color">#333333</color>
 
     <!--Theme colors-->
-    <color name="lightThemeBackground">#F5F5F5</color>
     <!--Teal-->
     <color name="tealPrimary">#247B7B</color>
     <color name="tealPrimaryDark">#0D5C63</color>

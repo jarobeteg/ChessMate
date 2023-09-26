@@ -4,10 +4,19 @@
         <item name="android:fontFamily">@font/custom_font</item>
     </style>
 
-    <style name="Theme.ChessMate" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:colorBackground">@color/lightThemeBackground</item>
-    </style>
+    <style name="Theme.ChessMate" parent="Theme.Material3.Light.NoActionBar"/>
     <style name="Theme.ChessMate.Dark" parent="Theme.Material3.Dark.NoActionBar"/>
+
+    <!--Custom dialogs for a few dark theme for better visibility-->
+    <style name="Theme.ChessMate.Dark.DarkPurple.Dialog" parent="Theme.Material3.Dark.Dialog">
+        <item name="colorPrimary">@color/darkPurpleAccent</item>
+        <item name="colorAccent">@color/darkPurplePrimary</item>
+    </style>
+
+    <style name="Theme.ChessMate.Dark.Indigo.Dialog" parent="Theme.Material3.Dark.Dialog">
+        <item name="colorPrimary">@color/indigoAccent</item>
+        <item name="colorAccent">@color/indigoPrimary</item>
+    </style>
 
     <!--Light themes-->
     <style name="Theme.ChessMate.Light.Teal" parent="Theme.ChessMate">
@@ -69,12 +78,14 @@
         <item name="colorPrimary">@color/indigoPrimary</item>
         <item name="colorPrimaryDark">@color/indigoPrimaryDark</item>
         <item name="colorAccent">@color/indigoAccent</item>
+        <item name="alertDialogTheme">@style/Theme.ChessMate.Dark.Indigo.Dialog</item>
     </style>
 
     <style name="Theme.ChessMate.Dark.DarkPurple" parent="Theme.ChessMate.Dark">
         <item name="colorPrimary">@color/darkPurplePrimary</item>
         <item name="colorPrimaryDark">@color/darkPurplePrimaryDark</item>
         <item name="colorAccent">@color/darkPurpleAccent</item>
+        <item name="alertDialogTheme">@style/Theme.ChessMate.Dark.DarkPurple.Dialog</item>
     </style>
 
     <style name="Theme.ChessMate.Dark.Blue" parent="Theme.ChessMate.Dark">
