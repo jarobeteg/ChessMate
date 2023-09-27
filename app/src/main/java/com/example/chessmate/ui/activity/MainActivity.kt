@@ -5,30 +5,54 @@ import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.example.chessmate.R
+import com.example.chessmate.adapter.MainViewPagerAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AbsThemeActivity() {
-    private lateinit var navController : NavController
     private lateinit var bottomNavigationView : BottomNavigationView
     private lateinit var mainToolbar : Toolbar
+    private lateinit var viewPager2: ViewPager2
+    private lateinit var adapter: MainViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        navController = findNavController(R.id.nav_host_fragment)
         bottomNavigationView = findViewById(R.id.bottom_navigation)
-        bottomNavigationView.setupWithNavController(navController)
+        viewPager2 = findViewById(R.id.mainViewPager)
 
         mainToolbar = findViewById(R.id.main_toolbar)
         setSupportActionBar(mainToolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        adapter = MainViewPagerAdapter(this)
+        viewPager2.adapter = adapter
+
+        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                bottomNavigationView.menu.getItem(position).isChecked = true
+            }
+        })
+
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            when(item.itemId){
+                R.id.nav_fragment_home -> viewPager2.setCurrentItem(0, true)
+                R.id.nav_fragment_puzzles -> viewPager2.setCurrentItem(1, true)
+                R.id.nav_fragment_learn -> viewPager2.setCurrentItem(2, true)
+                R.id.nav_fragment_profile -> viewPager2.setCurrentItem(3, true)
+                R.id.nav_fragment_more -> viewPager2.setCurrentItem(4, true)
+            }
+            true
+        }
     }
 
     override fun onBackPressed() {
-        if (!navController.popBackStack()){
+        if (viewPager2.currentItem == 0) {
             super.onBackPressed()
+        } else {
+            viewPager2.setCurrentItem(0, true)
         }
     }
 }
