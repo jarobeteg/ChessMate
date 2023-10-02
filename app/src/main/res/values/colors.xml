@@ -5,6 +5,7 @@
     <color name="grey">#808080</color>
 
     <!--Theme colors-->
+    <color name="splash_background">#0B1316</color>
     <!--Teal-->
     <color name="tealPrimary">#247B7B</color>
     <color name="tealPrimaryDark">#0D5C63</color>

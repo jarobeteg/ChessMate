@@ -7,6 +7,11 @@
     <style name="Theme.ChessMate" parent="Theme.Material3.Light.NoActionBar"/>
     <style name="Theme.ChessMate.Dark" parent="Theme.Material3.Dark.NoActionBar"/>
 
+    <!--Splash Theme-->
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/splash_background</item>
+    </style>
+
     <!--Custom dialogs for a few dark theme for better visibility-->
     <style name="Theme.ChessMate.Dark.DarkPurple.Dialog" parent="Theme.Material3.Dark.Dialog">
         <item name="colorPrimary">@color/darkPurpleAccent</item>

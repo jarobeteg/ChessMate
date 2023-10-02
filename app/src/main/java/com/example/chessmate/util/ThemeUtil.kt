@@ -69,7 +69,7 @@ class ThemeUtil (context: Context){
             "amber" -> R.style.Theme_ChessMate_Dark_Amber
             "red" -> R.style.Theme_ChessMate_Dark_Red
             "pink" -> R.style.Theme_ChessMate_Dark_Pink
-            else -> R.style.Theme_ChessMate_Light_Teal
+            else -> R.style.Theme_ChessMate_Dark_Teal
         }
     }
     private fun dayOrNight(): Boolean {
