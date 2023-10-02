@@ -1,10 +1,8 @@
 package com.example.chessmate.ui.activity
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.chessmate.R
 import com.example.chessmate.adapter.MainViewPagerAdapter
@@ -33,6 +31,7 @@ class MainActivity : AbsThemeActivity() {
         viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 bottomNavigationView.menu.getItem(position).isChecked = true
+                updateToolbarTitle(position)
             }
         })
 
@@ -54,5 +53,18 @@ class MainActivity : AbsThemeActivity() {
         } else {
             viewPager2.setCurrentItem(0, true)
         }
+    }
+
+    private fun updateToolbarTitle(position: Int) {
+        val newTitle = when (position) {
+            0 -> getString(R.string.app_name)
+            1 -> getString(R.string.bottom_nav_puzzles)
+            2 -> getString(R.string.bottom_nav_learn)
+            3 -> getString(R.string.bottom_nav_profile)
+            4 -> getString(R.string.bottom_nav_more)
+            else -> getString(R.string.app_name)
+        }
+        val textView: TextView? = findViewById(R.id.main_toolbar_title)
+        textView?.text = newTitle
     }
 }

@@ -7,13 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chessmate.R
 import com.example.chessmate.adapter.Item
 import com.example.chessmate.adapter.MoreAdapter
-import com.example.chessmate.ui.ViewModel.MoreViewModel
+import com.example.chessmate.ui.viewmodel.MoreViewModel
 import com.example.chessmate.ui.activity.SettingsActivity
 
 class MoreFragment : Fragment() {
@@ -41,12 +40,6 @@ class MoreFragment : Fragment() {
         val adapter = MoreAdapter(items)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val textView: TextView? = requireActivity().findViewById(R.id.main_toolbar_title)
-        textView?.text = getString(R.string.bottom_nav_more)
     }
 
     private fun startActivity(activityClass: Class<*>){

@@ -1,4 +1,4 @@
-package com.example.chessmate.ui.ViewModel
+package com.example.chessmate.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 

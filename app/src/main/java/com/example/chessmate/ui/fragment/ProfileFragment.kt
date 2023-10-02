@@ -6,9 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.example.chessmate.R
-import com.example.chessmate.ui.ViewModel.ProfileViewModel
+import com.example.chessmate.ui.viewmodel.ProfileViewModel
 
 class ProfileFragment : Fragment() {
 
@@ -23,12 +22,6 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_profile, container, false)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val textView: TextView? = requireActivity().findViewById(R.id.main_toolbar_title)
-        textView?.text = getString(R.string.bottom_nav_profile)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
