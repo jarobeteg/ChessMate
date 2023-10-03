@@ -1,13 +1,11 @@
 package com.example.chessmate.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chessmate.R
-import com.example.chessmate.ui.activity.SettingsActivity
 
 data class Item(val name: String, val action: () -> Unit)
 class MoreAdapter(private val items: List<Item>) : RecyclerView.Adapter<MoreAdapter.ViewHolder>() {
