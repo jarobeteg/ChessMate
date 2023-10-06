@@ -3,12 +3,257 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragment.ProfileFragment">
 
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:textSize="18sp"
+                android:includeFontPadding="false"
+                android:gravity="center"
+                android:background="@drawable/custom_rounded_textview"
+                android:padding="16dp"
+                app:drawableStartCompat="@drawable/ic_change_24"
+                app:drawableEndCompat="@drawable/ic_delete_24"/>
+
+            <TextView
+                android:id="@+id/level"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/level"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_marginTop="-22dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/openingRatingPoint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1200"
+                    android:textSize="18sp"
+                    android:includeFontPadding="false"
+                    android:gravity="center"
+                    android:background="@drawable/custom_rounded_textview"
+                    android:padding="16dp"/>
+
+                <TextView
+                    android:id="@+id/openingRatingTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/opening_rating_title"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:layout_marginTop="-22dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/midgameRatingPoint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1200"
+                    android:textSize="18sp"
+                    android:includeFontPadding="false"
+                    android:gravity="center"
+                    android:background="@drawable/custom_rounded_textview"
+                    android:padding="16dp"/>
+
+                <TextView
+                    android:id="@+id/midgameRatingTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/midgame_rating_title"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:layout_marginTop="-22dp"/>
+
+            </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/endgameRatingPoint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1200"
+                        android:textSize="18sp"
+                        android:includeFontPadding="false"
+                        android:gravity="center"
+                        android:background="@drawable/custom_rounded_textview"
+                        android:padding="16dp"/>
+
+                    <TextView
+                        android:id="@+id/endgameRatingTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/endgame_rating_title"
+                        android:textSize="12sp"
+                        android:gravity="center"
+                        android:layout_marginTop="-22dp"/>
+
+                </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/gamesPlayedValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1000"
+                    android:textSize="18sp"
+                    android:includeFontPadding="false"
+                    android:gravity="center"
+                    android:background="@drawable/custom_rounded_textview"
+                    android:padding="16dp"/>
+
+                <TextView
+                    android:id="@+id/gamesPlayedTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/games_played_title"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:layout_marginTop="-22dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/puzzlesPlayedValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1000"
+                    android:textSize="18sp"
+                    android:includeFontPadding="false"
+                    android:gravity="center"
+                    android:background="@drawable/custom_rounded_textview"
+                    android:padding="16dp"/>
+
+                <TextView
+                    android:id="@+id/puzzlesPlayedTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/puzzles_played_title"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:layout_marginTop="-22dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="24dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/lessonsTakenValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1000"
+                    android:textSize="18sp"
+                    android:includeFontPadding="false"
+                    android:gravity="center"
+                    android:background="@drawable/custom_rounded_textview"
+                    android:padding="16dp"/>
+
+                <TextView
+                    android:id="@+id/lessonsTakenTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lessons_taken_title"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:layout_marginTop="-22dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Profile fragment" />
+        android:text="@string/create_new_profile"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:includeFontPadding="false"
+        android:padding="16dp"
+        android:gravity="center"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_margin="16dp"
+        android:background="@drawable/custom_create_new_profile_button"/>
 
 </FrameLayout>

@@ -36,4 +36,13 @@
     <string name="pref_color_key" translatable="false">app_color</string>
     <string name="default_color_value" translatable="false">teal</string>
 
+    <!--Profile Fragment Strings-->
+    <string name="create_new_profile">Create New Profile</string>
+    <string name="opening_rating_title">Opening Rating</string>
+    <string name="midgame_rating_title">MidGame Rating</string>
+    <string name="endgame_rating_title">EndGame Rating</string>
+    <string name="games_played_title">Games Played</string>
+    <string name="puzzles_played_title">Puzzles Played</string>
+    <string name="lessons_taken_title">Lessons Taken</string>
+    <string name="level">Level:</string>
 </resources>
