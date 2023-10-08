@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.chessmate.database.dao.UserProfileDAO
 import com.example.chessmate.database.entity.UserProfile
 
-@Database(entities = [UserProfile::class], version = 1, exportSchema = false)
+@Database(entities = [UserProfile::class], version = 2, exportSchema = false)
 abstract class ChessMateDatabase: RoomDatabase() {
     abstract fun userProfileDAO(): UserProfileDAO
 
@@ -21,7 +21,7 @@ abstract class ChessMateDatabase: RoomDatabase() {
                     context.applicationContext,
                     ChessMateDatabase::class.java,
                     "chessmate_database"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 instance
             }

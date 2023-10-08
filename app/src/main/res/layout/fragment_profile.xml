@@ -24,7 +24,6 @@
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Username"
                 android:textSize="18sp"
                 android:includeFontPadding="false"
                 android:gravity="center"
@@ -63,7 +62,6 @@
                     android:id="@+id/openingRatingPoint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="1200"
                     android:textSize="18sp"
                     android:includeFontPadding="false"
                     android:gravity="center"
@@ -71,7 +69,6 @@
                     android:padding="16dp"/>
 
                 <TextView
-                    android:id="@+id/openingRatingTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/opening_rating_title"
@@ -93,7 +90,6 @@
                     android:id="@+id/midgameRatingPoint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="1200"
                     android:textSize="18sp"
                     android:includeFontPadding="false"
                     android:gravity="center"
@@ -101,7 +97,6 @@
                     android:padding="16dp"/>
 
                 <TextView
-                    android:id="@+id/midgameRatingTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/midgame_rating_title"
@@ -123,7 +118,6 @@
                         android:id="@+id/endgameRatingPoint"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="1200"
                         android:textSize="18sp"
                         android:includeFontPadding="false"
                         android:gravity="center"
@@ -131,7 +125,6 @@
                         android:padding="16dp"/>
 
                     <TextView
-                        android:id="@+id/endgameRatingTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/endgame_rating_title"
@@ -162,7 +155,6 @@
                     android:id="@+id/gamesPlayedValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="1000"
                     android:textSize="18sp"
                     android:includeFontPadding="false"
                     android:gravity="center"
@@ -170,7 +162,6 @@
                     android:padding="16dp"/>
 
                 <TextView
-                    android:id="@+id/gamesPlayedTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/games_played_title"
@@ -192,7 +183,6 @@
                     android:id="@+id/puzzlesPlayedValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="1000"
                     android:textSize="18sp"
                     android:includeFontPadding="false"
                     android:gravity="center"
@@ -200,7 +190,6 @@
                     android:padding="16dp"/>
 
                 <TextView
-                    android:id="@+id/puzzlesPlayedTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/puzzles_played_title"
@@ -222,7 +211,6 @@
                     android:id="@+id/lessonsTakenValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="1000"
                     android:textSize="18sp"
                     android:includeFontPadding="false"
                     android:gravity="center"
@@ -230,7 +218,6 @@
                     android:padding="16dp"/>
 
                 <TextView
-                    android:id="@+id/lessonsTakenTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/lessons_taken_title"
@@ -244,6 +231,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/createUserProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_new_profile"

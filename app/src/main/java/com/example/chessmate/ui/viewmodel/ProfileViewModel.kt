@@ -1,7 +1,30 @@
 package com.example.chessmate.ui.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.chessmate.database.UserProfileRepository
+import com.example.chessmate.database.entity.UserProfile
 
-class ProfileViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class ProfileViewModel(repository: UserProfileRepository): ViewModel() {
+    //This is for retrieving the profile from the database with error message if there is no active profiles in the database
+    private val _errorLiveData = MutableLiveData<String>()
+    val errorLiveData: LiveData<String> get() = _errorLiveData
+
+    val userProfileLiveData: LiveData<UserProfile> = repository.findActiveProfile { errorMessage ->
+        _errorLiveData.value = errorMessage
+    }
+
+    //This is the Create new profile button
+    private val _buttonClicked = MutableLiveData<Boolean>()
+    val buttonClicked: LiveData<Boolean>
+        get() = _buttonClicked
+
+    fun onCreateProfileClicked() {
+        _buttonClicked.value = true
+    }
+
+    fun onProfileCreationHandled() {
+        _buttonClicked.value = false
+    }
 }

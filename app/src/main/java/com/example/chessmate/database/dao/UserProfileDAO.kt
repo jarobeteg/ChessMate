@@ -17,4 +17,7 @@ interface UserProfileDAO {
 
     @Query("SELECT * FROM userprofile")
     fun getAllUsers(): LiveData<List<UserProfile>>
+
+    @Query("SELECT * FROM userprofile WHERE isActive = 1 LIMIT 1")
+    fun getActiveProfile(): LiveData<UserProfile>
 }
