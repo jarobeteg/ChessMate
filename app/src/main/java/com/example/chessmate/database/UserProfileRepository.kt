@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import com.example.chessmate.R
 import com.example.chessmate.database.dao.UserProfileDAO
 import com.example.chessmate.database.entity.UserProfile
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class UserProfileRepository(private val context: Context) {
 
@@ -58,5 +60,18 @@ class UserProfileRepository(private val context: Context) {
             }
         }
         return resultLiveData
+    }
+
+    suspend fun deactivateUserProfile(onError: (String) -> Unit): Boolean{
+        return try {
+            withContext(Dispatchers.IO) {
+                userProfileDAO.deactivateProfile()
+            }
+            true
+        } catch (ex: Exception) {
+            println("Exception caught here: ${ex.message}")
+            onError(context.getString(R.string.unexpected_error))
+            false
+        }
     }
 }

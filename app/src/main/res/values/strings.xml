@@ -49,6 +49,7 @@
     <!--UserProfileRepository strings-->
     <string name="failed_to_insert_user">Failed to insert user!</string>
     <string name="no_active_profile">Failed to find an active user! Guest profile loaded.</string>
+    <string name="unexpected_error">An unexpected error occurred. Please attempt to create a new profile.</string>
 
     <!--Question and answer strings for profile creation-->
     <string name="create_profile_title">Profile Creation</string>
