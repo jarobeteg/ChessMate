@@ -26,6 +26,7 @@ class MainActivity : AbsThemeActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         adapter = MainViewPagerAdapter(this)
+        viewPager2.offscreenPageLimit = 4 //Might need to remove it later if fragments get more complex
         viewPager2.adapter = adapter
 
         viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

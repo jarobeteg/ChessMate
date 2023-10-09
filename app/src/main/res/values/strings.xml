@@ -49,4 +49,48 @@
     <!--UserProfileRepository strings-->
     <string name="failed_to_insert_user">Failed to insert user!</string>
     <string name="no_active_profile">Failed to find an active user! Guest profile loaded.</string>
+
+    <!--Question and answer strings for profile creation-->
+    <string name="create_profile_title">Profile Creation</string>
+    <string name="enter_username">Username</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="create_profile_button">Create Profile</string>
+    <string name="not_all_questions_answered">You have to answer all questions!</string>
+    <string name="missing_username">You have to enter your username!</string>
+    <string name="no_username_and_answers">You have to enter your username and answer all questions!</string>
+
+    <string name="question1">1. Have you ever played chess before?</string>
+    <string name="answer1A">Yes, I\'m an experienced player.</string>
+    <string name="answer1B">Yes, but I\'m still learning.</string>
+    <string name="answer1C">No, I\'m completely new to chess.</string>
+
+    <string name="question2">2. How comfortable are you with the basic movement of chess pieces?</string>
+    <string name="answer2A">Very comfortable, I know how all the pieces move.</string>
+    <string name="answer2B">Somewhat comfortable, but I might need a refresher on a few pieces.</string>
+    <string name="answer2C">Not comfortable, I\'m not familiar with most piece movements.</string>
+
+    <string name="question3">3. Are you familiar with common chess strategies like forks, pins, and skewers?</string>
+    <string name="answer3A">Yes, I\'m familiar with advanced chess tactics.</string>
+    <string name="answer3B">I know some basic tactics but might need help with advanced ones.</string>
+    <string name="answer3C">No, I\'m not familiar with most chess strategies.</string>
+
+    <string name="question4">4. How often do you think ahead and plan your moves during a chess game?</string>
+    <string name="answer4A">I always plan several moves ahead and consider different strategies.</string>
+    <string name="answer4B">I plan a few moves ahead but sometimes miss strategic opportunities.</string>
+    <string name="answer4C">I mostly focus on my current move without planning too far ahead.</string>
+
+    <string name="question5">5. What does \'en passant\' mean in chess?</string>
+    <string name="answer5A">I know, it\'s a special pawn capture rule.</string>
+    <string name="answer5B">I\'ve heard of it but not sure about the details.</string>
+    <string name="answer5C">No, I\'m not familiar with that term.</string>
+
+    <string name="question6">6. When do you decide to trade pieces during a chess game?</string>
+    <string name="answer6A">I strategically trade pieces to gain an advantage or break my opponent\'s defenses.</string>
+    <string name="answer6B">I trade pieces based on immediate tactical opportunities.</string>
+    <string name="answer6C">I rarely consider piece trades during my games.</string>
+
+    <string name="question7">7. How often do you analyze your past chess games to learn from your mistakes?</string>
+    <string name="answer7A">I always review my games to identify areas for improvement.</string>
+    <string name="answer7B">I occasionally review my games to understand my mistakes.</string>
+    <string name="answer7C">I rarely or never analyze my past games.</string>
 </resources>

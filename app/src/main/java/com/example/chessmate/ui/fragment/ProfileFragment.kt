@@ -1,5 +1,7 @@
 package com.example.chessmate.ui.fragment
 
+import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,9 +11,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Observer
 import com.example.chessmate.R
 import com.example.chessmate.database.UserProfileRepository
+import com.example.chessmate.ui.activity.CreateProfile
 import com.example.chessmate.ui.viewmodel.ProfileViewModel
 import com.example.chessmate.ui.viewmodel.ViewModelFactory
 
@@ -30,6 +34,7 @@ class ProfileFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         userProfileRepository = UserProfileRepository(requireContext())
+        viewModel = ViewModelProvider(this, ViewModelFactory(userProfileRepository))[ProfileViewModel::class.java]
 
         val username = view.findViewById<TextView>(R.id.username)
         val level = view.findViewById<TextView>(R.id.level)
@@ -41,7 +46,15 @@ class ProfileFragment : Fragment() {
         val lessonsTaken = view.findViewById<TextView>(R.id.lessonsTakenValue)
         val createUserProfile = view.findViewById<Button>(R.id.createUserProfile)
 
-        viewModel = ViewModelProvider(this, ViewModelFactory(userProfileRepository))[ProfileViewModel::class.java]
+        val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+            if (result.resultCode == Activity.RESULT_OK){
+                val data: Intent? = result.data
+                val profileCreated = data?.getBooleanExtra("profileCreated", false) ?: false
+                if (profileCreated) {
+                    viewModel.onProfileCreationInitiated()
+                }
+            }
+        }
 
         viewModel.errorLiveData.observe(viewLifecycleOwner, Observer { errorMessage ->
             showErrorToUser(errorMessage)
@@ -59,14 +72,15 @@ class ProfileFragment : Fragment() {
             lessonsTaken.text = userProfile.lessonsTaken.toString()
         })
 
-        viewModel.buttonClicked.observe(viewLifecycleOwner, Observer { clicked ->
-            if (clicked){
-                viewModel.onProfileCreationHandled()
+        viewModel.initiateProfileCreation.observe(viewLifecycleOwner, Observer { initiate ->
+            if (initiate){
+                val createProfileIntent = Intent(requireContext(), CreateProfile::class.java)
+                resultLauncher.launch(createProfileIntent)
             }
         })
 
         createUserProfile.setOnClickListener {
-            viewModel.onCreateProfileClicked()
+            viewModel.initiateProfileCreation()
         }
 
         return view

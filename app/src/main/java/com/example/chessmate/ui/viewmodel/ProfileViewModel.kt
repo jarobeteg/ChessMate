@@ -15,16 +15,16 @@ class ProfileViewModel(repository: UserProfileRepository): ViewModel() {
         _errorLiveData.value = errorMessage
     }
 
-    //This is the Create new profile button
-    private val _buttonClicked = MutableLiveData<Boolean>()
-    val buttonClicked: LiveData<Boolean>
-        get() = _buttonClicked
+    //This is the Create new profile button. When the button is clicked it initiates the profile creation
+    private val _initiateProfileCreation = MutableLiveData<Boolean>()
+    val initiateProfileCreation: LiveData<Boolean>
+        get() = _initiateProfileCreation
 
-    fun onCreateProfileClicked() {
-        _buttonClicked.value = true
+    fun initiateProfileCreation() {
+        _initiateProfileCreation.value = true
     }
 
-    fun onProfileCreationHandled() {
-        _buttonClicked.value = false
+    fun onProfileCreationInitiated() {
+        _initiateProfileCreation.value = false
     }
 }

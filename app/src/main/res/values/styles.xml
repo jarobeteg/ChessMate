@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomScrollbar">
+        <item name="android:scrollbarThumbVertical">@drawable/custom_scrollbar_thumb</item>
+        <item name="android:scrollbarTrackVertical">@drawable/custom_scrollbar_track</item>
+    </style>
+</resources>
