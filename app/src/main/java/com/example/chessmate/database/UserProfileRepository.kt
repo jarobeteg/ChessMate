@@ -69,7 +69,6 @@ class UserProfileRepository(private val context: Context) {
             }
             true
         } catch (ex: Exception) {
-            println("Exception caught here: ${ex.message}")
             onError(context.getString(R.string.unexpected_error))
             false
         }
