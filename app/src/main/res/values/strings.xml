@@ -94,4 +94,7 @@
     <string name="answer7A">I always review my games to identify areas for improvement.</string>
     <string name="answer7B">I occasionally review my games to understand my mistakes.</string>
     <string name="answer7C">I rarely or never analyze my past games.</string>
+
+    <!--ChooseProfile string-->
+    <string name="choose_profile_title">Choose a Profile</string>
 </resources>

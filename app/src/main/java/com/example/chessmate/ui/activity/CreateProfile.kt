@@ -29,6 +29,8 @@ class CreateProfile : AbsThemeActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener{onBackPressed()}
 
+        //after the checkmark has been clicked we first check if a username have been answered and did the user have answered all the questions
+        //if not then the app will show the correct error message to the user explaining that they missed something
         val imageButton: ImageButton = findViewById(R.id.create_profile_checkmark)
         imageButton.setOnClickListener{
             if (!isUsernameEntered() || !areQuestionsAnswered()) {
@@ -42,6 +44,9 @@ class CreateProfile : AbsThemeActivity() {
                     showNotAllQuestionsAnswered()
                 }
             }else{
+                //if both username and all questions have been answered the app calls the createNewUserProfile through a Coroutine
+                //because the createNewUserProfile has suspend keyword in declaration because of the database queries and async code
+                //this will return to the profile fragment with a true result if everything went correctly
                 lifecycleScope.launch {
                     if (createNewUserProfile()) {
                         val resultIntent = Intent()
@@ -59,6 +64,7 @@ class CreateProfile : AbsThemeActivity() {
         }
     }
 
+    //this handles the new profile creation in the database and sets the current active profile inactive and the new profile active asynchronously
     private suspend fun createNewUserProfile(): Boolean{
         val username: String = findViewById<EditText>(R.id.new_profile_username).text.toString()
         val userRepo = UserProfileRepository(this)
@@ -92,6 +98,9 @@ class CreateProfile : AbsThemeActivity() {
 
         val deferred = CompletableDeferred<Boolean>()
 
+        //the async code part is important for the UI to function correctly otherwise the createNewUserProfile method returns earlier than the database query
+        //and the UI needs to update because we insert a new active profile while we deactivate the previous one and the UI will need to update because
+        //of the new active profile.
         lifecycleScope.launch {
             coroutineScope {
                 val deactivateResult = async {
@@ -122,6 +131,7 @@ class CreateProfile : AbsThemeActivity() {
         return deferred.await()
     }
 
+    //this evaluates the answers and returns the corresponding level for the profile
     private fun getNewProfileLevel(): Int {
         var levelPoints = 0
 
@@ -193,6 +203,7 @@ class CreateProfile : AbsThemeActivity() {
         return (levelPoints.toDouble() / 7).roundToInt()
     }
 
+    //this check if the user has answered to all questions and if they it the method returns true
     private fun areQuestionsAnswered(): Boolean{
         val radioQuestion1: RadioGroup = findViewById(R.id.question1)
         val radioQuestion2: RadioGroup = findViewById(R.id.question2)

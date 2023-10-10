@@ -27,4 +27,17 @@ class ProfileViewModel(repository: UserProfileRepository): ViewModel() {
     fun onProfileCreationInitiated() {
         _initiateProfileCreation.value = false
     }
+
+    //This is the Choose profile button. When the button is clicked it initiates the option to choose between profiles the user has created
+    private val _initiateChooseProfile = MutableLiveData<Boolean>()
+    val initiateChooseProfile: LiveData<Boolean>
+        get() = _initiateChooseProfile
+
+    fun initiateChooseProfile() {
+        _initiateChooseProfile.value = true
+    }
+
+    fun onChooseProfileInitiated() {
+        _initiateChooseProfile.value = false
+    }
 }

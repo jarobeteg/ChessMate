@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Observer
 import com.example.chessmate.R
 import com.example.chessmate.database.UserProfileRepository
+import com.example.chessmate.ui.activity.ChooseProfile
 import com.example.chessmate.ui.activity.CreateProfile
 import com.example.chessmate.ui.viewmodel.ProfileViewModel
 import com.example.chessmate.ui.viewmodel.ViewModelFactory
@@ -49,7 +50,8 @@ class ProfileFragment : Fragment() {
         val lessonsTaken = view.findViewById<TextView>(R.id.lessonsTakenValue)
         val createUserProfile = view.findViewById<Button>(R.id.createUserProfile)
 
-        val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+        //this waits for the CreateProfile activity's result. if the returned value is true it means that a profile has been created
+        val profileCreationLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
             if (result.resultCode == Activity.RESULT_OK){
                 val data: Intent? = result.data
                 val profileCreated = data?.getBooleanExtra("profileCreated", false) ?: false
@@ -59,10 +61,24 @@ class ProfileFragment : Fragment() {
             }
         }
 
+        //this waits for the ChooseProfile activity's result. if the returned value is true it means that the user has changed to a different profile
+        val chooseProfileLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+            if (result.resultCode == Activity.RESULT_OK){
+                val data: Intent? = result.data
+                val profileChosen = data?.getBooleanExtra("profileChosen", false) ?: false
+                if (profileChosen) {
+                    viewModel.onChooseProfileInitiated()
+                }
+            }
+        }
+
+        //this will call the showErrorToUser method and shows tells the user that no active profiles were found
         viewModel.errorLiveData.observe(viewLifecycleOwner, Observer { errorMessage ->
             showErrorToUser(errorMessage)
         })
 
+        //this observes the user profile data and displays it for the user
+        //because it's LiveData the UI should update automatically when a change occurs to the profile
         viewModel.userProfileLiveData.observe(viewLifecycleOwner, Observer { userProfile ->
             val levelText = getString(R.string.level) + userProfile.level
             username.text = userProfile.username
@@ -75,10 +91,19 @@ class ProfileFragment : Fragment() {
             lessonsTaken.text = userProfile.lessonsTaken.toString()
         })
 
+        //this is called when the user clicks the createUserProfile button
         viewModel.initiateProfileCreation.observe(viewLifecycleOwner, Observer { initiate ->
             if (initiate){
                 val createProfileIntent = Intent(requireContext(), CreateProfile::class.java)
-                resultLauncher.launch(createProfileIntent)
+                profileCreationLauncher.launch(createProfileIntent)
+            }
+        })
+
+        //this is called when the user click the changeProfile button
+        viewModel.initiateChooseProfile.observe(viewLifecycleOwner, Observer { initiate ->
+            if (initiate){
+                val chooseProfileIntent = Intent(requireContext(), ChooseProfile::class.java)
+                chooseProfileLauncher.launch(chooseProfileIntent)
             }
         })
 
@@ -86,9 +111,14 @@ class ProfileFragment : Fragment() {
             viewModel.initiateProfileCreation()
         }
 
+        changeProfile.setOnClickListener {
+            viewModel.initiateChooseProfile()
+        }
+
         return view
     }
 
+    //tells the user that no active profiles were found
     private fun showErrorToUser(errorMessage: String){
         Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
     }

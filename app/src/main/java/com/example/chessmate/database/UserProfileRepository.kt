@@ -20,6 +20,8 @@ class UserProfileRepository(private val context: Context) {
         database.userProfileDAO()
     }
 
+    //this returns all the profiles the user have created. the withContext(Dispatchers.IO) is critical here because
+    //it ensures that the database query doesn't block the main thread or any other critical thread to prevent UI freezes
     suspend fun getAllUsers(): List<UserProfile>{
         return try {
             withContext(Dispatchers.IO) {
@@ -30,6 +32,7 @@ class UserProfileRepository(private val context: Context) {
         }
     }
 
+    //this handles the insertion of a new profile into the database
     suspend fun insertUser(userProfile: UserProfile, onError: (String) -> Unit){
         try {
             userProfileDAO.insertUser(userProfile)
@@ -38,6 +41,8 @@ class UserProfileRepository(private val context: Context) {
         }
     }
 
+    //this finds the only active profile in the database and displays it in the profile fragment
+    //if there is no active profiles a guest profile is loaded
     fun findActiveProfile(onError: (String) -> Unit): LiveData<UserProfile>{
         val activeProfileLiveData = userProfileDAO.getActiveProfile()
 
@@ -64,6 +69,8 @@ class UserProfileRepository(private val context: Context) {
         return resultLiveData
     }
 
+    //this handles the current active profile's deactivation. the withContext(Dispatchers.IO) is critical here because
+    //it ensures that the database query doesn't block the main thread or any other critical thread to prevent UI freezes
     suspend fun deactivateUserProfile(onError: (String) -> Unit): Boolean{
         return try {
             withContext(Dispatchers.IO) {
