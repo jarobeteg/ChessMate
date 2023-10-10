@@ -16,6 +16,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
+import kotlinx.coroutines.CompletableDeferred
 
 class CreateProfile : AbsThemeActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,26 +42,27 @@ class CreateProfile : AbsThemeActivity() {
                     showNotAllQuestionsAnswered()
                 }
             }else{
-                if(createNewUserProfile()) {
-                    val resultIntent = Intent()
-                    resultIntent.putExtra("profileCreated", true)
-                    setResult(Activity.RESULT_OK, resultIntent)
-                    finish()
-                }else{
-                    val resultIntent = Intent()
-                    resultIntent.putExtra("profileCreated", false)
-                    setResult(Activity.RESULT_OK, resultIntent)
-                    finish()
+                lifecycleScope.launch {
+                    if (createNewUserProfile()) {
+                        val resultIntent = Intent()
+                        resultIntent.putExtra("profileCreated", true)
+                        setResult(Activity.RESULT_OK, resultIntent)
+                        finish()
+                    } else {
+                        val resultIntent = Intent()
+                        resultIntent.putExtra("profileCreated", false)
+                        setResult(Activity.RESULT_OK, resultIntent)
+                        finish()
+                    }
                 }
             }
         }
     }
 
-    private fun createNewUserProfile(): Boolean{
+    private suspend fun createNewUserProfile(): Boolean{
         val username: String = findViewById<EditText>(R.id.new_profile_username).text.toString()
         val userRepo = UserProfileRepository(this)
         val profileLevel: Int = getNewProfileLevel()
-        var result = false
 
         val resultRating = when (profileLevel){
             1 -> 350
@@ -88,6 +90,8 @@ class CreateProfile : AbsThemeActivity() {
             isActive = true
         )
 
+        val deferred = CompletableDeferred<Boolean>()
+
         lifecycleScope.launch {
             coroutineScope {
                 val deactivateResult = async {
@@ -108,12 +112,14 @@ class CreateProfile : AbsThemeActivity() {
                 }
 
                 if (deactivateResult.await() && insertResult.await()) {
-                    result = true
+                    deferred.complete(true)
+                } else {
+                    deferred.complete(false)
                 }
             }
         }
 
-        return result
+        return deferred.await()
     }
 
     private fun getNewProfileLevel(): Int {
