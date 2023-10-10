@@ -20,11 +20,13 @@ class UserProfileRepository(private val context: Context) {
         database.userProfileDAO()
     }
 
-    fun getAllUsers(): LiveData<List<UserProfile>>{
+    suspend fun getAllUsers(): List<UserProfile>{
         return try {
-            userProfileDAO.getAllUsers()
+            withContext(Dispatchers.IO) {
+                userProfileDAO.getAllUsers()
+            }
         } catch (ex: Exception) {
-            MutableLiveData<List<UserProfile>>().apply { value = emptyList() }
+           emptyList()
         }
     }
 
