@@ -70,30 +70,55 @@
     <string name="answer2B">Somewhat comfortable, but I might need a refresher on a few pieces.</string>
     <string name="answer2C">Not comfortable, I\'m not familiar with most piece movements.</string>
 
-    <string name="question3">3. Are you familiar with common chess strategies like forks, pins, and skewers?</string>
-    <string name="answer3A">Yes, I\'m familiar with advanced chess tactics.</string>
-    <string name="answer3B">I know some basic tactics but might need help with advanced ones.</string>
-    <string name="answer3C">No, I\'m not familiar with most chess strategies.</string>
+    <string name="question3">3. How often do you think ahead and plan your moves during a chess game?</string>
+    <string name="answer3A">I always plan several moves ahead and consider different strategies.</string>
+    <string name="answer3B">I plan a few moves ahead but sometimes miss strategic opportunities.</string>
+    <string name="answer3C">I mostly focus on my current move without planning too far ahead.</string>
 
-    <string name="question4">4. How often do you think ahead and plan your moves during a chess game?</string>
-    <string name="answer4A">I always plan several moves ahead and consider different strategies.</string>
-    <string name="answer4B">I plan a few moves ahead but sometimes miss strategic opportunities.</string>
-    <string name="answer4C">I mostly focus on my current move without planning too far ahead.</string>
+    <string name="question4">4. Do you know any specific chess openings and their variations?</string>
+    <string name="answer4A">Yes, I know multiple openings and their variations.</string>
+    <string name="answer4B">I know a few openings, but I\'m not well-versed in their variations.</string>
+    <string name="answer4C">No, I\'m not familiar with specific chess openings.</string>
 
-    <string name="question5">5. What does \'en passant\' mean in chess?</string>
-    <string name="answer5A">I know, it\'s a special pawn capture rule.</string>
-    <string name="answer5B">I\'ve heard of it but not sure about the details.</string>
-    <string name="answer5C">No, I\'m not familiar with that term.</string>
+    <string name="question5">5. Do you understand the concept of controlling the center in the opening?</string>
+    <string name="answer5A">Yes, controlling the center is crucial for a strong opening.</string>
+    <string name="answer5B">I\'ve heard of it, but I\'m not entirely sure about its importance.</string>
+    <string name="answer5C">No, I\'m not familiar with controlling the center.</string>
 
-    <string name="question6">6. When do you decide to trade pieces during a chess game?</string>
-    <string name="answer6A">I strategically trade pieces to gain an advantage or break my opponent\'s defenses.</string>
-    <string name="answer6B">I trade pieces based on immediate tactical opportunities.</string>
-    <string name="answer6C">I rarely consider piece trades during my games.</string>
+    <string name="question6">6. Have you studied common opening traps and pitfalls?</string>
+    <string name="answer6A">Yes, I\'m aware of common opening traps and how to avoid them.</string>
+    <string name="answer6B">I\'ve encountered some traps, but I\'m not well-informed about them.</string>
+    <string name="answer6C">No, I haven\'t studied opening traps.</string>
 
-    <string name="question7">7. How often do you analyze your past chess games to learn from your mistakes?</string>
-    <string name="answer7A">I always review my games to identify areas for improvement.</string>
-    <string name="answer7B">I occasionally review my games to understand my mistakes.</string>
-    <string name="answer7C">I rarely or never analyze my past games.</string>
+    <string name="question7">7. Do you understand the concept of piece activity and coordination in the midgame?</string>
+    <string name="answer7A">Yes, I understand how to coordinate my pieces for optimal activity.</string>
+    <string name="answer7B">I\'ve heard of it, but I might need more guidance on effective coordination.</string>
+    <string name="answer7C">No, I\'m not familiar with piece coordination in the midgame.</string>
+
+    <string name="question8">8. Are you familiar with common chess strategies like forks, pins, and skewers?</string>
+    <string name="answer8A">Yes, I\'m familiar with advanced chess tactics.</string>
+    <string name="answer8B">I know some basic tactics but might need help with advanced ones.</string>
+    <string name="answer8C">No, I\'m not familiar with most chess strategies.</string>
+
+    <string name="question9">9. Do you know how to create and recognize strategic pawn structures in the midgame?</string>
+    <string name="answer9A">Yes, I understand strategic pawn structures and their implications.</string>
+    <string name="answer9B">I know a bit about pawn structures, but I might need more knowledge.</string>
+    <string name="answer9C">No, I\'m not familiar with strategic pawn structures.</string>
+
+    <string name="question10">10. Are you familiar with common endgame techniques like opposition and king activity?</string>
+    <string name="answer10A">Yes, I know how to apply these techniques in the endgame.</string>
+    <string name="answer10B">I\'ve heard of them, but I\'m not entirely sure about their applications.</string>
+    <string name="answer10C">No, I\'m not familiar with endgame techniques.</string>
+
+    <string name="question11">11. Do you understand the concept of converting material advantage into a winning endgame?</string>
+    <string name="answer11A">Yes, I know how to convert material advantage in the endgame.</string>
+    <string name="answer11B">I have a basic understanding, but I might need more guidance.</string>
+    <string name="answer11C">No, I\'m not familiar with converting material advantage in the endgame.</string>
+
+    <string name="question12">12. Are you familiar with common endgame checkmating patterns in various scenarios (rook endgames, queen endgames, pawn and king endgames, etc.)?</string>
+    <string name="answer12A">Yes, I\'m familiar with a variety of endgame checkmating patterns and can apply them in different scenarios.</string>
+    <string name="answer12B">I know some endgame checkmating patterns, but I might need more examples and practice.</string>
+    <string name="answer12C">No, I\'m not familiar with specific endgame checkmating patterns.</string>
 
     <!--ChooseProfile string-->
     <string name="choose_profile_title">Choose a Profile</string>
