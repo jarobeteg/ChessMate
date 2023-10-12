@@ -18,6 +18,7 @@ class ChooseProfileAdapter(private val profiles: List<UserProfile>): RecyclerVie
         val openingRatingTextView: TextView = itemView.findViewById(R.id.choose_profile_opening_rating)
         val midgameRatingTextView: TextView = itemView.findViewById(R.id.choose_profile_midgame_rating)
         val endgameRatingTextView: TextView = itemView.findViewById(R.id.choose_profile_endgame_rating)
+        val chooseProfileButton: ImageButton = itemView.findViewById(R.id.choose_profile_button)
         val linearLayout: LinearLayout = itemView.findViewById(R.id.linear_layout)
         val expandButton: ImageButton = itemView.findViewById(R.id.expand_button)
     }
@@ -35,7 +36,6 @@ class ChooseProfileAdapter(private val profiles: List<UserProfile>): RecyclerVie
         holder.midgameRatingTextView.text = currentProfile.midgameRating.toString()
         holder.endgameRatingTextView.text = currentProfile.endgameRating.toString()
 
-        holder.linearLayout.visibility = View.GONE
         holder.linearLayout.translationY = -holder.linearLayout.height.toFloat()
         holder.linearLayout.alpha = 0f
 
@@ -62,6 +62,10 @@ class ChooseProfileAdapter(private val profiles: List<UserProfile>): RecyclerVie
                 holder.expandButton.animate()
                     .rotation(-90f).duration = 500
             }
+        }
+
+        holder.chooseProfileButton.setOnClickListener {
+            //todo
         }
     }
 

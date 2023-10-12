@@ -39,6 +39,7 @@ class ChooseProfile : AbsThemeActivity() {
         }
     }
 
+    //important code because registerForActivityResult needs this
     override fun onBackPressed() {
         super.onBackPressed()
         val resultIntent = Intent()
