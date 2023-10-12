@@ -32,6 +32,18 @@ class UserProfileRepository(private val context: Context) {
         }
     }
 
+    //this returns all the inactive profiles the user have created. the withContext(Dispatchers.IO) is critical here because
+    //it ensures that the database query doesn't block the main thread or any other critical thread to prevent UI freezes
+    suspend fun getAllInactiveProfiles(): List<UserProfile>{
+        return try {
+            withContext(Dispatchers.IO) {
+                userProfileDAO.getAllInactiveProfiles()
+            }
+        } catch (ex: Exception) {
+            emptyList()
+        }
+    }
+
     //this handles the insertion of a new profile into the database
     suspend fun insertUser(userProfile: UserProfile, onError: (String) -> Unit){
         try {

@@ -45,6 +45,7 @@
     <string name="puzzles_played_title">Puzzles Played</string>
     <string name="lessons_taken_title">Lessons Taken</string>
     <string name="level">Level:</string>
+    <string name="level_no_colon">Level</string>
 
     <!--UserProfileRepository strings-->
     <string name="failed_to_insert_user">Failed to insert user!</string>

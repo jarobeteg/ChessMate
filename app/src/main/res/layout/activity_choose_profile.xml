@@ -24,23 +24,14 @@
             android:textColor="@color/white"
             android:layout_gravity="center" />
 
-        <ImageButton
-            android:id="@+id/choose_profile_checkmark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_checkmark_24"
-            android:background="@drawable/ripple_circle"
-            android:layout_gravity="end"
-            android:layout_margin="8dp"
-            android:padding="8dp" />
-
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/choose_profile_recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:scrollbars="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        style="@style/CustomScrollbar"/>
 
 </LinearLayout>

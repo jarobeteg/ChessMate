@@ -64,6 +64,14 @@ class CreateProfile : AbsThemeActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val resultIntent = Intent()
+        resultIntent.putExtra("profileCreated", true)
+        setResult(Activity.RESULT_OK, resultIntent)
+        finish()
+    }
+
     //this handles the new profile creation in the database and sets the current active profile inactive and the new profile active asynchronously
     private suspend fun createNewUserProfile(): Boolean{
         val username: String = findViewById<EditText>(R.id.new_profile_username).text.toString()
