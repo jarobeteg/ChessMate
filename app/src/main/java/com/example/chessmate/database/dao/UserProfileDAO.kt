@@ -32,4 +32,7 @@ interface UserProfileDAO {
 
     @Query("UPDATE userprofile SET isActive = 1 WHERE userID = :userID")
     suspend fun activateProfileByID(userID: Long)
+
+    @Query("DELETE FROM userprofile WHERE userID = :userID")
+    suspend fun deleteProfileByID(userID: Long)
 }

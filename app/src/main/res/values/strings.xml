@@ -57,6 +57,7 @@
     <string name="no_active_profile">Failed to find an active user! Guest profile loaded.</string>
     <string name="unexpected_error">An unexpected error occurred. Please attempt to create a new profile.</string>
     <string name="profile_change_error">An unexpected error occurred while changing profiles. Please attempt to change it again.</string>
+    <string name="profile_delete_error">An unexpected error occurred while deleting profile. Please attempt to delete it again.</string>
 
     <!--Question and answer strings for profile creation-->
     <string name="create_profile_title">Profile Creation</string>
@@ -127,7 +128,10 @@
     <string name="answer12B">I know some endgame checkmating patterns, but I might need more examples and practice.</string>
     <string name="answer12C">No, I\'m not familiar with specific endgame checkmating patterns.</string>
 
-    <!--ChooseProfile string-->
+    <!--ChooseProfile strings-->
     <string name="choose_profile_title">Choose a Profile</string>
     <string name="change_profile_dialog_description">Are you sure you want to change the user profile?</string>
+
+    <!--DeleteProfile strings-->
+    <string name="delete_profile_dialog_description">Are you sure you want to delete the user profile? This action will redirect you to the Choose Profile screen.</string>
 </resources>

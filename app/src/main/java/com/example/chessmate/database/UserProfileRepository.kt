@@ -122,4 +122,16 @@ class UserProfileRepository(private val context: Context) {
            false
         }
     }
+
+    suspend fun deleteProfileByID(userID: Long, onError: (String) -> Unit): Boolean{
+        return try {
+            withContext(Dispatchers.IO){
+                userProfileDAO.deleteProfileByID(userID)
+            }
+            true
+        }catch (ex: Exception){
+            onError(context.getString(R.string.profile_delete_error))
+            false
+        }
+    }
 }

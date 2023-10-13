@@ -40,4 +40,17 @@ class ProfileViewModel(repository: UserProfileRepository): ViewModel() {
     fun onChooseProfileInitiated() {
         _initiateChooseProfile.value = false
     }
+
+    //This is the Delete profile button. When the button is clicked it initiates the deletion of the current profile
+    private val _initiateDeleteProfile = MutableLiveData<Boolean>()
+    val initiateDeleteProfile: LiveData<Boolean>
+        get() = _initiateDeleteProfile
+
+    fun initiateDeleteProfile() {
+        _initiateDeleteProfile.value = true
+    }
+
+    fun onDeleteProfileInitiated() {
+        _initiateDeleteProfile.value = false
+    }
 }

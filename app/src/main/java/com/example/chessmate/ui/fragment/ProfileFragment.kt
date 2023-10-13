@@ -1,6 +1,7 @@
 package com.example.chessmate.ui.fragment
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -14,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.example.chessmate.R
 import com.example.chessmate.database.UserProfileRepository
 import com.example.chessmate.ui.activity.ChooseProfile
@@ -21,6 +23,10 @@ import com.example.chessmate.ui.activity.CreateProfile
 import com.example.chessmate.ui.viewmodel.ProfileViewModel
 import com.example.chessmate.ui.viewmodel.ViewModelFactory
 import com.example.chessmate.util.UserProfileManager
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
 
@@ -74,6 +80,17 @@ class ProfileFragment : Fragment() {
             }
         }
 
+        //this waits for the ChooseProfile activity's result after a profile has been deleted. if the returned value is true it means that the user has changed to a different profile
+        val deleteProfileLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+            if (result.resultCode == Activity.RESULT_OK){
+                val data: Intent? = result.data
+                val profileChosen = data?.getBooleanExtra("profileChosen", false) ?: false
+                if (profileChosen) {
+                    viewModel.onChooseProfileInitiated()
+                }
+            }
+        }
+
         //this will call the showErrorToUser method and shows tells the user that no active profiles were found
         viewModel.errorLiveData.observe(viewLifecycleOwner, Observer { errorMessage ->
             showErrorToUser(errorMessage)
@@ -110,6 +127,14 @@ class ProfileFragment : Fragment() {
             }
         })
 
+        //this is called when the user click the deleteProfile button
+        viewModel.initiateDeleteProfile.observe(viewLifecycleOwner, Observer { initiate ->
+            if (initiate){
+                val deleteProfileIntent = Intent(requireContext(), ChooseProfile::class.java)
+                deleteProfileLauncher.launch(deleteProfileIntent)
+            }
+        })
+
         createUserProfile.setOnClickListener {
             viewModel.initiateProfileCreation()
         }
@@ -118,11 +143,62 @@ class ProfileFragment : Fragment() {
             viewModel.initiateChooseProfile()
         }
 
+        deleteProfile.setOnClickListener {
+            val alertDialogBuilder = AlertDialog.Builder(requireContext())
+            alertDialogBuilder.apply {
+                setTitle(requireContext().getString(R.string.confirmation))
+                setMessage(requireContext().getString(R.string.delete_profile_dialog_description))
+                setPositiveButton(requireContext().getString(R.string.yes)) {dialog, which ->
+                    lifecycleScope.launch {
+                        deleteProfile()
+                    }
+                }
+                setNegativeButton(requireContext().getString(R.string.no)) {dialog, which ->
+                    dialog.dismiss()
+                }
+
+                create().show()
+            }
+        }
+
         return view
+    }
+
+    private suspend fun deleteProfile(){
+        val deferred = CompletableDeferred<Boolean>()
+        val currentUserID = userProfileManager.getUserProfileLiveData().value?.userID
+        lifecycleScope.launch {
+            coroutineScope {
+                val deleteResult = async {
+                    try {
+                        if (currentUserID != null) {
+                            userProfileRepository.deleteProfileByID(currentUserID) {errorMessage ->
+                                showProfileDeletionErrorMessage(errorMessage)
+                            }
+                        }
+                        true
+                    }catch (ex: Exception){
+                        false
+                    }
+                }
+                if (deleteResult.await()){
+                    deferred.complete(true)
+                }else{
+                    deferred.complete(false)
+                }
+            }
+        }
+        if (deferred.await()){
+            viewModel.initiateDeleteProfile()
+        }
     }
 
     //tells the user that no active profiles were found
     private fun showErrorToUser(errorMessage: String){
+        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showProfileDeletionErrorMessage(errorMessage: String){
         Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
     }
 
