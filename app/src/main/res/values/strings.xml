@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">ChessMate</string>
 
+    <!--General strings-->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="confirmation">Confirmation</string>
+
     <!--Bottom navigation menu strings-->
     <string name="bottom_nav_home">Home</string>
     <string name="bottom_nav_puzzles">Puzzles</string>
@@ -51,6 +56,7 @@
     <string name="failed_to_insert_user">Failed to insert user!</string>
     <string name="no_active_profile">Failed to find an active user! Guest profile loaded.</string>
     <string name="unexpected_error">An unexpected error occurred. Please attempt to create a new profile.</string>
+    <string name="profile_change_error">An unexpected error occurred while changing profiles. Please attempt to change it again.</string>
 
     <!--Question and answer strings for profile creation-->
     <string name="create_profile_title">Profile Creation</string>
@@ -123,4 +129,5 @@
 
     <!--ChooseProfile string-->
     <string name="choose_profile_title">Choose a Profile</string>
+    <string name="change_profile_dialog_description">Are you sure you want to change the user profile?</string>
 </resources>

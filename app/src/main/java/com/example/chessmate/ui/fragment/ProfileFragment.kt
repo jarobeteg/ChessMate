@@ -20,6 +20,7 @@ import com.example.chessmate.ui.activity.ChooseProfile
 import com.example.chessmate.ui.activity.CreateProfile
 import com.example.chessmate.ui.viewmodel.ProfileViewModel
 import com.example.chessmate.ui.viewmodel.ViewModelFactory
+import com.example.chessmate.util.UserProfileManager
 
 class ProfileFragment : Fragment() {
 
@@ -29,6 +30,7 @@ class ProfileFragment : Fragment() {
 
     private lateinit var viewModel: ProfileViewModel
     private lateinit var userProfileRepository: UserProfileRepository
+    private val userProfileManager = UserProfileManager.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -89,6 +91,7 @@ class ProfileFragment : Fragment() {
             gamesPlayed.text = userProfile.gamesPlayed.toString()
             puzzlesPlayed.text = userProfile.puzzlesPlayed.toString()
             lessonsTaken.text = userProfile.lessonsTaken.toString()
+            userProfileManager.setUserProfile(userProfile)
         })
 
         //this is called when the user clicks the createUserProfile button

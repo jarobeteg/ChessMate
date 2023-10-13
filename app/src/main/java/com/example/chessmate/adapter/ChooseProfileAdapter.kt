@@ -1,5 +1,6 @@
 package com.example.chessmate.adapter
 
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +10,11 @@ import com.example.chessmate.R
 import com.example.chessmate.database.entity.UserProfile
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import androidx.lifecycle.lifecycleScope
+import com.example.chessmate.ui.activity.ChooseProfile
+import kotlinx.coroutines.launch
 
-class ChooseProfileAdapter(private val profiles: List<UserProfile>): RecyclerView.Adapter<ChooseProfileAdapter.ProfileViewHolder>() {
+class ChooseProfileAdapter(private val activity: ChooseProfile, private val profiles: List<UserProfile>): RecyclerView.Adapter<ChooseProfileAdapter.ProfileViewHolder>() {
 
     class ProfileViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val usernameTextView: TextView = itemView.findViewById(R.id.choose_profile_username)
@@ -64,8 +68,21 @@ class ChooseProfileAdapter(private val profiles: List<UserProfile>): RecyclerVie
             }
         }
 
+        //this changes the profiles for the user
         holder.chooseProfileButton.setOnClickListener {
-            //todo
+            val alertDialogBuilder = AlertDialog.Builder(holder.itemView.context)
+            alertDialogBuilder.apply {
+                setTitle(holder.itemView.context.getString(R.string.confirmation))
+                setMessage(holder.itemView.context.getString(R.string.change_profile_dialog_description))
+                setPositiveButton(holder.itemView.context.getString(R.string.yes)) { dialog, which ->
+                    activity.lifecycleScope.launch { activity.changeProfiles(currentProfile.userID) }
+                }
+                setNegativeButton(holder.itemView.context.getString(R.string.no)) { dialog, which ->
+                    dialog.dismiss()
+                }
+
+                create().show()
+            }
         }
     }
 

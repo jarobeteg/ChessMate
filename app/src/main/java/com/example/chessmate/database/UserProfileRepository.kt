@@ -94,4 +94,32 @@ class UserProfileRepository(private val context: Context) {
             false
         }
     }
+
+    //this handles the current active profile's deactivation by ID. the withContext(Dispatchers.IO) is critical here because
+    //it ensures that the database query doesn't block the main thread or any other critical thread to prevent UI freezes
+    suspend fun deactivateProfileByID(userID: Long, onError: (String) -> Unit): Boolean{
+        return try{
+            withContext(Dispatchers.IO){
+                userProfileDAO.deactivateProfileByID(userID)
+            }
+            true
+        }catch (ex: Exception){
+            onError(context.getString(R.string.profile_change_error))
+            false
+        }
+    }
+
+    //this handles the selected profile activation by id. the withContext(Dispatchers.IO) is critical here because
+    //it ensures that the database query doesn't block the main thread or any other critical thread to prevent UI freezes
+    suspend fun activateProfileByID(userID: Long, onError: (String) -> Unit): Boolean{
+       return try {
+            withContext(Dispatchers.IO){
+                userProfileDAO.activateProfileByID(userID)
+            }
+           true
+        }catch (ex: Exception){
+            onError(context.getString(R.string.profile_change_error))
+           false
+        }
+    }
 }
