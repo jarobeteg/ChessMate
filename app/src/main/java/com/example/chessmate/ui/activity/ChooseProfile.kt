@@ -52,7 +52,7 @@ class ChooseProfile : AbsThemeActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         val resultIntent = Intent()
-        resultIntent.putExtra("profileChosen", false)
+        resultIntent.putExtra("profileChosen", true)
         setResult(Activity.RESULT_OK, resultIntent)
         finish()
     }

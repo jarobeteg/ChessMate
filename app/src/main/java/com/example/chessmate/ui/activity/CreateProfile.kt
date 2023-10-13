@@ -68,7 +68,7 @@ class CreateProfile : AbsThemeActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         val resultIntent = Intent()
-        resultIntent.putExtra("profileCreated", false)
+        resultIntent.putExtra("profileCreated", true)
         setResult(Activity.RESULT_OK, resultIntent)
         finish()
     }
