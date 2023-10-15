@@ -150,7 +150,9 @@ class ProfileFragment : Fragment() {
                 setMessage(requireContext().getString(R.string.delete_profile_dialog_description))
                 setPositiveButton(requireContext().getString(R.string.yes)) {dialog, which ->
                     lifecycleScope.launch {
-                        deleteProfile()
+                        if(deleteProfile()){
+                            viewModel.initiateDeleteProfile()
+                        }
                     }
                 }
                 setNegativeButton(requireContext().getString(R.string.no)) {dialog, which ->
@@ -164,7 +166,7 @@ class ProfileFragment : Fragment() {
         return view
     }
 
-    private suspend fun deleteProfile(){
+    private suspend fun deleteProfile(): Boolean{
         val deferred = CompletableDeferred<Boolean>()
         val currentUserID = userProfileManager.getUserProfileLiveData().value?.userID
         lifecycleScope.launch {
@@ -188,9 +190,7 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
-        if (deferred.await()){
-            viewModel.initiateDeleteProfile()
-        }
+        return deferred.await()
     }
 
     //tells the user that no active profiles were found
