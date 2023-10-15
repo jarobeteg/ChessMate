@@ -86,7 +86,7 @@ class ProfileFragment : Fragment() {
                 val data: Intent? = result.data
                 val profileChosen = data?.getBooleanExtra("profileChosen", false) ?: false
                 if (profileChosen) {
-                    viewModel.onChooseProfileInitiated()
+                    viewModel.onDeleteProfileInitiated()
                 }
             }
         }

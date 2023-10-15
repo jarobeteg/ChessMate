@@ -101,7 +101,7 @@ class ChooseProfile : AbsThemeActivity() {
             finish()
         }else{
             val resultIntent = Intent()
-            resultIntent.putExtra("profileChosen", true)
+            resultIntent.putExtra("profileChosen", false)
             setResult(Activity.RESULT_OK, resultIntent)
             finish()
         }
