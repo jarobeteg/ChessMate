@@ -55,17 +55,18 @@ class UserProfileRepository(private val context: Context) {
 
     //this finds the only active profile in the database and displays it in the profile fragment
     //if there is no active profiles a guest profile is loaded
-    fun findActiveProfile(onError: (String) -> Unit): LiveData<UserProfile>{
+    fun findActiveProfile(): LiveData<ProfileResult> {
         val activeProfileLiveData = userProfileDAO.getActiveProfile()
 
-        val resultLiveData = MediatorLiveData<UserProfile>()
+        val resultLiveData = MediatorLiveData<ProfileResult>()
 
         resultLiveData.addSource(activeProfileLiveData) { activeProfile ->
-            if (activeProfile != null) {
-                resultLiveData.value = activeProfile
+            val hasActiveProfile = activeProfile != null
+
+            if (hasActiveProfile) {
+                resultLiveData.value = ProfileResult(activeProfile, false, null)
             } else {
-                onError(context.getString(R.string.no_active_profile))
-                resultLiveData.value = UserProfile(
+                val defaultProfile = UserProfile(
                     username = "Guest",
                     openingRating = 0,
                     midgameRating = 0,
@@ -76,8 +77,10 @@ class UserProfileRepository(private val context: Context) {
                     lessonsTaken = 0,
                     isActive = true
                 )
+                resultLiveData.value = ProfileResult(defaultProfile, true, context.getString(R.string.no_active_profile))
             }
         }
+
         return resultLiveData
     }
 

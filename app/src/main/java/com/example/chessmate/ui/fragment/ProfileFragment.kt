@@ -91,24 +91,26 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        //this will call the showErrorToUser method and shows tells the user that no active profiles were found
-        viewModel.errorLiveData.observe(viewLifecycleOwner, Observer { errorMessage ->
-            showErrorToUser(errorMessage)
-        })
-
         //this observes the user profile data and displays it for the user
+        //if no profile was found an error message is shown and a guest profile is loaded
         //because it's LiveData the UI should update automatically when a change occurs to the profile
-        viewModel.userProfileLiveData.observe(viewLifecycleOwner, Observer { userProfile ->
-            val levelText = getString(R.string.level) + userProfile.level
-            username.text = userProfile.username
-            level.text = levelText
-            openingRating.text = userProfile.openingRating.toString()
-            midgameRating.text = userProfile.midgameRating.toString()
-            endgameRating.text = userProfile.endgameRating.toString()
-            gamesPlayed.text = userProfile.gamesPlayed.toString()
-            puzzlesPlayed.text = userProfile.puzzlesPlayed.toString()
-            lessonsTaken.text = userProfile.lessonsTaken.toString()
-            userProfileManager.setUserProfile(userProfile)
+        viewModel.profileResultLiveData.observe(viewLifecycleOwner, Observer { result ->
+            if (result.hasError){
+                result.errorMessage?.let { showErrorToUser(it) }
+            }
+            val userProfile = result.userProfile
+            if (userProfile != null) {
+                val levelText = getString(R.string.level) + userProfile.level
+                username.text = userProfile.username
+                level.text = levelText
+                openingRating.text = userProfile.openingRating.toString()
+                midgameRating.text = userProfile.midgameRating.toString()
+                endgameRating.text = userProfile.endgameRating.toString()
+                gamesPlayed.text = userProfile.gamesPlayed.toString()
+                puzzlesPlayed.text = userProfile.puzzlesPlayed.toString()
+                lessonsTaken.text = userProfile.lessonsTaken.toString()
+                userProfileManager.setUserProfile(userProfile)
+            }
         })
 
         //this is called when the user clicks the createUserProfile button
