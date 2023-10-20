@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--General strings-->
+    <string name="yes">Igen</string>
+    <string name="no">Nem</string>
+    <string name="confirmation">Megerősítés</string>
+
+    <!--Bottom navigation menu strings-->
+    <string name="bottom_nav_home">Főoldal</string>
+    <string name="bottom_nav_puzzles">Rejtvények</string>
+    <string name="bottom_nav_learn">Leckék</string>
+    <string name="bottom_nav_profile">Profil</string>
+    <string name="bottom_nav_more">Egyebek</string>
+    <string name="title_settings_menu">Beállítások Menü</string>
+
+
+    <!--Preference Titles-->
+    <string name="settings_activity_title">Beállítások</string>
+    <string name="general_header">Általános</string>
+
+    <!--ListPreference Theme-->
+    <string name="theme_title">App Témaválasztás</string>
+    <string name="theme_summary">Személyre szabhatja az alkalmazás megjelenését a különböző témák közötti választással.</string>
+    <string name="theme_day">Világos</string>
+    <string name="theme_night">Sötét</string>
+    <string name="theme_day_night">Rendszer-alapú</string>
+
+    <!--ListPreference Color-->
+    <string name="color_title">Válassza ki az alkalmazás témájának színét</string>
+    <string name="color_summary">Válasszon nyolc különböző szín közül, hogy az alkalmazás témáját a saját ízlése szerint alakítsa.</string>
+    <string name="colorTeal">Teal</string>
+    <string name="colorIndigo">Indigó</string>
+    <string name="colorDarkPurple">Sötét lila</string>
+    <string name="colorBlue">Kék</string>
+    <string name="colorGreen">Zöld</string>
+    <string name="colorAmber">Borostyán</string>
+    <string name="colorRed">Piros</string>
+    <string name="colorPink">Rózsaszín</string>
+
+    <!--Profile Fragment Strings-->
+    <string name="create_new_profile">Új Profil Létrehozása</string>
+    <string name="opening_rating_title">Megnyitás</string>
+    <string name="midgame_rating_title">Középjáték</string>
+    <string name="endgame_rating_title">Végjáték</string>
+    <string name="games_played_title">Meccsek Száma</string>
+    <string name="puzzles_played_title">Rejtvények Száma</string>
+    <string name="lessons_taken_title">Leckék Száma</string>
+    <string name="level">Szint:</string>
+    <string name="level_no_colon">Szint</string>
+    <string name="level_distribution">Szinteloszlás az átlagos értékelés szerint</string>
+
+    <!--UserProfileRepository strings-->
+    <string name="failed_to_insert_user">A felhasználó beillesztése sikertelen!</string>
+    <string name="no_active_profile">Nem sikerült aktív felhasználót találni! Vendég profil betöltve.</string>
+    <string name="unexpected_error">Váratlan hiba történt. Kérjük, próbáljon meg új profilt létrehozni.</string>
+    <string name="profile_change_error">Váratlan hiba történt profilváltás közben. Kérjük, próbálja meg újra megváltoztatni.</string>
+    <string name="profile_delete_error">Váratlan hiba történt a profil törlése közben. Kérjük, próbálja meg újra törölni.</string>
+
+    <!--Question and answer strings for profile creation-->
+    <string name="create_profile_title">Profil Létrehozása</string>
+    <string name="enter_username">Felhasználónév</string>
+    <string name="cancel_button">Mégsem</string>
+    <string name="create_profile_button">Profil Létrehozása</string>
+    <string name="not_all_questions_answered">Minden kérdésre válaszolnia kell!</string>
+    <string name="missing_username">Meg kell adnod a felhasználónevedet!</string>
+    <string name="no_username_and_answers">Meg kell adnod a felhasználóneved és válaszolnod kell az összes kérdésre!</string>
+
+    <string name="question1">1. Sakkoztál már valaha?</string>
+    <string name="answer1A">Igen, tapasztalt játékos vagyok.</string>
+    <string name="answer1B">Igen, de még tanulok.</string>
+    <string name="answer1C">Nem, teljesen új vagyok a sakkban.</string>
+
+    <string name="question2">2. Mennyire ismered a sakkfigurák alapvető mozgását?</string>
+    <string name="answer2A">Nagyon jól tudom, hogyan mozognak a figurák.</string>
+    <string name="answer2B">Valamennyire jól, de lehet, hogy néhány figurát fel kell frissítenem.</string>
+    <string name="answer2C">Nem jól, nem ismerem a legtöbb figura mozgását.</string>
+
+    <string name="question3">3. Milyen gyakran gondolkodsz előre és tervezed meg a lépéseidet sakkozás közben?</string>
+    <string name="answer3A">Mindig több lépést tervezek előre, és különböző stratégiákat fontolgatok.</string>
+    <string name="answer3B">Néhány lépést előre tervezek, de néha elszalasztom a stratégiai lehetőségeket.</string>
+    <string name="answer3C">Leginkább a jelenlegi lépésemre koncentrálok, anélkül, hogy túlságosan előre terveznék.</string>
+
+    <string name="question4">4. Ismersz valamilyen konkrét sakkmegnyitást és annak variációit?</string>
+    <string name="answer4A">Igen, ismerek többféle nyitást és azok variációit.</string>
+    <string name="answer4B">Ismerek néhány megnyitást, de nem vagyok jártas a variációikban.</string>
+    <string name="answer4C">Nem, nem ismerek sakkmegnyitásokat.</string>
+
+    <string name="question5">5. Érted a közép irányításának koncepcióját a nyitásban?</string>
+    <string name="answer5A">Igen, a központ irányítása elengedhetetlen az erős nyitáshoz.</string>
+    <string name="answer5B">Hallottam róla, de nem vagyok teljesen biztos a jelentőségében.</string>
+    <string name="answer5C">Nem, nem ismerem a központ irányítását.</string>
+
+    <string name="question6">6. Tanulmányozta a gyakori nyitási csapdákat és buktatókat?</string>
+    <string name="answer6A">Igen, tisztában vagyok a gyakori nyitási csapdákkal és azzal, hogyan kerülhetjük el őket.</string>
+    <string name="answer6B">Találkoztam már néhány csapdával, de nem vagyok jól tájékozott velük kapcsolatban.</string>
+    <string name="answer6C">Nem, nem tanultam nyitogatási csapdákról.</string>
+
+    <string name="question7">7. Érted a figurák aktivitásának és a koordinációnak a fogalmát a középjátékban?</string>
+    <string name="answer7A">Igen, tudom, hogyan kell összehangolni a figuráimat az optimális aktivitás érdekében.</string>
+    <string name="answer7B">Hallottam róla, de lehet, hogy több útmutatásra lenne szükségem a hatékony koordinációhoz.</string>
+    <string name="answer7C">Nem, nem ismerem a figurák koordinációját a középjátékban.</string>
+
+    <string name="question8">8. Ismered az olyan gyakori sakkstratégiákat, mint a kettős támadás, a kötés és a ráterelés?</string>
+    <string name="answer8A">Igen, ismerem a haladó sakktaktikákat.</string>
+    <string name="answer8B">Ismerek néhány alapvető taktikát, de a haladó taktikákhoz segítségre lenne szükségem.</string>
+    <string name="answer8C">Nem, a legtöbb sakkstratégiát nem ismerem.</string>
+
+    <string name="question9">9. Tudja, hogyan hozzon létre és ismerje fel a stratégiai gyalogszerkezeteket a középjátékban?</string>
+    <string name="answer9A">Igen, értem a stratégiai gyalogszerkezeteket és azok következményeit.</string>
+    <string name="answer9B">Egy kicsit ismerem a gyalogszerkezeteket, de lehet, hogy több ismeretre lenne szükségem.</string>
+    <string name="answer9C">Nem, nem ismerem a stratégiai gyalogszerkezeteket.</string>
+
+    <string name="question10">10. Ismered az olyan gyakori végjátéktechnikákat, mint az oppozíció és a királytevékenység?</string>
+    <string name="answer10A">Igen, tudom, hogyan kell alkalmazni ezeket a technikákat a végjátékban.</string>
+    <string name="answer10B">Hallottam már róluk, de nem vagyok teljesen biztos az alkalmazásukban.</string>
+    <string name="answer10C">Nem, nem ismerek végjáték technikákat.</string>
+
+    <string name="question11">11. Ismered-e a minőségelőnyt győztes végjátékká alakításának koncepcióját?</string>
+    <string name="answer11A">Igen, tudom, hogyan kell minőségelőnyt a végjátékban átváltani.</string>
+    <string name="answer11B">Alapvetően értem a dolgot, de lehet, hogy több útmutatásra lenne szükségem.</string>
+    <string name="answer11C">Nem, nem ismerem a minőségelőny átváltását a végjátékban.</string>
+
+    <string name="question12">12. Ismered a gyakori végjáték-matt mintákat (bástyás végjátékok, vezérvégjátékok, gyalogos és király végjátékok stb.)?</string>
+    <string name="answer12A">Igen, ismerem a különböző végjáték sakk-matt mintákat, és tudom alkalmazni őket.</string>
+    <string name="answer12B">Ismerek néhány végjáték sakk-matt mintát, de lehet, hogy több példára és gyakorlatra lenne szükségem.</string>
+    <string name="answer12C">Nem, nem ismerek konkrét végjáték sakk-matt mintákat.</string>
+
+    <!--ChooseProfile strings-->
+    <string name="choose_profile_title">Profil Kiválasztása</string>
+    <string name="change_profile_dialog_description">Biztos, hogy meg akarja változtatni a felhasználói profilt?</string>
+
+    <!--DeleteProfile strings-->
+    <string name="delete_profile_dialog_description">Biztos, hogy törölni szeretné a felhasználói profilt? Ez a művelet átirányítja Önt a Profil Kiválasztása képernyőre.</string>
+</resources>

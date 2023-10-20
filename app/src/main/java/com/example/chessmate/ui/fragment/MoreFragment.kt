@@ -35,7 +35,7 @@ class MoreFragment : Fragment() {
 
         val recyclerView: RecyclerView = view.findViewById(R.id.moreFragment_recyclerView)
         val items = listOf(
-            Item("Settings Menu") { startActivity(SettingsActivity::class.java) }
+            Item(getString(R.string.title_settings_menu)) { startActivity(SettingsActivity::class.java) }
         )
         val adapter = MoreAdapter(items)
         recyclerView.layoutManager = LinearLayoutManager(context)

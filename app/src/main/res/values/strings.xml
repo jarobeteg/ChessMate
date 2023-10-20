@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ChessMate</string>
+    <string name="app_name" translatable="false">ChessMate</string>
 
     <!--General strings-->
     <string name="yes">Yes</string>
@@ -9,10 +9,11 @@
     <!--Bottom navigation menu strings-->
     <string name="bottom_nav_home">Home</string>
     <string name="bottom_nav_puzzles">Puzzles</string>
-    <string name="bottom_nav_learn">Learn</string>
+    <string name="bottom_nav_learn">Lessons</string>
     <string name="bottom_nav_profile">Profile</string>
     <string name="bottom_nav_more">More</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_settings_menu">Settings Menu</string>
+    <string name="title_activity_settings" translatable="false">SettingsActivity</string>
 
     <!--Preference Titles-->
     <string name="settings_activity_title">Settings</string>
@@ -52,16 +53,16 @@
     <string name="level">Level:</string>
     <string name="level_no_colon">Level</string>
     <string name="level_distribution">Level distribution by average rating</string>
-    <string name="by_level_one">200..500 -> 1</string>
-    <string name="by_level_two">501..800 -> 2</string>
-    <string name="by_level_three">801..1100 -> 3</string>
-    <string name="by_level_four">1101..1400 -> 4</string>
-    <string name="by_level_five">1401..1700 -> 5</string>
-    <string name="by_level_six">1701..2000 -> 6</string>
-    <string name="by_level_seven">2001..2300 -> 7</string>
-    <string name="by_level_eight">2301..2600 -> 8</string>
-    <string name="by_level_nine">2601..2900 -> 9</string>
-    <string name="by_level_ten">2901 -> 10</string>
+    <string name="by_level_one" translatable="false">200..500 -> 1</string>
+    <string name="by_level_two" translatable="false">501..800 -> 2</string>
+    <string name="by_level_three" translatable="false">801..1100 -> 3</string>
+    <string name="by_level_four" translatable="false">1101..1400 -> 4</string>
+    <string name="by_level_five" translatable="false">1401..1700 -> 5</string>
+    <string name="by_level_six" translatable="false">1701..2000 -> 6</string>
+    <string name="by_level_seven" translatable="false">2001..2300 -> 7</string>
+    <string name="by_level_eight" translatable="false">2301..2600 -> 8</string>
+    <string name="by_level_nine" translatable="false">2601..2900 -> 9</string>
+    <string name="by_level_ten" translatable="false">2901 -> 10</string>
 
     <!--UserProfileRepository strings-->
     <string name="failed_to_insert_user">Failed to insert user!</string>
