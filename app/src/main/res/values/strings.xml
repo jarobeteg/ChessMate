@@ -51,6 +51,17 @@
     <string name="lessons_taken_title">Lessons Taken</string>
     <string name="level">Level:</string>
     <string name="level_no_colon">Level</string>
+    <string name="level_distribution">Level distribution by average rating</string>
+    <string name="by_level_one">200..500 -> 1</string>
+    <string name="by_level_two">501..800 -> 2</string>
+    <string name="by_level_three">801..1100 -> 3</string>
+    <string name="by_level_four">1101..1400 -> 4</string>
+    <string name="by_level_five">1401..1700 -> 5</string>
+    <string name="by_level_six">1701..2000 -> 6</string>
+    <string name="by_level_seven">2001..2300 -> 7</string>
+    <string name="by_level_eight">2301..2600 -> 8</string>
+    <string name="by_level_nine">2601..2900 -> 9</string>
+    <string name="by_level_ten">2901 -> 10</string>
 
     <!--UserProfileRepository strings-->
     <string name="failed_to_insert_user">Failed to insert user!</string>
