@@ -64,6 +64,11 @@
     <string name="by_level_nine" translatable="false">2601..2900 -> 9</string>
     <string name="by_level_ten" translatable="false">2901 -> 10</string>
 
+    <!--Home Fragment Strings-->
+    <string name="play">Play</string>
+    <string name="welcome">Welcome to ChessMate!</string>
+    <string name="create_profile_to_start">Please create a profile. Whether you want to improve your skills or simply enjoy a game, the chessboard is all yours!</string>
+
     <!--UserProfileRepository strings-->
     <string name="failed_to_insert_user">Failed to insert user!</string>
     <string name="no_active_profile">Failed to find an active user! Guest profile loaded.</string>

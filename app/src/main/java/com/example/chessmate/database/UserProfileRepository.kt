@@ -32,6 +32,14 @@ class UserProfileRepository(private val context: Context) {
         }
     }
 
+    suspend fun hasProfiles(): Boolean {
+        var count: Int
+        withContext(Dispatchers.IO){
+            count = userProfileDAO.countProfiles()
+        }
+        return count > 0
+    }
+
     //this returns all the inactive profiles the user have created. the withContext(Dispatchers.IO) is critical here because
     //it ensures that the database query doesn't block the main thread or any other critical thread to prevent UI freezes
     suspend fun getAllInactiveProfiles(): List<UserProfile>{

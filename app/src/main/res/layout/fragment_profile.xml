@@ -348,7 +348,7 @@
 
     <Button
         android:id="@+id/createUserProfile"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/create_new_profile"
         android:textSize="24sp"
@@ -357,7 +357,9 @@
         android:padding="16dp"
         android:gravity="center"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_margin="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/custom_create_new_profile_button"/>
 
 </FrameLayout>

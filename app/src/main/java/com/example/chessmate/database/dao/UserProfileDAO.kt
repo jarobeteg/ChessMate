@@ -18,6 +18,9 @@ interface UserProfileDAO {
     @Query("SELECT * FROM userprofile")
     fun getAllUsers(): List<UserProfile>
 
+    @Query("SELECT COUNT(*) FROM userprofile")
+    fun countProfiles(): Int
+
     @Query("SELECT * FROM userprofile WHERE isActive = 0")
     fun getAllInactiveProfiles(): List<UserProfile>
 

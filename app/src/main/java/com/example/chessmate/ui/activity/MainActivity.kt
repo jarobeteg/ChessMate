@@ -3,6 +3,7 @@ package com.example.chessmate.ui.activity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.preference.PreferenceManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.chessmate.R
 import com.example.chessmate.adapter.MainViewPagerAdapter
@@ -26,7 +27,6 @@ class MainActivity : AbsThemeActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         adapter = MainViewPagerAdapter(this)
-        viewPager2.offscreenPageLimit = 4 //Might need to remove it later if fragments get more complex
         viewPager2.adapter = adapter
 
         viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -67,5 +67,13 @@ class MainActivity : AbsThemeActivity() {
         }
         val textView: TextView? = findViewById(R.id.main_toolbar_title)
         textView?.text = newTitle
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("first_time", false)
+        editor.apply()
     }
 }

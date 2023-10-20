@@ -49,6 +49,11 @@
     <string name="level_no_colon">Szint</string>
     <string name="level_distribution">Szinteloszlás az átlagos értékelés szerint</string>
 
+    <!--Home Fragment Strings-->
+    <string name="play">Játssz</string>
+    <string name="welcome">Üdvözöljük a ChessMate-ben!</string>
+    <string name="create_profile_to_start">Kérjük, hozzon létre egy profilt. Akár fejleszteni akarod a képességeidet, akár csak élvezni a játékot, a sakktábla a tiéd!</string>
+
     <!--UserProfileRepository strings-->
     <string name="failed_to_insert_user">A felhasználó beillesztése sikertelen!</string>
     <string name="no_active_profile">Nem sikerült aktív felhasználót találni! Vendég profil betöltve.</string>
