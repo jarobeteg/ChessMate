@@ -17,6 +17,7 @@ import androidx.preference.PreferenceManager
 import com.example.chessmate.R
 import com.example.chessmate.database.UserProfileRepository
 import com.example.chessmate.ui.activity.CreateProfile
+import com.example.chessmate.ui.activity.PlayActivity
 import com.example.chessmate.ui.viewmodel.HomeViewModel
 import com.example.chessmate.ui.viewmodel.ViewModelFactory
 import com.example.chessmate.util.UserProfileManager
@@ -47,6 +48,7 @@ class HomeFragment : Fragment() {
         val welcomeTextView = view.findViewById<TextView>(R.id.welcome_textview)
         val createProfileTextView = view.findViewById<TextView>(R.id.create_profile_to_start_textview)
         val createProfile = view.findViewById<Button>(R.id.create_profile_from_home)
+        val playChess = view.findViewById<Button>(R.id.playChess)
 
         if (isFirstTime) {
             welcomeTextView.visibility = View.VISIBLE
@@ -81,6 +83,11 @@ class HomeFragment : Fragment() {
 
         createProfile.setOnClickListener {
             viewModel.initiateProfileCreation()
+        }
+
+        playChess.setOnClickListener {
+            val playIntent = Intent(requireContext(), PlayActivity::class.java)
+            startActivity(playIntent)
         }
 
         viewModel.checkProfiles()

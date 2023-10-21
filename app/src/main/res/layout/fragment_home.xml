@@ -46,8 +46,6 @@
 
     </LinearLayout>
 
-
-
     <Button
         android:id="@+id/playChess"
         android:layout_width="match_parent"

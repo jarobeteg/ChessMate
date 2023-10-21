@@ -151,4 +151,13 @@
 
     <!--DeleteProfile strings-->
     <string name="delete_profile_dialog_description">Are you sure you want to delete the user profile? This action will redirect you to the Choose Profile screen.</string>
+
+    <!--Play strings-->
+    <string name="new_game">New Game</string>
+    <string name="start_game">Start Game</string>
+    <string name="bot_difficulty">Bot Difficulty</string>
+    <string name="adjust_level_to_profile">Adjust the bot\'s abilities to match the user\'s profile</string>
+    <string name="start_as_random">Random starting side</string>
+    <string name="start_as_white">Start as white</string>
+    <string name="start_as_black">Start as black</string>
 </resources>
