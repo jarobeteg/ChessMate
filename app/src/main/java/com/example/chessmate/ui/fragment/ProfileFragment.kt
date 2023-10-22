@@ -138,6 +138,19 @@ class ProfileFragment : Fragment() {
         })
 
         createUserProfile.setOnClickListener {
+            createUserProfile.animate()
+                .scaleX(0.95f)
+                .scaleY(0.95f)
+                .setDuration(100)
+                .withEndAction {
+                    createUserProfile.animate()
+                        .scaleX(1f)
+                        .scaleY(1f)
+                        .setDuration(100)
+                        .start()
+                }
+                .start()
+
             viewModel.initiateProfileCreation()
         }
 

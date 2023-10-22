@@ -86,6 +86,19 @@ class HomeFragment : Fragment() {
         }
 
         playChess.setOnClickListener {
+            playChess.animate()
+                .scaleX(0.95f)
+                .scaleY(0.95f)
+                .setDuration(100)
+                .withEndAction {
+                    playChess.animate()
+                        .scaleX(1f)
+                        .scaleY(1f)
+                        .setDuration(100)
+                        .start()
+                }
+                .start()
+
             val playIntent = Intent(requireContext(), PlayActivity::class.java)
             startActivity(playIntent)
         }
