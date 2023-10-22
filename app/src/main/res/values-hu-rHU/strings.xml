@@ -146,4 +146,9 @@
     <string name="start_as_white">Kezd fehérként</string>
     <string name="start_as_black">Kezd feketeként</string>
 
+    <!--Game Chess strings-->
+    <string name="resign">Feladás</string>
+    <string name="takeback">Visszalépés</string>
+    <string name="back">Vissza</string>
+    <string name="forward">Előre</string>
 </resources>

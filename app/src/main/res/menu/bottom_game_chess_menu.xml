@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_resign"
+        android:icon="@drawable/ic_resign_24"
+        android:title="@string/resign"/>
+
+    <item
+        android:id="@+id/nav_takeback"
+        android:icon="@drawable/ic_takeback_24"
+        android:title="@string/takeback"/>
+
+    <item
+        android:id="@+id/nav_back"
+        android:icon="@drawable/ic_back_24"
+        android:title="@string/back"/>
+
+    <item
+        android:id="@+id/nav_forward"
+        android:icon="@drawable/ic_forward_24"
+        android:title="@string/forward"/>
+
+</menu>
