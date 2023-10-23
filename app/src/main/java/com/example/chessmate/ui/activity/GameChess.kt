@@ -102,26 +102,32 @@ class GameChess : AbsThemeActivity() {
                     FrameLayout.LayoutParams.MATCH_PARENT
                 )
                 square.setBackgroundColor(ContextCompat.getColor(this, colorResId))
+                frameLayout.addView(square)
+
+                val pieces = ImageView(this)
+                pieces.layoutParams = FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.MATCH_PARENT,
+                    FrameLayout.LayoutParams.MATCH_PARENT
+                )
 
                 //piece type 1 is white pawn, 2 is white rook, 3 is white knight, 4 is white bishop, 5 is white queen, 6 is white king
                 //piece type 7 is black pawn, 8 is black rook, 9 is black knight, 10 is black bishop, 11 is black queen, 12 is black king
-                val pieceType = boardState[row][col]
-                when (pieceType){
-                    1 -> square.setImageResource(R.drawable.default_pawn_white)
-                    2 -> square.setImageResource(R.drawable.default_rook_white)
-                    3 -> square.setImageResource(R.drawable.default_knight_white)
-                    4 -> square.setImageResource(R.drawable.default_bishop_white)
-                    5 -> square.setImageResource(R.drawable.default_queen_white)
-                    6 -> square.setImageResource(R.drawable.default_king_white)
-                    7 -> square.setImageResource(R.drawable.default_pawn_black)
-                    8 -> square.setImageResource(R.drawable.default_rook_black)
-                    9 -> square.setImageResource(R.drawable.default_knight_black)
-                    10 -> square.setImageResource(R.drawable.default_bishop_black)
-                    11 -> square.setImageResource(R.drawable.default_queen_black)
-                    12 -> square.setImageResource(R.drawable.default_king_black)
+                when (boardState[row][col]){
+                    1 -> pieces.setImageResource(R.drawable.default_pawn_white)
+                    2 -> pieces.setImageResource(R.drawable.default_rook_white)
+                    3 -> pieces.setImageResource(R.drawable.default_knight_white)
+                    4 -> pieces.setImageResource(R.drawable.default_bishop_white)
+                    5 -> pieces.setImageResource(R.drawable.default_queen_white)
+                    6 -> pieces.setImageResource(R.drawable.default_king_white)
+                    7 -> pieces.setImageResource(R.drawable.default_pawn_black)
+                    8 -> pieces.setImageResource(R.drawable.default_rook_black)
+                    9 -> pieces.setImageResource(R.drawable.default_knight_black)
+                    10 -> pieces.setImageResource(R.drawable.default_bishop_black)
+                    11 -> pieces.setImageResource(R.drawable.default_queen_black)
+                    12 -> pieces.setImageResource(R.drawable.default_king_black)
                 }
 
-                frameLayout.addView(square)
+                frameLayout.addView(pieces)
 
                 if (col == 0) {
                     val numberTextView = TextView(this)
