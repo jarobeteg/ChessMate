@@ -22,7 +22,8 @@ class GameChess : AbsThemeActivity() {
     private lateinit var chessboard: Chessboard
     private var isWhiteStarting: Boolean = false
     private var squareSize: Int = 0
-    val highlightCircleTag = "highlight_cirlce"
+    private val highlightCircleTag = "highlight_circle"
+    private val highlightOpponentTag = "highlight_opponent"
     private var selectedSquare: Square? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -237,6 +238,7 @@ class GameChess : AbsThemeActivity() {
         when{
             isWhiteStarting && square.pieceColor == PieceColor.WHITE && selectedSquare == null -> { //first click as white
                 removeHighlightCircles()
+                removeHighlightOpponents()
                 when(square.pieceType){
                     PieceType.PAWN -> {
                         val pawn = Pawn(this, chessboardLayout, chessboard, square)
@@ -255,9 +257,11 @@ class GameChess : AbsThemeActivity() {
             isWhiteStarting && selectedSquare != null -> { //second click as white
                 if (selectedSquare == square){
                     removeHighlightCircles()
+                    removeHighlightOpponents()
                     selectedSquare = null
                 } else if (selectedSquare?.pieceColor == square.pieceColor){
                     removeHighlightCircles()
+                    removeHighlightOpponents()
                     selectedSquare = null
                     handleSquareClick(square)
                 } else {
@@ -269,6 +273,7 @@ class GameChess : AbsThemeActivity() {
                                 movePiece(selectedSquare!!, destinationSquare)
                             }
                             removeHighlightCircles()
+                            removeHighlightOpponents()
                             selectedSquare = null
                         }
                         else -> throw IllegalArgumentException("Unexpected PieceType: ${square.pieceType}")
@@ -278,6 +283,7 @@ class GameChess : AbsThemeActivity() {
 
             !isWhiteStarting && square.pieceColor == PieceColor.BLACK && selectedSquare == null -> { //first click as black
                 removeHighlightCircles()
+                removeHighlightOpponents()
                 when(square.pieceType){
                     PieceType.PAWN -> {
                         val pawn = Pawn(this, chessboardLayout, chessboard, square)
@@ -296,9 +302,11 @@ class GameChess : AbsThemeActivity() {
             !isWhiteStarting && selectedSquare != null -> { //second click as black
                 if (selectedSquare == square){
                     removeHighlightCircles()
+                    removeHighlightOpponents()
                     selectedSquare = null
                 } else if (selectedSquare?.pieceColor == square.pieceColor){
                     removeHighlightCircles()
+                    removeHighlightOpponents()
                     selectedSquare = null
                     handleSquareClick(square)
                 } else {
@@ -310,6 +318,7 @@ class GameChess : AbsThemeActivity() {
                                 movePiece(selectedSquare!!, destinationSquare)
                             }
                             removeHighlightCircles()
+                            removeHighlightOpponents()
                             selectedSquare = null
                         }
                         else -> throw IllegalArgumentException("Unexpected PieceType: ${square.pieceType}")
@@ -349,6 +358,20 @@ class GameChess : AbsThemeActivity() {
 
         circlesToRemove.forEach { circle ->
             chessboardLayout.removeView(circle)
+        }
+    }
+
+    private fun removeHighlightOpponents() {
+        val opponentHighlightsToRemove = mutableListOf<View>()
+        for (i in 0 until chessboardLayout.childCount) {
+            val view = chessboardLayout.getChildAt(i)
+            if (view.tag == highlightOpponentTag) {
+                opponentHighlightsToRemove.add(view)
+            }
+        }
+
+        opponentHighlightsToRemove.forEach { highlight ->
+            chessboardLayout.removeView(highlight)
         }
     }
 }
