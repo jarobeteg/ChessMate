@@ -9,19 +9,16 @@ import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.chessmate.R
-import com.example.chessmate.util.chess.Bishop
-import com.example.chessmate.util.chess.ChessColor
-import com.example.chessmate.util.chess.ChessPiece
+import com.example.chessmate.util.chess.PieceColor
 import com.example.chessmate.util.chess.Chessboard
-import com.example.chessmate.util.chess.King
-import com.example.chessmate.util.chess.Knight
-import com.example.chessmate.util.chess.Pawn
-import com.example.chessmate.util.chess.Queen
-import com.example.chessmate.util.chess.Rook
+import com.example.chessmate.util.chess.PieceType
 import com.example.chessmate.util.chess.Square
 
 class GameChess : AbsThemeActivity() {
+    private lateinit var chessboardLayout: GridLayout
     private lateinit var chessboard: Chessboard
+    private var isWhiteStarting: Boolean = false
+    private var squareSize: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chess_game)
@@ -34,29 +31,29 @@ class GameChess : AbsThemeActivity() {
             startingSide = if (isWhite) "white" else "black"
         }
 
-        val chessboardLayout = findViewById<GridLayout>(R.id.chessboard)
-        val screenWidth = resources.displayMetrics.widthPixels
-        val squareSize = screenWidth / 8
-
         chessboard = Chessboard()
+        chessboardLayout = findViewById(R.id.chessboard)
+        val screenWidth = resources.displayMetrics.widthPixels
+        squareSize = screenWidth / 8
 
         if (startingSide == "white"){
-            initializeStartingPosition(true)
-            setupChessboard(chessboardLayout, squareSize, true)
+            isWhiteStarting = true
+            initializeStartingPosition()
+            setupChessboard()
         }else{
-            initializeStartingPosition(false)
-            setupChessboard(chessboardLayout, squareSize, false)
+            isWhiteStarting = false
+            initializeStartingPosition()
+            setupChessboard()
         }
     }
 
-    private fun setupChessboard(chessboardLayout: GridLayout, squareSize: Int, isWhiteStarting: Boolean){
+    private fun setupChessboard(){
         val lightSquareColor = R.color.default_light_square_color
         val darkSquareColor = R.color.default_dark_square_color
 
         for (row in 0 until 8) {
             for (col in 0 until 8) {
                 val square = chessboard.getSquare(row, col)
-                val piece = square?.piece
                 val frameLayout = FrameLayout(this)
                 frameLayout.layoutParams = GridLayout.LayoutParams().apply {
                     width = squareSize
@@ -68,15 +65,9 @@ class GameChess : AbsThemeActivity() {
                 val colorResId = if ((row + col) % 2 == 0) lightSquareColor else darkSquareColor
                 frameLayout.setBackgroundResource(colorResId)
 
-                if (piece != null) {
-                    val pieceImageResId = getPieceImageResource(piece)
-                    val imageView = ImageView(this)
-                    imageView.setImageResource(pieceImageResId)
-                    imageView.layoutParams = FrameLayout.LayoutParams(
-                        FrameLayout.LayoutParams.MATCH_PARENT,
-                        FrameLayout.LayoutParams.MATCH_PARENT
-                    )
-                    frameLayout.addView(imageView)
+                if (square.isOccupied) {
+                    val pieceImageView = createPieceImageView(square)
+                    frameLayout.addView(pieceImageView)
                 }
 
                 if (col == 0) {
@@ -120,79 +111,79 @@ class GameChess : AbsThemeActivity() {
         }
     }
 
-    private fun initializeStartingPosition(isWhiteStarting: Boolean) {
+    private fun initializeStartingPosition() {
         if (isWhiteStarting){
-            chessboard.placePiece(Pawn(ChessColor.WHITE,6,0), 6, 0)
-            chessboard.placePiece(Pawn(ChessColor.WHITE,6,1), 6, 1)
-            chessboard.placePiece(Pawn(ChessColor.WHITE,6,2), 6, 2)
-            chessboard.placePiece(Pawn(ChessColor.WHITE,6,3), 6, 3)
-            chessboard.placePiece(Pawn(ChessColor.WHITE,6,4), 6, 4)
-            chessboard.placePiece(Pawn(ChessColor.WHITE,6,5), 6, 5)
-            chessboard.placePiece(Pawn(ChessColor.WHITE,6,6), 6, 6)
-            chessboard.placePiece(Pawn(ChessColor.WHITE,6,7), 6, 7)
+            chessboard.placePiece(6, 0, PieceColor.WHITE, PieceType.PAWN)
+            chessboard.placePiece(6, 1, PieceColor.WHITE, PieceType.PAWN)
+            chessboard.placePiece(6, 2, PieceColor.WHITE, PieceType.PAWN)
+            chessboard.placePiece(6, 3, PieceColor.WHITE, PieceType.PAWN)
+            chessboard.placePiece(6, 4, PieceColor.WHITE, PieceType.PAWN)
+            chessboard.placePiece(6, 5, PieceColor.WHITE, PieceType.PAWN)
+            chessboard.placePiece(6, 6, PieceColor.WHITE, PieceType.PAWN)
+            chessboard.placePiece(6, 7, PieceColor.WHITE, PieceType.PAWN)
 
-            chessboard.placePiece(Rook(ChessColor.WHITE,7,0), 7, 0)
-            chessboard.placePiece(Knight(ChessColor.WHITE,7,1), 7, 1)
-            chessboard.placePiece(Bishop(ChessColor.WHITE,7,2), 7, 2)
-            chessboard.placePiece(Queen(ChessColor.WHITE,7,3), 7, 3)
-            chessboard.placePiece(King(ChessColor.WHITE,7,4), 7, 4)
-            chessboard.placePiece(Bishop(ChessColor.WHITE,7,5), 7, 5)
-            chessboard.placePiece(Knight(ChessColor.WHITE,7,6), 7, 6)
-            chessboard.placePiece(Rook(ChessColor.WHITE,7,7), 7, 7)
+            chessboard.placePiece(7, 0, PieceColor.WHITE, PieceType.ROOK)
+            chessboard.placePiece(7, 1, PieceColor.WHITE, PieceType.KNIGHT)
+            chessboard.placePiece(7, 2, PieceColor.WHITE, PieceType.BISHOP)
+            chessboard.placePiece(7, 3, PieceColor.WHITE, PieceType.QUEEN)
+            chessboard.placePiece(7, 4, PieceColor.WHITE, PieceType.KING)
+            chessboard.placePiece(7, 5, PieceColor.WHITE, PieceType.BISHOP)
+            chessboard.placePiece(7, 6, PieceColor.WHITE, PieceType.KNIGHT)
+            chessboard.placePiece(7, 7, PieceColor.WHITE, PieceType.ROOK)
 
-            chessboard.placePiece(Pawn(ChessColor.BLACK,1,0), 1, 0)
-            chessboard.placePiece(Pawn(ChessColor.BLACK,1,1), 1, 1)
-            chessboard.placePiece(Pawn(ChessColor.BLACK,1,2), 1, 2)
-            chessboard.placePiece(Pawn(ChessColor.BLACK,1,3), 1, 3)
-            chessboard.placePiece(Pawn(ChessColor.BLACK,1,4), 1, 4)
-            chessboard.placePiece(Pawn(ChessColor.BLACK,1,5), 1, 5)
-            chessboard.placePiece(Pawn(ChessColor.BLACK,1,6), 1, 6)
-            chessboard.placePiece(Pawn(ChessColor.BLACK,1,7), 1, 7)
+            chessboard.placePiece(1, 0, PieceColor.BLACK, PieceType.PAWN)
+            chessboard.placePiece(1, 1, PieceColor.BLACK, PieceType.PAWN)
+            chessboard.placePiece(1, 2, PieceColor.BLACK, PieceType.PAWN)
+            chessboard.placePiece(1, 3, PieceColor.BLACK, PieceType.PAWN)
+            chessboard.placePiece(1, 4, PieceColor.BLACK, PieceType.PAWN)
+            chessboard.placePiece(1, 5, PieceColor.BLACK, PieceType.PAWN)
+            chessboard.placePiece(1, 6, PieceColor.BLACK, PieceType.PAWN)
+            chessboard.placePiece(1, 7, PieceColor.BLACK, PieceType.PAWN)
 
-            chessboard.placePiece(Rook(ChessColor.BLACK,0,0), 0, 0)
-            chessboard.placePiece(Knight(ChessColor.BLACK,0,1), 0, 1)
-            chessboard.placePiece(Bishop(ChessColor.BLACK,0,2), 0, 2)
-            chessboard.placePiece(Queen(ChessColor.BLACK,0,3), 0, 3)
-            chessboard.placePiece(King(ChessColor.BLACK,0,4), 0, 4)
-            chessboard.placePiece(Bishop(ChessColor.BLACK,0,5), 0, 5)
-            chessboard.placePiece(Knight(ChessColor.BLACK,0,6), 0, 6)
-            chessboard.placePiece(Rook(ChessColor.BLACK,0,7), 0, 7)
+            chessboard.placePiece(0, 0, PieceColor.BLACK, PieceType.ROOK)
+            chessboard.placePiece(0, 1, PieceColor.BLACK, PieceType.KNIGHT)
+            chessboard.placePiece(0, 2, PieceColor.BLACK, PieceType.BISHOP)
+            chessboard.placePiece(0, 3, PieceColor.BLACK, PieceType.QUEEN)
+            chessboard.placePiece(0, 4, PieceColor.BLACK, PieceType.KING)
+            chessboard.placePiece(0, 5, PieceColor.BLACK, PieceType.BISHOP)
+            chessboard.placePiece(0, 6, PieceColor.BLACK, PieceType.KNIGHT)
+            chessboard.placePiece(0, 7, PieceColor.BLACK, PieceType.ROOK)
         }else{
-            chessboard.placePiece(Pawn(ChessColor.WHITE,1,0), 1, 0)
-            chessboard.placePiece(Pawn(ChessColor.WHITE,1,1), 1, 1)
-            chessboard.placePiece(Pawn(ChessColor.WHITE,1,2), 1, 2)
-            chessboard.placePiece(Pawn(ChessColor.WHITE,1,3), 1, 3)
-            chessboard.placePiece(Pawn(ChessColor.WHITE,1,4), 1, 4)
-            chessboard.placePiece(Pawn(ChessColor.WHITE,1,5), 1, 5)
-            chessboard.placePiece(Pawn(ChessColor.WHITE,1,6), 1, 6)
-            chessboard.placePiece(Pawn(ChessColor.WHITE,1,7), 1, 7)
+            chessboard.placePiece(1, 0, PieceColor.WHITE, PieceType.PAWN)
+            chessboard.placePiece(1, 1, PieceColor.WHITE, PieceType.PAWN)
+            chessboard.placePiece(1, 2, PieceColor.WHITE, PieceType.PAWN)
+            chessboard.placePiece(1, 3, PieceColor.WHITE, PieceType.PAWN)
+            chessboard.placePiece(1, 4, PieceColor.WHITE, PieceType.PAWN)
+            chessboard.placePiece(1, 5, PieceColor.WHITE, PieceType.PAWN)
+            chessboard.placePiece(1, 6, PieceColor.WHITE, PieceType.PAWN)
+            chessboard.placePiece(1, 7, PieceColor.WHITE, PieceType.PAWN)
 
-            chessboard.placePiece(Rook(ChessColor.WHITE,0,0), 0, 0)
-            chessboard.placePiece(Knight(ChessColor.WHITE,0,1), 0, 1)
-            chessboard.placePiece(Bishop(ChessColor.WHITE,0,2), 0, 2)
-            chessboard.placePiece(King(ChessColor.WHITE,0,3), 0, 3)
-            chessboard.placePiece(Queen(ChessColor.WHITE,0,4), 0, 4)
-            chessboard.placePiece(Bishop(ChessColor.WHITE,0,5), 0, 5)
-            chessboard.placePiece(Knight(ChessColor.WHITE,0,6), 0, 6)
-            chessboard.placePiece(Rook(ChessColor.WHITE,0,7), 0, 7)
+            chessboard.placePiece(0, 0, PieceColor.WHITE, PieceType.ROOK)
+            chessboard.placePiece(0, 1, PieceColor.WHITE, PieceType.KNIGHT)
+            chessboard.placePiece(0, 2, PieceColor.WHITE, PieceType.BISHOP)
+            chessboard.placePiece(0, 3, PieceColor.WHITE, PieceType.KING)
+            chessboard.placePiece(0, 4, PieceColor.WHITE, PieceType.QUEEN)
+            chessboard.placePiece(0, 5, PieceColor.WHITE, PieceType.BISHOP)
+            chessboard.placePiece(0, 6, PieceColor.WHITE, PieceType.KNIGHT)
+            chessboard.placePiece(0, 7, PieceColor.WHITE, PieceType.ROOK)
 
-            chessboard.placePiece(Pawn(ChessColor.BLACK,6,0), 6, 0)
-            chessboard.placePiece(Pawn(ChessColor.BLACK,6,1), 6, 1)
-            chessboard.placePiece(Pawn(ChessColor.BLACK,6,2), 6, 2)
-            chessboard.placePiece(Pawn(ChessColor.BLACK,6,3), 6, 3)
-            chessboard.placePiece(Pawn(ChessColor.BLACK,6,4), 6, 4)
-            chessboard.placePiece(Pawn(ChessColor.BLACK,6,5), 6, 5)
-            chessboard.placePiece(Pawn(ChessColor.BLACK,6,6), 6, 6)
-            chessboard.placePiece(Pawn(ChessColor.BLACK,6,7), 6, 7)
+            chessboard.placePiece(6, 0, PieceColor.BLACK, PieceType.PAWN)
+            chessboard.placePiece(6, 1, PieceColor.BLACK, PieceType.PAWN)
+            chessboard.placePiece(6, 2, PieceColor.BLACK, PieceType.PAWN)
+            chessboard.placePiece(6, 3, PieceColor.BLACK, PieceType.PAWN)
+            chessboard.placePiece(6, 4, PieceColor.BLACK, PieceType.PAWN)
+            chessboard.placePiece(6, 5, PieceColor.BLACK, PieceType.PAWN)
+            chessboard.placePiece(6, 6, PieceColor.BLACK, PieceType.PAWN)
+            chessboard.placePiece(6, 7, PieceColor.BLACK, PieceType.PAWN)
 
-            chessboard.placePiece(Rook(ChessColor.BLACK,7,0), 7, 0)
-            chessboard.placePiece(Knight(ChessColor.BLACK,7,1), 7, 1)
-            chessboard.placePiece(Bishop(ChessColor.BLACK,7,2), 7, 2)
-            chessboard.placePiece(King(ChessColor.BLACK,7,3), 7, 3)
-            chessboard.placePiece(Queen(ChessColor.BLACK,7,4), 7, 4)
-            chessboard.placePiece(Bishop(ChessColor.BLACK,7,5), 7, 5)
-            chessboard.placePiece(Knight(ChessColor.BLACK,7,6), 7, 6)
-            chessboard.placePiece(Rook(ChessColor.BLACK,7,7), 7, 7)
+            chessboard.placePiece(7, 0, PieceColor.BLACK, PieceType.ROOK)
+            chessboard.placePiece(7, 1, PieceColor.BLACK, PieceType.KNIGHT)
+            chessboard.placePiece(7, 2, PieceColor.BLACK, PieceType.BISHOP)
+            chessboard.placePiece(7, 3, PieceColor.BLACK, PieceType.KING)
+            chessboard.placePiece(7, 4, PieceColor.BLACK, PieceType.QUEEN)
+            chessboard.placePiece(7, 5, PieceColor.BLACK, PieceType.BISHOP)
+            chessboard.placePiece(7, 6, PieceColor.BLACK, PieceType.KNIGHT)
+            chessboard.placePiece(7, 7, PieceColor.BLACK, PieceType.ROOK)
         }
     }
 
@@ -206,18 +197,33 @@ class GameChess : AbsThemeActivity() {
         else getColor(R.color.default_dark_square_color)
     }
 
-    private fun getPieceImageResource(piece: ChessPiece): Int {
-        return when (piece){
-            is Pawn -> if (piece.color == ChessColor.WHITE) R.drawable.default_pawn_white else R.drawable.default_pawn_black
-            is Rook -> if (piece.color == ChessColor.WHITE) R.drawable.default_rook_white else R.drawable.default_rook_black
-            is Knight -> if (piece.color == ChessColor.WHITE) R.drawable.default_knight_white else R.drawable.default_knight_black
-            is Bishop -> if (piece.color == ChessColor.WHITE) R.drawable.default_bishop_white else R.drawable.default_bishop_black
-            is Queen -> if (piece.color == ChessColor.WHITE) R.drawable.default_queen_white else R.drawable.default_queen_black
-            is King -> if (piece.color == ChessColor.WHITE) R.drawable.default_king_white else R.drawable.default_king_black
-            else -> 0
+    private fun createPieceImageView(square: Square): ImageView {
+        val pieceImageView = ImageView(this)
+        if (square.pieceColor == PieceColor.WHITE){
+            when(square.pieceType){
+                PieceType.PAWN -> pieceImageView.setImageResource(R.drawable.default_pawn_white)
+                PieceType.ROOK -> pieceImageView.setImageResource(R.drawable.default_rook_white)
+                PieceType.KNIGHT -> pieceImageView.setImageResource(R.drawable.default_knight_white)
+                PieceType.BISHOP -> pieceImageView.setImageResource(R.drawable.default_bishop_white)
+                PieceType.QUEEN -> pieceImageView.setImageResource(R.drawable.default_queen_white)
+                PieceType.KING -> pieceImageView.setImageResource(R.drawable.default_king_white)
+                else -> throw IllegalArgumentException("Unexpected PieceType: ${square.pieceType}")
+            }
+        }else{
+            when(square.pieceType){
+                PieceType.PAWN -> pieceImageView.setImageResource(R.drawable.default_pawn_black)
+                PieceType.ROOK -> pieceImageView.setImageResource(R.drawable.default_rook_black)
+                PieceType.KNIGHT -> pieceImageView.setImageResource(R.drawable.default_knight_black)
+                PieceType.BISHOP -> pieceImageView.setImageResource(R.drawable.default_bishop_black)
+                PieceType.QUEEN -> pieceImageView.setImageResource(R.drawable.default_queen_black)
+                PieceType.KING -> pieceImageView.setImageResource(R.drawable.default_king_black)
+                else -> throw IllegalArgumentException("Unexpected PieceType: ${square.pieceType}")
+            }
         }
+        return pieceImageView
     }
 
-    private fun handleSquareClick(square: Square?) {
+    private fun handleSquareClick(square: Square) {
+
     }
 }

@@ -1,6 +1,6 @@
 package com.example.chessmate.util.chess
 
-enum class ChessColor {
+enum class PieceColor {
     WHITE,
     BLACK
 }
