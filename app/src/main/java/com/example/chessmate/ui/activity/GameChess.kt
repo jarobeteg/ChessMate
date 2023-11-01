@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
+import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.GridLayout
 import android.widget.ImageView
@@ -11,6 +13,7 @@ import android.widget.TextView
 import com.example.chessmate.R
 import com.example.chessmate.util.chess.PieceColor
 import com.example.chessmate.util.chess.Chessboard
+import com.example.chessmate.util.chess.Pawn
 import com.example.chessmate.util.chess.PieceType
 import com.example.chessmate.util.chess.Square
 
@@ -19,6 +22,8 @@ class GameChess : AbsThemeActivity() {
     private lateinit var chessboard: Chessboard
     private var isWhiteStarting: Boolean = false
     private var squareSize: Int = 0
+    val highlightCircleTag = "highlight_cirlce"
+    private var selectedSquare: Square? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chess_game)
@@ -67,6 +72,7 @@ class GameChess : AbsThemeActivity() {
 
                 if (square.isOccupied) {
                     val pieceImageView = createPieceImageView(square)
+                    square.imageView = pieceImageView
                     frameLayout.addView(pieceImageView)
                 }
 
@@ -106,6 +112,7 @@ class GameChess : AbsThemeActivity() {
                     handleSquareClick(square)
                 }
 
+                square.frameLayout = frameLayout
                 chessboardLayout.addView(frameLayout)
             }
         }
@@ -224,6 +231,124 @@ class GameChess : AbsThemeActivity() {
     }
 
     private fun handleSquareClick(square: Square) {
+        //the println is there for debugging this fucking mess. will get removed eventually
+        println("row: ${square.row}, col: ${square.col}, PieceType: ${square.pieceType}, PieceColor: ${square.pieceColor}, FrameLayout: ${square.frameLayout}, ImageView: ${square.imageView}")
 
+        when{
+            isWhiteStarting && square.pieceColor == PieceColor.WHITE && selectedSquare == null -> { //first click as white
+                removeHighlightCircles()
+                when(square.pieceType){
+                    PieceType.PAWN -> {
+                        val pawn = Pawn(this, chessboardLayout, chessboard, square)
+                        pawn.showHighlightSquares()
+                        selectedSquare = square
+                    }
+                    PieceType.ROOK -> {println("rook")}
+                    PieceType.KNIGHT -> {println("knight")}
+                    PieceType.BISHOP -> {println("bishop")}
+                    PieceType.QUEEN -> {println("queen")}
+                    PieceType.KING -> {println("king")}
+                    else -> throw IllegalArgumentException("Unexpected PieceType: ${square.pieceType}")
+                }
+            }
+
+            isWhiteStarting && selectedSquare != null -> { //second click as white
+                if (selectedSquare == square){
+                    removeHighlightCircles()
+                    selectedSquare = null
+                } else if (selectedSquare?.pieceColor == square.pieceColor){
+                    removeHighlightCircles()
+                    selectedSquare = null
+                    handleSquareClick(square)
+                } else {
+                    val destinationSquare = square
+                    when(selectedSquare!!.pieceType){
+                        PieceType.PAWN -> {
+                            val pawn = Pawn(this, chessboardLayout, chessboard, selectedSquare!!)
+                            if (pawn.isValidMove(destinationSquare)){
+                                movePiece(selectedSquare!!, destinationSquare)
+                            }
+                            removeHighlightCircles()
+                            selectedSquare = null
+                        }
+                        else -> throw IllegalArgumentException("Unexpected PieceType: ${square.pieceType}")
+                    }
+                }
+            }
+
+            !isWhiteStarting && square.pieceColor == PieceColor.BLACK && selectedSquare == null -> { //first click as black
+                removeHighlightCircles()
+                when(square.pieceType){
+                    PieceType.PAWN -> {
+                        val pawn = Pawn(this, chessboardLayout, chessboard, square)
+                        pawn.showHighlightSquares()
+                        selectedSquare = square
+                    }
+                    PieceType.ROOK -> {println("rook")}
+                    PieceType.KNIGHT -> {println("knight")}
+                    PieceType.BISHOP -> {println("bishop")}
+                    PieceType.QUEEN -> {println("queen")}
+                    PieceType.KING -> {println("king")}
+                    else -> throw IllegalArgumentException("Unexpected PieceType: ${square.pieceType}")
+                }
+            }
+
+            !isWhiteStarting && selectedSquare != null -> { //second click as black
+                if (selectedSquare == square){
+                    removeHighlightCircles()
+                    selectedSquare = null
+                } else if (selectedSquare?.pieceColor == square.pieceColor){
+                    removeHighlightCircles()
+                    selectedSquare = null
+                    handleSquareClick(square)
+                } else {
+                    val destinationSquare = square
+                    when(selectedSquare!!.pieceType){
+                        PieceType.PAWN -> {
+                            val pawn = Pawn(this, chessboardLayout, chessboard, selectedSquare!!)
+                            if (pawn.isValidMove(destinationSquare)){
+                                movePiece(selectedSquare!!, destinationSquare)
+                            }
+                            removeHighlightCircles()
+                            selectedSquare = null
+                        }
+                        else -> throw IllegalArgumentException("Unexpected PieceType: ${square.pieceType}")
+                    }
+                }
+            }
+        }
+    }
+
+    private fun movePiece(sourceSquare: Square, destinationSquare: Square) {
+        destinationSquare.pieceType = sourceSquare.pieceType
+        destinationSquare.isOccupied = true
+        destinationSquare.pieceColor = sourceSquare.pieceColor
+        removePiece(sourceSquare)
+        addPiece(destinationSquare)
+    }
+
+    private fun addPiece(square: Square) {
+        val pieceImageView = createPieceImageView(square)
+        square.imageView = pieceImageView
+        square.frameLayout?.addView(pieceImageView)
+    }
+
+    private fun removePiece(square: Square) {
+        square.frameLayout?.removeView(square.imageView)
+        square.clearSquare()
+    }
+
+    private fun removeHighlightCircles() {
+        val circlesToRemove = mutableListOf<View>()
+        for (i in 0 until chessboardLayout.childCount) {
+            val view = chessboardLayout.getChildAt(i)
+            if (view.tag == highlightCircleTag) {
+                circlesToRemove.add(view)
+            }
+        }
+
+        circlesToRemove.forEach { circle ->
+            chessboardLayout.removeView(circle)
+        }
     }
 }
