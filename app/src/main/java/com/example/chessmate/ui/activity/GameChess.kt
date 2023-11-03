@@ -237,7 +237,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
 
     private fun handleSquareClick(square: Square) {
         //the println is there for debugging this fucking mess. will get removed eventually
-        println("row: ${square.row}, col: ${square.col}, PieceType: ${square.pieceType}, PieceColor: ${square.pieceColor}, FrameLayout: ${square.frameLayout}, ImageView: ${square.imageView}")
+        println("row: ${square.row}, col: ${square.col}, isOccupied: ${square.isOccupied}, PieceType: ${square.pieceType}, PieceColor: ${square.pieceColor}, FrameLayout: ${square.frameLayout}, ImageView: ${square.imageView}")
 
         when{
             isWhiteStarting && square.pieceColor == PieceColor.WHITE && selectedSquare == null -> { //first click as white
@@ -348,6 +348,9 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
 
     private fun movePiece(sourceSquare: Square, destinationSquare: Square) {
         removeMoveHighlights()
+        if (destinationSquare.isOccupied){
+            removePiece(destinationSquare)
+        }
         destinationSquare.pieceType = sourceSquare.pieceType
         destinationSquare.isOccupied = true
         destinationSquare.pieceColor = sourceSquare.pieceColor

@@ -22,6 +22,21 @@ class Pawn(private var context: Context, private var chessboardLayout: GridLayou
                     return true
                 }
             }
+        }else{
+            val leftDiagonalRow = currentSquare.row - 1
+            val leftDiagonalCol = currentSquare.col - 1
+            val rightDiagonalRow = currentSquare.row - 1
+            val rightDiagonalCol = currentSquare.col + 1
+
+            if (chessboard.getSquare(destinationSquare.row, destinationSquare.col).pieceColor != currentSquare.pieceColor &&
+                destinationSquare.row == leftDiagonalRow && destinationSquare.col == leftDiagonalCol) {
+                return true
+            }
+
+            if (chessboard.getSquare(destinationSquare.row, destinationSquare.col).pieceColor != currentSquare.pieceColor &&
+                destinationSquare.row == rightDiagonalRow && destinationSquare.col == rightDiagonalCol) {
+                return true
+            }
         }
         return false
     }
