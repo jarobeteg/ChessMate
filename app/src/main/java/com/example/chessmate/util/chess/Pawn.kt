@@ -89,27 +89,14 @@ class Pawn(private var context: Context, private var chessboardLayout: GridLayou
     }
 
     private fun addHighlightOpponent(row: Int, col: Int) {
-        val frameLayout = FrameLayout(context)
-        val squareSize = chessboardLayout.width / 8
-        val opponentHighlightSize = squareSize
-
-        val params = GridLayout.LayoutParams().apply {
-            width = squareSize
-            height = squareSize
-            rowSpec = GridLayout.spec(row)
-            columnSpec = GridLayout.spec(col)
-        }
-
-        val highlightParams = FrameLayout.LayoutParams(opponentHighlightSize, opponentHighlightSize).apply {
-            gravity = Gravity.CENTER
-        }
-
+        val square = chessboard.getSquare(row, col)
+        val squareFrameLayout = square.frameLayout
+        val squareImageView = square.imageView
         val imageView = ImageView(context)
         imageView.setImageResource(R.drawable.highlight_square_opponent)
-
-        frameLayout.addView(imageView, highlightParams)
-        frameLayout.tag = highlightOpponentTag
-
-        chessboardLayout.addView(frameLayout, params)
+        imageView.tag = highlightOpponentTag
+        squareFrameLayout?.removeView(squareImageView)
+        squareFrameLayout?.addView(imageView)
+        squareFrameLayout?.addView(squareImageView)
     }
 }

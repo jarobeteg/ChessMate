@@ -6,11 +6,6 @@
         android:title="@string/resign"/>
 
     <item
-        android:id="@+id/nav_takeback"
-        android:icon="@drawable/ic_takeback_24"
-        android:title="@string/takeback"/>
-
-    <item
         android:id="@+id/nav_back"
         android:icon="@drawable/ic_back_24"
         android:title="@string/back"/>

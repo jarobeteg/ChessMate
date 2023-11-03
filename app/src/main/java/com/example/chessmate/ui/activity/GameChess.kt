@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.GridLayout
 import android.widget.ImageView
@@ -13,6 +12,7 @@ import android.widget.TextView
 import com.example.chessmate.R
 import com.example.chessmate.util.chess.PieceColor
 import com.example.chessmate.util.chess.Chessboard
+import com.example.chessmate.util.chess.MoveTracker
 import com.example.chessmate.util.chess.Pawn
 import com.example.chessmate.util.chess.PieceType
 import com.example.chessmate.util.chess.Square
@@ -20,10 +20,13 @@ import com.example.chessmate.util.chess.Square
 class GameChess : AbsThemeActivity() {
     private lateinit var chessboardLayout: GridLayout
     private lateinit var chessboard: Chessboard
+    private var moveTracker: MutableList<MoveTracker> = mutableListOf()
+    private var turnNumber: Int = 1
     private var isWhiteStarting: Boolean = false
     private var squareSize: Int = 0
     private val highlightCircleTag = "highlight_circle"
     private val highlightOpponentTag = "highlight_opponent"
+    private val highlightMoveTag = "highlight_move"
     private var selectedSquare: Square? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -234,7 +237,7 @@ class GameChess : AbsThemeActivity() {
     private fun handleSquareClick(square: Square) {
         //the println is there for debugging this fucking mess. will get removed eventually
         println("row: ${square.row}, col: ${square.col}, PieceType: ${square.pieceType}, PieceColor: ${square.pieceColor}, FrameLayout: ${square.frameLayout}, ImageView: ${square.imageView}")
-
+        println(moveTracker)
         when{
             isWhiteStarting && square.pieceColor == PieceColor.WHITE && selectedSquare == null -> { //first click as white
                 removeHighlightCircles()
@@ -328,12 +331,23 @@ class GameChess : AbsThemeActivity() {
         }
     }
 
+    private fun trackMove(move: MoveTracker){
+        moveTracker.add(move)
+    }
+
     private fun movePiece(sourceSquare: Square, destinationSquare: Square) {
+        removeMoveHighlights()
         destinationSquare.pieceType = sourceSquare.pieceType
         destinationSquare.isOccupied = true
         destinationSquare.pieceColor = sourceSquare.pieceColor
+        addMoveHighlights(sourceSquare.row, sourceSquare.col)
+        addMoveHighlights(destinationSquare.row, destinationSquare.col)
         removePiece(sourceSquare)
         addPiece(destinationSquare)
+        val isWhiteToMove = destinationSquare.pieceColor == PieceColor.BLACK
+        val move = MoveTracker(sourceSquare, destinationSquare, turnNumber, isWhiteToMove)
+        turnNumber++
+        trackMove(move)
     }
 
     private fun addPiece(square: Square) {
@@ -345,6 +359,35 @@ class GameChess : AbsThemeActivity() {
     private fun removePiece(square: Square) {
         square.frameLayout?.removeView(square.imageView)
         square.clearSquare()
+    }
+
+    private fun addMoveHighlights(row: Int, col: Int){
+        val square = chessboard.getSquare(row, col)
+        val squareFrameLayout = square.frameLayout
+        val imageView = ImageView(this)
+        imageView.setImageResource(R.drawable.highlight_square_move)
+        imageView.tag = highlightMoveTag
+        squareFrameLayout?.addView(imageView)
+    }
+    private fun removeMoveHighlights(){
+        val moveHighlightsToRemove = mutableListOf<View>()
+
+        for (i in 0 until chessboardLayout.childCount) {
+            val squareFrameLayout = chessboardLayout.getChildAt(i) as? FrameLayout
+            if (squareFrameLayout != null) {
+                for (j in 0 until squareFrameLayout.childCount) {
+                    val view = squareFrameLayout.getChildAt(j)
+                    if (view.tag == highlightMoveTag) {
+                        moveHighlightsToRemove.add(view)
+                    }
+                }
+            }
+        }
+
+        moveHighlightsToRemove.forEach { highlight ->
+            val parentFrameLayout = highlight.parent as? FrameLayout
+            parentFrameLayout?.removeView(highlight)
+        }
     }
 
     private fun removeHighlightCircles() {
@@ -363,15 +406,22 @@ class GameChess : AbsThemeActivity() {
 
     private fun removeHighlightOpponents() {
         val opponentHighlightsToRemove = mutableListOf<View>()
+
         for (i in 0 until chessboardLayout.childCount) {
-            val view = chessboardLayout.getChildAt(i)
-            if (view.tag == highlightOpponentTag) {
-                opponentHighlightsToRemove.add(view)
+            val squareFrameLayout = chessboardLayout.getChildAt(i) as? FrameLayout
+            if (squareFrameLayout != null) {
+                for (j in 0 until squareFrameLayout.childCount) {
+                    val view = squareFrameLayout.getChildAt(j)
+                    if (view.tag == highlightOpponentTag) {
+                        opponentHighlightsToRemove.add(view)
+                    }
+                }
             }
         }
 
         opponentHighlightsToRemove.forEach { highlight ->
-            chessboardLayout.removeView(highlight)
+            val parentFrameLayout = highlight.parent as? FrameLayout
+            parentFrameLayout?.removeView(highlight)
         }
     }
 }
