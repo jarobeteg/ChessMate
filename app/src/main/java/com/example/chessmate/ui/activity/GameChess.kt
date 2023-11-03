@@ -15,9 +15,10 @@ import com.example.chessmate.util.chess.Chessboard
 import com.example.chessmate.util.chess.MoveTracker
 import com.example.chessmate.util.chess.Pawn
 import com.example.chessmate.util.chess.PieceType
+import com.example.chessmate.util.chess.PromotionDialogFragment
 import com.example.chessmate.util.chess.Square
 
-class GameChess : AbsThemeActivity() {
+class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogListener {
     private lateinit var chessboardLayout: GridLayout
     private lateinit var chessboard: Chessboard
     private var moveTracker: MutableList<MoveTracker> = mutableListOf()
@@ -237,7 +238,7 @@ class GameChess : AbsThemeActivity() {
     private fun handleSquareClick(square: Square) {
         //the println is there for debugging this fucking mess. will get removed eventually
         println("row: ${square.row}, col: ${square.col}, PieceType: ${square.pieceType}, PieceColor: ${square.pieceColor}, FrameLayout: ${square.frameLayout}, ImageView: ${square.imageView}")
-        println(moveTracker)
+
         when{
             isWhiteStarting && square.pieceColor == PieceColor.WHITE && selectedSquare == null -> { //first click as white
                 removeHighlightCircles()
@@ -273,7 +274,12 @@ class GameChess : AbsThemeActivity() {
                         PieceType.PAWN -> {
                             val pawn = Pawn(this, chessboardLayout, chessboard, selectedSquare!!)
                             if (pawn.isValidMove(destinationSquare)){
-                                movePiece(selectedSquare!!, destinationSquare)
+                                if (destinationSquare.row == 0){
+                                    val promotionDialog = PromotionDialogFragment(isWhiteStarting, this, selectedSquare!!, destinationSquare)
+                                    promotionDialog.show(supportFragmentManager, "PromotionDialog")
+                                }else {
+                                    movePiece(selectedSquare!!, destinationSquare)
+                                }
                             }
                             removeHighlightCircles()
                             removeHighlightOpponents()
@@ -318,7 +324,12 @@ class GameChess : AbsThemeActivity() {
                         PieceType.PAWN -> {
                             val pawn = Pawn(this, chessboardLayout, chessboard, selectedSquare!!)
                             if (pawn.isValidMove(destinationSquare)){
-                                movePiece(selectedSquare!!, destinationSquare)
+                                if (destinationSquare.row == 0){
+                                    val promotionDialog = PromotionDialogFragment(isWhiteStarting, this, selectedSquare!!, destinationSquare)
+                                    promotionDialog.show(supportFragmentManager, "PromotionDialog")
+                                }else {
+                                    movePiece(selectedSquare!!, destinationSquare)
+                                }
                             }
                             removeHighlightCircles()
                             removeHighlightOpponents()
@@ -422,6 +433,28 @@ class GameChess : AbsThemeActivity() {
         opponentHighlightsToRemove.forEach { highlight ->
             val parentFrameLayout = highlight.parent as? FrameLayout
             parentFrameLayout?.removeView(highlight)
+        }
+    }
+
+    override fun onPieceSelected(pieceType: PieceType, sourceSquare: Square, destinationSquare: Square) {
+        when(pieceType){
+            PieceType.QUEEN -> {
+                sourceSquare.pieceType = pieceType
+                movePiece(sourceSquare, destinationSquare)
+            }
+            PieceType.ROOK -> {
+                sourceSquare.pieceType = pieceType
+                movePiece(sourceSquare, destinationSquare)
+            }
+            PieceType.BISHOP -> {
+                sourceSquare.pieceType = pieceType
+                movePiece(sourceSquare, destinationSquare)
+            }
+            PieceType.KNIGHT -> {
+                sourceSquare.pieceType = pieceType
+                movePiece(sourceSquare, destinationSquare)
+            }
+            else -> throw IllegalArgumentException("Unexpected PieceType: $pieceType")
         }
     }
 }

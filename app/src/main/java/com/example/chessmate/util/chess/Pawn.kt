@@ -37,7 +37,7 @@ class Pawn(private var context: Context, private var chessboardLayout: GridLayou
                 }
             }
         }else {
-            if (!chessboard.getSquare(currentSquare.row - 1, currentSquare.col).isOccupied) {
+            if (isValidSquare(currentSquare.row - 1, currentSquare.col) && !chessboard.getSquare(currentSquare.row - 1, currentSquare.col).isOccupied) {
                 addHighlightSquare(currentSquare.row - 1, currentSquare.col)
             }
             val leftDiagonalRow = currentSquare.row - 1
