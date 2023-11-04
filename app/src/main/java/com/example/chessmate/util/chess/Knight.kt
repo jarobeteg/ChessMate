@@ -6,16 +6,40 @@ import android.widget.FrameLayout
 import android.widget.GridLayout
 import android.widget.ImageView
 import com.example.chessmate.R
+import kotlin.math.abs
 
 class Knight(private var context: Context, private var chessboardLayout: GridLayout, private var chessboard: Chessboard, private var currentSquare: Square){
     private val highlightCircleTag = "highlight_circle"
     private val highlightOpponentTag = "highlight_opponent"
     fun isValidMove(destinationSquare: Square): Boolean{
-        TODO("not yet implemented")
+        val rowDiff = abs(destinationSquare.row - currentSquare.row)
+        val colDiff = abs(destinationSquare.col - currentSquare.col)
+
+        return (rowDiff == 2 && colDiff == 1) || (rowDiff == 1 && colDiff == 2)
     }
 
     fun showHighlightSquare(){
+        val knightMoves = arrayOf(
+            Pair(-2, -1), Pair(-2, 1),
+            Pair(-1, -2), Pair(-1, 2),
+            Pair(1, -2), Pair(1, 2),
+            Pair(2, -1), Pair(2, 1)
+        )
 
+        for (move in knightMoves) {
+            val r = currentSquare.row + move.first
+            val c = currentSquare.col + move.second
+
+            if (isValidSquare(r, c) && (!chessboard.getSquare(r, c).isOccupied ||
+                        chessboard.getSquare(r, c).pieceColor != currentSquare.pieceColor)){
+                if (chessboard.getSquare(r, c).isOccupied &&
+                    chessboard.getSquare(r, c).pieceColor != currentSquare.pieceColor){
+                    addHighlightOpponent(r, c)
+                }else{
+                    addHighlightSquare(r, c)
+                }
+            }
+        }
     }
 
     private fun isValidSquare(row: Int, col: Int): Boolean{
