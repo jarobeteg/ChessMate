@@ -349,6 +349,16 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             selectedSquare = null
                         }
 
+                        PieceType.BISHOP -> {
+                            val bishop = Bishop(this, chessboardLayout, chessboard, selectedSquare!!)
+                            if (bishop.isValidMove(destinationSquare)){
+                                movePiece(selectedSquare!!, destinationSquare)
+                            }
+                            removeHighlightCircles()
+                            removeHighlightOpponents()
+                            selectedSquare = null
+                        }
+
                         else -> throw IllegalArgumentException("Unexpected PieceType: ${square.pieceType}")
                     }
                 }
@@ -423,6 +433,16 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                         PieceType.ROOK -> {
                             val rook = Rook(this, chessboardLayout, chessboard, selectedSquare!!)
                             if (rook.isValidMove(destinationSquare)){
+                                movePiece(selectedSquare!!, destinationSquare)
+                            }
+                            removeHighlightCircles()
+                            removeHighlightOpponents()
+                            selectedSquare = null
+                        }
+
+                        PieceType.BISHOP -> {
+                            val bishop = Bishop(this, chessboardLayout, chessboard, selectedSquare!!)
+                            if (bishop.isValidMove(destinationSquare)){
                                 movePiece(selectedSquare!!, destinationSquare)
                             }
                             removeHighlightCircles()

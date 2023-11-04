@@ -6,17 +6,115 @@ import android.widget.FrameLayout
 import android.widget.GridLayout
 import android.widget.ImageView
 import com.example.chessmate.R
+import kotlin.math.abs
 
 class Bishop(private var context: Context, private var chessboardLayout: GridLayout, private var chessboard: Chessboard, private var currentSquare: Square){
     private val highlightCircleTag = "highlight_circle"
     private val highlightOpponentTag = "highlight_opponent"
     fun isValidMove(destinationSquare: Square): Boolean{
-        TODO("not yet implemented")
+        val rowDiff = abs(destinationSquare.row - currentSquare.row)
+        val colDiff = abs(destinationSquare.col - currentSquare.col)
+
+        if (rowDiff != colDiff) {
+            return false
+        }
+
+        val rowIncrement = if (destinationSquare.row > currentSquare.row) 1 else -1
+        val colIncrement = if (destinationSquare.col > currentSquare.col) 1 else -1
+
+        var r = currentSquare.row + rowIncrement
+        var c = currentSquare.col + colIncrement
+        while (r != destinationSquare.row && c != destinationSquare.col) {
+            if (chessboard.getSquare(r, c).isOccupied) {
+                return false
+            }
+            r += rowIncrement
+            c += colIncrement
+        }
+        return true
     }
 
-    fun showHighlightSquare(){
+    fun showHighlightSquare() {
+        val row = currentSquare.row
+        val col = currentSquare.col
 
+        var r = row - 1
+        var c = col + 1
+        while (r >= 0 && c < 8) {
+            if (isValidSquare(r, c)) {
+                if (chessboard.getSquare(r, c).isOccupied) {
+                    if (chessboard.getSquare(r, c).pieceColor != currentSquare.pieceColor) {
+                        addHighlightOpponent(r, c)
+                    }
+                    break
+                }else{
+                    addHighlightSquare(r, c)
+                }
+            } else {
+                break
+            }
+            r--
+            c++
+        }
+
+        r = row + 1
+        c = col - 1
+        while (r < 8 && c >= 0) {
+            if (isValidSquare(r, c)) {
+                if (chessboard.getSquare(r, c).isOccupied) {
+                    if (chessboard.getSquare(r, c).pieceColor != currentSquare.pieceColor) {
+                        addHighlightOpponent(r, c)
+                    }
+                    break
+                }else{
+                    addHighlightSquare(r, c)
+                }
+            } else {
+                break
+            }
+            r++
+            c--
+        }
+
+        r = row - 1
+        c = col - 1
+        while (r >= 0 && c >= 0) {
+            if (isValidSquare(r, c)) {
+                if (chessboard.getSquare(r, c).isOccupied) {
+                    if (chessboard.getSquare(r, c).pieceColor != currentSquare.pieceColor) {
+                        addHighlightOpponent(r, c)
+                    }
+                    break
+                }else{
+                    addHighlightSquare(r, c)
+                }
+            } else {
+                break
+            }
+            r--
+            c--
+        }
+
+        r = row + 1
+        c = col + 1
+        while (r < 8 && c < 8) {
+            if (isValidSquare(r, c)) {
+                if (chessboard.getSquare(r, c).isOccupied) {
+                    if (chessboard.getSquare(r, c).pieceColor != currentSquare.pieceColor) {
+                        addHighlightOpponent(r, c)
+                    }
+                    break
+                }else{
+                    addHighlightSquare(r, c)
+                }
+            } else {
+                break
+            }
+            r++
+            c++
+        }
     }
+
 
     private fun isValidSquare(row: Int, col: Int): Boolean{
         return row in 0 until 8 && col in 0 until 8
