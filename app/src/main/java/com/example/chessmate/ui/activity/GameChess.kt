@@ -33,6 +33,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chess_game)
 
+        //this code snippet determines the user starting side
         val sharedPreferences = getSharedPreferences("chess_game", Context.MODE_PRIVATE)
         var startingSide = sharedPreferences.getString("starting_side", "random")
         if (startingSide == "random") {
@@ -41,11 +42,13 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
             startingSide = if (isWhite) "white" else "black"
         }
 
+        //the chessboard gets initialized with empty squares and square sizes are determined based on the device's display metrics
         chessboard = Chessboard()
         chessboardLayout = findViewById(R.id.chessboard)
         val screenWidth = resources.displayMetrics.widthPixels
         squareSize = screenWidth / 8
 
+        //here the the chessboard gets set up with a starting position based on which color starts
         if (startingSide == "white"){
             isWhiteStarting = true
             initializeStartingPosition()
@@ -57,6 +60,17 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         }
     }
 
+    /** before this is called an initial starting position of pieces has been set
+     * here we iterate through the chessboard and we get each square on the chessboard and we create a frame layout that represents the square UI
+     * the square sizes have been determined previously and these frame layouts will have this size
+     * then colors of the squares are determined and set
+     * after that we check if a piece have been placed on the square during the initialization of the starting position
+     * if isOccupied returns true wew create a piece image view and add it to the square frame layout and also add it to the square class (we need this later for piece movement)
+     * after this the numbers and letters are determined and placed on the first col and bottom row
+     * each square gets a click listener. well the square frame layout gets a click listener to be more precise
+     * then at last the frame layout is saved in the square class (for later we need this to show move highlights etc)
+     * and the square frame layout is added to the chessboard layout which is a grid layout
+     * */
     private fun setupChessboard(){
         val lightSquareColor = R.color.default_light_square_color
         val darkSquareColor = R.color.default_dark_square_color
@@ -123,6 +137,9 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         }
     }
 
+    //first this is called to place pieces on the chessboard. this just places the piece types only and not the images of pieces
+    //the chessboard have been previously initialized to the chessboard.placePiece places a piece type with color to a square with row and col to setup the starting position
+    //once this is done the setupChessboard is called and does the UI part for the chessboard
     private fun initializeStartingPosition() {
         if (isWhiteStarting){
             chessboard.placePiece(6, 0, PieceColor.WHITE, PieceType.PAWN)
@@ -235,6 +252,17 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         return pieceImageView
     }
 
+    /**
+     * this handles the square clicks and this probably can be prettier or more optimized. idk might refractor the code later
+     * there is selected square variable that is set to null. this is how the app knows if the user clicks for the first time or not meaning if a square has been selected that means the user has clicked on a square
+     * so on the first click highlights are removed and we check which square has been clicked
+     * for example if a pawn is clicked a Pawn is created and show all the available moves for that pawn.
+     * the second time we click we first check if the same square was clicked if yes we remove all highlights and set the selected square to null
+     * we also check if we clicked on a piece that has the same color as the one on the selected square meaning we clicked on another of our square
+     * we remove all the highlights and set the selected square to null again but now we call the handle square click again with the square we just clicked
+     * and it would show immediately the available moves of that piece otherwise if this is not implemented then we would have to click twice to choose a different piece
+     * on the second click which would mean that we either move or take a piece (here the pawn is an exception because it can promote so with second click we check if the destination square is the promotion square)
+     */
     private fun handleSquareClick(square: Square) {
         //the println is there for debugging this fucking mess. will get removed eventually
         println("row: ${square.row}, col: ${square.col}, isOccupied: ${square.isOccupied}, PieceType: ${square.pieceType}, PieceColor: ${square.pieceColor}, FrameLayout: ${square.frameLayout}, ImageView: ${square.imageView}")
@@ -342,10 +370,14 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         }
     }
 
+    //track each move in a chess game
     private fun trackMove(move: MoveTracker){
         moveTracker.add(move)
     }
 
+    //if the piece just moves then we give the destination square the piece type and color and we set to occupied and also we add the move highlight so the user can we what was the last move they did
+    //the source square gets cleared and the destination square gets an image view based on which piece type is on the square
+    //if the destination square is occupied meaning the user choose to take that piece we first have to clear that square before moving our piece onto that square.
     private fun movePiece(sourceSquare: Square, destinationSquare: Square) {
         removeMoveHighlights()
         if (destinationSquare.isOccupied){
@@ -383,6 +415,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         imageView.tag = highlightMoveTag
         squareFrameLayout?.addView(imageView)
     }
+
     private fun removeMoveHighlights(){
         val moveHighlightsToRemove = mutableListOf<View>()
 
