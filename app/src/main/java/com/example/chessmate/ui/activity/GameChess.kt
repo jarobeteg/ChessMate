@@ -10,12 +10,17 @@ import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.chessmate.R
+import com.example.chessmate.util.chess.Bishop
 import com.example.chessmate.util.chess.PieceColor
 import com.example.chessmate.util.chess.Chessboard
+import com.example.chessmate.util.chess.King
+import com.example.chessmate.util.chess.Knight
 import com.example.chessmate.util.chess.MoveTracker
 import com.example.chessmate.util.chess.Pawn
 import com.example.chessmate.util.chess.PieceType
 import com.example.chessmate.util.chess.PromotionDialogFragment
+import com.example.chessmate.util.chess.Queen
+import com.example.chessmate.util.chess.Rook
 import com.example.chessmate.util.chess.Square
 
 class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogListener {
@@ -277,11 +282,31 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                         pawn.showHighlightSquares()
                         selectedSquare = square
                     }
-                    PieceType.ROOK -> {println("rook")}
-                    PieceType.KNIGHT -> {println("knight")}
-                    PieceType.BISHOP -> {println("bishop")}
-                    PieceType.QUEEN -> {println("queen")}
-                    PieceType.KING -> {println("king")}
+                    PieceType.ROOK -> {
+                        val rook = Rook(this, chessboardLayout, chessboard, square)
+                        rook.showHighlightSquare()
+                        selectedSquare = square
+                    }
+                    PieceType.KNIGHT -> {
+                        val knight = Knight(this, chessboardLayout, chessboard, square)
+                        knight.showHighlightSquare()
+                        selectedSquare = square
+                    }
+                    PieceType.BISHOP -> {
+                        val bishop = Bishop(this, chessboardLayout, chessboard, square)
+                        bishop.showHighlightSquare()
+                        selectedSquare = square
+                    }
+                    PieceType.QUEEN -> {
+                        val queen = Queen(this, chessboardLayout, chessboard, square)
+                        queen.showHighlightSquare()
+                        selectedSquare = square
+                    }
+                    PieceType.KING -> {
+                        val king = King(this, chessboardLayout, chessboard, square)
+                        king.showHighlightSquare()
+                        selectedSquare = square
+                    }
                     else -> throw IllegalArgumentException("Unexpected PieceType: ${square.pieceType}")
                 }
             }
@@ -313,6 +338,17 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             removeHighlightOpponents()
                             selectedSquare = null
                         }
+
+                        PieceType.ROOK -> {
+                            val rook = Rook(this, chessboardLayout, chessboard, selectedSquare!!)
+                                if (rook.isValidMove(destinationSquare)){
+                                    movePiece(selectedSquare!!, destinationSquare)
+                                }
+                            removeHighlightCircles()
+                            removeHighlightOpponents()
+                            selectedSquare = null
+                        }
+
                         else -> throw IllegalArgumentException("Unexpected PieceType: ${square.pieceType}")
                     }
                 }
@@ -327,11 +363,31 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                         pawn.showHighlightSquares()
                         selectedSquare = square
                     }
-                    PieceType.ROOK -> {println("rook")}
-                    PieceType.KNIGHT -> {println("knight")}
-                    PieceType.BISHOP -> {println("bishop")}
-                    PieceType.QUEEN -> {println("queen")}
-                    PieceType.KING -> {println("king")}
+                    PieceType.ROOK -> {
+                        val rook = Rook(this, chessboardLayout, chessboard, square)
+                        rook.showHighlightSquare()
+                        selectedSquare = square
+                    }
+                    PieceType.KNIGHT -> {
+                        val knight = Knight(this, chessboardLayout, chessboard, square)
+                        knight.showHighlightSquare()
+                        selectedSquare = square
+                    }
+                    PieceType.BISHOP -> {
+                        val bishop = Bishop(this, chessboardLayout, chessboard, square)
+                        bishop.showHighlightSquare()
+                        selectedSquare = square
+                    }
+                    PieceType.QUEEN -> {
+                        val queen = Queen(this, chessboardLayout, chessboard, square)
+                        queen.showHighlightSquare()
+                        selectedSquare = square
+                    }
+                    PieceType.KING -> {
+                        val king = King(this, chessboardLayout, chessboard, square)
+                        king.showHighlightSquare()
+                        selectedSquare = square
+                    }
                     else -> throw IllegalArgumentException("Unexpected PieceType: ${square.pieceType}")
                 }
             }
@@ -363,6 +419,17 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             removeHighlightOpponents()
                             selectedSquare = null
                         }
+
+                        PieceType.ROOK -> {
+                            val rook = Rook(this, chessboardLayout, chessboard, selectedSquare!!)
+                            if (rook.isValidMove(destinationSquare)){
+                                movePiece(selectedSquare!!, destinationSquare)
+                            }
+                            removeHighlightCircles()
+                            removeHighlightOpponents()
+                            selectedSquare = null
+                        }
+
                         else -> throw IllegalArgumentException("Unexpected PieceType: ${square.pieceType}")
                     }
                 }
