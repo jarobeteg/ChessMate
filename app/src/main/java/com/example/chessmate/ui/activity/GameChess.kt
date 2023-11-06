@@ -178,7 +178,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
             chessboard.placePiece(0, 0, PieceColor.BLACK, PieceType.ROOK)
             chessboard.placePiece(0, 1, PieceColor.BLACK, PieceType.KNIGHT)
             chessboard.placePiece(0, 2, PieceColor.BLACK, PieceType.BISHOP)
-            chessboard.placePiece(4, 7, PieceColor.BLACK, PieceType.QUEEN)
+            chessboard.placePiece(0, 3, PieceColor.BLACK, PieceType.QUEEN)
             chessboard.placePiece(0, 4, PieceColor.BLACK, PieceType.KING)
             chessboard.placePiece(0, 5, PieceColor.BLACK, PieceType.BISHOP)
             chessboard.placePiece(0, 6, PieceColor.BLACK, PieceType.KNIGHT)
