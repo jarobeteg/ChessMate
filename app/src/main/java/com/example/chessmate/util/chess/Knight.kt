@@ -18,7 +18,7 @@ class Knight(private var context: Context, private var chessboardLayout: GridLay
         return (rowDiff == 2 && colDiff == 1) || (rowDiff == 1 && colDiff == 2)
     }
 
-    fun showHighlightSquare(){
+    fun showHighlightSquares(){
         val knightMoves = arrayOf(
             Pair(-2, -1), Pair(-2, 1),
             Pair(-1, -2), Pair(-1, 2),
@@ -30,7 +30,7 @@ class Knight(private var context: Context, private var chessboardLayout: GridLay
             val r = currentSquare.row + move.first
             val c = currentSquare.col + move.second
 
-            if (isValidSquare(r, c) && (!chessboard.getSquare(r, c).isOccupied ||
+            if (chessboard.isValidSquare(r, c) && (!chessboard.getSquare(r, c).isOccupied ||
                         chessboard.getSquare(r, c).pieceColor != currentSquare.pieceColor)){
                 if (chessboard.getSquare(r, c).isOccupied &&
                     chessboard.getSquare(r, c).pieceColor != currentSquare.pieceColor){
@@ -40,10 +40,6 @@ class Knight(private var context: Context, private var chessboardLayout: GridLay
                 }
             }
         }
-    }
-
-    private fun isValidSquare(row: Int, col: Int): Boolean{
-        return row in 0 until 8 && col in 0 until 8
     }
 
     private fun addHighlightSquare(row: Int, col: Int){

@@ -34,14 +34,14 @@ class Bishop(private var context: Context, private var chessboardLayout: GridLay
         return true
     }
 
-    fun showHighlightSquare() {
+    fun showHighlightSquares() {
         val row = currentSquare.row
         val col = currentSquare.col
 
         var r = row - 1
         var c = col + 1
         while (r >= 0 && c < 8) {
-            if (isValidSquare(r, c)) {
+            if (chessboard.isValidSquare(r, c)) {
                 if (chessboard.getSquare(r, c).isOccupied) {
                     if (chessboard.getSquare(r, c).pieceColor != currentSquare.pieceColor) {
                         addHighlightOpponent(r, c)
@@ -60,7 +60,7 @@ class Bishop(private var context: Context, private var chessboardLayout: GridLay
         r = row + 1
         c = col - 1
         while (r < 8 && c >= 0) {
-            if (isValidSquare(r, c)) {
+            if (chessboard.isValidSquare(r, c)) {
                 if (chessboard.getSquare(r, c).isOccupied) {
                     if (chessboard.getSquare(r, c).pieceColor != currentSquare.pieceColor) {
                         addHighlightOpponent(r, c)
@@ -79,7 +79,7 @@ class Bishop(private var context: Context, private var chessboardLayout: GridLay
         r = row - 1
         c = col - 1
         while (r >= 0 && c >= 0) {
-            if (isValidSquare(r, c)) {
+            if (chessboard.isValidSquare(r, c)) {
                 if (chessboard.getSquare(r, c).isOccupied) {
                     if (chessboard.getSquare(r, c).pieceColor != currentSquare.pieceColor) {
                         addHighlightOpponent(r, c)
@@ -98,7 +98,7 @@ class Bishop(private var context: Context, private var chessboardLayout: GridLay
         r = row + 1
         c = col + 1
         while (r < 8 && c < 8) {
-            if (isValidSquare(r, c)) {
+            if (chessboard.isValidSquare(r, c)) {
                 if (chessboard.getSquare(r, c).isOccupied) {
                     if (chessboard.getSquare(r, c).pieceColor != currentSquare.pieceColor) {
                         addHighlightOpponent(r, c)
@@ -113,11 +113,6 @@ class Bishop(private var context: Context, private var chessboardLayout: GridLay
             r++
             c++
         }
-    }
-
-
-    private fun isValidSquare(row: Int, col: Int): Boolean{
-        return row in 0 until 8 && col in 0 until 8
     }
 
     private fun addHighlightSquare(row: Int, col: Int){

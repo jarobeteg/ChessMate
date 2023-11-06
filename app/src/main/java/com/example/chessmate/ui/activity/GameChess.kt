@@ -2,6 +2,7 @@ package com.example.chessmate.ui.activity
 
 import android.content.Context
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -146,13 +147,13 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     //the chessboard have been previously initialized to the chessboard.placePiece places a piece type with color to a square with row and col to setup the starting position
     //once this is done the setupChessboard is called and does the UI part for the chessboard
     private fun initializeStartingPosition() {
-        if (isWhiteStarting){
+        if (isWhiteStarting){//user starts as white
             chessboard.placePiece(6, 0, PieceColor.WHITE, PieceType.PAWN)
             chessboard.placePiece(6, 1, PieceColor.WHITE, PieceType.PAWN)
             chessboard.placePiece(6, 2, PieceColor.WHITE, PieceType.PAWN)
-            chessboard.placePiece(6, 3, PieceColor.WHITE, PieceType.PAWN)
+//            chessboard.placePiece(6, 3, PieceColor.WHITE, PieceType.PAWN)
             chessboard.placePiece(6, 4, PieceColor.WHITE, PieceType.PAWN)
-            chessboard.placePiece(6, 5, PieceColor.WHITE, PieceType.PAWN)
+//            chessboard.placePiece(6, 5, PieceColor.WHITE, PieceType.PAWN)
             chessboard.placePiece(6, 6, PieceColor.WHITE, PieceType.PAWN)
             chessboard.placePiece(6, 7, PieceColor.WHITE, PieceType.PAWN)
 
@@ -177,7 +178,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
             chessboard.placePiece(0, 0, PieceColor.BLACK, PieceType.ROOK)
             chessboard.placePiece(0, 1, PieceColor.BLACK, PieceType.KNIGHT)
             chessboard.placePiece(0, 2, PieceColor.BLACK, PieceType.BISHOP)
-            chessboard.placePiece(0, 3, PieceColor.BLACK, PieceType.QUEEN)
+            chessboard.placePiece(4, 7, PieceColor.BLACK, PieceType.QUEEN)
             chessboard.placePiece(0, 4, PieceColor.BLACK, PieceType.KING)
             chessboard.placePiece(0, 5, PieceColor.BLACK, PieceType.BISHOP)
             chessboard.placePiece(0, 6, PieceColor.BLACK, PieceType.KNIGHT)
@@ -274,37 +275,103 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
 
         when{
             isWhiteStarting && square.pieceColor == PieceColor.WHITE && selectedSquare == null -> { //first click as white
+                val kingSquare = chessboard.getWhiteKingSquare()
                 removeHighlightCircles()
                 removeHighlightOpponents()
                 when(square.pieceType){
                     PieceType.PAWN -> {
                         val pawn = Pawn(this, chessboardLayout, chessboard, square)
-                        pawn.showHighlightSquares()
-                        selectedSquare = square
+                        if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.WHITE)) {
+                            square.pieceType = null
+                            square.isOccupied = false
+                            if (chessboard.isKingInCheck(chessboard, kingSquare, PieceColor.WHITE)){
+                                square.pieceType = PieceType.PAWN
+                                square.isOccupied = true
+                            }else {
+                                square.pieceType = PieceType.PAWN
+                                square.isOccupied = true
+                                pawn.showHighlightSquares()
+                                selectedSquare = square
+                            }
+                        }else{
+                            addHighlightCheck(kingSquare.row, kingSquare.col)
+                        }
                     }
                     PieceType.ROOK -> {
                         val rook = Rook(this, chessboardLayout, chessboard, square)
-                        rook.showHighlightSquare()
-                        selectedSquare = square
+                        if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.WHITE)) {
+                            square.pieceType = null
+                            square.isOccupied = false
+                            if (chessboard.isKingInCheck(chessboard, kingSquare, PieceColor.WHITE)){
+                                square.pieceType = PieceType.ROOK
+                                square.isOccupied = true
+                            }else {
+                                square.pieceType = PieceType.ROOK
+                                square.isOccupied = true
+                                rook.showHighlightSquares()
+                                selectedSquare = square
+                            }
+                        }else{
+                            addHighlightCheck(kingSquare.row, kingSquare.col)
+                        }
                     }
                     PieceType.KNIGHT -> {
                         val knight = Knight(this, chessboardLayout, chessboard, square)
-                        knight.showHighlightSquare()
-                        selectedSquare = square
+                        if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.WHITE)) {
+                            square.pieceType = null
+                            square.isOccupied = false
+                            if (chessboard.isKingInCheck(chessboard, kingSquare, PieceColor.WHITE)){
+                                square.pieceType = PieceType.KNIGHT
+                                square.isOccupied = true
+                            }else {
+                                square.pieceType = PieceType.KNIGHT
+                                square.isOccupied = true
+                                knight.showHighlightSquares()
+                                selectedSquare = square
+                            }
+                        }else{
+                            addHighlightCheck(kingSquare.row, kingSquare.col)
+                        }
                     }
                     PieceType.BISHOP -> {
                         val bishop = Bishop(this, chessboardLayout, chessboard, square)
-                        bishop.showHighlightSquare()
-                        selectedSquare = square
+                        if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.WHITE)) {
+                            square.pieceType = null
+                            square.isOccupied = false
+                            if (chessboard.isKingInCheck(chessboard, kingSquare, PieceColor.WHITE)){
+                                square.pieceType = PieceType.BISHOP
+                                square.isOccupied = true
+                            }else {
+                                square.pieceType = PieceType.BISHOP
+                                square.isOccupied = true
+                                bishop.showHighlightSquares()
+                                selectedSquare = square
+                            }
+                        }else{
+                            addHighlightCheck(kingSquare.row, kingSquare.col)
+                        }
                     }
                     PieceType.QUEEN -> {
                         val queen = Queen(this, chessboardLayout, chessboard, square)
-                        queen.showHighlightSquare()
-                        selectedSquare = square
+                        if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.WHITE)) {
+                            square.pieceType = null
+                            square.isOccupied = false
+                            if (chessboard.isKingInCheck(chessboard, kingSquare, PieceColor.WHITE)){
+                                square.pieceType = PieceType.QUEEN
+                                square.isOccupied = true
+                            }else {
+                                square.pieceType = PieceType.QUEEN
+                                square.isOccupied = true
+                                queen.showHighlightSquares()
+                                selectedSquare = square
+                            }
+                        }else{
+                            addHighlightCheck(kingSquare.row, kingSquare.col)
+                        }
                     }
                     PieceType.KING -> {
                         val king = King(this, chessboardLayout, chessboard, square)
-                        king.showHighlightSquare()
+                        king.showHighlightSquares()
                         selectedSquare = square
                     }
                     else -> throw IllegalArgumentException("Unexpected PieceType: ${square.pieceType}")
@@ -395,37 +462,103 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
             }
 
             !isWhiteStarting && square.pieceColor == PieceColor.BLACK && selectedSquare == null -> { //first click as black
+                val kingSquare = chessboard.getBlackKingSquare()
                 removeHighlightCircles()
                 removeHighlightOpponents()
                 when(square.pieceType){
                     PieceType.PAWN -> {
                         val pawn = Pawn(this, chessboardLayout, chessboard, square)
-                        pawn.showHighlightSquares()
-                        selectedSquare = square
+                        if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.BLACK)) {
+                            square.pieceType = null
+                            square.isOccupied = false
+                            if (chessboard.isKingInCheck(chessboard, kingSquare, PieceColor.BLACK)){
+                                square.pieceType = PieceType.PAWN
+                                square.isOccupied = true
+                            }else {
+                                square.pieceType = PieceType.PAWN
+                                square.isOccupied = true
+                                pawn.showHighlightSquares()
+                                selectedSquare = square
+                            }
+                        }else{
+                            addHighlightCheck(kingSquare.row, kingSquare.col)
+                        }
                     }
                     PieceType.ROOK -> {
                         val rook = Rook(this, chessboardLayout, chessboard, square)
-                        rook.showHighlightSquare()
-                        selectedSquare = square
+                        if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.BLACK)) {
+                            square.pieceType = null
+                            square.isOccupied = false
+                            if (chessboard.isKingInCheck(chessboard, kingSquare, PieceColor.BLACK)){
+                                square.pieceType = PieceType.ROOK
+                                square.isOccupied = true
+                            }else {
+                                square.pieceType = PieceType.ROOK
+                                square.isOccupied = true
+                                rook.showHighlightSquares()
+                                selectedSquare = square
+                            }
+                        }else{
+                            addHighlightCheck(kingSquare.row, kingSquare.col)
+                        }
                     }
                     PieceType.KNIGHT -> {
                         val knight = Knight(this, chessboardLayout, chessboard, square)
-                        knight.showHighlightSquare()
-                        selectedSquare = square
+                        if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.BLACK)) {
+                            square.pieceType = null
+                            square.isOccupied = false
+                            if (chessboard.isKingInCheck(chessboard, kingSquare, PieceColor.BLACK)){
+                                square.pieceType = PieceType.KNIGHT
+                                square.isOccupied = true
+                            }else {
+                                square.pieceType = PieceType.KNIGHT
+                                square.isOccupied = true
+                                knight.showHighlightSquares()
+                                selectedSquare = square
+                            }
+                        }else{
+                            addHighlightCheck(kingSquare.row, kingSquare.col)
+                        }
                     }
                     PieceType.BISHOP -> {
                         val bishop = Bishop(this, chessboardLayout, chessboard, square)
-                        bishop.showHighlightSquare()
-                        selectedSquare = square
+                        if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.BLACK)) {
+                            square.pieceType = null
+                            square.isOccupied = false
+                            if (chessboard.isKingInCheck(chessboard, kingSquare, PieceColor.BLACK)){
+                                square.pieceType = PieceType.BISHOP
+                                square.isOccupied = true
+                            }else {
+                                square.pieceType = PieceType.BISHOP
+                                square.isOccupied = true
+                                bishop.showHighlightSquares()
+                                selectedSquare = square
+                            }
+                        }else{
+                            addHighlightCheck(kingSquare.row, kingSquare.col)
+                        }
                     }
                     PieceType.QUEEN -> {
                         val queen = Queen(this, chessboardLayout, chessboard, square)
-                        queen.showHighlightSquare()
-                        selectedSquare = square
+                        if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.BLACK)) {
+                            square.pieceType = null
+                            square.isOccupied = false
+                            if (chessboard.isKingInCheck(chessboard, kingSquare, PieceColor.BLACK)){
+                                square.pieceType = PieceType.QUEEN
+                                square.isOccupied = true
+                            }else {
+                                square.pieceType = PieceType.QUEEN
+                                square.isOccupied = true
+                                queen.showHighlightSquares()
+                                selectedSquare = square
+                            }
+                        }else{
+                            addHighlightCheck(kingSquare.row, kingSquare.col)
+                        }
                     }
                     PieceType.KING -> {
                         val king = King(this, chessboardLayout, chessboard, square)
-                        king.showHighlightSquare()
+                        king.showHighlightSquares()
                         selectedSquare = square
                     }
                     else -> throw IllegalArgumentException("Unexpected PieceType: ${square.pieceType}")
@@ -561,6 +694,38 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         imageView.setImageResource(R.drawable.highlight_square_move)
         imageView.tag = highlightMoveTag
         squareFrameLayout?.addView(imageView)
+    }
+
+    private fun addHighlightCheck(row: Int, col: Int){
+        val square = chessboard.getSquare(row, col)
+        val squareFrameLayout = square.frameLayout
+        val squareImageView = square.imageView
+        val imageView = ImageView(this)
+        imageView.setImageResource(R.drawable.highlight_square_opponent)
+        imageView.tag = highlightOpponentTag
+
+        squareFrameLayout?.removeView(squareImageView)
+        squareFrameLayout?.addView(imageView)
+        squareFrameLayout?.addView(squareImageView)
+
+        val countdownTimer = object : CountDownTimer(3000, 500) {
+            override fun onTick(millisUntilFinished: Long) {
+                when (millisUntilFinished){
+                    in 0..500 -> imageView.visibility = View.INVISIBLE
+                    in 501..1000 -> imageView.visibility = View.VISIBLE
+                    in 1001..1500 -> imageView.visibility = View.INVISIBLE
+                    in 1501..2000 -> imageView.visibility = View.VISIBLE
+                    in 2001..2500 -> imageView.visibility = View.INVISIBLE
+                    in 2501..3000 -> imageView.visibility = View.VISIBLE
+                }
+            }
+
+            override fun onFinish() {
+                squareFrameLayout?.removeView(imageView)
+            }
+        }
+
+        countdownTimer.start()
     }
 
     private fun removeMoveHighlights(){

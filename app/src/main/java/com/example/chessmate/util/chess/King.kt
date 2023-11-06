@@ -15,10 +15,11 @@ class King(private var context: Context, private var chessboardLayout: GridLayou
         val rowDiff = abs(destinationSquare.row - currentSquare.row)
         val colDiff = abs(destinationSquare.col - currentSquare.col)
 
+        if (chessboard.isKingInCheck(chessboard, destinationSquare, currentSquare.pieceColor!!)) return false
         return (rowDiff <= 1 && colDiff <= 1)
     }
 
-    fun showHighlightSquare(){
+    fun showHighlightSquares() {
         val row = currentSquare.row
         val col = currentSquare.col
 
@@ -32,12 +33,17 @@ class King(private var context: Context, private var chessboardLayout: GridLayou
                 val newCol = col + c
 
                 if (isValidSquare(newRow, newCol)) {
+                    val destSquare = chessboard.getSquare(newRow, newCol)
                     if (chessboard.getSquare(newRow, newCol).isOccupied){
                         if (chessboard.getSquare(newRow, newCol).pieceColor != currentSquare.pieceColor){
-                            addHighlightOpponent(newRow, newCol)
+                            if (!chessboard.isKingInCheck(chessboard, destSquare, currentSquare.pieceColor!!)) {
+                                addHighlightOpponent(newRow, newCol)
+                            }
                         }
                     }else{
-                        addHighlightSquare(newRow, newCol)
+                        if (!chessboard.isKingInCheck(chessboard, destSquare, currentSquare.pieceColor!!)) {
+                            addHighlightSquare(newRow, newCol)
+                        }
                     }
                 }
             }

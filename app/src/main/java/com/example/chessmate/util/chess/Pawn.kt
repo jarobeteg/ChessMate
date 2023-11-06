@@ -42,6 +42,10 @@ class Pawn(private var context: Context, private var chessboardLayout: GridLayou
     }
 
     fun showHighlightSquares(){
+        var kingPosition = chessboard.getWhiteKingSquare()
+        if (currentSquare.pieceColor == PieceColor.BLACK){
+            kingPosition = chessboard.getBlackKingSquare()
+        }
         if (currentSquare.row == 6){
             if (!chessboard.getSquare(currentSquare.row - 1, currentSquare.col).isOccupied) {
                 addHighlightSquare(currentSquare.row - 1, currentSquare.col)
@@ -52,7 +56,7 @@ class Pawn(private var context: Context, private var chessboardLayout: GridLayou
                 }
             }
         }else {
-            if (isValidSquare(currentSquare.row - 1, currentSquare.col) && !chessboard.getSquare(currentSquare.row - 1, currentSquare.col).isOccupied) {
+            if (chessboard.isValidSquare(currentSquare.row - 1, currentSquare.col) && !chessboard.getSquare(currentSquare.row - 1, currentSquare.col).isOccupied) {
                 addHighlightSquare(currentSquare.row - 1, currentSquare.col)
             }
             val leftDiagonalRow = currentSquare.row - 1
@@ -60,22 +64,18 @@ class Pawn(private var context: Context, private var chessboardLayout: GridLayou
             val rightDiagonalRow = currentSquare.row - 1
             val rightDiagonalCol = currentSquare.col + 1
 
-            if (isValidSquare(leftDiagonalRow, leftDiagonalCol) &&
+            if (chessboard.isValidSquare(leftDiagonalRow, leftDiagonalCol) &&
                 chessboard.getSquare(leftDiagonalRow, leftDiagonalCol).isOccupied &&
                 chessboard.getSquare(leftDiagonalRow, leftDiagonalCol).pieceColor != currentSquare.pieceColor) {
                 addHighlightOpponent(leftDiagonalRow, leftDiagonalCol)
             }
 
-            if (isValidSquare(rightDiagonalRow, rightDiagonalCol) &&
+            if (chessboard.isValidSquare(rightDiagonalRow, rightDiagonalCol) &&
                 chessboard.getSquare(rightDiagonalRow, rightDiagonalCol).isOccupied &&
                 chessboard.getSquare(rightDiagonalRow, rightDiagonalCol).pieceColor != currentSquare.pieceColor) {
                 addHighlightOpponent(rightDiagonalRow, rightDiagonalCol)
             }
         }
-    }
-
-    private fun isValidSquare(row: Int, col: Int): Boolean {
-        return row in 0 until 8 && col in 0 until 8
     }
 
     private fun addHighlightSquare(row: Int, col: Int) {

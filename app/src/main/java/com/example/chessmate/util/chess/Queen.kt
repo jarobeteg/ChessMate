@@ -37,7 +37,7 @@ class Queen(private var context: Context, private var chessboardLayout: GridLayo
     }
 
 
-    fun showHighlightSquare(){
+    fun showHighlightSquares(){
         bishopHighlightMoves()
         rookHighlightMoves()
     }
@@ -49,7 +49,7 @@ class Queen(private var context: Context, private var chessboardLayout: GridLayo
         var r = row - 1
         var c = col + 1
         while (r >= 0 && c < 8) {
-            if (isValidSquare(r, c)) {
+            if (chessboard.isValidSquare(r, c)) {
                 if (chessboard.getSquare(r, c).isOccupied) {
                     if (chessboard.getSquare(r, c).pieceColor != currentSquare.pieceColor) {
                         addHighlightOpponent(r, c)
@@ -68,7 +68,7 @@ class Queen(private var context: Context, private var chessboardLayout: GridLayo
         r = row + 1
         c = col - 1
         while (r < 8 && c >= 0) {
-            if (isValidSquare(r, c)) {
+            if (chessboard.isValidSquare(r, c)) {
                 if (chessboard.getSquare(r, c).isOccupied) {
                     if (chessboard.getSquare(r, c).pieceColor != currentSquare.pieceColor) {
                         addHighlightOpponent(r, c)
@@ -87,7 +87,7 @@ class Queen(private var context: Context, private var chessboardLayout: GridLayo
         r = row - 1
         c = col - 1
         while (r >= 0 && c >= 0) {
-            if (isValidSquare(r, c)) {
+            if (chessboard.isValidSquare(r, c)) {
                 if (chessboard.getSquare(r, c).isOccupied) {
                     if (chessboard.getSquare(r, c).pieceColor != currentSquare.pieceColor) {
                         addHighlightOpponent(r, c)
@@ -106,7 +106,7 @@ class Queen(private var context: Context, private var chessboardLayout: GridLayo
         r = row + 1
         c = col + 1
         while (r < 8 && c < 8) {
-            if (isValidSquare(r, c)) {
+            if (chessboard.isValidSquare(r, c)) {
                 if (chessboard.getSquare(r, c).isOccupied) {
                     if (chessboard.getSquare(r, c).pieceColor != currentSquare.pieceColor) {
                         addHighlightOpponent(r, c)
@@ -127,7 +127,7 @@ class Queen(private var context: Context, private var chessboardLayout: GridLayo
         val row = currentSquare.row
         val col = currentSquare.col
         for (r in row - 1 downTo 0){
-            if (isValidSquare(r, currentSquare.col)) {
+            if (chessboard.isValidSquare(r, currentSquare.col)) {
                 if (chessboard.getSquare(r, currentSquare.col).isOccupied) {
                     if (chessboard.getSquare(r, currentSquare.col).pieceColor != currentSquare.pieceColor) {
                         addHighlightOpponent(r, currentSquare.col)
@@ -140,7 +140,7 @@ class Queen(private var context: Context, private var chessboardLayout: GridLayo
         }
 
         for (r in row + 1 until 8){
-            if (isValidSquare(r, currentSquare.col)) {
+            if (chessboard.isValidSquare(r, currentSquare.col)) {
                 if (chessboard.getSquare(r, currentSquare.col).isOccupied) {
                     if (chessboard.getSquare(r, currentSquare.col).pieceColor != currentSquare.pieceColor) {
                         addHighlightOpponent(r, currentSquare.col)
@@ -153,7 +153,7 @@ class Queen(private var context: Context, private var chessboardLayout: GridLayo
         }
 
         for (c in col - 1 downTo  0){
-            if (isValidSquare(currentSquare.row, c)) {
+            if (chessboard.isValidSquare(currentSquare.row, c)) {
                 if (chessboard.getSquare(currentSquare.row, c).isOccupied) {
                     if (chessboard.getSquare(currentSquare.row, c).pieceColor != currentSquare.pieceColor) {
                         addHighlightOpponent(currentSquare.row, c)
@@ -166,7 +166,7 @@ class Queen(private var context: Context, private var chessboardLayout: GridLayo
         }
 
         for (c in col + 1 until 8){
-            if (isValidSquare(currentSquare.row, c)) {
+            if (chessboard.isValidSquare(currentSquare.row, c)) {
                 if (chessboard.getSquare(currentSquare.row, c).isOccupied) {
                     if (chessboard.getSquare(currentSquare.row, c).pieceColor != currentSquare.pieceColor) {
                         addHighlightOpponent(currentSquare.row, c)
@@ -177,10 +177,6 @@ class Queen(private var context: Context, private var chessboardLayout: GridLayo
                 }
             }
         }
-    }
-
-    private fun isValidSquare(row: Int, col: Int): Boolean{
-        return row in 0 until 8 && col in 0 until 8
     }
 
     private fun addHighlightSquare(row: Int, col: Int){
