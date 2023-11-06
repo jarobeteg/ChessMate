@@ -151,9 +151,9 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
             chessboard.placePiece(6, 0, PieceColor.WHITE, PieceType.PAWN)
             chessboard.placePiece(6, 1, PieceColor.WHITE, PieceType.PAWN)
             chessboard.placePiece(6, 2, PieceColor.WHITE, PieceType.PAWN)
-//            chessboard.placePiece(6, 3, PieceColor.WHITE, PieceType.PAWN)
+            chessboard.placePiece(6, 3, PieceColor.WHITE, PieceType.PAWN)
             chessboard.placePiece(6, 4, PieceColor.WHITE, PieceType.PAWN)
-//            chessboard.placePiece(6, 5, PieceColor.WHITE, PieceType.PAWN)
+            chessboard.placePiece(6, 5, PieceColor.WHITE, PieceType.PAWN)
             chessboard.placePiece(6, 6, PieceColor.WHITE, PieceType.PAWN)
             chessboard.placePiece(6, 7, PieceColor.WHITE, PieceType.PAWN)
 

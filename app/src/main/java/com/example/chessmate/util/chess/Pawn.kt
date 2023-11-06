@@ -42,10 +42,6 @@ class Pawn(private var context: Context, private var chessboardLayout: GridLayou
     }
 
     fun showHighlightSquares(){
-        var kingPosition = chessboard.getWhiteKingSquare()
-        if (currentSquare.pieceColor == PieceColor.BLACK){
-            kingPosition = chessboard.getBlackKingSquare()
-        }
         if (currentSquare.row == 6){
             if (!chessboard.getSquare(currentSquare.row - 1, currentSquare.col).isOccupied) {
                 addHighlightSquare(currentSquare.row - 1, currentSquare.col)
@@ -76,6 +72,10 @@ class Pawn(private var context: Context, private var chessboardLayout: GridLayou
                 addHighlightOpponent(rightDiagonalRow, rightDiagonalCol)
             }
         }
+    }
+
+    fun canCheckBeBlocked(): Boolean{
+        TODO("Not yet implemented")
     }
 
     private fun addHighlightSquare(row: Int, col: Int) {
