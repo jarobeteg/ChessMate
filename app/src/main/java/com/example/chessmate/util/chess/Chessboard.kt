@@ -141,4 +141,100 @@ class Chessboard {
 
         return false
     }
+
+    fun getCheckingPieceSquare(chessboard: Chessboard, kingPosition: Square, kingColor: PieceColor): List<Square> {
+        val opponentColor = if (kingColor == PieceColor.WHITE) PieceColor.BLACK else PieceColor.WHITE
+        val checkingPieces = mutableListOf<Square>()
+
+        if (chessboard.isValidSquare(kingPosition.row - 1, kingPosition.col - 1) &&
+            chessboard.getSquare(kingPosition.row - 1, kingPosition.col - 1).pieceColor == opponentColor &&
+            chessboard.getSquare(kingPosition.row - 1, kingPosition.col - 1).pieceType == PieceType.PAWN) {
+            checkingPieces.add(chessboard.getSquare(kingPosition.row - 1, kingPosition.col - 1))
+        }
+        if (chessboard.isValidSquare(kingPosition.row - 1, kingPosition.col + 1) &&
+            chessboard.getSquare(kingPosition.row - 1, kingPosition.col + 1).pieceColor == opponentColor &&
+            chessboard.getSquare(kingPosition.row - 1, kingPosition.col + 1).pieceType == PieceType.PAWN) {
+            checkingPieces.add(chessboard.getSquare(kingPosition.row - 1, kingPosition.col + 1))
+        }
+
+        val knightMoves = listOf(
+            Pair(-2, -1), Pair(-2, 1),
+            Pair(-1, -2), Pair(-1, 2),
+            Pair(1, -2), Pair(1, 2),
+            Pair(2, -1), Pair(2, 1)
+        )
+        for ((rowOffset, colOffset) in knightMoves) {
+            if (chessboard.isValidSquare(kingPosition.row + rowOffset, kingPosition.col + colOffset) &&
+                chessboard.getSquare(kingPosition.row + rowOffset, kingPosition.col + colOffset).pieceColor == opponentColor &&
+                chessboard.getSquare(kingPosition.row + rowOffset, kingPosition.col + colOffset).pieceType == PieceType.KNIGHT) {
+                checkingPieces.add(chessboard.getSquare(kingPosition.row + rowOffset, kingPosition.col + colOffset))
+            }
+        }
+
+        val queenMoves = listOf(Pair(-1, -1), Pair(-1, 1), Pair(1, -1), Pair(1, 1), Pair(-1, 0), Pair(1, 0), Pair(0, -1), Pair(0, 1))
+        for ((rowOffset, colOffset) in queenMoves) {
+            var row = kingPosition.row + rowOffset
+            var col = kingPosition.col + colOffset
+            while (chessboard.isValidSquare(row, col)) {
+                val square = chessboard.getSquare(row, col)
+                if (square.isOccupied) {
+                    if (square.pieceColor == opponentColor && square.pieceType == PieceType.QUEEN) {
+                        checkingPieces.add(chessboard.getSquare(row, col))
+                    }
+                    break
+                }
+                row += rowOffset
+                col += colOffset
+            }
+        }
+
+        val rookMoves = listOf(Pair(-1, 0), Pair(1, 0), Pair(0, -1), Pair(0, 1))
+        for ((rowOffset, colOffset) in rookMoves) {
+            var row = kingPosition.row + rowOffset
+            var col = kingPosition.col + colOffset
+            while (chessboard.isValidSquare(row, col)) {
+                val square = chessboard.getSquare(row, col)
+                if (square.isOccupied) {
+                    if (square.pieceColor == opponentColor && square.pieceType == PieceType.ROOK) {
+                        checkingPieces.add(chessboard.getSquare(row, col))
+                    }
+                    break
+                }
+                row += rowOffset
+                col += colOffset
+            }
+        }
+
+        val bishopMoves = listOf(Pair(-1, -1), Pair(-1, 1), Pair(1, -1), Pair(1, 1))
+        for ((rowOffset, colOffset) in bishopMoves) {
+            var row = kingPosition.row + rowOffset
+            var col = kingPosition.col + colOffset
+            while (chessboard.isValidSquare(row, col)) {
+                val square = chessboard.getSquare(row, col)
+                if (square.isOccupied) {
+                    if (square.pieceColor == opponentColor && square.pieceType == PieceType.BISHOP) {
+                        checkingPieces.add(chessboard.getSquare(row, col))
+                    }
+                    break
+                }
+                row += rowOffset
+                col += colOffset
+            }
+        }
+
+        val kingMoves = listOf(
+            Pair(-1, -1), Pair(-1, 0), Pair(-1, 1),
+            Pair(0, -1), Pair(0, 1),
+            Pair(1, -1), Pair(1, 0), Pair(1, 1)
+        )
+        for ((rowOffset, colOffset) in kingMoves) {
+            if (chessboard.isValidSquare(kingPosition.row + rowOffset, kingPosition.col + colOffset) &&
+                chessboard.getSquare(kingPosition.row + rowOffset, kingPosition.col + colOffset).pieceColor == opponentColor &&
+                chessboard.getSquare(kingPosition.row + rowOffset, kingPosition.col + colOffset).pieceType == PieceType.KING) {
+                checkingPieces.add(chessboard.getSquare(kingPosition.row + rowOffset, kingPosition.col + colOffset))
+            }
+        }
+
+        return checkingPieces
+    }
 }

@@ -18,4 +18,11 @@ data class Square(
         pieceType = null
         imageView = null
     }
+
+    fun dupe(source: Square) {
+        pieceColor = source.pieceColor
+        pieceType = source.pieceType
+        isOccupied = source.isOccupied
+        imageView = source.imageView
+    }
 }

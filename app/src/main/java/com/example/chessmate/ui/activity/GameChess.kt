@@ -287,6 +287,9 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             if (chessboard.isKingInCheck(chessboard, kingSquare, PieceColor.WHITE)){
                                 square.pieceType = PieceType.PAWN
                                 square.isOccupied = true
+                                if (pawn.canTakePinPiece()){
+                                    selectedSquare = square
+                                }
                             }else {
                                 square.pieceType = PieceType.PAWN
                                 square.isOccupied = true
@@ -294,7 +297,11 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                                 selectedSquare = square
                             }
                         }else{
-                            addHighlightCheck(kingSquare.row, kingSquare.col)
+                            if (pawn.canCheckBeBlocked()){
+                                selectedSquare = square
+                            }else {
+                                addHighlightCheck(kingSquare.row, kingSquare.col)
+                            }
                         }
                     }
                     PieceType.ROOK -> {
@@ -474,6 +481,9 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             if (chessboard.isKingInCheck(chessboard, kingSquare, PieceColor.BLACK)){
                                 square.pieceType = PieceType.PAWN
                                 square.isOccupied = true
+                                if (pawn.canTakePinPiece()){
+                                    selectedSquare = square
+                                }
                             }else {
                                 square.pieceType = PieceType.PAWN
                                 square.isOccupied = true
@@ -481,7 +491,11 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                                 selectedSquare = square
                             }
                         }else{
-                            addHighlightCheck(kingSquare.row, kingSquare.col)
+                            if (pawn.canCheckBeBlocked()){
+                                selectedSquare = square
+                            }else {
+                                addHighlightCheck(kingSquare.row, kingSquare.col)
+                            }
                         }
                     }
                     PieceType.ROOK -> {
