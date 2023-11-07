@@ -148,18 +148,18 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     //once this is done the setupChessboard is called and does the UI part for the chessboard
     private fun initializeStartingPosition() {
         if (isWhiteStarting){//user starts as white
-            chessboard.placePiece(6, 0, PieceColor.WHITE, PieceType.PAWN)
-            chessboard.placePiece(6, 1, PieceColor.WHITE, PieceType.PAWN)
-            chessboard.placePiece(6, 2, PieceColor.WHITE, PieceType.PAWN)
-            chessboard.placePiece(6, 3, PieceColor.WHITE, PieceType.PAWN)
-            chessboard.placePiece(6, 4, PieceColor.WHITE, PieceType.PAWN)
-            chessboard.placePiece(6, 5, PieceColor.WHITE, PieceType.PAWN)
-            chessboard.placePiece(6, 6, PieceColor.WHITE, PieceType.PAWN)
-            chessboard.placePiece(6, 7, PieceColor.WHITE, PieceType.PAWN)
+//            chessboard.placePiece(6, 0, PieceColor.WHITE, PieceType.PAWN)
+//            chessboard.placePiece(6, 1, PieceColor.WHITE, PieceType.PAWN)
+//            chessboard.placePiece(6, 2, PieceColor.WHITE, PieceType.PAWN)
+//            chessboard.placePiece(6, 3, PieceColor.WHITE, PieceType.PAWN)
+//            chessboard.placePiece(6, 4, PieceColor.WHITE, PieceType.PAWN)
+//            chessboard.placePiece(6, 5, PieceColor.WHITE, PieceType.PAWN)
+//            chessboard.placePiece(6, 6, PieceColor.WHITE, PieceType.PAWN)
+//            chessboard.placePiece(6, 7, PieceColor.WHITE, PieceType.PAWN)
 
             chessboard.placePiece(7, 0, PieceColor.WHITE, PieceType.ROOK)
             chessboard.placePiece(7, 1, PieceColor.WHITE, PieceType.KNIGHT)
-            chessboard.placePiece(7, 2, PieceColor.WHITE, PieceType.BISHOP)
+            chessboard.placePiece(6, 3, PieceColor.WHITE, PieceType.BISHOP)
             chessboard.placePiece(7, 3, PieceColor.WHITE, PieceType.QUEEN)
             chessboard.placePiece(7, 4, PieceColor.WHITE, PieceType.KING)
             chessboard.placePiece(7, 5, PieceColor.WHITE, PieceType.BISHOP)
@@ -178,7 +178,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
             chessboard.placePiece(0, 0, PieceColor.BLACK, PieceType.ROOK)
             chessboard.placePiece(0, 1, PieceColor.BLACK, PieceType.KNIGHT)
             chessboard.placePiece(0, 2, PieceColor.BLACK, PieceType.BISHOP)
-            chessboard.placePiece(0, 3, PieceColor.BLACK, PieceType.QUEEN)
+            chessboard.placePiece(3, 0, PieceColor.BLACK, PieceType.QUEEN)
             chessboard.placePiece(0, 4, PieceColor.BLACK, PieceType.KING)
             chessboard.placePiece(0, 5, PieceColor.BLACK, PieceType.BISHOP)
             chessboard.placePiece(0, 6, PieceColor.BLACK, PieceType.KNIGHT)
@@ -355,6 +355,9 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             if (chessboard.isKingInCheck(chessboard, kingSquare, PieceColor.WHITE)){
                                 square.pieceType = PieceType.BISHOP
                                 square.isOccupied = true
+                                if (bishop.canTakePinPiece()){
+                                    selectedSquare = square
+                                }
                             }else {
                                 square.pieceType = PieceType.BISHOP
                                 square.isOccupied = true
@@ -362,7 +365,11 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                                 selectedSquare = square
                             }
                         }else{
-                            addHighlightCheck(kingSquare.row, kingSquare.col)
+                            if (bishop.canCheckBeBlocked()){
+                                selectedSquare = square
+                            }else {
+                                addHighlightCheck(kingSquare.row, kingSquare.col)
+                            }
                         }
                     }
                     PieceType.QUEEN -> {
@@ -556,6 +563,9 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             if (chessboard.isKingInCheck(chessboard, kingSquare, PieceColor.BLACK)){
                                 square.pieceType = PieceType.BISHOP
                                 square.isOccupied = true
+                                if (bishop.canTakePinPiece()){
+                                    selectedSquare = square
+                                }
                             }else {
                                 square.pieceType = PieceType.BISHOP
                                 square.isOccupied = true
@@ -563,7 +573,11 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                                 selectedSquare = square
                             }
                         }else{
-                            addHighlightCheck(kingSquare.row, kingSquare.col)
+                            if (bishop.canCheckBeBlocked()){
+                                selectedSquare = square
+                            }else {
+                                addHighlightCheck(kingSquare.row, kingSquare.col)
+                            }
                         }
                     }
                     PieceType.QUEEN -> {
