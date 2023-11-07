@@ -384,6 +384,9 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             if (chessboard.isKingInCheck(chessboard, kingSquare, PieceColor.WHITE)){
                                 square.pieceType = PieceType.QUEEN
                                 square.isOccupied = true
+                                if (queen.canTakePinPiece()){
+                                    selectedSquare = square
+                                }
                             }else {
                                 square.pieceType = PieceType.QUEEN
                                 square.isOccupied = true
@@ -391,7 +394,11 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                                 selectedSquare = square
                             }
                         }else{
-                            addHighlightCheck(kingSquare.row, kingSquare.col)
+                            if (queen.canCheckBeBlocked()){
+                                selectedSquare = square
+                            }else {
+                                addHighlightCheck(kingSquare.row, kingSquare.col)
+                            }
                         }
                     }
                     PieceType.KING -> {
@@ -596,6 +603,9 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             if (chessboard.isKingInCheck(chessboard, kingSquare, PieceColor.BLACK)){
                                 square.pieceType = PieceType.QUEEN
                                 square.isOccupied = true
+                                if (queen.canTakePinPiece()){
+                                    selectedSquare = square
+                                }
                             }else {
                                 square.pieceType = PieceType.QUEEN
                                 square.isOccupied = true
@@ -603,7 +613,11 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                                 selectedSquare = square
                             }
                         }else{
-                            addHighlightCheck(kingSquare.row, kingSquare.col)
+                            if (queen.canCheckBeBlocked()){
+                                selectedSquare = square
+                            }else {
+                                addHighlightCheck(kingSquare.row, kingSquare.col)
+                            }
                         }
                     }
                     PieceType.KING -> {
