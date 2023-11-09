@@ -47,6 +47,19 @@ class Chessboard {
         return null
     }
 
+    fun getWhiteKingSideRook(): Square {
+        return getSquare(7, 7)
+    }
+    fun getWhiteQueenSideRook(): Square{
+        return getSquare(7,0)
+    }
+    fun getBlackQueenSideRook(): Square{
+        return getSquare(7,7)
+    }
+    fun getBlackKingSideRook(): Square{
+        return getSquare(7,0)
+    }
+
     fun isKingInCheck(chessboard: Chessboard, kingPosition: Square, kingColor: PieceColor): Boolean {
         val opponentColor = if (kingColor == PieceColor.WHITE) PieceColor.BLACK else PieceColor.WHITE
 

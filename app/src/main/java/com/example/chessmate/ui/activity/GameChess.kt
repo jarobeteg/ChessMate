@@ -183,7 +183,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
             chessboard.placePiece(0, 5, PieceColor.BLACK, PieceType.BISHOP)
             chessboard.placePiece(0, 6, PieceColor.BLACK, PieceType.KNIGHT)
             chessboard.placePiece(0, 7, PieceColor.BLACK, PieceType.ROOK)
-        }else{
+        }else{//user starts as black
             chessboard.placePiece(1, 0, PieceColor.WHITE, PieceType.PAWN)
             chessboard.placePiece(1, 1, PieceColor.WHITE, PieceType.PAWN)
             chessboard.placePiece(1, 2, PieceColor.WHITE, PieceType.PAWN)
@@ -404,6 +404,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                     PieceType.KING -> {
                         val king = King(this, chessboardLayout, chessboard, square)
                         king.showHighlightSquares()
+                        king.showIfCastlingPossible()
                         selectedSquare = square
                     }
                     else -> throw IllegalArgumentException("Unexpected PieceType: ${square.pieceType}")
@@ -480,7 +481,21 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
 
                         PieceType.KING -> {
                             val king = King(this, chessboardLayout, chessboard, selectedSquare!!)
-                            if (king.isValidMove(destinationSquare)){
+                            if (selectedSquare!!.col + 2 == destinationSquare.col){
+                                val isKingSideCastles = true
+                                val isPlayerWhite = true
+                                if (king.isCastlingMoveValid(isKingSideCastles, isPlayerWhite)){
+                                    performCastles(isKingSideCastles, isPlayerWhite)
+                                }
+                            }
+                            else if (selectedSquare!!.col - 2 == destinationSquare.col){
+                                val isKingSideCastles = false
+                                val isPlayerWhite = true
+                                if (king.isCastlingMoveValid(isKingSideCastles, isPlayerWhite)){
+                                    performCastles(isKingSideCastles, isPlayerWhite)
+                                }
+                            }
+                            else if (king.isValidMove(destinationSquare)){
                                 movePiece(selectedSquare!!, destinationSquare)
                             }
                             removeHighlightCircles()
@@ -623,6 +638,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                     PieceType.KING -> {
                         val king = King(this, chessboardLayout, chessboard, square)
                         king.showHighlightSquares()
+                        king.showIfCastlingPossible()
                         selectedSquare = square
                     }
                     else -> throw IllegalArgumentException("Unexpected PieceType: ${square.pieceType}")
@@ -699,7 +715,21 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
 
                         PieceType.KING -> {
                             val king = King(this, chessboardLayout, chessboard, selectedSquare!!)
-                            if (king.isValidMove(destinationSquare)){
+                            if (selectedSquare!!.col - 2 == destinationSquare.col){
+                                val isKingSideCastles = true
+                                val isPlayerWhite = false
+                                if (king.isCastlingMoveValid(isKingSideCastles, isPlayerWhite)){
+                                    performCastles(isKingSideCastles, isPlayerWhite)
+                                }
+                            }
+                            else if (selectedSquare!!.col + 2 == destinationSquare.col){
+                                val isKingSideCastles = false
+                                val isPlayerWhite = false
+                                if (king.isCastlingMoveValid(isKingSideCastles, isPlayerWhite)){
+                                    performCastles(isKingSideCastles, isPlayerWhite)
+                                }
+                            }
+                            else if (king.isValidMove(destinationSquare)){
                                 movePiece(selectedSquare!!, destinationSquare)
                             }
                             removeHighlightCircles()
@@ -727,6 +757,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         if (destinationSquare.isOccupied){
             removePiece(destinationSquare)
         }
+        sourceSquare.hasMoved = true
         destinationSquare.pieceType = sourceSquare.pieceType
         destinationSquare.isOccupied = true
         destinationSquare.pieceColor = sourceSquare.pieceColor
@@ -734,6 +765,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         addMoveHighlights(destinationSquare.row, destinationSquare.col)
         removePiece(sourceSquare)
         addPiece(destinationSquare)
+        //move tracker
         val isWhiteToMove = destinationSquare.pieceColor == PieceColor.BLACK
         val move = MoveTracker(sourceSquare, destinationSquare, turnNumber, isWhiteToMove)
         turnNumber++
@@ -749,6 +781,105 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     private fun removePiece(square: Square) {
         square.frameLayout?.removeView(square.imageView)
         square.clearSquare()
+    }
+
+    private fun performCastles(isKingSideCastles: Boolean, isPlayerWhite: Boolean) {
+        val kingPosition = if (isPlayerWhite) chessboard.getWhiteKingSquare() else chessboard.getBlackKingSquare()
+        val kingSideRook = if (isPlayerWhite) chessboard.getWhiteKingSideRook() else chessboard.getBlackKingSideRook()
+        val queenSideRook = if (isPlayerWhite) chessboard.getWhiteQueenSideRook() else chessboard.getBlackQueenSideRook()
+        if (isPlayerWhite){
+            if (isKingSideCastles){
+                kingPosition!!.hasMoved = true
+                val destinationKingSquare = chessboard.getSquare(7, 6)
+                destinationKingSquare.isOccupied = true
+                destinationKingSquare.hasMoved = true
+                destinationKingSquare.pieceType = PieceType.KING
+                destinationKingSquare.pieceColor = PieceColor.WHITE
+
+                val destinationRookSquare = chessboard.getSquare(7,5)
+                destinationRookSquare.isOccupied = true
+                destinationRookSquare.hasMoved = true
+                destinationRookSquare.pieceType = PieceType.ROOK
+                destinationRookSquare.pieceColor = PieceColor.WHITE
+
+                addMoveHighlights(kingPosition.row, kingPosition.col)
+                addMoveHighlights(destinationKingSquare.row, destinationKingSquare.col)
+
+                removePiece(kingPosition)
+                addPiece(destinationKingSquare)
+
+                removePiece(kingSideRook)
+                addPiece(destinationRookSquare)
+            }else{
+                kingPosition!!.hasMoved = true
+                val destinationKingSquare = chessboard.getSquare(7, 2)
+                destinationKingSquare.isOccupied = true
+                destinationKingSquare.hasMoved = true
+                destinationKingSquare.pieceType = PieceType.KING
+                destinationKingSquare.pieceColor = PieceColor.WHITE
+
+                val destinationRookSquare = chessboard.getSquare(7,3)
+                destinationRookSquare.isOccupied = true
+                destinationRookSquare.hasMoved = true
+                destinationRookSquare.pieceType = PieceType.ROOK
+                destinationRookSquare.pieceColor = PieceColor.WHITE
+
+                addMoveHighlights(kingPosition.row, kingPosition.col)
+                addMoveHighlights(destinationKingSquare.row, destinationKingSquare.col)
+
+                removePiece(kingPosition)
+                addPiece(destinationKingSquare)
+
+                removePiece(queenSideRook)
+                addPiece(destinationRookSquare)
+            }
+        }else{
+            if (isKingSideCastles){
+                kingPosition!!.hasMoved = true
+                val destinationKingSquare = chessboard.getSquare(7, 1)
+                destinationKingSquare.isOccupied = true
+                destinationKingSquare.hasMoved = true
+                destinationKingSquare.pieceType = PieceType.KING
+                destinationKingSquare.pieceColor = PieceColor.BLACK
+
+                val destinationRookSquare = chessboard.getSquare(7,2)
+                destinationRookSquare.isOccupied = true
+                destinationRookSquare.hasMoved = true
+                destinationRookSquare.pieceType = PieceType.ROOK
+                destinationRookSquare.pieceColor = PieceColor.BLACK
+
+                addMoveHighlights(kingPosition.row, kingPosition.col)
+                addMoveHighlights(destinationKingSquare.row, destinationKingSquare.col)
+
+                removePiece(kingPosition)
+                addPiece(destinationKingSquare)
+
+                removePiece(kingSideRook)
+                addPiece(destinationRookSquare)
+            }else{
+                kingPosition!!.hasMoved = true
+                val destinationKingSquare = chessboard.getSquare(7, 5)
+                destinationKingSquare.isOccupied = true
+                destinationKingSquare.hasMoved = true
+                destinationKingSquare.pieceType = PieceType.KING
+                destinationKingSquare.pieceColor = PieceColor.BLACK
+
+                val destinationRookSquare = chessboard.getSquare(7,4)
+                destinationRookSquare.isOccupied = true
+                destinationRookSquare.hasMoved = true
+                destinationRookSquare.pieceType = PieceType.ROOK
+                destinationRookSquare.pieceColor = PieceColor.BLACK
+
+                addMoveHighlights(kingPosition.row, kingPosition.col)
+                addMoveHighlights(destinationKingSquare.row, destinationKingSquare.col)
+
+                removePiece(kingPosition)
+                addPiece(destinationKingSquare)
+
+                removePiece(queenSideRook)
+                addPiece(destinationRookSquare)
+            }
+        }
     }
 
     private fun addMoveHighlights(row: Int, col: Int){

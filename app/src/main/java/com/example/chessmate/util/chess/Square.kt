@@ -9,6 +9,7 @@ data class Square(
     var isOccupied: Boolean,
     var pieceColor: PieceColor?,
     var pieceType: PieceType?,
+    var hasMoved: Boolean = false,
     var frameLayout: FrameLayout? = null,
     var imageView: ImageView? = null
 ){
