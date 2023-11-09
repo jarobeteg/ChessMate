@@ -16,6 +16,8 @@ class Knight(private var context: Context, private var chessboardLayout: GridLay
         val rowDiff = abs(destinationSquare.row - currentSquare.row)
         val colDiff = abs(destinationSquare.col - currentSquare.col)
 
+        if (destinationSquare.pieceType == PieceType.KING) return false
+
         if ((rowDiff == 2 && colDiff == 1) || (rowDiff == 1 && colDiff == 2)){
             val tmpIsOccupied = destinationSquare.isOccupied
             val tmpPieceType = destinationSquare.pieceType
@@ -192,6 +194,7 @@ class Knight(private var context: Context, private var chessboardLayout: GridLay
 
     private fun addHighlightOpponent(row: Int, col: Int){
         val square = chessboard.getSquare(row, col)
+        if (square.pieceType == PieceType.KING) return
         val squareFrameLayout = square.frameLayout
         val squareImageView = square.imageView
         val imageView = ImageView(context)

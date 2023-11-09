@@ -13,8 +13,11 @@ class Rook(private var context: Context, private var chessboardLayout: GridLayou
     fun isValidMove(destinationSquare: Square): Boolean{
         val kingPosition = if (currentSquare.pieceColor == PieceColor.WHITE) chessboard.getWhiteKingSquare() else chessboard.getBlackKingSquare()
 
+        if (destinationSquare.pieceType == PieceType.KING) return false
+
         val row = currentSquare.row
         val col = currentSquare.col
+
         if (destinationSquare.row == row || destinationSquare.col == col) {
             if (destinationSquare.col == col) {
                 val start = destinationSquare.row.coerceAtMost(row) + 1
@@ -668,6 +671,7 @@ class Rook(private var context: Context, private var chessboardLayout: GridLayou
 
     private fun addHighlightOpponent(row: Int, col: Int){
         val square = chessboard.getSquare(row, col)
+        if (square.pieceType == PieceType.KING) return
         val squareFrameLayout = square.frameLayout
         val squareImageView = square.imageView
         val imageView = ImageView(context)

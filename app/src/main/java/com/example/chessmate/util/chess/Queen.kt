@@ -16,6 +16,8 @@ class Queen(private var context: Context, private var chessboardLayout: GridLayo
         val rowDiff = abs(destinationSquare.row - currentSquare.row)
         val colDiff = abs(destinationSquare.col - currentSquare.col)
 
+        if (destinationSquare.pieceType == PieceType.KING) return false
+
         if (rowDiff == 0 || colDiff == 0 || rowDiff == colDiff) {
             val rowIncrement = if (destinationSquare.row > currentSquare.row) 1 else if (destinationSquare.row < currentSquare.row) -1 else 0
             val colIncrement = if (destinationSquare.col > currentSquare.col) 1 else if (destinationSquare.col < currentSquare.col) -1 else 0
@@ -1372,6 +1374,7 @@ class Queen(private var context: Context, private var chessboardLayout: GridLayo
 
     private fun addHighlightOpponent(row: Int, col: Int){
         val square = chessboard.getSquare(row, col)
+        if (square.pieceType == PieceType.KING) return
         val squareFrameLayout = square.frameLayout
         val squareImageView = square.imageView
         val imageView = ImageView(context)

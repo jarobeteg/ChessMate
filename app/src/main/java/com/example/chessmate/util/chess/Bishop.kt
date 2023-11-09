@@ -16,6 +16,8 @@ class Bishop(private var context: Context, private var chessboardLayout: GridLay
         val rowDiff = abs(destinationSquare.row - currentSquare.row)
         val colDiff = abs(destinationSquare.col - currentSquare.col)
 
+        if (destinationSquare.pieceType == PieceType.KING) return false
+
         if (rowDiff != colDiff) {
             return false
         }
@@ -735,6 +737,7 @@ class Bishop(private var context: Context, private var chessboardLayout: GridLay
 
     private fun addHighlightOpponent(row: Int, col: Int){
         val square = chessboard.getSquare(row, col)
+        if (square.pieceType == PieceType.KING) return
         val squareFrameLayout = square.frameLayout
         val squareImageView = square.imageView
         val imageView = ImageView(context)

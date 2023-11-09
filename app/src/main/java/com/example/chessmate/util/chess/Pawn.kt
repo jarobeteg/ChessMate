@@ -12,6 +12,9 @@ class Pawn(private var context: Context, private var chessboardLayout: GridLayou
     private val highlightOpponentTag = "highlight_opponent"
     fun isValidMove(destinationSquare: Square): Boolean {
         val kingPosition = if (currentSquare.pieceColor == PieceColor.WHITE) chessboard.getWhiteKingSquare() else chessboard.getBlackKingSquare()
+
+        if (destinationSquare.pieceType == PieceType.KING) return false
+
         if (!destinationSquare.isOccupied){
             if (currentSquare.row - 1 == destinationSquare.row && currentSquare.col == destinationSquare.col) {
                 destinationSquare.dupe(currentSquare)
@@ -383,6 +386,7 @@ class Pawn(private var context: Context, private var chessboardLayout: GridLayou
 
     private fun addHighlightOpponent(row: Int, col: Int) {
         val square = chessboard.getSquare(row, col)
+        if (square.pieceType == PieceType.KING) return
         val squareFrameLayout = square.frameLayout
         val squareImageView = square.imageView
         val imageView = ImageView(context)
