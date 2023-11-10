@@ -121,6 +121,37 @@ class Pawn(private var context: Context, private var chessboardLayout: GridLayou
         return false
     }
 
+    fun isValidEnPassantMove(destinationSquare: Square, lastOpponentMove: MoveTracker?): Boolean {
+        val kingPosition = if (currentSquare.pieceColor == PieceColor.WHITE) chessboard.getWhiteKingSquare() else chessboard.getBlackKingSquare()
+        if (lastOpponentMove != null){
+            val opponentPawnSquare = chessboard.getSquare(lastOpponentMove.destinationSquare.row, lastOpponentMove.destinationSquare.col)
+            val tmpIsOccupied = opponentPawnSquare.isOccupied
+            val tmpPieceType = opponentPawnSquare.pieceType
+            val tmpPieceColor = opponentPawnSquare.pieceColor
+            val tmpImageView = opponentPawnSquare.imageView
+            opponentPawnSquare.clearSquare()
+            destinationSquare.dupe(currentSquare)
+            currentSquare.clearSquare()
+            if (destinationSquare.row == lastOpponentMove.sourceSquare.row + 1 && destinationSquare.col == lastOpponentMove.sourceSquare.col &&
+                !chessboard.isKingInCheck(chessboard, kingPosition!!, kingPosition.pieceColor!!)){
+                opponentPawnSquare.pieceColor = tmpPieceColor
+                opponentPawnSquare.pieceType = tmpPieceType
+                opponentPawnSquare.isOccupied = tmpIsOccupied
+                opponentPawnSquare.imageView = tmpImageView
+                currentSquare.dupe(destinationSquare)
+                destinationSquare.clearSquare()
+                return true
+            }
+            opponentPawnSquare.pieceColor = tmpPieceColor
+            opponentPawnSquare.pieceType = tmpPieceType
+            opponentPawnSquare.isOccupied = tmpIsOccupied
+            opponentPawnSquare.imageView = tmpImageView
+            currentSquare.dupe(destinationSquare)
+            destinationSquare.clearSquare()
+        }
+        return false
+    }
+
     fun showHighlightSquares(){
         val newRow = currentSquare.row - 1
         if (chessboard.isValidSquare(newRow, currentSquare.col) && !chessboard.getSquare(newRow, currentSquare.col).isOccupied) {

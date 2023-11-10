@@ -443,6 +443,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                     when(selectedSquare!!.pieceType){
                         PieceType.PAWN -> {
                             val pawn = Pawn(this, chessboardLayout, chessboard, selectedSquare!!)
+                            val lastOpponentMove = getLastOpponentMoveForEnPassant()
                             if (pawn.isValidMove(destinationSquare)){
                                 if (destinationSquare.row == 0){
                                     val promotionDialog = PromotionDialogFragment(isWhiteStarting, this, selectedSquare!!, destinationSquare)
@@ -450,6 +451,8 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                                 }else {
                                     movePiece(selectedSquare!!, destinationSquare)
                                 }
+                            } else if (pawn.isValidEnPassantMove(destinationSquare, lastOpponentMove)){
+                                performEnPassant(selectedSquare!!, destinationSquare, lastOpponentMove)
                             }
                             removeHighlightCircles()
                             removeHighlightOpponents()
@@ -683,6 +686,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                     when(selectedSquare!!.pieceType){
                         PieceType.PAWN -> {
                             val pawn = Pawn(this, chessboardLayout, chessboard, selectedSquare!!)
+                            val lastOpponentMove = getLastOpponentMoveForEnPassant()
                             if (pawn.isValidMove(destinationSquare)){
                                 if (destinationSquare.row == 0){
                                     val promotionDialog = PromotionDialogFragment(isWhiteStarting, this, selectedSquare!!, destinationSquare)
@@ -690,6 +694,8 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                                 }else {
                                     movePiece(selectedSquare!!, destinationSquare)
                                 }
+                            }else if (pawn.isValidEnPassantMove(destinationSquare, lastOpponentMove)){
+                                performEnPassant(selectedSquare!!, destinationSquare, lastOpponentMove)
                             }
                             removeHighlightCircles()
                             removeHighlightOpponents()
@@ -843,6 +849,30 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     private fun removePiece(square: Square) {
         square.frameLayout?.removeView(square.imageView)
         square.clearSquare()
+    }
+
+    private fun performEnPassant(sourceSquare: Square, destinationSquare: Square, lastOpponentMove: MoveTracker?) {
+        val move = MoveTracker(sourceSquare.copy(), destinationSquare.copy(), sourceSquare.pieceType, destinationSquare.pieceType,  turnNumber, isWhiteToMove)
+        if (!isUserTurn && isWhiteStarting) turnNumber++
+        if (isUserTurn && !isWhiteStarting) turnNumber++
+        trackMove(move)
+
+        removeMoveHighlights()
+
+        sourceSquare.hasMoved = true
+        destinationSquare.pieceType = sourceSquare.pieceType
+        destinationSquare.isOccupied = true
+        destinationSquare.pieceColor = sourceSquare.pieceColor
+        addMoveHighlights(sourceSquare.row, sourceSquare.col)
+        addMoveHighlights(destinationSquare.row, destinationSquare.col)
+        removePiece(sourceSquare)
+        addPiece(destinationSquare)
+        if (lastOpponentMove != null){
+            val opponentPawnSquare = chessboard.getSquare(lastOpponentMove.destinationSquare.row, lastOpponentMove.destinationSquare.col)
+            removePiece(opponentPawnSquare)
+        }
+        switchTurns()
+        switchPlayerToMove()
     }
 
     private fun performCastles(isKingSideCastles: Boolean, isPlayerWhite: Boolean) {
