@@ -152,6 +152,10 @@ class Pawn(private var context: Context, private var chessboardLayout: GridLayou
         }
     }
 
+    fun showEnPassantSquare(lastOpponentMove: MoveTracker){
+        addHighlightSquare(lastOpponentMove.sourceSquare.row + 1, lastOpponentMove.sourceSquare.col)
+    }
+
     fun canCheckBeBlocked(): Boolean{
         val kingPosition = if (currentSquare.pieceColor == PieceColor.WHITE) chessboard.getWhiteKingSquare() else chessboard.getBlackKingSquare()
         val newRow = currentSquare.row - 1
