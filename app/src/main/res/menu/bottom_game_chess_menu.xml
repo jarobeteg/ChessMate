@@ -15,4 +15,9 @@
         android:icon="@drawable/ic_forward_24"
         android:title="@string/forward"/>
 
+    <item
+        android:id="@+id/nav_continue"
+        android:icon="@drawable/ic_continue_24"
+        android:title="@string/continue_chess"/>
+
 </menu>
