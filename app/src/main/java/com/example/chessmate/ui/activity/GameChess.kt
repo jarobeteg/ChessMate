@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.TypedValue
 import android.view.Gravity
+import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.GridLayout
@@ -23,6 +24,7 @@ import com.example.chessmate.util.chess.PromotionDialogFragment
 import com.example.chessmate.util.chess.Queen
 import com.example.chessmate.util.chess.Rook
 import com.example.chessmate.util.chess.Square
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogListener {
     private lateinit var chessboardLayout: GridLayout
@@ -38,6 +40,8 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chess_game)
+
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
 
         //this code snippet determines the user starting side
         val sharedPreferences = getSharedPreferences("chess_game", Context.MODE_PRIVATE)
@@ -63,6 +67,10 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
             isWhiteStarting = false
             initializeStartingPosition()
             setupChessboard()
+        }
+
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            return@setOnItemSelectedListener bottomNavItemClicked(item)
         }
     }
 
@@ -753,6 +761,12 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     //the source square gets cleared and the destination square gets an image view based on which piece type is on the square
     //if the destination square is occupied meaning the user choose to take that piece we first have to clear that square before moving our piece onto that square.
     private fun movePiece(sourceSquare: Square, destinationSquare: Square) {
+        //move tracker
+        val isWhiteToMove = destinationSquare.pieceColor == PieceColor.BLACK
+        val move = MoveTracker(sourceSquare, destinationSquare, sourceSquare.pieceType, destinationSquare.pieceType,  turnNumber, isWhiteToMove)
+        turnNumber++
+        trackMove(move)
+
         removeMoveHighlights()
         if (destinationSquare.isOccupied){
             removePiece(destinationSquare)
@@ -765,11 +779,6 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         addMoveHighlights(destinationSquare.row, destinationSquare.col)
         removePiece(sourceSquare)
         addPiece(destinationSquare)
-        //move tracker
-        val isWhiteToMove = destinationSquare.pieceColor == PieceColor.BLACK
-        val move = MoveTracker(sourceSquare, destinationSquare, turnNumber, isWhiteToMove)
-        turnNumber++
-        trackMove(move)
     }
 
     private fun addPiece(square: Square) {
@@ -787,6 +796,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         val kingPosition = if (isPlayerWhite) chessboard.getWhiteKingSquare() else chessboard.getBlackKingSquare()
         val kingSideRook = if (isPlayerWhite) chessboard.getWhiteKingSideRook() else chessboard.getBlackKingSideRook()
         val queenSideRook = if (isPlayerWhite) chessboard.getWhiteQueenSideRook() else chessboard.getBlackQueenSideRook()
+        removeMoveHighlights()
         if (isPlayerWhite){
             if (isKingSideCastles){
                 kingPosition!!.hasMoved = true
@@ -879,6 +889,28 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                 removePiece(queenSideRook)
                 addPiece(destinationRookSquare)
             }
+        }
+    }
+
+    private fun bottomNavItemClicked(item: MenuItem): Boolean{
+        when (item.itemId) {
+            R.id.nav_resign -> {
+                return true
+            }
+
+            R.id.nav_back -> {
+                return true
+            }
+
+            R.id.nav_forward -> {
+                return true
+            }
+
+            R.id.nav_continue -> {
+                return true
+            }
+
+            else -> return false
         }
     }
 
