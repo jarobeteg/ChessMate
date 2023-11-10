@@ -184,7 +184,117 @@ class Pawn(private var context: Context, private var chessboardLayout: GridLayou
     }
 
     fun showEnPassantSquare(lastOpponentMove: MoveTracker){
-        addHighlightSquare(lastOpponentMove.sourceSquare.row + 1, lastOpponentMove.sourceSquare.col)
+        val kingPosition = if (currentSquare.pieceColor == PieceColor.WHITE) chessboard.getWhiteKingSquare() else chessboard.getBlackKingSquare()
+        val leftDiagonalRow = currentSquare.row - 1
+        val leftDiagonalCol = currentSquare.col - 1
+        val rightDiagonalRow = currentSquare.row - 1
+        val rightDiagonalCol = currentSquare.col + 1
+        val opponentPawnSquare = chessboard.getSquare(lastOpponentMove.destinationSquare.row, lastOpponentMove.destinationSquare.col)
+        if (lastOpponentMove.destinationSquare.col == leftDiagonalCol){
+            val tmpIsOccupied = opponentPawnSquare.isOccupied
+            val tmpPieceType = opponentPawnSquare.pieceType
+            val tmpPieceColor = opponentPawnSquare.pieceColor
+            val tmpImageView = opponentPawnSquare.imageView
+            opponentPawnSquare.clearSquare()
+
+            val destSquare = chessboard.getSquare(leftDiagonalRow, leftDiagonalCol)
+            val tmpDestIsOccupied = destSquare.isOccupied
+            val tmpDestPieceType = destSquare.pieceType
+            val tmpDestPieceColor = destSquare.pieceColor
+            val tmpDestImageView = destSquare.imageView
+            destSquare.clearSquare()
+
+            val sourceIsOccupied = currentSquare.isOccupied
+            val sourcePieceType = currentSquare.pieceType
+            val sourcePieceColor = currentSquare.pieceColor
+            val sourceImageView = currentSquare.imageView
+            currentSquare.clearSquare()
+            if (!chessboard.isKingInCheck(chessboard, kingPosition!!, kingPosition.pieceColor!!)){
+                opponentPawnSquare.pieceColor = tmpPieceColor
+                opponentPawnSquare.pieceType = tmpPieceType
+                opponentPawnSquare.isOccupied = tmpIsOccupied
+                opponentPawnSquare.imageView = tmpImageView
+
+                destSquare.pieceColor = tmpDestPieceColor
+                destSquare.pieceType = tmpDestPieceType
+                destSquare.isOccupied = tmpDestIsOccupied
+                destSquare.imageView = tmpDestImageView
+
+                currentSquare.pieceColor = sourcePieceColor
+                currentSquare.pieceType = sourcePieceType
+                currentSquare.isOccupied = sourceIsOccupied
+                currentSquare.imageView = sourceImageView
+
+                addHighlightSquare(leftDiagonalRow, leftDiagonalCol)
+            }
+            opponentPawnSquare.pieceColor = tmpPieceColor
+            opponentPawnSquare.pieceType = tmpPieceType
+            opponentPawnSquare.isOccupied = tmpIsOccupied
+            opponentPawnSquare.imageView = tmpImageView
+
+            destSquare.pieceColor = tmpDestPieceColor
+            destSquare.pieceType = tmpDestPieceType
+            destSquare.isOccupied = tmpDestIsOccupied
+            destSquare.imageView = tmpDestImageView
+
+            currentSquare.pieceColor = sourcePieceColor
+            currentSquare.pieceType = sourcePieceType
+            currentSquare.isOccupied = sourceIsOccupied
+            currentSquare.imageView = sourceImageView
+        }
+
+        if (lastOpponentMove.destinationSquare.col == rightDiagonalCol){
+            val tmpIsOccupied = opponentPawnSquare.isOccupied
+            val tmpPieceType = opponentPawnSquare.pieceType
+            val tmpPieceColor = opponentPawnSquare.pieceColor
+            val tmpImageView = opponentPawnSquare.imageView
+            opponentPawnSquare.clearSquare()
+
+            val destSquare = chessboard.getSquare(rightDiagonalRow, rightDiagonalCol)
+            val tmpDestIsOccupied = destSquare.isOccupied
+            val tmpDestPieceType = destSquare.pieceType
+            val tmpDestPieceColor = destSquare.pieceColor
+            val tmpDestImageView = destSquare.imageView
+            destSquare.clearSquare()
+
+            val sourceIsOccupied = currentSquare.isOccupied
+            val sourcePieceType = currentSquare.pieceType
+            val sourcePieceColor = currentSquare.pieceColor
+            val sourceImageView = currentSquare.imageView
+            currentSquare.clearSquare()
+            if (!chessboard.isKingInCheck(chessboard, kingPosition!!, kingPosition.pieceColor!!)){
+                opponentPawnSquare.pieceColor = tmpPieceColor
+                opponentPawnSquare.pieceType = tmpPieceType
+                opponentPawnSquare.isOccupied = tmpIsOccupied
+                opponentPawnSquare.imageView = tmpImageView
+
+                destSquare.pieceColor = tmpDestPieceColor
+                destSquare.pieceType = tmpDestPieceType
+                destSquare.isOccupied = tmpDestIsOccupied
+                destSquare.imageView = tmpDestImageView
+
+                currentSquare.pieceColor = sourcePieceColor
+                currentSquare.pieceType = sourcePieceType
+                currentSquare.isOccupied = sourceIsOccupied
+                currentSquare.imageView = sourceImageView
+
+                addHighlightSquare(rightDiagonalRow, rightDiagonalCol)
+            }
+            opponentPawnSquare.pieceColor = tmpPieceColor
+            opponentPawnSquare.pieceType = tmpPieceType
+            opponentPawnSquare.isOccupied = tmpIsOccupied
+            opponentPawnSquare.imageView = tmpImageView
+
+            destSquare.pieceColor = tmpDestPieceColor
+            destSquare.pieceType = tmpDestPieceType
+            destSquare.isOccupied = tmpDestIsOccupied
+            destSquare.imageView = tmpDestImageView
+
+            currentSquare.pieceColor = sourcePieceColor
+            currentSquare.pieceType = sourcePieceType
+            currentSquare.isOccupied = sourceIsOccupied
+            currentSquare.imageView = sourceImageView
+        }
     }
 
     fun canCheckBeBlocked(): Boolean{
@@ -307,7 +417,7 @@ class Pawn(private var context: Context, private var chessboardLayout: GridLayou
         return false
     }
 
-    fun canTakePinPiece(): Boolean{
+    fun canTakePinPiece(lastOpponentMove: MoveTracker?, isEnPassantPossible: Boolean): Boolean{
         val kingPosition = if (currentSquare.pieceColor == PieceColor.WHITE) chessboard.getWhiteKingSquare() else chessboard.getBlackKingSquare()
         var result = false
         val leftDiagonalRow = currentSquare.row - 1
@@ -389,6 +499,117 @@ class Pawn(private var context: Context, private var chessboardLayout: GridLayou
             currentSquare.pieceType = sourcePieceType
             currentSquare.isOccupied = sourceIsOccupied
             currentSquare.imageView = sourceImageView
+        }
+
+        if (isEnPassantPossible && lastOpponentMove != null){
+            val opponentPawnSquare = chessboard.getSquare(lastOpponentMove.destinationSquare.row, lastOpponentMove.destinationSquare.col)
+            if (lastOpponentMove.destinationSquare.col == leftDiagonalCol){
+                val tmpIsOccupied = opponentPawnSquare.isOccupied
+                val tmpPieceType = opponentPawnSquare.pieceType
+                val tmpPieceColor = opponentPawnSquare.pieceColor
+                val tmpImageView = opponentPawnSquare.imageView
+                opponentPawnSquare.clearSquare()
+
+                val destSquare = chessboard.getSquare(leftDiagonalRow, leftDiagonalCol)
+                val tmpDestIsOccupied = destSquare.isOccupied
+                val tmpDestPieceType = destSquare.pieceType
+                val tmpDestPieceColor = destSquare.pieceColor
+                val tmpDestImageView = destSquare.imageView
+                destSquare.clearSquare()
+
+                val sourceIsOccupied = currentSquare.isOccupied
+                val sourcePieceType = currentSquare.pieceType
+                val sourcePieceColor = currentSquare.pieceColor
+                val sourceImageView = currentSquare.imageView
+                currentSquare.clearSquare()
+                if (!chessboard.isKingInCheck(chessboard, kingPosition!!, kingPosition.pieceColor!!)){
+                    opponentPawnSquare.pieceColor = tmpPieceColor
+                    opponentPawnSquare.pieceType = tmpPieceType
+                    opponentPawnSquare.isOccupied = tmpIsOccupied
+                    opponentPawnSquare.imageView = tmpImageView
+
+                    destSquare.pieceColor = tmpDestPieceColor
+                    destSquare.pieceType = tmpDestPieceType
+                    destSquare.isOccupied = tmpDestIsOccupied
+                    destSquare.imageView = tmpDestImageView
+
+                    currentSquare.pieceColor = sourcePieceColor
+                    currentSquare.pieceType = sourcePieceType
+                    currentSquare.isOccupied = sourceIsOccupied
+                    currentSquare.imageView = sourceImageView
+
+                    addHighlightSquare(leftDiagonalRow, leftDiagonalCol)
+                    result = true
+                }
+                opponentPawnSquare.pieceColor = tmpPieceColor
+                opponentPawnSquare.pieceType = tmpPieceType
+                opponentPawnSquare.isOccupied = tmpIsOccupied
+                opponentPawnSquare.imageView = tmpImageView
+
+                destSquare.pieceColor = tmpDestPieceColor
+                destSquare.pieceType = tmpDestPieceType
+                destSquare.isOccupied = tmpDestIsOccupied
+                destSquare.imageView = tmpDestImageView
+
+                currentSquare.pieceColor = sourcePieceColor
+                currentSquare.pieceType = sourcePieceType
+                currentSquare.isOccupied = sourceIsOccupied
+                currentSquare.imageView = sourceImageView
+            }
+
+            if (lastOpponentMove.destinationSquare.col == rightDiagonalCol){
+                val tmpIsOccupied = opponentPawnSquare.isOccupied
+                val tmpPieceType = opponentPawnSquare.pieceType
+                val tmpPieceColor = opponentPawnSquare.pieceColor
+                val tmpImageView = opponentPawnSquare.imageView
+                opponentPawnSquare.clearSquare()
+
+                val destSquare = chessboard.getSquare(rightDiagonalRow, rightDiagonalCol)
+                val tmpDestIsOccupied = destSquare.isOccupied
+                val tmpDestPieceType = destSquare.pieceType
+                val tmpDestPieceColor = destSquare.pieceColor
+                val tmpDestImageView = destSquare.imageView
+                destSquare.clearSquare()
+
+                val sourceIsOccupied = currentSquare.isOccupied
+                val sourcePieceType = currentSquare.pieceType
+                val sourcePieceColor = currentSquare.pieceColor
+                val sourceImageView = currentSquare.imageView
+                currentSquare.clearSquare()
+                if (!chessboard.isKingInCheck(chessboard, kingPosition!!, kingPosition.pieceColor!!)){
+                    opponentPawnSquare.pieceColor = tmpPieceColor
+                    opponentPawnSquare.pieceType = tmpPieceType
+                    opponentPawnSquare.isOccupied = tmpIsOccupied
+                    opponentPawnSquare.imageView = tmpImageView
+
+                    destSquare.pieceColor = tmpDestPieceColor
+                    destSquare.pieceType = tmpDestPieceType
+                    destSquare.isOccupied = tmpDestIsOccupied
+                    destSquare.imageView = tmpDestImageView
+
+                    currentSquare.pieceColor = sourcePieceColor
+                    currentSquare.pieceType = sourcePieceType
+                    currentSquare.isOccupied = sourceIsOccupied
+                    currentSquare.imageView = sourceImageView
+
+                    addHighlightSquare(rightDiagonalRow, rightDiagonalCol)
+                    result = true
+                }
+                opponentPawnSquare.pieceColor = tmpPieceColor
+                opponentPawnSquare.pieceType = tmpPieceType
+                opponentPawnSquare.isOccupied = tmpIsOccupied
+                opponentPawnSquare.imageView = tmpImageView
+
+                destSquare.pieceColor = tmpDestPieceColor
+                destSquare.pieceType = tmpDestPieceType
+                destSquare.isOccupied = tmpDestIsOccupied
+                destSquare.imageView = tmpDestImageView
+
+                currentSquare.pieceColor = sourcePieceColor
+                currentSquare.pieceType = sourcePieceType
+                currentSquare.isOccupied = sourceIsOccupied
+                currentSquare.imageView = sourceImageView
+            }
         }
 
         return result

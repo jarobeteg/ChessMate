@@ -298,7 +298,8 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             if (chessboard.isKingInCheck(chessboard, kingSquare, PieceColor.WHITE)){
                                 square.pieceType = PieceType.PAWN
                                 square.isOccupied = true
-                                if (pawn.canTakePinPiece()){
+                                val lastOpponentMove = getLastOpponentMoveForEnPassant()
+                                if (pawn.canTakePinPiece(lastOpponentMove, false)){
                                     selectedSquare = square
                                 }
                             }else {
@@ -314,6 +315,10 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                                 selectedSquare = square
                             }
                         }else{
+                            val lastOpponentMove = getLastOpponentMoveForEnPassant()
+                            if (pawn.canTakePinPiece(lastOpponentMove, true) && isEnPassantPossible()){
+                                selectedSquare = square
+                            }
                             if (pawn.canCheckBeBlocked()){
                                 selectedSquare = square
                             }else {
@@ -541,7 +546,8 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             if (chessboard.isKingInCheck(chessboard, kingSquare, PieceColor.BLACK)){
                                 square.pieceType = PieceType.PAWN
                                 square.isOccupied = true
-                                if (pawn.canTakePinPiece()){
+                                val lastOpponentMove = getLastOpponentMoveForEnPassant()
+                                if (pawn.canTakePinPiece(lastOpponentMove, false)){
                                     selectedSquare = square
                                 }
                             }else {
@@ -557,6 +563,10 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                                 selectedSquare = square
                             }
                         }else{
+                            val lastOpponentMove = getLastOpponentMoveForEnPassant()
+                            if (pawn.canTakePinPiece(lastOpponentMove, true) && isEnPassantPossible()){
+                                selectedSquare = square
+                            }
                             if (pawn.canCheckBeBlocked()){
                                 selectedSquare = square
                             }else {
