@@ -29,7 +29,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogListener {
     private lateinit var chessboardLayout: GridLayout
     private lateinit var chessboard: Chessboard
-    private var moveTracker: MutableList<MoveTracker> = mutableListOf()
     private var turnNumber: Int = 1
     private var isWhiteStarting: Boolean = false
     private var isWhiteToMove: Boolean = true
@@ -77,17 +76,16 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         }
     }
 
-    /** before this is called an initial starting position of pieces has been set
-     * here we iterate through the chessboard and we get each square on the chessboard and we create a frame layout that represents the square UI
-     * the square sizes have been determined previously and these frame layouts will have this size
-     * then colors of the squares are determined and set
-     * after that we check if a piece have been placed on the square during the initialization of the starting position
-     * if isOccupied returns true wew create a piece image view and add it to the square frame layout and also add it to the square class (we need this later for piece movement)
-     * after this the numbers and letters are determined and placed on the first col and bottom row
-     * each square gets a click listener. well the square frame layout gets a click listener to be more precise
-     * then at last the frame layout is saved in the square class (for later we need this to show move highlights etc)
-     * and the square frame layout is added to the chessboard layout which is a grid layout
-     * */
+    // before this is called an initial starting position of pieces has been set
+    // here we iterate through the chessboard and we get each square on the chessboard and we create a frame layout that represents the square UI
+    // the square sizes have been determined previously and these frame layouts will have this size
+    // then colors of the squares are determined and set
+    // after that we check if a piece have been placed on the square during the initialization of the starting position
+    // if isOccupied returns true wew create a piece image view and add it to the square frame layout and also add it to the square class (we need this later for piece movement)
+    // after this the numbers and letters are determined and placed on the first col and bottom row
+    // each square gets a click listener. well the square frame layout gets a click listener to be more precise
+    // then at last the frame layout is saved in the square class (for later we need this to show move highlights etc)
+    // and the square frame layout is added to the chessboard layout which is a grid layout
     private fun setupChessboard(){
         val lightSquareColor = R.color.default_light_square_color
         val darkSquareColor = R.color.default_dark_square_color
@@ -784,9 +782,9 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     }
 
     private fun isEnPassantPossible(): Boolean{
-        var lastOpponentMove = moveTracker.firstOrNull { it.turnNumber == turnNumber && it.sourceSquare.pieceColor == PieceColor.WHITE && it.pieceMoved == PieceType.PAWN}
+        var lastOpponentMove = chessboard.moveTracker.firstOrNull { it.turnNumber == turnNumber && it.sourceSquare.pieceColor == PieceColor.WHITE && it.pieceMoved == PieceType.PAWN}
         if (isWhiteStarting){
-            lastOpponentMove = moveTracker.firstOrNull { it.turnNumber == turnNumber - 1 && it.sourceSquare.pieceColor == PieceColor.BLACK && it.pieceMoved == PieceType.PAWN}
+            lastOpponentMove = chessboard.moveTracker.firstOrNull { it.turnNumber == turnNumber - 1 && it.sourceSquare.pieceColor == PieceColor.BLACK && it.pieceMoved == PieceType.PAWN}
         }
 
         if (lastOpponentMove?.sourceSquare?.row == 1 && lastOpponentMove.destinationSquare.row == 3 &&
@@ -798,9 +796,9 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     }
 
     private fun getLastOpponentMoveForEnPassant(): MoveTracker? {
-        var lastOpponentMove = moveTracker.firstOrNull { it.turnNumber == turnNumber && it.sourceSquare.pieceColor == PieceColor.WHITE && it.pieceMoved == PieceType.PAWN}
+        var lastOpponentMove = chessboard.moveTracker.firstOrNull { it.turnNumber == turnNumber && it.sourceSquare.pieceColor == PieceColor.WHITE && it.pieceMoved == PieceType.PAWN}
         if (isWhiteStarting){
-            lastOpponentMove = moveTracker.firstOrNull { it.turnNumber == turnNumber - 1 && it.sourceSquare.pieceColor == PieceColor.BLACK && it.pieceMoved == PieceType.PAWN}
+            lastOpponentMove = chessboard.moveTracker.firstOrNull { it.turnNumber == turnNumber - 1 && it.sourceSquare.pieceColor == PieceColor.BLACK && it.pieceMoved == PieceType.PAWN}
         }
 
         if (lastOpponentMove?.sourceSquare?.row == 1 && lastOpponentMove.destinationSquare.row == 3 &&
@@ -821,7 +819,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
 
     //track each move in a chess game
     private fun trackMove(move: MoveTracker) {
-        moveTracker.add(move)
+        chessboard.moveTracker.add(move)
     }
 
     //if the piece just moves then we give the destination square the piece type and color and we set to occupied and also we add the move highlight so the user can we what was the last move they did
@@ -1016,7 +1014,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     private fun bottomNavItemClicked(item: MenuItem): Boolean{//this is just occupied for the testing purpose of en passant. it will get removed eventually
         when (item.itemId) {
             R.id.nav_resign -> {
-                for (move in moveTracker){
+                for (move in chessboard.moveTracker){
                     println("${move.turnNumber} ${move.isWhiteToMove}")
                 }
                 return true

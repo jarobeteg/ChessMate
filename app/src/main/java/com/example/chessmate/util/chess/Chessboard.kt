@@ -2,6 +2,7 @@ package com.example.chessmate.util.chess
 
 class Chessboard {
     private val board: Array<Array<Square>> = Array(8) { Array(8) { Square(0, 0, false, null, null) } }
+    var moveTracker: MutableList<MoveTracker> = mutableListOf()
 
     init {
         for (row in 0 until 8) {
