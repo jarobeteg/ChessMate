@@ -286,7 +286,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                 removeHighlightCircles()
                 removeHighlightOpponents()
                 when(square.pieceType){
-                    PieceType.PAWN -> {
+                    PieceType.PAWN -> { //first click as white and clicked on Pawn
                         val pawn = Pawn(this, chessboardLayout, chessboard, square)
                         if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.WHITE)) {
                             square.pieceType = null
@@ -322,7 +322,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             }
                         }
                     }
-                    PieceType.ROOK -> {
+                    PieceType.ROOK -> {//first click as white and clicked on Rook
                         val rook = Rook(this, chessboardLayout, chessboard, square)
                         if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.WHITE)) {
                             square.pieceType = null
@@ -347,7 +347,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             }
                         }
                     }
-                    PieceType.KNIGHT -> {
+                    PieceType.KNIGHT -> {//first click as white and clicked on Knight
                         val knight = Knight(this, chessboardLayout, chessboard, square)
                         if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.WHITE)) {
                             square.pieceType = null
@@ -369,7 +369,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             }
                         }
                     }
-                    PieceType.BISHOP -> {
+                    PieceType.BISHOP -> {//first click as white and clicked on Bishop
                         val bishop = Bishop(this, chessboardLayout, chessboard, square)
                         if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.WHITE)) {
                             square.pieceType = null
@@ -394,7 +394,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             }
                         }
                     }
-                    PieceType.QUEEN -> {
+                    PieceType.QUEEN -> {//first click as white and clicked on Queen
                         val queen = Queen(this, chessboardLayout, chessboard, square)
                         if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.WHITE)) {
                             square.pieceType = null
@@ -419,7 +419,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             }
                         }
                     }
-                    PieceType.KING -> {
+                    PieceType.KING -> {//first click as white and clicked on King
                         val king = King(this, chessboardLayout, chessboard, square)
                         king.showHighlightSquares()
                         king.showIfCastlingPossible()
@@ -429,7 +429,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                 }
             }
 
-            isWhiteStarting && selectedSquare != null -> { //second click as white
+            isWhiteStarting && selectedSquare != null -> {//second click as white
                 if (selectedSquare == square){
                     removeHighlightCircles()
                     removeHighlightOpponents()
@@ -442,7 +442,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                 } else {
                     val destinationSquare = square
                     when(selectedSquare!!.pieceType){
-                        PieceType.PAWN -> {
+                        PieceType.PAWN -> {//second click as white and the selected piece is Pawn
                             val pawn = Pawn(this, chessboardLayout, chessboard, selectedSquare!!)
                             val lastOpponentMove = getLastOpponentMoveForEnPassant()
                             if (pawn.isValidMove(destinationSquare)){
@@ -460,7 +460,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             selectedSquare = null
                         }
 
-                        PieceType.ROOK -> {
+                        PieceType.ROOK -> {//second click as white and the selected piece is Rook
                             val rook = Rook(this, chessboardLayout, chessboard, selectedSquare!!)
                                 if (rook.isValidMove(destinationSquare)){
                                     movePiece(selectedSquare!!, destinationSquare)
@@ -470,7 +470,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             selectedSquare = null
                         }
 
-                        PieceType.BISHOP -> {
+                        PieceType.BISHOP -> {//second click as white and the selected piece is Bishop
                             val bishop = Bishop(this, chessboardLayout, chessboard, selectedSquare!!)
                             if (bishop.isValidMove(destinationSquare)){
                                 movePiece(selectedSquare!!, destinationSquare)
@@ -480,7 +480,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             selectedSquare = null
                         }
 
-                        PieceType.KNIGHT -> {
+                        PieceType.KNIGHT -> {//second click as white and the selected piece is Knight
                             val knight = Knight(this, chessboardLayout, chessboard, selectedSquare!!)
                             if (knight.isValidMove(destinationSquare)){
                                 movePiece(selectedSquare!!, destinationSquare)
@@ -490,7 +490,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             selectedSquare = null
                         }
 
-                        PieceType.QUEEN -> {
+                        PieceType.QUEEN -> {//second click as white and the selected piece is Queen
                             val queen = Queen(this, chessboardLayout, chessboard, selectedSquare!!)
                             if (queen.isValidMove(destinationSquare)){
                                 movePiece(selectedSquare!!, destinationSquare)
@@ -500,7 +500,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             selectedSquare = null
                         }
 
-                        PieceType.KING -> {
+                        PieceType.KING -> {//second click as white and the selected piece is King
                             val king = King(this, chessboardLayout, chessboard, selectedSquare!!)
                             if (selectedSquare!!.col + 2 == destinationSquare.col){
                                 val isKingSideCastles = true
@@ -529,12 +529,12 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                 }
             }
 
-            !isWhiteStarting && isUserTurn && square.pieceColor == PieceColor.BLACK && selectedSquare == null -> { //first click as black
+            !isWhiteStarting && isUserTurn && square.pieceColor == PieceColor.BLACK && selectedSquare == null -> {//first click as black
                 val kingSquare = chessboard.getBlackKingSquare()
                 removeHighlightCircles()
                 removeHighlightOpponents()
                 when(square.pieceType){
-                    PieceType.PAWN -> {
+                    PieceType.PAWN -> {//first click as black and clicked Pawn
                         val pawn = Pawn(this, chessboardLayout, chessboard, square)
                         if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.BLACK)) {
                             square.pieceType = null
@@ -570,7 +570,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             }
                         }
                     }
-                    PieceType.ROOK -> {
+                    PieceType.ROOK -> {//first click as black and clicked Rook
                         val rook = Rook(this, chessboardLayout, chessboard, square)
                         if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.BLACK)) {
                             square.pieceType = null
@@ -595,7 +595,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             }
                         }
                     }
-                    PieceType.KNIGHT -> {
+                    PieceType.KNIGHT -> {//first click as black and clicked Knight
                         val knight = Knight(this, chessboardLayout, chessboard, square)
                         if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.BLACK)) {
                             square.pieceType = null
@@ -617,7 +617,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             }
                         }
                     }
-                    PieceType.BISHOP -> {
+                    PieceType.BISHOP -> {//first click as black and clicked Bishop
                         val bishop = Bishop(this, chessboardLayout, chessboard, square)
                         if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.BLACK)) {
                             square.pieceType = null
@@ -642,7 +642,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             }
                         }
                     }
-                    PieceType.QUEEN -> {
+                    PieceType.QUEEN -> {//first click as black and clicked Queen
                         val queen = Queen(this, chessboardLayout, chessboard, square)
                         if (!chessboard.isKingInCheck(chessboard, kingSquare!!, PieceColor.BLACK)) {
                             square.pieceType = null
@@ -667,7 +667,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             }
                         }
                     }
-                    PieceType.KING -> {
+                    PieceType.KING -> {//first click as black and clicked King
                         val king = King(this, chessboardLayout, chessboard, square)
                         king.showHighlightSquares()
                         king.showIfCastlingPossible()
@@ -677,7 +677,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                 }
             }
 
-            !isWhiteStarting && selectedSquare != null -> { //second click as black
+            !isWhiteStarting && selectedSquare != null -> {//second click as black
                 if (selectedSquare == square){
                     removeHighlightCircles()
                     removeHighlightOpponents()
@@ -690,7 +690,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                 } else {
                     val destinationSquare = square
                     when(selectedSquare!!.pieceType){
-                        PieceType.PAWN -> {
+                        PieceType.PAWN -> {//second click as black and the selected piece is Pawn
                             val pawn = Pawn(this, chessboardLayout, chessboard, selectedSquare!!)
                             val lastOpponentMove = getLastOpponentMoveForEnPassant()
                             if (pawn.isValidMove(destinationSquare)){
@@ -708,7 +708,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             selectedSquare = null
                         }
 
-                        PieceType.ROOK -> {
+                        PieceType.ROOK -> {//second click as black and the selected piece is Rook
                             val rook = Rook(this, chessboardLayout, chessboard, selectedSquare!!)
                             if (rook.isValidMove(destinationSquare)){
                                 movePiece(selectedSquare!!, destinationSquare)
@@ -718,7 +718,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             selectedSquare = null
                         }
 
-                        PieceType.BISHOP -> {
+                        PieceType.BISHOP -> {//second click as black and the selected piece is Bishop
                             val bishop = Bishop(this, chessboardLayout, chessboard, selectedSquare!!)
                             if (bishop.isValidMove(destinationSquare)){
                                 movePiece(selectedSquare!!, destinationSquare)
@@ -728,7 +728,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             selectedSquare = null
                         }
 
-                        PieceType.KNIGHT -> {
+                        PieceType.KNIGHT -> {//second click as black and the selected piece is Knight
                             val knight = Knight(this, chessboardLayout, chessboard, selectedSquare!!)
                             if (knight.isValidMove(destinationSquare)){
                                 movePiece(selectedSquare!!, destinationSquare)
@@ -738,7 +738,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             selectedSquare = null
                         }
 
-                        PieceType.QUEEN -> {
+                        PieceType.QUEEN -> {//second click as black and the selected piece is Queen
                             val queen = Queen(this, chessboardLayout, chessboard, selectedSquare!!)
                             if (queen.isValidMove(destinationSquare)){
                                 movePiece(selectedSquare!!, destinationSquare)
@@ -748,7 +748,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             selectedSquare = null
                         }
 
-                        PieceType.KING -> {
+                        PieceType.KING -> {//second click as black and the selected piece is King
                             val king = King(this, chessboardLayout, chessboard, selectedSquare!!)
                             if (selectedSquare!!.col - 2 == destinationSquare.col){
                                 val isKingSideCastles = true
