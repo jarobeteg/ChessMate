@@ -267,17 +267,15 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         return pieceImageView
     }
 
-    /**
-     * this handles the square clicks and this probably can be prettier or more optimized. idk might refractor the code later
-     * there is selected square variable that is set to null. this is how the app knows if the user clicks for the first time or not meaning if a square has been selected that means the user has clicked on a square
-     * so on the first click highlights are removed and we check which square has been clicked
-     * for example if a pawn is clicked a Pawn is created and show all the available moves for that pawn.
-     * the second time we click we first check if the same square was clicked if yes we remove all highlights and set the selected square to null
-     * we also check if we clicked on a piece that has the same color as the one on the selected square meaning we clicked on another of our square
-     * we remove all the highlights and set the selected square to null again but now we call the handle square click again with the square we just clicked
-     * and it would show immediately the available moves of that piece otherwise if this is not implemented then we would have to click twice to choose a different piece
-     * on the second click which would mean that we either move or take a piece (here the pawn is an exception because it can promote so with second click we check if the destination square is the promotion square)
-     */
+     // this handles the square clicks and this probably can be prettier or more optimized. idk might refractor the code later
+     // there is selected square variable that is set to null. this is how the app knows if the user clicks for the first time or not meaning if a square has been selected that means the user has clicked on a square
+     // so on the first click highlights are removed and we check which square has been clicked
+     // for example if a pawn is clicked a Pawn is created and show all the available moves for that pawn.
+     // the second time we click we first check if the same square was clicked if yes we remove all highlights and set the selected square to null
+     // we also check if we clicked on a piece that has the same color as the one on the selected square meaning we clicked on another of our square
+     // we remove all the highlights and set the selected square to null again but now we call the handle square click again with the square we just clicked
+     // and it would show immediately the available moves of that piece otherwise if this is not implemented then we would have to click twice to choose a different piece
+     // on the second click which would mean that we either move or take a piece (here the pawn is an exception because it can promote so with second click we check if the destination square is the promotion square)
     private fun handleSquareClick(square: Square) {
         //the println is there for debugging this fucking mess. will get removed eventually
         println("row: ${square.row}, col: ${square.col}, isOccupied: ${square.isOccupied}, PieceType: ${square.pieceType}, PieceColor: ${square.pieceColor}, FrameLayout: ${square.frameLayout}, ImageView: ${square.imageView}")
