@@ -133,7 +133,7 @@ class Pawn(private var context: Context, private var chessboardLayout: GridLayou
             destinationSquare.dupe(currentSquare)
             currentSquare.clearSquare()
             if (destinationSquare.row == lastOpponentMove.sourceSquare.row + 1 && destinationSquare.col == lastOpponentMove.sourceSquare.col &&
-                !chessboard.isKingInCheck(chessboard, kingPosition!!, kingPosition.pieceColor!!)){
+                !chessboard.isKingInCheck(chessboard, kingPosition!!, kingPosition.pieceColor!!) && currentSquare.row == lastOpponentMove.destinationSquare.row){
                 opponentPawnSquare.pieceColor = tmpPieceColor
                 opponentPawnSquare.pieceType = tmpPieceType
                 opponentPawnSquare.isOccupied = tmpIsOccupied
