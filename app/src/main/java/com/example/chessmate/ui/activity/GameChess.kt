@@ -312,10 +312,10 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             }
                         }else{
                             val lastOpponentMove = getLastOpponentMoveForEnPassant()
-                            if (pawn.canTakePinPiece(lastOpponentMove, true) && isEnPassantPossible()){
+                            if (pawn.canTakePinPiece(lastOpponentMove, isEnPassantPossible())){
                                 selectedSquare = square
                             }
-                            if (pawn.canCheckBeBlocked()){
+                            if (pawn.canCheckBeBlocked(lastOpponentMove, isEnPassantPossible())){
                                 selectedSquare = square
                             }else {
                                 addHighlightCheck(kingSquare.row, kingSquare.col)
@@ -560,10 +560,10 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                             }
                         }else{
                             val lastOpponentMove = getLastOpponentMoveForEnPassant()
-                            if (pawn.canTakePinPiece(lastOpponentMove, true) && isEnPassantPossible()){
+                            if (pawn.canTakePinPiece(lastOpponentMove, isEnPassantPossible())){
                                 selectedSquare = square
                             }
-                            if (pawn.canCheckBeBlocked()){
+                            if (pawn.canCheckBeBlocked(lastOpponentMove, isEnPassantPossible())){
                                 selectedSquare = square
                             }else {
                                 addHighlightCheck(kingSquare.row, kingSquare.col)
