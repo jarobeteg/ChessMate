@@ -1012,9 +1012,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     private fun bottomNavItemClicked(item: MenuItem): Boolean{//this is just occupied for the testing purpose of en passant. it will get removed eventually
         when (item.itemId) {
             R.id.nav_resign -> {
-                for (move in chessboard.moveTracker){
-                    println("${move.turnNumber} ${move.isWhiteToMove}")
-                }
+                println("Eval score of current board state: ${chessboard.evaluatePosition()}")
                 return true
             }
 
