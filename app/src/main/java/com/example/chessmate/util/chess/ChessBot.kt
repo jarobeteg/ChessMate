@@ -29,6 +29,8 @@ class ChessBot(private val botColor: PieceColor, private var context: Context, p
                         PieceType.PAWN -> legalMoves.addAll(generatePawnMoves(row, col))
                         PieceType.KNIGHT -> legalMoves.addAll(generateKnightMoves(row, col))
                         PieceType.BISHOP -> legalMoves.addAll(generateBishopMoves(row, col))
+                        PieceType.ROOK -> legalMoves.addAll(generateRookMoves(row, col))
+                        PieceType.QUEEN -> legalMoves.addAll(generateQueenMoves(row, col))
                         else -> {}
                     }
                 }
@@ -156,6 +158,15 @@ class ChessBot(private val botColor: PieceColor, private var context: Context, p
                 newCol += colOffset
             }
         }
+
+        return legalMoves
+    }
+
+    private fun generateQueenMoves(row: Int, col: Int): List<Move>{
+        val legalMoves = mutableListOf<Move>()
+
+        legalMoves.addAll(generateBishopMoves(row, col))
+        legalMoves.addAll(generateRookMoves(row, col))
 
         return legalMoves
     }
