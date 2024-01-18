@@ -13,7 +13,7 @@ class ChessBot(private val botColor: PieceColor, private var context: Context, p
         println("making best move")
         val legalMoves = generateLegalMoves()
         for (l in legalMoves){
-            println("Start square row: ${l.startSquare.row}, start square col: ${l.startSquare.col}")
+            //println("Start square row: ${l.startSquare.row}, start square col: ${l.startSquare.col}")
             println("Dest square row: ${l.destSquare.row}, dest square col: ${l.destSquare.col}")
         }
     }
@@ -28,6 +28,7 @@ class ChessBot(private val botColor: PieceColor, private var context: Context, p
                     when (piece.pieceType){
                         PieceType.PAWN -> legalMoves.addAll(generatePawnMoves(row, col))
                         PieceType.KNIGHT -> legalMoves.addAll(generateKnightMoves(row, col))
+                        PieceType.BISHOP -> legalMoves.addAll(generateBishopMoves(row, col))
                         else -> {}
                     }
                 }
@@ -89,6 +90,38 @@ class ChessBot(private val botColor: PieceColor, private var context: Context, p
                 (chessboard.isEmptySquare(newRow,newCol) || chessboard.isOpponentPiece(newRow, newCol, startSquare))){
                 destSquare = chessboard.getSquare(newRow, newCol)
                 legalMoves.add(Move(startSquare, destSquare))
+            }
+        }
+
+        return legalMoves
+    }
+
+    private fun generateBishopMoves(row: Int, col: Int): List<Move>{
+        val legalMoves = mutableListOf<Move>()
+        val startSquare = chessboard.getSquare(row, col)
+        var destSquare: Square
+        val directions = arrayOf(
+            Pair(-1, -1), Pair(-1, 1),
+            Pair(1, -1), Pair(1, 1)
+        )
+
+        for ((rowOffset, colOffset) in directions){
+            var newRow = row + rowOffset
+            var newCol = col + colOffset
+
+            while(chessboard.isValidSquare(newRow, newCol)){
+                destSquare = chessboard.getSquare(newRow, newCol)
+                if (chessboard.isEmptySquare(newRow, newCol)){
+                    legalMoves.add(Move(startSquare, destSquare))
+                } else if (chessboard.isOpponentPiece(newRow, newCol, startSquare)){
+                    legalMoves.add(Move(startSquare, destSquare))
+                    break
+                } else {
+                    break
+                }
+
+                newRow += rowOffset
+                newCol += colOffset
             }
         }
 
