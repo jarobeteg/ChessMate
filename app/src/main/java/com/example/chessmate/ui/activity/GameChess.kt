@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.chessmate.R
 import com.example.chessmate.util.chess.Bishop
+import com.example.chessmate.util.chess.ChessBot
 import com.example.chessmate.util.chess.PieceColor
 import com.example.chessmate.util.chess.Chessboard
 import com.example.chessmate.util.chess.King
@@ -29,6 +30,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogListener {
     private lateinit var chessboardLayout: GridLayout
     private lateinit var chessboard: Chessboard
+    private lateinit var chessBot: ChessBot
     private var turnNumber: Int = 1
     private var isWhiteStarting: Boolean = false
     private var isWhiteToMove: Boolean = true
@@ -62,10 +64,12 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         //here the the chessboard gets set up with a starting position based on which color starts
         if (startingSide == "white"){
             isWhiteStarting = true
+            chessBot = ChessBot(PieceColor.BLACK, this, chessboardLayout, chessboard)
             initializeStartingPosition()
             setupChessboard()
         }else{
             isWhiteStarting = false
+            chessBot = ChessBot(PieceColor.WHITE, this, chessboardLayout, chessboard)
             switchTurns()
             initializeStartingPosition()
             setupChessboard()
@@ -809,6 +813,9 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
 
     private fun switchTurns() {
         isUserTurn = !isUserTurn
+        if (!isUserTurn){
+            chessBot.makeBestMove()
+        }
     }
 
     private fun switchPlayerToMove() {

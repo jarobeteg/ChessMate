@@ -24,6 +24,17 @@ class Chessboard {
         return row in 0 until 8 && col in 0 until 8
     }
 
+    fun isEmptySquare(row: Int, col: Int): Boolean{
+        return getSquare(row, col).pieceType == null
+    }
+
+    fun isOpponentPiece(row: Int, col: Int, botSquare: Square): Boolean{
+        if (isEmptySquare(row, col)){
+            return false
+        }
+        return getSquare(row, col).pieceColor != botSquare.pieceColor
+    }
+
     fun evaluatePosition(): Int {
         var score = 0;
 
