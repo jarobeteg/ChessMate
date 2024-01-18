@@ -27,6 +27,7 @@ class ChessBot(private val botColor: PieceColor, private var context: Context, p
                 if (piece.pieceColor == botColor){
                     when (piece.pieceType){
                         PieceType.PAWN -> legalMoves.addAll(generatePawnMoves(row, col))
+                        PieceType.KNIGHT -> legalMoves.addAll(generateKnightMoves(row, col))
                         else -> {}
                     }
                 }
@@ -64,6 +65,31 @@ class ChessBot(private val botColor: PieceColor, private var context: Context, p
             chessboard.isOpponentPiece(row + direction, col + direction, startSquare)){
             destSquare = chessboard.getSquare(row + direction, col + direction)
             legalMoves.add(Move(startSquare, destSquare))
+        }
+
+        return legalMoves
+    }
+
+    private fun generateKnightMoves(row: Int, col: Int): List<Move>{
+        val legalMoves = mutableListOf<Move>()
+        val startSquare = chessboard.getSquare(row, col)
+        var destSquare: Square
+        val moves = arrayOf(
+            Pair(-2, -1), Pair(-2, 1),
+            Pair(-1, -2), Pair(-1, 2),
+            Pair(1, -2), Pair(1, 2),
+            Pair(2, -1), Pair(2, 1)
+        )
+
+        for ((rowOffset, colOffset) in moves){
+            val newRow = row + rowOffset
+            val newCol = col + colOffset
+
+            if (chessboard.isValidSquare(newRow, newCol) &&
+                (chessboard.isEmptySquare(newRow,newCol) || chessboard.isOpponentPiece(newRow, newCol, startSquare))){
+                destSquare = chessboard.getSquare(newRow, newCol)
+                legalMoves.add(Move(startSquare, destSquare))
+            }
         }
 
         return legalMoves
