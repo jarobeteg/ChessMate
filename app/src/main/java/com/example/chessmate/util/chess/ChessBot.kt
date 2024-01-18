@@ -109,7 +109,39 @@ class ChessBot(private val botColor: PieceColor, private var context: Context, p
             var newRow = row + rowOffset
             var newCol = col + colOffset
 
-            while(chessboard.isValidSquare(newRow, newCol)){
+            while (chessboard.isValidSquare(newRow, newCol)){
+                destSquare = chessboard.getSquare(newRow, newCol)
+                if (chessboard.isEmptySquare(newRow, newCol)){
+                    legalMoves.add(Move(startSquare, destSquare))
+                } else if (chessboard.isOpponentPiece(newRow, newCol, startSquare)){
+                    legalMoves.add(Move(startSquare, destSquare))
+                    break
+                } else {
+                    break
+                }
+
+                newRow += rowOffset
+                newCol += colOffset
+            }
+        }
+
+        return legalMoves
+    }
+
+    private fun generateRookMoves(row: Int, col: Int): List<Move>{
+        val legalMoves = mutableListOf<Move>()
+        val startSquare = chessboard.getSquare(row, col)
+        var destSquare: Square
+        val directions = arrayOf(
+            Pair(-1, 0), Pair(1, 0),
+            Pair(0, -1), Pair(0, 1)
+        )
+
+        for ((rowOffset, colOffset) in directions){
+            var newRow = row + rowOffset
+            var newCol = col + colOffset
+
+            while (chessboard.isValidSquare(newRow, newCol)){
                 destSquare = chessboard.getSquare(newRow, newCol)
                 if (chessboard.isEmptySquare(newRow, newCol)){
                     legalMoves.add(Move(startSquare, destSquare))
