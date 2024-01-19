@@ -13,7 +13,7 @@ class ChessBot(private val botColor: PieceColor, private var context: Context, p
         println("making best move")
         val legalMoves = generateLegalMoves()
         for (l in legalMoves){
-            //println("Start square row: ${l.startSquare.row}, start square col: ${l.startSquare.col}")
+            println("Start square row: ${l.startSquare.row}, start square col: ${l.startSquare.col}, pieceType: ${l.startSquare.pieceType}")
             println("Dest square row: ${l.destSquare.row}, dest square col: ${l.destSquare.col}")
         }
     }

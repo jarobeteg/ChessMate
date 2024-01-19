@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import com.example.chessmate.R
 
 class PlayActivity : AbsThemeActivity() {
+    private var depth = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play)
@@ -26,8 +27,14 @@ class PlayActivity : AbsThemeActivity() {
         val blackTextView = findViewById<TextView>(R.id.black_textview)
         val startGameButton = findViewById<Button>(R.id.startGameChess)
 
+        val sharedPreferences = getSharedPreferences("chess_game", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("starting_side", "random")
+
         levelSlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                depth = progress
+                editor.putInt("depth", depth)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -36,10 +43,6 @@ class PlayActivity : AbsThemeActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
             }
         })
-
-        val sharedPreferences = getSharedPreferences("chess_game", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("starting_side", "random")
 
         randomTextView.setOnClickListener {
             randomTextView.setBackgroundResource(R.drawable.custom_rounded_textview)

@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.GridLayout
 import android.widget.ImageView
+import android.widget.SeekBar
 import android.widget.TextView
 import com.example.chessmate.R
 import com.example.chessmate.util.chess.Bishop
@@ -31,6 +32,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     private lateinit var chessboardLayout: GridLayout
     private lateinit var chessboard: Chessboard
     private lateinit var chessBot: ChessBot
+    private var depth = 1
     private var turnNumber: Int = 1
     private var isWhiteStarting: Boolean = false
     private var isWhiteToMove: Boolean = true
@@ -49,6 +51,8 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         //this code snippet determines the user starting side
         val sharedPreferences = getSharedPreferences("chess_game", Context.MODE_PRIVATE)
         var startingSide = sharedPreferences.getString("starting_side", "random")
+        depth += sharedPreferences.getInt("depth", 0)
+        println(depth)
         if (startingSide == "random") {
             val random = java.util.Random()
             val isWhite = random.nextBoolean()
