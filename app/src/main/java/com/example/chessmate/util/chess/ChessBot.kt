@@ -1,21 +1,34 @@
 package com.example.chessmate.util.chess
 
-import android.content.Context
-import android.widget.GridLayout
+class ChessBot(private val botColor: PieceColor, private val depth: Int, private var chessboard: Chessboard){
+    private lateinit var clonedBoard: Chessboard
 
-class ChessBot(private val botColor: PieceColor, private var context: Context, private var chessboardLayout: GridLayout, private var chessboard: Chessboard){
     init {
-        println("The chess bot color is: $botColor")
+        clonedBoard = chessboard.cloneBoardWithoutUI()
     }
 
-    fun makeBestMove(){
+    fun getBestMove(): Move?{
         //before generating moves you need to check if the chessbot king is in check
-        println("making best move")
+        clonedBoard = chessboard.cloneBoardWithoutUI()
+        return findBestMoves()
+    }
+
+    private fun findBestMoves(): Move?{
         val legalMoves = generateLegalMoves()
+        var tmpScore: Int = Int.MAX_VALUE
+        var bestMove: Move? = null
         for (l in legalMoves){
-            println("Start square row: ${l.startSquare.row}, start square col: ${l.startSquare.col}, pieceType: ${l.startSquare.pieceType}")
-            println("Dest square row: ${l.destSquare.row}, dest square col: ${l.destSquare.col}")
+            if (l.score < tmpScore){
+                tmpScore = l.score
+            }
         }
+        for (l in legalMoves){
+            if (tmpScore == l.score){
+                bestMove = l
+            }
+        }
+
+        return bestMove
     }
 
     private fun generateLegalMoves(): List<Move>{
@@ -23,7 +36,7 @@ class ChessBot(private val botColor: PieceColor, private var context: Context, p
 
         for (row in 0 until 8){
             for (col in 0 until 8){
-                val piece = chessboard.getSquare(row, col)
+                val piece = clonedBoard.getSquare(row, col)
                 if (piece.pieceColor == botColor){
                     when (piece.pieceType){
                         PieceType.PAWN -> legalMoves.addAll(generatePawnMoves(row, col))
@@ -42,41 +55,53 @@ class ChessBot(private val botColor: PieceColor, private var context: Context, p
     }
 
     private fun generatePawnMoves(row: Int, col: Int): List<Move>{
+        clonedBoard = chessboard.cloneBoardWithoutUI()
+
         val legalMoves = mutableListOf<Move>()
-        val startSquare: Square = chessboard.getSquare(row, col)
+        val startSquare: Square = clonedBoard.getSquare(row, col)
         var destSquare: Square
         val direction = 1
 
-        if (chessboard.isEmptySquare(row + direction, col)){
-            destSquare = chessboard.getSquare(row + direction, col)
-            legalMoves.add(Move(startSquare, destSquare))
+        if (clonedBoard.isEmptySquare(row + direction, col)){
+            destSquare = clonedBoard.getSquare(row + direction, col)
+            startSquare.move(destSquare)
+            legalMoves.add(Move(startSquare, destSquare, clonedBoard.evaluatePosition()))
+            clonedBoard = chessboard.cloneBoardWithoutUI()
         }
 
         if (row == 1){
-            if (chessboard.isEmptySquare(row + direction, col) &&
-                chessboard.isEmptySquare(row + 2 * direction, col)){
-                destSquare = chessboard.getSquare(row + 2 * direction, col)
-                legalMoves.add(Move(startSquare, destSquare))
+            if (clonedBoard.isEmptySquare(row + direction, col) &&
+                clonedBoard.isEmptySquare(row + 2 * direction, col)){
+                destSquare = clonedBoard.getSquare(row + 2 * direction, col)
+                startSquare.move(destSquare)
+                legalMoves.add(Move(startSquare, destSquare, clonedBoard.evaluatePosition()))
+                clonedBoard = chessboard.cloneBoardWithoutUI()
             }
         }
 
-        if (chessboard.isValidSquare(row + direction, col - direction) &&
-            chessboard.isOpponentPiece(row + direction, col - direction, startSquare)){
-            destSquare = chessboard.getSquare(row + direction, col - direction)
-            legalMoves.add(Move(startSquare, destSquare))
+        if (clonedBoard.isValidSquare(row + direction, col - direction) &&
+            clonedBoard.isOpponentPiece(row + direction, col - direction, botColor)){
+            destSquare = clonedBoard.getSquare(row + direction, col - direction)
+            startSquare.move(destSquare)
+            legalMoves.add(Move(startSquare, destSquare, clonedBoard.evaluatePosition()))
+            clonedBoard = chessboard.cloneBoardWithoutUI()
         }
-        if (chessboard.isValidSquare(row + direction, col + direction) &&
-            chessboard.isOpponentPiece(row + direction, col + direction, startSquare)){
-            destSquare = chessboard.getSquare(row + direction, col + direction)
-            legalMoves.add(Move(startSquare, destSquare))
+        if (clonedBoard.isValidSquare(row + direction, col + direction) &&
+            clonedBoard.isOpponentPiece(row + direction, col + direction, botColor)){
+            destSquare = clonedBoard.getSquare(row + direction, col + direction)
+            startSquare.move(destSquare)
+            legalMoves.add(Move(startSquare, destSquare, clonedBoard.evaluatePosition()))
+            clonedBoard = chessboard.cloneBoardWithoutUI()
         }
 
         return legalMoves
     }
 
     private fun generateKnightMoves(row: Int, col: Int): List<Move>{
+        clonedBoard = chessboard.cloneBoardWithoutUI()
+
         val legalMoves = mutableListOf<Move>()
-        val startSquare = chessboard.getSquare(row, col)
+        val startSquare = clonedBoard.getSquare(row, col)
         var destSquare: Square
         val moves = arrayOf(
             Pair(-2, -1), Pair(-2, 1),
@@ -89,10 +114,12 @@ class ChessBot(private val botColor: PieceColor, private var context: Context, p
             val newRow = row + rowOffset
             val newCol = col + colOffset
 
-            if (chessboard.isValidSquare(newRow, newCol) &&
-                (chessboard.isEmptySquare(newRow,newCol) || chessboard.isOpponentPiece(newRow, newCol, startSquare))){
-                destSquare = chessboard.getSquare(newRow, newCol)
-                legalMoves.add(Move(startSquare, destSquare))
+            if (clonedBoard.isValidSquare(newRow, newCol) &&
+                (clonedBoard.isEmptySquare(newRow,newCol) || clonedBoard.isOpponentPiece(newRow, newCol, botColor))){
+                destSquare = clonedBoard.getSquare(newRow, newCol)
+                startSquare.move(destSquare)
+                legalMoves.add(Move(startSquare, destSquare, clonedBoard.evaluatePosition()))
+                clonedBoard = chessboard.cloneBoardWithoutUI()
             }
         }
 
@@ -100,8 +127,10 @@ class ChessBot(private val botColor: PieceColor, private var context: Context, p
     }
 
     private fun generateBishopMoves(row: Int, col: Int): List<Move>{
+        clonedBoard = chessboard.cloneBoardWithoutUI()
+
         val legalMoves = mutableListOf<Move>()
-        val startSquare = chessboard.getSquare(row, col)
+        val startSquare = clonedBoard.getSquare(row, col)
         var destSquare: Square
         val directions = arrayOf(
             Pair(-1, -1), Pair(-1, 1),
@@ -112,12 +141,16 @@ class ChessBot(private val botColor: PieceColor, private var context: Context, p
             var newRow = row + rowOffset
             var newCol = col + colOffset
 
-            while (chessboard.isValidSquare(newRow, newCol)){
-                destSquare = chessboard.getSquare(newRow, newCol)
-                if (chessboard.isEmptySquare(newRow, newCol)){
-                    legalMoves.add(Move(startSquare, destSquare))
-                } else if (chessboard.isOpponentPiece(newRow, newCol, startSquare)){
-                    legalMoves.add(Move(startSquare, destSquare))
+            while (clonedBoard.isValidSquare(newRow, newCol)){
+                destSquare = clonedBoard.getSquare(newRow, newCol)
+                if (clonedBoard.isEmptySquare(newRow, newCol)){
+                    startSquare.move(destSquare)
+                    legalMoves.add(Move(startSquare, destSquare, clonedBoard.evaluatePosition()))
+                    clonedBoard = chessboard.cloneBoardWithoutUI()
+                } else if (clonedBoard.isOpponentPiece(newRow, newCol, botColor)){
+                    startSquare.move(destSquare)
+                    legalMoves.add(Move(startSquare, destSquare, clonedBoard.evaluatePosition()))
+                    clonedBoard = chessboard.cloneBoardWithoutUI()
                     break
                 } else {
                     break
@@ -132,8 +165,10 @@ class ChessBot(private val botColor: PieceColor, private var context: Context, p
     }
 
     private fun generateRookMoves(row: Int, col: Int): List<Move>{
+        clonedBoard = chessboard.cloneBoardWithoutUI()
+
         val legalMoves = mutableListOf<Move>()
-        val startSquare = chessboard.getSquare(row, col)
+        val startSquare = clonedBoard.getSquare(row, col)
         var destSquare: Square
         val directions = arrayOf(
             Pair(-1, 0), Pair(1, 0),
@@ -144,12 +179,16 @@ class ChessBot(private val botColor: PieceColor, private var context: Context, p
             var newRow = row + rowOffset
             var newCol = col + colOffset
 
-            while (chessboard.isValidSquare(newRow, newCol)){
-                destSquare = chessboard.getSquare(newRow, newCol)
-                if (chessboard.isEmptySquare(newRow, newCol)){
-                    legalMoves.add(Move(startSquare, destSquare))
-                } else if (chessboard.isOpponentPiece(newRow, newCol, startSquare)){
-                    legalMoves.add(Move(startSquare, destSquare))
+            while (clonedBoard.isValidSquare(newRow, newCol)){
+                destSquare = clonedBoard.getSquare(newRow, newCol)
+                if (clonedBoard.isEmptySquare(newRow, newCol)){
+                    startSquare.move(destSquare)
+                    legalMoves.add(Move(startSquare, destSquare, clonedBoard.evaluatePosition()))
+                    clonedBoard = chessboard.cloneBoardWithoutUI()
+                } else if (clonedBoard.isOpponentPiece(newRow, newCol, botColor)){
+                    startSquare.move(destSquare)
+                    legalMoves.add(Move(startSquare, destSquare, clonedBoard.evaluatePosition()))
+                    clonedBoard = chessboard.cloneBoardWithoutUI()
                     break
                 } else {
                     break
@@ -173,8 +212,10 @@ class ChessBot(private val botColor: PieceColor, private var context: Context, p
     }
 
     private fun generateKingMoves(row: Int, col: Int): List<Move>{
+        clonedBoard = chessboard.cloneBoardWithoutUI()
+
         val legalMoves = mutableListOf<Move>()
-        val startSquare = chessboard.getSquare(row, col)
+        val startSquare = clonedBoard.getSquare(row, col)
         var destSquare: Square
         val moves = arrayOf(
             Pair(-1, -1), Pair(-1, 0), Pair(-1, 1),
@@ -186,10 +227,12 @@ class ChessBot(private val botColor: PieceColor, private var context: Context, p
             val newRow = row + rowOffset
             val newCol = col + colOffset
 
-            if (chessboard.isValidSquare(newRow, newCol) &&
-                (chessboard.isEmptySquare(newRow, newCol) || chessboard.isOpponentPiece(newRow, newCol, startSquare))){
-                destSquare = chessboard.getSquare(newRow, newCol)
-                legalMoves.add(Move(startSquare, destSquare))
+            if (clonedBoard.isValidSquare(newRow, newCol) &&
+                (clonedBoard.isEmptySquare(newRow, newCol) || clonedBoard.isOpponentPiece(newRow, newCol, botColor))){
+                destSquare = clonedBoard.getSquare(newRow, newCol)
+                startSquare.move(destSquare)
+                legalMoves.add(Move(startSquare, destSquare, clonedBoard.evaluatePosition()))
+                clonedBoard = chessboard.cloneBoardWithoutUI()
             }
         }
 

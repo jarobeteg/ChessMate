@@ -19,6 +19,7 @@ import com.example.chessmate.util.chess.PieceColor
 import com.example.chessmate.util.chess.Chessboard
 import com.example.chessmate.util.chess.King
 import com.example.chessmate.util.chess.Knight
+import com.example.chessmate.util.chess.Move
 import com.example.chessmate.util.chess.MoveTracker
 import com.example.chessmate.util.chess.Pawn
 import com.example.chessmate.util.chess.PieceType
@@ -68,13 +69,14 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         //here the the chessboard gets set up with a starting position based on which color starts
         if (startingSide == "white"){
             isWhiteStarting = true
-            chessBot = ChessBot(PieceColor.BLACK, this, chessboardLayout, chessboard)
+            chessBot = ChessBot(PieceColor.BLACK, depth, chessboard)
             initializeStartingPosition()
             setupChessboard()
         }else{
             isWhiteStarting = false
-            chessBot = ChessBot(PieceColor.WHITE, this, chessboardLayout, chessboard)
+            chessBot = ChessBot(PieceColor.WHITE, depth, chessboard)
             switchTurns()
+            chessBotToMove()
             initializeStartingPosition()
             setupChessboard()
         }
@@ -817,9 +819,14 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
 
     private fun switchTurns() {
         isUserTurn = !isUserTurn
-        if (!isUserTurn){
-            chessBot.makeBestMove()
+    }
+
+    private fun chessBotToMove(){
+        var bestMove: Move? = chessBot.getBestMove()
+        if (bestMove != null){
+            botMove(bestMove.startSquare, bestMove.destSquare)
         }
+        println("bestMove is likely null: $bestMove")
     }
 
     private fun switchPlayerToMove() {
@@ -836,6 +843,32 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     //if the destination square is occupied meaning the user choose to take that piece we first have to clear that square before moving our piece onto that square.
     private fun movePiece(sourceSquare: Square, destinationSquare: Square) {
         //move tracker
+        val move = MoveTracker(sourceSquare.copy(), destinationSquare.copy(), sourceSquare.pieceType, destinationSquare.pieceType,  turnNumber, isWhiteToMove)
+        if (!isUserTurn && isWhiteStarting) turnNumber++
+        if (isUserTurn && !isWhiteStarting) turnNumber++
+        trackMove(move)
+
+        removeMoveHighlights()
+        if (destinationSquare.isOccupied){
+            removePiece(destinationSquare)
+        }
+        sourceSquare.hasMoved = true
+        destinationSquare.pieceType = sourceSquare.pieceType
+        destinationSquare.isOccupied = true
+        destinationSquare.pieceColor = sourceSquare.pieceColor
+        addMoveHighlights(sourceSquare.row, sourceSquare.col)
+        addMoveHighlights(destinationSquare.row, destinationSquare.col)
+        removePiece(sourceSquare)
+        addPiece(destinationSquare)
+        switchTurns()
+        chessBotToMove()
+        switchPlayerToMove()
+    }
+
+    private fun botMove(sourceSquareBot: Square, destinationSquareBot: Square){
+        //move tracker
+        val sourceSquare = chessboard.getSquare(sourceSquareBot.row, sourceSquareBot.col)
+        val destinationSquare = chessboard.getSquare(destinationSquareBot.row, destinationSquareBot.col)
         val move = MoveTracker(sourceSquare.copy(), destinationSquare.copy(), sourceSquare.pieceType, destinationSquare.pieceType,  turnNumber, isWhiteToMove)
         if (!isUserTurn && isWhiteStarting) turnNumber++
         if (isUserTurn && !isWhiteStarting) turnNumber++
@@ -889,6 +922,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
             removePiece(opponentPawnSquare)
         }
         switchTurns()
+        chessBotToMove()
         switchPlayerToMove()
     }
 
@@ -926,6 +960,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                 if (isUserTurn && !isWhiteStarting) turnNumber++
                 trackMove(move)
                 switchTurns()
+                chessBotToMove()
                 switchPlayerToMove()
             }else{
                 kingPosition!!.hasMoved = true
@@ -955,6 +990,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                 if (isUserTurn && !isWhiteStarting) turnNumber++
                 trackMove(move)
                 switchTurns()
+                chessBotToMove()
                 switchPlayerToMove()
             }
         }else{
@@ -986,6 +1022,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                 if (isUserTurn && !isWhiteStarting) turnNumber++
                 trackMove(move)
                 switchTurns()
+                chessBotToMove()
                 switchPlayerToMove()
             }else{
                 kingPosition!!.hasMoved = true
@@ -1015,6 +1052,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                 if (isUserTurn && !isWhiteStarting) turnNumber++
                 trackMove(move)
                 switchTurns()
+                chessBotToMove()
                 switchPlayerToMove()
             }
         }
@@ -1043,6 +1081,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
 
             R.id.nav_continue -> {
                 switchTurns()
+                chessBotToMove()
                 switchPlayerToMove()
                 return true
             }

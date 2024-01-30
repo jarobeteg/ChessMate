@@ -12,6 +12,18 @@ class Chessboard {
         }
     }
 
+    fun cloneBoardWithoutUI(): Chessboard{
+        val clonedBoard = Chessboard()
+
+        for (row in 0 until 8){
+            for (col in 0 until 8){
+                clonedBoard.board[row][col] = board[row][col].copyWithoutUI()
+            }
+        }
+
+        return clonedBoard
+    }
+
     fun placePiece(row: Int, col: Int, pieceColor: PieceColor, pieceType: PieceType) {
         board[row][col] = Square(row, col, true, pieceColor, pieceType)
     }
@@ -28,15 +40,15 @@ class Chessboard {
         return getSquare(row, col).pieceType == null
     }
 
-    fun isOpponentPiece(row: Int, col: Int, botSquare: Square): Boolean{
+    fun isOpponentPiece(row: Int, col: Int, botColor: PieceColor): Boolean{
         if (isEmptySquare(row, col)){
             return false
         }
-        return getSquare(row, col).pieceColor != botSquare.pieceColor
+        return getSquare(row, col).pieceColor != botColor
     }
 
     fun evaluatePosition(): Int {
-        var score = 0;
+        var score = 0
 
         score += evaluateMaterialBalance()
 
@@ -57,8 +69,8 @@ class Chessboard {
         val blackKingSquare = getBlackKingSquare()
 
         if (whiteKingSquare != null && blackKingSquare != null) {
-            kingSafetyScore += exposedKingPenalty(whiteKingSquare)
-            kingSafetyScore -= exposedKingPenalty(blackKingSquare)
+            kingSafetyScore -= exposedKingPenalty(whiteKingSquare)
+            kingSafetyScore += exposedKingPenalty(blackKingSquare)
         }
 
         return kingSafetyScore

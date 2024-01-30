@@ -13,6 +13,11 @@ data class Square(
     var frameLayout: FrameLayout? = null,
     var imageView: ImageView? = null
 ){
+
+    fun copyWithoutUI(): Square{
+        return Square(row, col, isOccupied, pieceColor, pieceType, hasMoved)
+    }
+
     fun clearSquare(){
         isOccupied = false
         pieceColor = null
@@ -25,5 +30,29 @@ data class Square(
         pieceType = source.pieceType
         isOccupied = source.isOccupied
         imageView = source.imageView
+    }
+
+    fun swap(other: Square){
+        val tempIsOccupied = isOccupied
+        val tempPieceColor = pieceColor
+        val tempPieceType = pieceType
+
+        isOccupied = other.isOccupied
+        pieceColor = other.pieceColor
+        pieceType = other.pieceType
+
+        other.isOccupied = tempIsOccupied
+        other.pieceColor = tempPieceColor
+        other.pieceType = tempPieceType
+    }
+
+    fun move(other: Square){
+        other.isOccupied = isOccupied
+        other.pieceColor = pieceColor
+        other.pieceType = pieceType
+
+        isOccupied = false
+        pieceColor = null
+        pieceType = null
     }
 }
