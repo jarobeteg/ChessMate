@@ -75,10 +75,10 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         }else{
             isWhiteStarting = false
             chessBot = ChessBot(PieceColor.WHITE, depth, chessboard)
-            switchTurns()
-            chessBotToMove()
             initializeStartingPosition()
             setupChessboard()
+            switchTurns()
+            chessBotToMove()
         }
 
         bottomNavigationView.setOnItemSelectedListener { item ->
@@ -822,7 +822,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     }
 
     private fun chessBotToMove(){
-        var bestMove: Move? = chessBot.getBestMove()
+        val bestMove: Move? = chessBot.getBestMove()
         if (bestMove != null){
             botMove(bestMove.startSquare, bestMove.destSquare)
         }

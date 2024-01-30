@@ -40,11 +40,11 @@ class Chessboard {
         return getSquare(row, col).pieceType == null
     }
 
-    fun isOpponentPiece(row: Int, col: Int, botColor: PieceColor): Boolean{
+    fun isOpponentPiece(row: Int, col: Int, pieceColor: PieceColor): Boolean{
         if (isEmptySquare(row, col)){
             return false
         }
-        return getSquare(row, col).pieceColor != botColor
+        return getSquare(row, col).pieceColor != pieceColor
     }
 
     fun evaluatePosition(): Int {
