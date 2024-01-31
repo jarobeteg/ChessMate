@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.GridLayout
 import android.widget.ImageView
-import android.widget.SeekBar
 import android.widget.TextView
 import com.example.chessmate.R
 import com.example.chessmate.util.chess.Bishop
@@ -826,7 +825,6 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         if (bestMove != null){
             botMove(bestMove.startSquare, bestMove.destSquare)
         }
-        println("bestMove is likely null: $bestMove")
     }
 
     private fun switchPlayerToMove() {
@@ -882,6 +880,9 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         destinationSquare.pieceType = sourceSquare.pieceType
         destinationSquare.isOccupied = true
         destinationSquare.pieceColor = sourceSquare.pieceColor
+        if (destinationSquare.row == 7){
+            destinationSquare.pieceType = PieceType.QUEEN
+        }
         addMoveHighlights(sourceSquare.row, sourceSquare.col)
         addMoveHighlights(destinationSquare.row, destinationSquare.col)
         removePiece(sourceSquare)

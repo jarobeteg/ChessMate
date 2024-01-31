@@ -15,7 +15,7 @@ class LegalMoveGenerator(val chessboard: Chessboard, val pieceColor: PieceColor)
                 val piece = clonedBoard.getSquare(row, col)
                 if (piece.pieceColor == pieceColor){
                     when (piece.pieceType){
-                        PieceType.PAWN -> legalMoves.addAll(generatePawnMoves(row, col))
+                        PieceType.PAWN -> legalMoves.addAll(generatePawnMoves(row, col, true))
                         PieceType.KNIGHT -> legalMoves.addAll(generateKnightMoves(row, col))
                         PieceType.BISHOP -> legalMoves.addAll(generateBishopMoves(row, col))
                         PieceType.ROOK -> legalMoves.addAll(generateRookMoves(row, col))
@@ -53,7 +53,7 @@ class LegalMoveGenerator(val chessboard: Chessboard, val pieceColor: PieceColor)
         return legalMoves
     }
 
-    fun generatePawnMoves(row: Int, col: Int): List<Move>{
+    fun generatePawnMoves(row: Int, col: Int, isForBot: Boolean = false): List<Move>{
         clonedBoard = chessboard.cloneBoardWithoutUI()
 
         val legalMoves = mutableListOf<Move>()
@@ -68,7 +68,17 @@ class LegalMoveGenerator(val chessboard: Chessboard, val pieceColor: PieceColor)
             clonedBoard = chessboard.cloneBoardWithoutUI()
         }
 
-        if (row == 1){
+        if (row == 1 && isForBot){
+            if (clonedBoard.isEmptySquare(row + direction, col) &&
+                clonedBoard.isEmptySquare(row + 2 * direction, col)){
+                destSquare = clonedBoard.getSquare(row + 2 * direction, col)
+                startSquare.move(destSquare)
+                legalMoves.add(Move(startSquare, destSquare, clonedBoard.evaluatePosition()))
+                clonedBoard = chessboard.cloneBoardWithoutUI()
+            }
+        }
+
+        if (row == 6 && !isForBot){
             if (clonedBoard.isEmptySquare(row + direction, col) &&
                 clonedBoard.isEmptySquare(row + 2 * direction, col)){
                 destSquare = clonedBoard.getSquare(row + 2 * direction, col)
