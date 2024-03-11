@@ -1,15 +1,30 @@
 package com.example.chessmate.util.chess
 
-class ChessBot(private val botColor: PieceColor, private val depth: Int, private var chessboard: Chessboard){
+class ChessBot(val botColor: PieceColor, private val depth: Int){
+    var isBotTurn: Boolean = false
 
-    fun getBestMove(): Move?{
+    fun getBestMove(chessboard: Chessboard): Move?{
         //before generating moves you need to check if the chessbot king is in check
-        return findBestMoves()
+        var isBotInCheck: Boolean
+        if (botColor == PieceColor.BLACK){
+            isBotInCheck = chessboard.isKingInCheck(chessboard, chessboard.getBlackKingSquare()!!, botColor)
+        } else {
+            isBotInCheck = chessboard.isKingInCheck(chessboard, chessboard.getWhiteKingSquare()!!, botColor)
+        }
+        if (isBotInCheck){
+            println("The bot is in check")
+        } else {
+            println("The bot is not in check")
+        }
+        return findBestMoves(chessboard)
     }
 
-    private fun findBestMoves(): Move?{
-        val botMoveGenerator = LegalMoveGenerator(chessboard, botColor)
-        val legalMoves = botMoveGenerator.generateLegalMovesForBot()
+    private fun findBestMoves(chessboard: Chessboard): Move?{
+        val botMoveGenerator = LegalMoveGenerator()
+        val legalMoves = botMoveGenerator.generateLegalMovesForBot(chessboard, botColor)
+        if (legalMoves.isEmpty()){
+            println("Bot checkmated")
+        }
         if (botColor == PieceColor.WHITE){
             return bestMoveAsWhite(legalMoves)
         } else {

@@ -1,6 +1,6 @@
 package com.example.chessmate.util.chess
 
-class Chessboard {
+class Chessboard{
     private val board: Array<Array<Square>> = Array(8) { Array(8) { Square(0, 0, false, null, null) } }
     var moveTracker: MutableList<MoveTracker> = mutableListOf()
 
@@ -69,8 +69,8 @@ class Chessboard {
         val blackKingSquare = getBlackKingSquare()
 
         if (whiteKingSquare != null && blackKingSquare != null) {
-            kingSafetyScore -= exposedKingPenalty(whiteKingSquare)
-            kingSafetyScore += exposedKingPenalty(blackKingSquare)
+            kingSafetyScore += exposedKingPenalty(whiteKingSquare)
+            kingSafetyScore -= exposedKingPenalty(blackKingSquare)
         }
 
         return kingSafetyScore
@@ -81,7 +81,7 @@ class Chessboard {
     private fun exposedKingPenalty(kingSquare: Square): Int {
         var attackingScore = 0
 
-        val attackingPieces = getCheckingPieceSquare(this, kingSquare, kingSquare.pieceColor!!.opposite())
+        val attackingPieces = getCheckingPieceSquare(this, kingSquare, kingSquare.pieceColor!!)
         for (attackingPiece in attackingPieces) {
             attackingScore += getPieceValue(attackingPiece.pieceType!!)
         }
@@ -186,6 +186,10 @@ class Chessboard {
             PieceType.QUEEN -> 9
             PieceType.KING -> 0
         }
+    }
+
+    fun getKingSquare(color: PieceColor): Square?{
+        return if (color == PieceColor.BLACK) getBlackKingSquare() else getWhiteKingSquare()
     }
 
     fun getWhiteKingSquare(): Square?{
