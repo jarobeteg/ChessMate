@@ -43,6 +43,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     private val highlightMoveTag = "highlight_move"
     private var selectedSquare: Square? = null
     private var legalSquares: MutableList<Move> = mutableListOf()
+    //test commit because android studio got updated and it seemed like it fucked up some things in the project
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
