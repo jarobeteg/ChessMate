@@ -36,7 +36,6 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     private var turnNumber: Int = 1
     private var isPlayerStarting: Boolean = false
     private var isWhiteToMove: Boolean = true
-    private var isUserTurn: Boolean = true
     private var squareSize: Int = 0
     private val highlightCircleTag = "highlight_circle"
     private val highlightOpponentTag = "highlight_opponent"
@@ -86,7 +85,6 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
             player.isPlayerTurn = false
             initializeStartingPosition()
             setupChessboard()
-            switchTurns()
             chessBotToMove()
         }
 
@@ -298,8 +296,11 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
      // on the second click which would mean that we either move or take a piece (here the pawn is an exception because it can promote so with second click we check if the destination square is the promotion square)
     private fun handleSquareClick(square: Square) {
         //the println is there for debugging this fucking mess. will get removed eventually
-         println("row: ${square.row}, col: ${square.col}, isOccupied: ${square.isOccupied}, PieceType: ${square.pieceType}, PieceColor: ${square.pieceColor}, FrameLayout: ${square.frameLayout}, ImageView: ${square.imageView}")
+        //println("row: ${square.row}, col: ${square.col}, isOccupied: ${square.isOccupied}, PieceType: ${square.pieceType}, PieceColor: ${square.pieceColor}, FrameLayout: ${square.frameLayout}, ImageView: ${square.imageView}")
 
+         println(player.isPlayerTurn)
+         println(square.pieceColor == player.playerColor)
+         println(selectedSquare == null)
          if (player.isPlayerTurn && square.pieceColor == player.playerColor && selectedSquare == null){
              removeHighlightCircles()
              removeHighlightOpponents()
@@ -395,7 +396,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     }
 
     private fun switchTurns() {
-        isUserTurn = !isUserTurn
+        player.isPlayerTurn = !player.isPlayerTurn
     }
 
     private fun chessBotToMove(){
@@ -420,8 +421,8 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     private fun movePiece(sourceSquare: Square, destinationSquare: Square) {
         //move tracker
         val move = MoveTracker(sourceSquare.copy(), destinationSquare.copy(), sourceSquare.pieceType, destinationSquare.pieceType,  turnNumber, isWhiteToMove)
-        if (!isUserTurn && isPlayerStarting) turnNumber++
-        if (isUserTurn && !isPlayerStarting) turnNumber++
+        if (!player.isPlayerTurn && isPlayerStarting) turnNumber++
+        if (player.isPlayerTurn && !isPlayerStarting) turnNumber++
         trackMove(move)
 
         removeMoveHighlights()
@@ -446,8 +447,8 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         val sourceSquare = chessboard.getSquare(fromRow, fromCol)
         val destinationSquare = chessboard.getSquare(toRow, toCol)
         val move = MoveTracker(sourceSquare.copy(), destinationSquare.copy(), sourceSquare.pieceType, destinationSquare.pieceType,  turnNumber, isWhiteToMove)
-        if (!isUserTurn && isPlayerStarting) turnNumber++
-        if (isUserTurn && !isPlayerStarting) turnNumber++
+        if (!player.isPlayerTurn && isPlayerStarting) turnNumber++
+        if (player.isPlayerTurn && !isPlayerStarting) turnNumber++
         trackMove(move)
 
         removeMoveHighlights()
@@ -482,8 +483,8 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
 
     private fun performEnPassant(sourceSquare: Square, destinationSquare: Square, lastOpponentMove: MoveTracker?) {
         val move = MoveTracker(sourceSquare.copy(), destinationSquare.copy(), sourceSquare.pieceType, destinationSquare.pieceType,  turnNumber, isWhiteToMove)
-        if (!isUserTurn && isPlayerStarting) turnNumber++
-        if (isUserTurn && !isPlayerStarting) turnNumber++
+        if (!player.isPlayerTurn && isPlayerStarting) turnNumber++
+        if (player.isPlayerTurn && !isPlayerStarting) turnNumber++
         trackMove(move)
 
         removeMoveHighlights()
@@ -535,8 +536,8 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                 addPiece(destinationRookSquare)
 
                 val move = MoveTracker(kingPosition.copy(), destinationKingSquare.copy(), kingPosition.pieceType, destinationKingSquare.pieceType,  turnNumber, isWhiteToMove)
-                if (!isUserTurn && isPlayerStarting) turnNumber++
-                if (isUserTurn && !isPlayerStarting) turnNumber++
+                if (!player.isPlayerTurn && isPlayerStarting) turnNumber++
+                if (player.isPlayerTurn && !isPlayerStarting) turnNumber++
                 trackMove(move)
                 switchTurns()
                 chessBotToMove()
@@ -565,8 +566,8 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                 addPiece(destinationRookSquare)
 
                 val move = MoveTracker(kingPosition.copy(), destinationKingSquare.copy(), kingPosition.pieceType, destinationKingSquare.pieceType,  turnNumber, isWhiteToMove)
-                if (!isUserTurn && isPlayerStarting) turnNumber++
-                if (isUserTurn && !isPlayerStarting) turnNumber++
+                if (!player.isPlayerTurn && isPlayerStarting) turnNumber++
+                if (player.isPlayerTurn && !isPlayerStarting) turnNumber++
                 trackMove(move)
                 switchTurns()
                 chessBotToMove()
@@ -597,8 +598,8 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                 addPiece(destinationRookSquare)
 
                 val move = MoveTracker(kingPosition.copy(), destinationKingSquare.copy(), kingPosition.pieceType, destinationKingSquare.pieceType,  turnNumber, isWhiteToMove)
-                if (!isUserTurn && isPlayerStarting) turnNumber++
-                if (isUserTurn && !isPlayerStarting) turnNumber++
+                if (!player.isPlayerTurn && isPlayerStarting) turnNumber++
+                if (player.isPlayerTurn && !isPlayerStarting) turnNumber++
                 trackMove(move)
                 switchTurns()
                 chessBotToMove()
@@ -627,8 +628,8 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
                 addPiece(destinationRookSquare)
 
                 val move = MoveTracker(kingPosition.copy(), destinationKingSquare.copy(), kingPosition.pieceType, destinationKingSquare.pieceType,  turnNumber, isWhiteToMove)
-                if (!isUserTurn && isPlayerStarting) turnNumber++
-                if (isUserTurn && !isPlayerStarting) turnNumber++
+                if (!player.isPlayerTurn && isPlayerStarting) turnNumber++
+                if (player.isPlayerTurn && !isPlayerStarting) turnNumber++
                 trackMove(move)
                 switchTurns()
                 chessBotToMove()
@@ -647,14 +648,14 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
             R.id.nav_back -> {
                 val sourceSquare = chessboard.getSquare(3, 3)
                 val destinationSquare = chessboard.getSquare(1, 3)
-                if (!isUserTurn) movePiece(sourceSquare, destinationSquare)
+                if (!player.isPlayerTurn) movePiece(sourceSquare, destinationSquare)
                 return true
             }
 
             R.id.nav_forward -> {
                 val sourceSquare = chessboard.getSquare(1, 3)
                 val destinationSquare = chessboard.getSquare(3, 3)
-                if (!isUserTurn) movePiece(sourceSquare, destinationSquare)
+                if (!player.isPlayerTurn) movePiece(sourceSquare, destinationSquare)
                 return true
             }
 
