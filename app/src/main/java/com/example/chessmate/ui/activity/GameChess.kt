@@ -34,7 +34,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     private lateinit var player: Player
     private var depth = 1
     private var turnNumber: Int = 1
-    private var isPlayerStarting: Boolean = false
+    private var isPlayerStarted: Boolean = false
     private var isWhiteToMove: Boolean = true
     private var squareSize: Int = 0
     private val highlightCircleTag = "highlight_circle"
@@ -53,7 +53,6 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         val sharedPreferences = getSharedPreferences("chess_game", Context.MODE_PRIVATE)
         var startingSide = sharedPreferences.getString("starting_side", "random")
         depth += sharedPreferences.getInt("depth", 0)
-        println("Depth: $depth")
         if (startingSide == "random") {
             val random = java.util.Random()
             val isWhite = random.nextBoolean()
@@ -70,7 +69,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
 
         //here the the chessboard gets set up with a starting position based on which color starts
         if (startingSide == "white"){
-            isPlayerStarting = true
+            isPlayerStarted = true
             chessBot = ChessBot(PieceColor.BLACK, depth)
             chessBot.isBotTurn = false
             player = Player(PieceColor.WHITE)
@@ -78,7 +77,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
             initializeStartingPosition()
             setupChessboard()
         }else{
-            isPlayerStarting = false
+            isPlayerStarted = false
             chessBot = ChessBot(PieceColor.WHITE, depth)
             chessBot.isBotTurn = true
             player = Player(PieceColor.BLACK)
@@ -129,7 +128,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
 
                 if (col == 0) {
                     val numberTextView = TextView(this)
-                    val number = if (isPlayerStarting) (8 - row).toString() else (row + 1).toString()
+                    val number = if (isPlayerStarted) (8 - row).toString() else (row + 1).toString()
                     numberTextView.text = number
                     val textSizeInSp = 10
                     numberTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSizeInSp.toFloat())
@@ -145,7 +144,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
 
                 if (row == 7) {
                     val letterTextView = TextView(this)
-                    val letter = if (isPlayerStarting) ('a' + col).toString() else ('h' - col).toString()
+                    val letter = if (isPlayerStarted) ('a' + col).toString() else ('h' - col).toString()
                     letterTextView.text = letter
                     val textSizeInSp = 10
                     letterTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSizeInSp.toFloat())
@@ -173,7 +172,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     //the chessboard have been previously initialized to the chessboard.placePiece places a piece type with color to a square with row and col to setup the starting position
     //once this is done the setupChessboard is called and does the UI part for the chessboard
     private fun initializeStartingPosition() {
-        if (isPlayerStarting){//user starts as white
+        if (isPlayerStarted){//user starts as white
             chessboard.placePiece(6, 0, PieceColor.WHITE, PieceType.PAWN)
             chessboard.placePiece(6, 1, PieceColor.WHITE, PieceType.PAWN)
             chessboard.placePiece(6, 2, PieceColor.WHITE, PieceType.PAWN)
@@ -296,11 +295,8 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
      // on the second click which would mean that we either move or take a piece (here the pawn is an exception because it can promote so with second click we check if the destination square is the promotion square)
     private fun handleSquareClick(square: Square) {
         //the println is there for debugging this fucking mess. will get removed eventually
-        //println("row: ${square.row}, col: ${square.col}, isOccupied: ${square.isOccupied}, PieceType: ${square.pieceType}, PieceColor: ${square.pieceColor}, FrameLayout: ${square.frameLayout}, ImageView: ${square.imageView}")
+        println("row: ${square.row}, col: ${square.col}, isOccupied: ${square.isOccupied}, PieceType: ${square.pieceType}, PieceColor: ${square.pieceColor}, FrameLayout: ${square.frameLayout}, ImageView: ${square.imageView}")
 
-         println(player.isPlayerTurn)
-         println(square.pieceColor == player.playerColor)
-         println(selectedSquare == null)
          if (player.isPlayerTurn && square.pieceColor == player.playerColor && selectedSquare == null){
              removeHighlightCircles()
              removeHighlightOpponents()
@@ -369,6 +365,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
 
     private fun switchTurns() {
         player.isPlayerTurn = !player.isPlayerTurn
+        isWhiteToMove = !isWhiteToMove
     }
 
     private fun chessBotToMove(){
@@ -376,10 +373,6 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         if (bestMove != null){
             botMove(bestMove.fromRow, bestMove.fromCol, bestMove.toRow, bestMove.toCol)
         }
-    }
-
-    private fun switchPlayerToMove() {
-        isWhiteToMove = !isWhiteToMove
     }
 
     //track each move in a chess game
@@ -393,8 +386,8 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     private fun movePiece(sourceSquare: Square, destinationSquare: Square) {
         //move tracker
         val move = MoveTracker(sourceSquare.copy(), destinationSquare.copy(), sourceSquare.pieceType, destinationSquare.pieceType,  turnNumber, isWhiteToMove)
-        if (!player.isPlayerTurn && isPlayerStarting) turnNumber++
-        if (player.isPlayerTurn && !isPlayerStarting) turnNumber++
+        if (!player.isPlayerTurn && isPlayerStarted) turnNumber++
+        if (player.isPlayerTurn && !isPlayerStarted) turnNumber++
         trackMove(move)
 
         removeMoveHighlights()
@@ -411,7 +404,6 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         addPiece(destinationSquare)
         switchTurns()
         chessBotToMove()
-        switchPlayerToMove()
     }
 
     private fun botMove(fromRow: Int, fromCol: Int, toRow: Int, toCol: Int){
@@ -419,8 +411,8 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         val sourceSquare = chessboard.getSquare(fromRow, fromCol)
         val destinationSquare = chessboard.getSquare(toRow, toCol)
         val move = MoveTracker(sourceSquare.copy(), destinationSquare.copy(), sourceSquare.pieceType, destinationSquare.pieceType,  turnNumber, isWhiteToMove)
-        if (!player.isPlayerTurn && isPlayerStarting) turnNumber++
-        if (player.isPlayerTurn && !isPlayerStarting) turnNumber++
+        if (!player.isPlayerTurn && isPlayerStarted) turnNumber++
+        if (player.isPlayerTurn && !isPlayerStarted) turnNumber++
         trackMove(move)
 
         removeMoveHighlights()
@@ -439,7 +431,6 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         removePiece(sourceSquare)
         addPiece(destinationSquare)
         switchTurns()
-        switchPlayerToMove()
     }
 
     private fun addPiece(square: Square) {
@@ -477,7 +468,6 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
             R.id.nav_continue -> {
                 switchTurns()
                 chessBotToMove()
-                switchPlayerToMove()
                 return true
             }
 
