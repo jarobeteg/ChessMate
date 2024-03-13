@@ -258,7 +258,6 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     }
 
     private fun createPieceImageView(square: Square): ImageView {
-        println("createPieceImageView: $square")
         val pieceImageView = ImageView(this)
         if (square.pieceColor == PieceColor.WHITE){
             when(square.pieceType){
@@ -448,6 +447,11 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         when (item.itemId) {
             R.id.nav_resign -> {
                 println("Eval score of current board state: ${chessboard.evaluatePosition()}")
+                println("Next up is the move tracker:")
+                println("----------------------------------------------------------------------")
+                for (move in chessboard.moveTracker){
+                    println(move)
+                }
                 return true
             }
 
