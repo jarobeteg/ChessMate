@@ -177,7 +177,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
             chessboard.placePiece(6, 0, PieceColor.WHITE, PieceType.PAWN)
             chessboard.placePiece(6, 1, PieceColor.WHITE, PieceType.PAWN)
             chessboard.placePiece(6, 2, PieceColor.WHITE, PieceType.PAWN)
-            //chessboard.placePiece(6, 3, PieceColor.WHITE, PieceType.PAWN)
+            chessboard.placePiece(6, 3, PieceColor.WHITE, PieceType.PAWN)
             chessboard.placePiece(6, 4, PieceColor.WHITE, PieceType.PAWN)
             chessboard.placePiece(6, 5, PieceColor.WHITE, PieceType.PAWN)
             chessboard.placePiece(6, 6, PieceColor.WHITE, PieceType.PAWN)
@@ -204,7 +204,7 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
             chessboard.placePiece(0, 0, PieceColor.BLACK, PieceType.ROOK)
             chessboard.placePiece(0, 1, PieceColor.BLACK, PieceType.KNIGHT)
             chessboard.placePiece(0, 2, PieceColor.BLACK, PieceType.BISHOP)
-            chessboard.placePiece(3, 0, PieceColor.BLACK, PieceType.QUEEN)
+            chessboard.placePiece(0, 3, PieceColor.BLACK, PieceType.QUEEN)
             chessboard.placePiece(0, 4, PieceColor.BLACK, PieceType.KING)
             chessboard.placePiece(0, 5, PieceColor.BLACK, PieceType.BISHOP)
             chessboard.placePiece(0, 6, PieceColor.BLACK, PieceType.KNIGHT)
@@ -367,34 +367,6 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
         }
     }
 
-    private fun isEnPassantPossible(): Boolean{
-        var lastOpponentMove = chessboard.moveTracker.firstOrNull { it.turnNumber == turnNumber && it.sourceSquare.pieceColor == PieceColor.WHITE && it.pieceMoved == PieceType.PAWN}
-        if (isPlayerStarting){
-            lastOpponentMove = chessboard.moveTracker.firstOrNull { it.turnNumber == turnNumber - 1 && it.sourceSquare.pieceColor == PieceColor.BLACK && it.pieceMoved == PieceType.PAWN}
-        }
-
-        if (lastOpponentMove?.sourceSquare?.row == 1 && lastOpponentMove.destinationSquare.row == 3 &&
-            lastOpponentMove.sourceSquare.col == lastOpponentMove.destinationSquare.col){
-            return true
-        }
-
-        return false
-    }
-
-    private fun getLastOpponentMoveForEnPassant(): MoveTracker? {
-        var lastOpponentMove = chessboard.moveTracker.firstOrNull { it.turnNumber == turnNumber && it.sourceSquare.pieceColor == PieceColor.WHITE && it.pieceMoved == PieceType.PAWN}
-        if (isPlayerStarting){
-            lastOpponentMove = chessboard.moveTracker.firstOrNull { it.turnNumber == turnNumber - 1 && it.sourceSquare.pieceColor == PieceColor.BLACK && it.pieceMoved == PieceType.PAWN}
-        }
-
-        if (lastOpponentMove?.sourceSquare?.row == 1 && lastOpponentMove.destinationSquare.row == 3 &&
-            lastOpponentMove.sourceSquare.col == lastOpponentMove.destinationSquare.col){
-            return lastOpponentMove
-        }
-
-        return lastOpponentMove
-    }
-
     private fun switchTurns() {
         player.isPlayerTurn = !player.isPlayerTurn
     }
@@ -479,163 +451,6 @@ class GameChess : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogLis
     private fun removePiece(square: Square) {
         square.frameLayout?.removeView(square.imageView)
         square.clearSquare()
-    }
-
-    private fun performEnPassant(sourceSquare: Square, destinationSquare: Square, lastOpponentMove: MoveTracker?) {
-        val move = MoveTracker(sourceSquare.copy(), destinationSquare.copy(), sourceSquare.pieceType, destinationSquare.pieceType,  turnNumber, isWhiteToMove)
-        if (!player.isPlayerTurn && isPlayerStarting) turnNumber++
-        if (player.isPlayerTurn && !isPlayerStarting) turnNumber++
-        trackMove(move)
-
-        removeMoveHighlights()
-
-        sourceSquare.hasMoved = true
-        destinationSquare.pieceType = sourceSquare.pieceType
-        destinationSquare.isOccupied = true
-        destinationSquare.pieceColor = sourceSquare.pieceColor
-        addMoveHighlights(sourceSquare.row, sourceSquare.col)
-        addMoveHighlights(destinationSquare.row, destinationSquare.col)
-        removePiece(sourceSquare)
-        addPiece(destinationSquare)
-        if (lastOpponentMove != null){
-            val opponentPawnSquare = chessboard.getSquare(lastOpponentMove.destinationSquare.row, lastOpponentMove.destinationSquare.col)
-            removePiece(opponentPawnSquare)
-        }
-        switchTurns()
-        chessBotToMove()
-        switchPlayerToMove()
-    }
-
-    private fun performCastles(isKingSideCastles: Boolean, isPlayerWhite: Boolean) {
-        val kingPosition = if (isPlayerWhite) chessboard.getWhiteKingSquare() else chessboard.getBlackKingSquare()
-        val kingSideRook = if (isPlayerWhite) chessboard.getWhiteKingSideRook() else chessboard.getBlackKingSideRook()
-        val queenSideRook = if (isPlayerWhite) chessboard.getWhiteQueenSideRook() else chessboard.getBlackQueenSideRook()
-        removeMoveHighlights()
-        if (isPlayerWhite){
-            if (isKingSideCastles){
-                kingPosition!!.hasMoved = true
-                val destinationKingSquare = chessboard.getSquare(7, 6)
-                destinationKingSquare.isOccupied = true
-                destinationKingSquare.hasMoved = true
-                destinationKingSquare.pieceType = PieceType.KING
-                destinationKingSquare.pieceColor = PieceColor.WHITE
-
-                val destinationRookSquare = chessboard.getSquare(7,5)
-                destinationRookSquare.isOccupied = true
-                destinationRookSquare.hasMoved = true
-                destinationRookSquare.pieceType = PieceType.ROOK
-                destinationRookSquare.pieceColor = PieceColor.WHITE
-
-                addMoveHighlights(kingPosition.row, kingPosition.col)
-                addMoveHighlights(destinationKingSquare.row, destinationKingSquare.col)
-
-                removePiece(kingPosition)
-                addPiece(destinationKingSquare)
-
-                removePiece(kingSideRook)
-                addPiece(destinationRookSquare)
-
-                val move = MoveTracker(kingPosition.copy(), destinationKingSquare.copy(), kingPosition.pieceType, destinationKingSquare.pieceType,  turnNumber, isWhiteToMove)
-                if (!player.isPlayerTurn && isPlayerStarting) turnNumber++
-                if (player.isPlayerTurn && !isPlayerStarting) turnNumber++
-                trackMove(move)
-                switchTurns()
-                chessBotToMove()
-                switchPlayerToMove()
-            }else{
-                kingPosition!!.hasMoved = true
-                val destinationKingSquare = chessboard.getSquare(7, 2)
-                destinationKingSquare.isOccupied = true
-                destinationKingSquare.hasMoved = true
-                destinationKingSquare.pieceType = PieceType.KING
-                destinationKingSquare.pieceColor = PieceColor.WHITE
-
-                val destinationRookSquare = chessboard.getSquare(7,3)
-                destinationRookSquare.isOccupied = true
-                destinationRookSquare.hasMoved = true
-                destinationRookSquare.pieceType = PieceType.ROOK
-                destinationRookSquare.pieceColor = PieceColor.WHITE
-
-                addMoveHighlights(kingPosition.row, kingPosition.col)
-                addMoveHighlights(destinationKingSquare.row, destinationKingSquare.col)
-
-                removePiece(kingPosition)
-                addPiece(destinationKingSquare)
-
-                removePiece(queenSideRook)
-                addPiece(destinationRookSquare)
-
-                val move = MoveTracker(kingPosition.copy(), destinationKingSquare.copy(), kingPosition.pieceType, destinationKingSquare.pieceType,  turnNumber, isWhiteToMove)
-                if (!player.isPlayerTurn && isPlayerStarting) turnNumber++
-                if (player.isPlayerTurn && !isPlayerStarting) turnNumber++
-                trackMove(move)
-                switchTurns()
-                chessBotToMove()
-                switchPlayerToMove()
-            }
-        }else{
-            if (isKingSideCastles){
-                kingPosition!!.hasMoved = true
-                val destinationKingSquare = chessboard.getSquare(7, 1)
-                destinationKingSquare.isOccupied = true
-                destinationKingSquare.hasMoved = true
-                destinationKingSquare.pieceType = PieceType.KING
-                destinationKingSquare.pieceColor = PieceColor.BLACK
-
-                val destinationRookSquare = chessboard.getSquare(7,2)
-                destinationRookSquare.isOccupied = true
-                destinationRookSquare.hasMoved = true
-                destinationRookSquare.pieceType = PieceType.ROOK
-                destinationRookSquare.pieceColor = PieceColor.BLACK
-
-                addMoveHighlights(kingPosition.row, kingPosition.col)
-                addMoveHighlights(destinationKingSquare.row, destinationKingSquare.col)
-
-                removePiece(kingPosition)
-                addPiece(destinationKingSquare)
-
-                removePiece(kingSideRook)
-                addPiece(destinationRookSquare)
-
-                val move = MoveTracker(kingPosition.copy(), destinationKingSquare.copy(), kingPosition.pieceType, destinationKingSquare.pieceType,  turnNumber, isWhiteToMove)
-                if (!player.isPlayerTurn && isPlayerStarting) turnNumber++
-                if (player.isPlayerTurn && !isPlayerStarting) turnNumber++
-                trackMove(move)
-                switchTurns()
-                chessBotToMove()
-                switchPlayerToMove()
-            }else{
-                kingPosition!!.hasMoved = true
-                val destinationKingSquare = chessboard.getSquare(7, 5)
-                destinationKingSquare.isOccupied = true
-                destinationKingSquare.hasMoved = true
-                destinationKingSquare.pieceType = PieceType.KING
-                destinationKingSquare.pieceColor = PieceColor.BLACK
-
-                val destinationRookSquare = chessboard.getSquare(7,4)
-                destinationRookSquare.isOccupied = true
-                destinationRookSquare.hasMoved = true
-                destinationRookSquare.pieceType = PieceType.ROOK
-                destinationRookSquare.pieceColor = PieceColor.BLACK
-
-                addMoveHighlights(kingPosition.row, kingPosition.col)
-                addMoveHighlights(destinationKingSquare.row, destinationKingSquare.col)
-
-                removePiece(kingPosition)
-                addPiece(destinationKingSquare)
-
-                removePiece(queenSideRook)
-                addPiece(destinationRookSquare)
-
-                val move = MoveTracker(kingPosition.copy(), destinationKingSquare.copy(), kingPosition.pieceType, destinationKingSquare.pieceType,  turnNumber, isWhiteToMove)
-                if (!player.isPlayerTurn && isPlayerStarting) turnNumber++
-                if (player.isPlayerTurn && !isPlayerStarting) turnNumber++
-                trackMove(move)
-                switchTurns()
-                chessBotToMove()
-                switchPlayerToMove()
-            }
-        }
     }
 
     private fun bottomNavItemClicked(item: MenuItem): Boolean{//this is just occupied for the testing purpose of en passant. it will get removed eventually
