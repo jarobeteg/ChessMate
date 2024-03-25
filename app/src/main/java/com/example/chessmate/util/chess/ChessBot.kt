@@ -1,27 +1,16 @@
 package com.example.chessmate.util.chess
 
-class ChessBot(val botColor: PieceColor, private val depth: Int){
+class ChessBot(private val chessboard: Chessboard, val botColor: PieceColor, private val depth: Int){
     var isBotTurn: Boolean = false
 
-    fun getBestMove(chessboard: Chessboard): Move?{
+    fun getBestMove(): Move?{
         //before generating moves you need to check if the chessbot king is in check
-        var isBotInCheck: Boolean
-        if (botColor == PieceColor.BLACK){
-            isBotInCheck = chessboard.isKingInCheck(chessboard, chessboard.getBlackKingSquare()!!, botColor)
-        } else {
-            isBotInCheck = chessboard.isKingInCheck(chessboard, chessboard.getWhiteKingSquare()!!, botColor)
-        }
-        if (isBotInCheck){
-            println("The bot is in check")
-        } else {
-            println("The bot is not in check")
-        }
-        return findBestMoves(chessboard)
+        return findBestMoves()
     }
 
-    private fun findBestMoves(chessboard: Chessboard): Move?{
-        val botMoveGenerator = LegalMoveGenerator()
-        val legalMoves = botMoveGenerator.generateLegalMovesForBot(chessboard, botColor)
+    private fun findBestMoves(): Move?{
+        val legalMoveGenerator = LegalMoveGenerator(chessboard.cloneBoardWithoutUI())
+        val legalMoves = legalMoveGenerator.generateLegalMoves(botColor, true)
         if (legalMoves.isEmpty()){
             println("Bot checkmated")
         }
@@ -33,7 +22,7 @@ class ChessBot(val botColor: PieceColor, private val depth: Int){
     }
 
     private fun bestMoveAsBlack(legalMoves: List<Move>): Move?{
-        var tmpScore: Int = Int.MAX_VALUE
+        var tmpScore: Float = Float.MAX_VALUE
         var bestMove: Move? = null
         for (move in legalMoves){
             if (move.score < tmpScore){
@@ -50,7 +39,7 @@ class ChessBot(val botColor: PieceColor, private val depth: Int){
     }
 
     private fun bestMoveAsWhite(legalMoves: List<Move>): Move?{
-        var tmpScore: Int = Int.MIN_VALUE
+        var tmpScore: Float = Float.MIN_VALUE
         var bestMove: Move? = null
         for (move in legalMoves){
             if (move.score > tmpScore){

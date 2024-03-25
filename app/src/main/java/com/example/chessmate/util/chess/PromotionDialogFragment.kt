@@ -8,8 +8,8 @@ import android.widget.ImageButton
 import androidx.fragment.app.DialogFragment
 import com.example.chessmate.R
 
-class PromotionDialogFragment(private val isWhiteStarting: Boolean, private val listener: PromotionDialogListener,
-                              private val sourceSquare: Square, private val destinationSquare: Square ) : DialogFragment() {
+class PromotionDialogFragment(private val isPlayerWhite: Boolean, private val listener: PromotionDialogListener,
+                              private val destinationSquare: Square ) : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,7 +25,7 @@ class PromotionDialogFragment(private val isWhiteStarting: Boolean, private val 
         val promoteToBishop = view.findViewById<ImageButton>(R.id.buttonPromoteToBishop)
         val promoteToKnight = view.findViewById<ImageButton>(R.id.buttonPromoteToKnight)
 
-        if (isWhiteStarting) {
+        if (isPlayerWhite) {
             promoteToQueen.setImageResource(R.drawable.default_queen_white)
             promoteToRook.setImageResource(R.drawable.default_rook_white)
             promoteToBishop.setImageResource(R.drawable.default_bishop_white)
@@ -38,27 +38,27 @@ class PromotionDialogFragment(private val isWhiteStarting: Boolean, private val 
         }
 
         promoteToQueen.setOnClickListener {
-            listener.onPieceSelected(PieceType.QUEEN, sourceSquare, destinationSquare)
+            listener.onPieceSelected(PieceType.QUEEN, destinationSquare)
             dismiss()
         }
 
         promoteToRook.setOnClickListener {
-            listener.onPieceSelected(PieceType.ROOK, sourceSquare, destinationSquare)
+            listener.onPieceSelected(PieceType.ROOK, destinationSquare)
             dismiss()
         }
 
         promoteToBishop.setOnClickListener {
-            listener.onPieceSelected(PieceType.BISHOP, sourceSquare, destinationSquare)
+            listener.onPieceSelected(PieceType.BISHOP, destinationSquare)
             dismiss()
         }
 
         promoteToKnight.setOnClickListener {
-            listener.onPieceSelected(PieceType.KNIGHT, sourceSquare, destinationSquare)
+            listener.onPieceSelected(PieceType.KNIGHT, destinationSquare)
             dismiss()
         }
     }
 
     interface PromotionDialogListener {
-        fun onPieceSelected(pieceType: PieceType, sourceSquare: Square, destinationSquare: Square)
+        fun onPieceSelected(pieceType: PieceType, destinationSquare: Square)
     }
 }

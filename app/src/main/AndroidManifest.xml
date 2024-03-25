@@ -13,7 +13,7 @@
         android:theme="@style/SplashTheme"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activity.GameChess"
+            android:name=".ui.activity.ChessGameActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.PlayActivity"

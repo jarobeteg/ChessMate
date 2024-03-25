@@ -22,37 +22,17 @@ data class Square(
         isOccupied = false
         pieceColor = null
         pieceType = null
+    }
+
+    fun movePerformed(){
+        hasMoved = true
+    }
+
+    fun moveReversed(){
+        hasMoved = false
+    }
+
+    fun clearUI(){
         imageView = null
-    }
-
-    fun dupe(source: Square) {
-        pieceColor = source.pieceColor
-        pieceType = source.pieceType
-        isOccupied = source.isOccupied
-        imageView = source.imageView
-    }
-
-    fun swap(other: Square){
-        val tempIsOccupied = isOccupied
-        val tempPieceColor = pieceColor
-        val tempPieceType = pieceType
-
-        isOccupied = other.isOccupied
-        pieceColor = other.pieceColor
-        pieceType = other.pieceType
-
-        other.isOccupied = tempIsOccupied
-        other.pieceColor = tempPieceColor
-        other.pieceType = tempPieceType
-    }
-
-    fun move(other: Square){
-        other.isOccupied = isOccupied
-        other.pieceColor = pieceColor
-        other.pieceType = pieceType
-
-        isOccupied = false
-        pieceColor = null
-        pieceType = null
     }
 }

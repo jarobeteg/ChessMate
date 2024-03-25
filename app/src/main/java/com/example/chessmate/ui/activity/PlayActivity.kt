@@ -80,7 +80,7 @@ class PlayActivity : AbsThemeActivity() {
                 .start()
 
             editor.apply()
-            val playIntent = Intent(this, GameChess::class.java)
+            val playIntent = Intent(this, ChessGameActivity::class.java)
             startActivity(playIntent)
         }
     }
