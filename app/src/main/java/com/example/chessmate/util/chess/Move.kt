@@ -9,12 +9,16 @@ sealed class Move {
 data class RegularMove(
     override val sourceSquare: Square,
     override val destinationSquare: Square,
+    val sourcePieceColor: PieceColor,
+    val sourcePieceType: PieceType,
     override var score: Float = 0.00F
 ): Move()
 
 data class MoveAndCapture(
     override val sourceSquare: Square,
     override val destinationSquare: Square,
+    val sourcePieceColor: PieceColor,
+    val sourcePieceType: PieceType,
     val capturedPieceColor: PieceColor,
     val capturedPieceType: PieceType,
     override var score: Float = 0.00F
@@ -41,6 +45,7 @@ data class PawnPromotionCaptureMove(
 data class EnPassantMove(
     override val sourceSquare: Square,
     override val destinationSquare: Square,
+    val sourcePieceColor: PieceColor,
     val opponentPawnSquare: Square,
     override var score: Float = 0.00F
 ): Move()
@@ -48,6 +53,7 @@ data class EnPassantMove(
 data class CastleMove(
     override val sourceSquare: Square,
     override val destinationSquare: Square,
+    val sourcePieceColor: PieceColor,
     val rookSourceSquare: Square,
     val rookDestinationSquare: Square,
     override var score: Float = 0.00F

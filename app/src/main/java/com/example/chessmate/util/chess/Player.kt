@@ -27,9 +27,11 @@ class Player(private val chessboard: Chessboard, val playerColor: PieceColor) {
                         chessboard.getSquare(move.sourceSquare.row, move.sourceSquare.col)
                     val destinationSquare =
                         chessboard.getSquare(move.destinationSquare.row, move.destinationSquare.col)
+                    val sourcePieceColor = sourceSquare.pieceColor!!
+                    val sourcePieceType = sourceSquare.pieceType!!
                     val score = move.score
 
-                    val regularMove = RegularMove(sourceSquare, destinationSquare, score)
+                    val regularMove = RegularMove(sourceSquare, destinationSquare, sourcePieceColor, sourcePieceType, score)
                     legalPlayerMoves.add(regularMove)
                 }
 
@@ -38,6 +40,7 @@ class Player(private val chessboard: Chessboard, val playerColor: PieceColor) {
                         chessboard.getSquare(move.sourceSquare.row, move.sourceSquare.col)
                     val destinationSquare =
                         chessboard.getSquare(move.destinationSquare.row, move.destinationSquare.col)
+                    val sourcePieceColor = sourceSquare.pieceColor!!
                     val rookSourceSquare =
                         chessboard.getSquare(move.rookSourceSquare.row, move.rookSourceSquare.col)
                     val rookDestinationSquare = chessboard.getSquare(
@@ -49,6 +52,7 @@ class Player(private val chessboard: Chessboard, val playerColor: PieceColor) {
                     val castleMove = CastleMove(
                         sourceSquare,
                         destinationSquare,
+                        sourcePieceColor,
                         rookSourceSquare,
                         rookDestinationSquare,
                         score
@@ -61,6 +65,7 @@ class Player(private val chessboard: Chessboard, val playerColor: PieceColor) {
                         chessboard.getSquare(move.sourceSquare.row, move.sourceSquare.col)
                     val destinationSquare =
                         chessboard.getSquare(move.destinationSquare.row, move.destinationSquare.col)
+                    val sourcePieceColor = sourceSquare.pieceColor!!
                     val opponentPawnSquare = chessboard.getSquare(
                         move.opponentPawnSquare.row,
                         move.opponentPawnSquare.col
@@ -68,7 +73,7 @@ class Player(private val chessboard: Chessboard, val playerColor: PieceColor) {
                     val score = move.score
 
                     val enPassantMove =
-                        EnPassantMove(sourceSquare, destinationSquare, opponentPawnSquare, score)
+                        EnPassantMove(sourceSquare, destinationSquare, sourcePieceColor, opponentPawnSquare, score)
                     legalPlayerMoves.add(enPassantMove)
                 }
 
@@ -77,6 +82,8 @@ class Player(private val chessboard: Chessboard, val playerColor: PieceColor) {
                         chessboard.getSquare(move.sourceSquare.row, move.sourceSquare.col)
                     val destinationSquare =
                         chessboard.getSquare(move.destinationSquare.row, move.destinationSquare.col)
+                    val sourcePieceColor = sourceSquare.pieceColor!!
+                    val sourcePieceType = sourceSquare.pieceType!!
                     val capturedPieceColor = move.capturedPieceColor
                     val capturedPieceType = move.capturedPieceType
                     val score = move.score
@@ -84,6 +91,8 @@ class Player(private val chessboard: Chessboard, val playerColor: PieceColor) {
                     val moveAndCapture = MoveAndCapture(
                         sourceSquare,
                         destinationSquare,
+                        sourcePieceColor,
+                        sourcePieceType,
                         capturedPieceColor,
                         capturedPieceType,
                         score

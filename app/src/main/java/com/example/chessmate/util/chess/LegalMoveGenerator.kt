@@ -58,7 +58,9 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
             && newRow != 0 && newRow != 7) {
             val sourceSquare = chessboard.getSquare(row, col)
             val destinationSquare = chessboard.getSquare(newRow, col)
-            val regularMove = RegularMove(sourceSquare, destinationSquare)
+            val sourcePieceColor = sourceSquare.pieceColor!!
+            val sourcePieceType = sourceSquare.pieceType!!
+            val regularMove = RegularMove(sourceSquare, destinationSquare, sourcePieceColor, sourcePieceType)
             applyMoveAndCheckForCheck(regularMove, pieceColor, legalMoves)
         }
     }
@@ -77,7 +79,9 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
             if (chessboard.isEmptySquare(newRow, col) && chessboard.isEmptySquare(nextRow, col)) {
                 val sourceSquare = chessboard.getSquare(row, col)
                 val destinationSquare = chessboard.getSquare(nextRow, col)
-                val regularMove = RegularMove(sourceSquare, destinationSquare)
+                val sourcePieceColor = sourceSquare.pieceColor!!
+                val sourcePieceType = sourceSquare.pieceType!!
+                val regularMove = RegularMove(sourceSquare, destinationSquare, sourcePieceColor, sourcePieceType)
                 applyMoveAndCheckForCheck(regularMove, pieceColor, legalMoves)
             }
         }
@@ -112,9 +116,11 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
             val sourceSquare = chessboard.getSquare(row, col)
             val destinationSquare = chessboard.getSquare(newRow, newCol)
             if (chessboard.isOpponentPiece(newRow, newCol, pieceColor) && !chessboard.isOpponentKingSquare(newRow, newCol, pieceColor)) {
+                val sourcePieceColor = sourceSquare.pieceColor!!
+                val sourcePieceType = sourceSquare.pieceType!!
                 val opponentPieceColor = destinationSquare.pieceColor!!
                 val opponentPieceType = destinationSquare.pieceType!!
-                val moveAndCapture = MoveAndCapture(sourceSquare, destinationSquare, opponentPieceColor, opponentPieceType)
+                val moveAndCapture = MoveAndCapture(sourceSquare, destinationSquare, sourcePieceColor, sourcePieceType, opponentPieceColor, opponentPieceType)
                 applyMoveAndCheckForCheck(moveAndCapture, pieceColor, legalMoves)
             }
         }
@@ -416,7 +422,9 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
         pieceColor: PieceColor,
         legalMoves: MutableList<Move>
     ) {
-        val regularMove = RegularMove(sourceSquare, destinationSquare)
+        val sourcePieceColor = sourceSquare.pieceColor!!
+        val sourcePieceType = sourceSquare.pieceType!!
+        val regularMove = RegularMove(sourceSquare, destinationSquare, sourcePieceColor, sourcePieceType)
         applyMoveAndCheckForCheck(regularMove, pieceColor, legalMoves)
     }
 
@@ -426,10 +434,12 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
         pieceColor: PieceColor,
         legalMoves: MutableList<Move>
     ) {
+        val sourcePieceColor = sourceSquare.pieceColor!!
+        val sourcePieceType = sourceSquare.pieceType!!
         val opponentPieceColor = destinationSquare.pieceColor!!
         val opponentPieceType = destinationSquare.pieceType!!
 
-        val moveAndCapture = MoveAndCapture(sourceSquare, destinationSquare, opponentPieceColor, opponentPieceType)
+        val moveAndCapture = MoveAndCapture(sourceSquare, destinationSquare, sourcePieceColor, sourcePieceType, opponentPieceColor, opponentPieceType)
         applyMoveAndCheckForCheck(moveAndCapture, pieceColor, legalMoves)
     }
 
@@ -444,6 +454,7 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
         val direction = if (isPlayerStarted) 1 else -1
         val kingDirection = 2 * direction
         val rookDirection = if (isKingSideCastles) 2 else 3
+        val sourcePieceColor = sourceSquare.pieceColor!!
         lateinit var destinationSquare: Square
         lateinit var rookSourceSquare: Square
         lateinit var rookDestinationSquare: Square
@@ -458,7 +469,7 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
             rookDestinationSquare = chessboard.getSquare(rookSourceSquare.row, rookSourceSquare.col + (rookDirection * direction))
         }
 
-        val castleMove = CastleMove(sourceSquare, destinationSquare, rookSourceSquare, rookDestinationSquare)
+        val castleMove = CastleMove(sourceSquare, destinationSquare, sourcePieceColor, rookSourceSquare, rookDestinationSquare)
         applyMoveAndCheckForCheck(castleMove, pieceColor, legalMoves)
     }
 
@@ -467,27 +478,14 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
         pieceColor: PieceColor,
         legalMoves: MutableList<Move>
     ) {
-        println("----------------------------------------------------------------------")
-        when (move) {
-            is RegularMove -> println("RegularMove")
-            is MoveAndCapture -> println("MoveAndCapture")
-            is PawnPromotionMove -> println("PawnPromotionMove")
-            is PawnPromotionCaptureMove -> println("PawnPromotionCaptureMove")
-            is EnPassantMove -> println("EnPassantMove")
-            is CastleMove -> println("CastleMove")
-        }
-        println("Before performMove(): $move")
         chessboard.performMove(move)
         val kingSquare = chessboard.getKingSquare(pieceColor)
-        println("After performMove(): $move")
+
         if (!chessboard.isKingInCheck(kingSquare, pieceColor)) {
             move.score = chessboardEvaluator.evaluatePosition()
             legalMoves.add(move)
         }
 
         chessboard.reverseMove(move)
-        println("After reverseMove(): $move")
-        println("Are the \"Before performMove move\" is equal to \"After reverseMove() move\"?")
-        println("----------------------------------------------------------------------")
     }
 }

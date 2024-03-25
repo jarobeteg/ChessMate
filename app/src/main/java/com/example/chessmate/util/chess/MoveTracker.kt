@@ -2,6 +2,8 @@ package com.example.chessmate.util.chess
 
 data class MoveTracker(
     val move: Move,
-    val turnNumber: Int,
+    var turnNumber: Int,
+    val playerColor: PieceColor,
+    val botColor: PieceColor,
     val isWhiteToMove: Boolean
 )
