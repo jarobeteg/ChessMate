@@ -150,8 +150,11 @@
 
     <!--Game Chess strings-->
     <string name="resign">Feladás</string>
-    <string name="takeback">Visszalépés</string>
     <string name="back">Vissza</string>
     <string name="forward">Előre</string>
     <string name="continue_chess">Folytatás</string>
+    <string name="move_tracker">Lépéskövető</string>
+    <string name="turn">Lépés:\u0020</string>
+    <string name="white">Fehér:\u0020</string>
+    <string name="black">Fekete:\u0020</string>
 </resources>

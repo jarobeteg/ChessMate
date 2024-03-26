@@ -165,8 +165,13 @@
 
     <!--Game Chess strings-->
     <string name="resign">Resign</string>
-    <string name="takeback">Takeback</string>
     <string name="back">Back</string>
     <string name="forward">Forward</string>
     <string name="continue_chess">Continue</string>
+    <string name="move_tracker">Move Tracker</string>
+    <string name="turn">Turn:\u0020</string>
+    <string name="white">White:\u0020</string>
+    <string name="black">Black:\u0020</string>
+    <string name="one" translatable="false">1.</string>
+    <string name="empty_move" translatable="false">---</string>
 </resources>
