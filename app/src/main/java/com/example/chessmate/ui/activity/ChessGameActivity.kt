@@ -238,6 +238,7 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
             }
         }
 
+        chessGameManager.updateMoveTracker(move)
         resetUserData()
     }
 
@@ -317,6 +318,11 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
         chessGameManager.clearPlayerMoves()
     }
 
+    override fun updateMoveTrackerUI() {
+        //TODO: Not yet implemented
+        println("Last Tracked Move: ${chessGameManager.getLastTrackedMove()}")
+    }
+
     override fun checkForStalemate() {
         //TODO: Not yet implemented
     }
@@ -339,9 +345,9 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
     private fun bottomNavItemClicked(item: MenuItem): Boolean{
         when (item.itemId) {
             R.id.nav_resign -> {
-                var i = 1
-                for (move in chessGameManager.player.legalPlayerMoves){
-                    println("LEGAL MOVE #${i++}: $move")
+                println("TrackedMoves:")
+                for (trackedMove in chessGameManager.moveTracker){
+                    println("TrackedMove: $trackedMove")
                 }
                 return true
             }

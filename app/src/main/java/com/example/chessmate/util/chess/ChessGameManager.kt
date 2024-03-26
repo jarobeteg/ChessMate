@@ -1,6 +1,7 @@
 package com.example.chessmate.util.chess
 
 class ChessGameManager(private val listener: ChessGameListener) {
+    var moveTracker = mutableListOf<MoveTracker>()
     var chessboard: Chessboard = Chessboard()
     var isPlayerStarted: Boolean = true
     var isWhiteToMove: Boolean = true
@@ -94,10 +95,29 @@ class ChessGameManager(private val listener: ChessGameListener) {
         }
     }
 
+    fun updateMoveTracker(move: Move){
+        if (!isWhiteToMove){
+            turnNumber++
+        }
+
+        val trackedMove = MoveTracker(move, turnNumber, player.playerColor, chessBot.botColor, isWhiteToMove)
+        moveTracker.add(trackedMove)
+    }
+
+    fun getLastTrackedMove(): Move{
+        return moveTracker.last().move
+    }
+
     private fun switchTurns() {
         chessBot.isBotTurn = !chessBot.isBotTurn
         player.isPlayerTurn = !player.isPlayerTurn
         isWhiteToMove = !isWhiteToMove
+
+        listener.updateMoveTrackerUI()
+
+        if (chessBot.isBotTurn){
+            chessBotTurn()
+        }
     }
 
     private fun chessBotTurn(){
@@ -140,7 +160,7 @@ class ChessGameManager(private val listener: ChessGameListener) {
                 }
             }
         }
-        //switchTurns()
+        switchTurns()
     }
 
     fun isPromotionSquareLegal(selectedSquare: Square, promotionSquare: Square): Boolean{

@@ -4,6 +4,7 @@ interface ChessGameListener {
     fun onMoveMade(move: Move)
     fun onPlayerMoveCalculated(legalMoves: MutableList<Move>, square: Square)
     fun kingIsInCheck(square: Square)
+    fun updateMoveTrackerUI()
     fun checkForStalemate()
     fun checkForCheckmate()
 }
