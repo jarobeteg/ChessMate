@@ -11,6 +11,7 @@ import android.widget.FrameLayout
 import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.example.chessmate.R
 import com.example.chessmate.util.chess.CastleMove
 import com.example.chessmate.util.chess.PieceColor
@@ -26,10 +27,14 @@ import com.example.chessmate.util.chess.PromotionDialogFragment
 import com.example.chessmate.util.chess.RegularMove
 import com.example.chessmate.util.chess.Square
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.lang.StringBuilder
 
 class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogListener, ChessGameListener {
     private lateinit var chessboardLayout: GridLayout
     private lateinit var chessGameManager: ChessGameManager
+    private lateinit var turnNumber: TextView
+    private lateinit var whiteLastMove: TextView
+    private lateinit var blackLastMove: TextView
     private var depth = 1
     private var squareSize: Int = 0
     private val highlightCircleTag = "highlight_circle"
@@ -56,6 +61,9 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
         //the chessboard gets initialized with empty squares and square sizes are determined based on the device's display metrics
         chessGameManager = ChessGameManager(this)
         chessboardLayout = findViewById(R.id.chessboard)
+        turnNumber = findViewById(R.id.turn_number)
+        whiteLastMove = findViewById(R.id.white_last_move)
+        blackLastMove = findViewById(R.id.black_last_move)
         val screenWidth = resources.displayMetrics.widthPixels
         squareSize = screenWidth / 8
 
@@ -319,8 +327,128 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
     }
 
     override fun updateMoveTrackerUI() {
-        //TODO: Not yet implemented
-        println("Last Tracked Move: ${chessGameManager.getLastTrackedMove()}")
+        turnNumber.visibility = View.VISIBLE
+        whiteLastMove.visibility = View.VISIBLE
+        blackLastMove.visibility = View.VISIBLE
+
+        val lastMove = chessGameManager.getLastTrackedMove()
+        updateTurnNumberUI()
+        when (lastMove){
+            is RegularMove -> {
+                val sourceSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.sourceSquare)
+                val destinationSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.destinationSquare)
+
+                val resultNotation = StringBuilder()
+                resultNotation.append(sourceSquareNotation)
+                resultNotation.append("->")
+                resultNotation.append(destinationSquareNotation)
+
+                if (lastMove.sourcePieceColor == PieceColor.WHITE){
+                    updateWhiteLastMoveUI(resultNotation.toString())
+                    removeWhiteDrawableEndCompat()
+                } else {
+                    updateBlackLastMoveUI(resultNotation.toString())
+                    removeBlackDrawableEndCompat()
+                }
+
+                addDrawableStartCompat(lastMove.sourcePieceType, lastMove.sourcePieceColor)
+            }
+            is MoveAndCapture -> {
+                val sourceSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.sourceSquare)
+                val destinationSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.destinationSquare)
+
+                val resultNotation = StringBuilder()
+                resultNotation.append(sourceSquareNotation)
+                resultNotation.append("x")
+                resultNotation.append(destinationSquareNotation)
+
+                if (lastMove.sourcePieceColor == PieceColor.WHITE){
+                    updateWhiteLastMoveUI(resultNotation.toString())
+                    removeWhiteDrawableEndCompat()
+                } else {
+                    updateBlackLastMoveUI(resultNotation.toString())
+                    removeBlackDrawableEndCompat()
+                }
+
+                addDrawableStartCompat(lastMove.sourcePieceType, lastMove.sourcePieceColor)
+            }
+            is PawnPromotionMove -> {
+                val sourceSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.sourceSquare)
+                val destinationSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.destinationSquare)
+
+                val resultNotation = StringBuilder()
+                resultNotation.append(sourceSquareNotation)
+                resultNotation.append("->")
+                resultNotation.append(destinationSquareNotation)
+                resultNotation.append("=")
+
+                if (lastMove.promotedPieceColor == PieceColor.WHITE){
+                    updateWhiteLastMoveUI(resultNotation.toString())
+                } else {
+                    updateBlackLastMoveUI(resultNotation.toString())
+                }
+
+                addDrawableStartCompat(PieceType.PAWN, lastMove.promotedPieceColor)
+                addDrawableEndCompat(lastMove.promotedPieceType, lastMove.promotedPieceColor)
+            }
+            is PawnPromotionCaptureMove -> {
+                val sourceSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.sourceSquare)
+                val destinationSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.destinationSquare)
+
+                val resultNotation = StringBuilder()
+                resultNotation.append(sourceSquareNotation)
+                resultNotation.append("x")
+                resultNotation.append(destinationSquareNotation)
+                resultNotation.append("=")
+
+                if (lastMove.promotedPieceColor == PieceColor.WHITE){
+                    updateWhiteLastMoveUI(resultNotation.toString())
+                } else {
+                    updateBlackLastMoveUI(resultNotation.toString())
+                }
+
+                addDrawableStartCompat(PieceType.PAWN, lastMove.promotedPieceColor)
+                addDrawableEndCompat(lastMove.promotedPieceType, lastMove.promotedPieceColor)
+            }
+            is EnPassantMove -> {
+                val sourceSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.sourceSquare)
+                val destinationSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.destinationSquare)
+
+                val resultNotation = StringBuilder()
+                resultNotation.append(sourceSquareNotation)
+                resultNotation.append("x")
+                resultNotation.append(destinationSquareNotation)
+
+                if (lastMove.sourcePieceColor == PieceColor.WHITE){
+                    updateWhiteLastMoveUI(resultNotation.toString())
+                    removeWhiteDrawableEndCompat()
+                } else {
+                    updateBlackLastMoveUI(resultNotation.toString())
+                    removeBlackDrawableEndCompat()
+                }
+
+                addDrawableStartCompat(PieceType.PAWN, lastMove.sourcePieceColor)
+            }
+            is CastleMove -> {
+                val resultNotation = StringBuilder()
+
+                if (lastMove.isKingSideCastles){
+                    resultNotation.append("O-O")
+                } else {
+                    resultNotation.append("O-O-O")
+                }
+
+                if (lastMove.sourcePieceColor == PieceColor.WHITE){
+                    updateWhiteLastMoveUI(resultNotation.toString())
+                    removeWhiteDrawableEndCompat()
+                } else {
+                    updateBlackLastMoveUI(resultNotation.toString())
+                    removeBlackDrawableEndCompat()
+                }
+
+                addDrawableStartCompat(PieceType.KING, lastMove.sourcePieceColor)
+            }
+        }
     }
 
     override fun checkForStalemate() {
@@ -329,6 +457,159 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
 
     override fun checkForCheckmate() {
         //TODO: Not yet implemented
+    }
+
+    private fun updateTurnNumberUI(){
+        val turnStr = chessGameManager.turnNumber.toString() + "."
+        turnNumber.text = turnStr
+    }
+
+    private fun updateWhiteLastMoveUI(notation: String){
+        whiteLastMove.text = notation
+    }
+
+    private fun updateBlackLastMoveUI(notation: String){
+        blackLastMove.text = notation
+    }
+
+    private fun addDrawableStartCompat(pieceType: PieceType, pieceColor: PieceColor){
+       when (pieceType){
+           PieceType.PAWN -> {
+               if (pieceColor == PieceColor.WHITE){
+                   val pawnDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_pawn_white_24)
+                   whiteLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(pawnDrawable, null, null, null)
+               } else {
+                   val pawnDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_pawn_black_24)
+                   blackLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(pawnDrawable, null, null, null)
+               }
+           }
+           PieceType.ROOK -> {
+               if (pieceColor == PieceColor.WHITE){
+                   val rookDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_rook_white_24)
+                   whiteLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(rookDrawable, null, null, null)
+               } else {
+                   val rookDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_rook_black_24)
+                   blackLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(rookDrawable, null, null, null)
+               }
+           }
+           PieceType.KNIGHT -> {
+               if (pieceColor == PieceColor.WHITE){
+                   val knightDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_knight_white_24)
+                   whiteLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(knightDrawable, null, null, null)
+               } else {
+                   val knightDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_knight_black_24)
+                   blackLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(knightDrawable, null, null, null)
+               }
+           }
+           PieceType.BISHOP -> {
+               if (pieceColor == PieceColor.WHITE){
+                   val bishopDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_bishop_white_24)
+                   whiteLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(bishopDrawable, null, null, null)
+               } else {
+                   val bishopDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_bishop_black_24)
+                   blackLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(bishopDrawable, null, null, null)
+               }
+           }
+           PieceType.QUEEN -> {
+               if (pieceColor == PieceColor.WHITE){
+                   val queenDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_queen_white_24)
+                   whiteLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(queenDrawable, null, null, null)
+               } else {
+                   val queenDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_queen_black_24)
+                   blackLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(queenDrawable, null, null, null)
+               }
+           }
+           PieceType.KING -> {
+               if (pieceColor == PieceColor.WHITE){
+                   val kingDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_king_white_24)
+                   whiteLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(kingDrawable, null, null, null)
+               } else {
+                   val kingDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_king_black_24)
+                   blackLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(kingDrawable, null, null, null)
+               }
+           }
+       }
+    }
+
+    private fun addDrawableEndCompat(pieceType: PieceType, pieceColor: PieceColor){
+        when (pieceType){
+            PieceType.PAWN -> {
+                if (pieceColor == PieceColor.WHITE){
+                    val existingStartDrawable = whiteLastMove.compoundDrawables
+                    val pawnDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_pawn_white_24)
+                    whiteLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(existingStartDrawable[0], null, pawnDrawable, null)
+                } else {
+                    val existingStartDrawable = blackLastMove.compoundDrawables
+                    val pawnDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_pawn_black_24)
+                    blackLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(existingStartDrawable[0], null, pawnDrawable, null)
+                }
+            }
+            PieceType.ROOK -> {
+                if (pieceColor == PieceColor.WHITE){
+                    val existingStartDrawable = whiteLastMove.compoundDrawables
+                    val rookDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_rook_white_24)
+                    whiteLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(existingStartDrawable[0], null, rookDrawable, null)
+                } else {
+                    val existingStartDrawable = blackLastMove.compoundDrawables
+                    val rookDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_rook_black_24)
+                    blackLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(existingStartDrawable[0], null, rookDrawable, null)
+                }
+            }
+            PieceType.KNIGHT -> {
+                if (pieceColor == PieceColor.WHITE){
+                    val existingStartDrawable = whiteLastMove.compoundDrawables
+                    val knightDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_knight_white_24)
+                    whiteLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(existingStartDrawable[0], null, knightDrawable, null)
+                } else {
+                    val existingStartDrawable = blackLastMove.compoundDrawables
+                    val knightDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_knight_black_24)
+                    blackLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(existingStartDrawable[0], null, knightDrawable, null)
+                }
+            }
+            PieceType.BISHOP -> {
+                if (pieceColor == PieceColor.WHITE){
+                    val existingStartDrawable = whiteLastMove.compoundDrawables
+                    val bishopDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_bishop_white_24)
+                    whiteLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(existingStartDrawable[0], null, bishopDrawable, null)
+                } else {
+                    val existingStartDrawable = blackLastMove.compoundDrawables
+                    val bishopDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_bishop_black_24)
+                    blackLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(existingStartDrawable[0], null, bishopDrawable, null)
+                }
+            }
+            PieceType.QUEEN -> {
+                if (pieceColor == PieceColor.WHITE){
+                    val existingStartDrawable = whiteLastMove.compoundDrawables
+                    val queenDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_queen_white_24)
+                    whiteLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(existingStartDrawable[0], null, queenDrawable, null)
+                } else {
+                    val existingStartDrawable = blackLastMove.compoundDrawables
+                    val queenDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_queen_black_24)
+                    blackLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(existingStartDrawable[0], null, queenDrawable, null)
+                }
+            }
+            PieceType.KING -> {
+                if (pieceColor == PieceColor.WHITE){
+                    val existingStartDrawable = whiteLastMove.compoundDrawables
+                    val kingDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_king_white_24)
+                    whiteLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(existingStartDrawable[0], null, kingDrawable, null)
+                } else {
+                    val existingStartDrawable = blackLastMove.compoundDrawables
+                    val kingDrawable = ContextCompat.getDrawable(this, R.drawable.ic_default_king_black_24)
+                    blackLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(existingStartDrawable[0], null, kingDrawable, null)
+                }
+            }
+        }
+    }
+
+    private fun removeWhiteDrawableEndCompat(){
+        val existingStartDrawable = whiteLastMove.compoundDrawables
+        whiteLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(existingStartDrawable[0], null, null, null)
+    }
+
+    private fun removeBlackDrawableEndCompat(){
+        val existingStartDrawable = blackLastMove.compoundDrawables
+        blackLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(existingStartDrawable[0], null, null, null)
     }
 
     private fun addPieceUI(square: Square) {

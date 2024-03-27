@@ -47,6 +47,7 @@ class Player(private val chessboard: Chessboard, val playerColor: PieceColor) {
                         move.rookDestinationSquare.row,
                         move.rookDestinationSquare.col
                     )
+                    val isKingSideCastles = move.isKingSideCastles
                     val score = move.score
 
                     val castleMove = CastleMove(
@@ -55,6 +56,7 @@ class Player(private val chessboard: Chessboard, val playerColor: PieceColor) {
                         sourcePieceColor,
                         rookSourceSquare,
                         rookDestinationSquare,
+                        isKingSideCastles,
                         score
                     )
                     legalPlayerMoves.add(castleMove)

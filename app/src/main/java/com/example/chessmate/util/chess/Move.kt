@@ -56,6 +56,7 @@ data class CastleMove(
     val sourcePieceColor: PieceColor,
     val rookSourceSquare: Square,
     val rookDestinationSquare: Square,
+    val isKingSideCastles: Boolean,
     override var score: Float = 0.00F
 ): Move()
 

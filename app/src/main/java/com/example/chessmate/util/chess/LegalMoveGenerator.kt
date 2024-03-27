@@ -469,7 +469,7 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
             rookDestinationSquare = chessboard.getSquare(rookSourceSquare.row, rookSourceSquare.col + (rookDirection * direction))
         }
 
-        val castleMove = CastleMove(sourceSquare, destinationSquare, sourcePieceColor, rookSourceSquare, rookDestinationSquare)
+        val castleMove = CastleMove(sourceSquare, destinationSquare, sourcePieceColor, rookSourceSquare, rookDestinationSquare, isKingSideCastles)
         applyMoveAndCheckForCheck(castleMove, pieceColor, legalMoves)
     }
 

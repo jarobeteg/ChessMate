@@ -8,6 +8,7 @@ class ChessGameManager(private val listener: ChessGameListener) {
     var turnNumber: Int = 1
     lateinit var player: Player
     lateinit var chessBot: ChessBot
+    lateinit var moveInterpreter: MoveInterpreter
 
     fun initializeGame(isPlayerStarting: Boolean, playerColor: PieceColor, botColor: PieceColor, botDepth: Int){
         initializeStartingPosition(isPlayerStarting)
@@ -17,6 +18,8 @@ class ChessGameManager(private val listener: ChessGameListener) {
         chessBot.isBotTurn = !isPlayerStarting
         player = Player(chessboard, playerColor)
         player.isPlayerTurn = isPlayerStarting
+
+        moveInterpreter = MoveInterpreter(isPlayerStarting)
     }
 
     private fun initializeStartingPosition(isPlayerStarting: Boolean) {
