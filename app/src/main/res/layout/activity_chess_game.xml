@@ -84,7 +84,7 @@
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
                     android:text="@string/black"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"/>
 
                 <TextView
                     android:id="@+id/black_last_move"
