@@ -335,8 +335,8 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
         updateTurnNumberUI()
         when (lastMove){
             is RegularMove -> {
-                val sourceSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.sourceSquare)
-                val destinationSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.destinationSquare)
+                val sourceSquareNotation = chessGameManager.squareToNotation(lastMove.sourceSquare)
+                val destinationSquareNotation = chessGameManager.squareToNotation(lastMove.destinationSquare)
 
                 val resultNotation = StringBuilder()
                 resultNotation.append(sourceSquareNotation)
@@ -354,8 +354,8 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
                 addDrawableStartCompat(lastMove.sourcePieceType, lastMove.sourcePieceColor)
             }
             is MoveAndCapture -> {
-                val sourceSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.sourceSquare)
-                val destinationSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.destinationSquare)
+                val sourceSquareNotation = chessGameManager.squareToNotation(lastMove.sourceSquare)
+                val destinationSquareNotation = chessGameManager.squareToNotation(lastMove.destinationSquare)
 
                 val resultNotation = StringBuilder()
                 resultNotation.append(sourceSquareNotation)
@@ -373,8 +373,8 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
                 addDrawableStartCompat(lastMove.sourcePieceType, lastMove.sourcePieceColor)
             }
             is PawnPromotionMove -> {
-                val sourceSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.sourceSquare)
-                val destinationSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.destinationSquare)
+                val sourceSquareNotation = chessGameManager.squareToNotation(lastMove.sourceSquare)
+                val destinationSquareNotation = chessGameManager.squareToNotation(lastMove.destinationSquare)
 
                 val resultNotation = StringBuilder()
                 resultNotation.append(sourceSquareNotation)
@@ -392,8 +392,8 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
                 addDrawableEndCompat(lastMove.promotedPieceType, lastMove.promotedPieceColor)
             }
             is PawnPromotionCaptureMove -> {
-                val sourceSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.sourceSquare)
-                val destinationSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.destinationSquare)
+                val sourceSquareNotation = chessGameManager.squareToNotation(lastMove.sourceSquare)
+                val destinationSquareNotation = chessGameManager.squareToNotation(lastMove.destinationSquare)
 
                 val resultNotation = StringBuilder()
                 resultNotation.append(sourceSquareNotation)
@@ -411,8 +411,8 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
                 addDrawableEndCompat(lastMove.promotedPieceType, lastMove.promotedPieceColor)
             }
             is EnPassantMove -> {
-                val sourceSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.sourceSquare)
-                val destinationSquareNotation = chessGameManager.moveInterpreter.squareToNotation(lastMove.destinationSquare)
+                val sourceSquareNotation = chessGameManager.squareToNotation(lastMove.sourceSquare)
+                val destinationSquareNotation = chessGameManager.squareToNotation(lastMove.destinationSquare)
 
                 val resultNotation = StringBuilder()
                 resultNotation.append(sourceSquareNotation)

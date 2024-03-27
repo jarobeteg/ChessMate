@@ -8,7 +8,6 @@ class ChessGameManager(private val listener: ChessGameListener) {
     var turnNumber: Int = 1
     lateinit var player: Player
     lateinit var chessBot: ChessBot
-    lateinit var moveInterpreter: MoveInterpreter
 
     fun initializeGame(isPlayerStarting: Boolean, playerColor: PieceColor, botColor: PieceColor, botDepth: Int){
         initializeStartingPosition(isPlayerStarting)
@@ -18,8 +17,6 @@ class ChessGameManager(private val listener: ChessGameListener) {
         chessBot.isBotTurn = !isPlayerStarting
         player = Player(chessboard, playerColor)
         player.isPlayerTurn = isPlayerStarting
-
-        moveInterpreter = MoveInterpreter(isPlayerStarting)
     }
 
     private fun initializeStartingPosition(isPlayerStarting: Boolean) {
@@ -112,11 +109,14 @@ class ChessGameManager(private val listener: ChessGameListener) {
     }
 
     private fun switchTurns() {
+        if (player.isPlayerTurn){
+            listener.updateMoveTrackerUI()
+        }
         chessBot.isBotTurn = !chessBot.isBotTurn
         player.isPlayerTurn = !player.isPlayerTurn
         isWhiteToMove = !isWhiteToMove
 
-        listener.updateMoveTrackerUI()
+        //listener.updateMoveTrackerUI()
 
         if (chessBot.isBotTurn){
             chessBotTurn()
@@ -177,6 +177,23 @@ class ChessGameManager(private val listener: ChessGameListener) {
             }
         }
         return false
+    }
+
+    fun squareToNotation(square: Square): String{
+        val row = square.row
+        val col = square.col
+        val file: String
+        val rank: String
+
+        if (isPlayerStarted) {
+            file = ('a' + col).toString()
+            rank = (8 - row).toString()
+        } else {
+            file = ('h' - col).toString()
+            rank = (1 + row).toString()
+        }
+
+        return "$file$rank"
     }
 
     fun clearPlayerMoves(){
