@@ -109,14 +109,11 @@ class ChessGameManager(private val listener: ChessGameListener) {
     }
 
     private fun switchTurns() {
-        if (player.isPlayerTurn){
-            listener.updateMoveTrackerUI()
-        }
         chessBot.isBotTurn = !chessBot.isBotTurn
         player.isPlayerTurn = !player.isPlayerTurn
         isWhiteToMove = !isWhiteToMove
 
-        //listener.updateMoveTrackerUI()
+        listener.updateMoveTrackerUI()
 
         if (chessBot.isBotTurn){
             chessBotTurn()
