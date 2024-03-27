@@ -26,15 +26,15 @@ class PromotionDialogFragment(private val isPlayerWhite: Boolean, private val li
         val promoteToKnight = view.findViewById<ImageButton>(R.id.buttonPromoteToKnight)
 
         if (isPlayerWhite) {
-            promoteToQueen.setImageResource(R.drawable.default_queen_white)
-            promoteToRook.setImageResource(R.drawable.default_rook_white)
-            promoteToBishop.setImageResource(R.drawable.default_bishop_white)
-            promoteToKnight.setImageResource(R.drawable.default_knight_white)
+            promoteToQueen.setImageResource(R.drawable.piece_default_queen_white)
+            promoteToRook.setImageResource(R.drawable.piece_default_rook_white)
+            promoteToBishop.setImageResource(R.drawable.piece_default_bishop_white)
+            promoteToKnight.setImageResource(R.drawable.piece_default_knight_white)
         } else {
-            promoteToQueen.setImageResource(R.drawable.default_queen_black)
-            promoteToRook.setImageResource(R.drawable.default_rook_black)
-            promoteToBishop.setImageResource(R.drawable.default_bishop_black)
-            promoteToKnight.setImageResource(R.drawable.default_knight_black)
+            promoteToQueen.setImageResource(R.drawable.piece_default_queen_black)
+            promoteToRook.setImageResource(R.drawable.piece_default_rook_black)
+            promoteToBishop.setImageResource(R.drawable.piece_default_bishop_black)
+            promoteToKnight.setImageResource(R.drawable.piece_default_knight_black)
         }
 
         promoteToQueen.setOnClickListener {

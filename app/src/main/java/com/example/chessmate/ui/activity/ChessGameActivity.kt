@@ -155,22 +155,22 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
         val pieceImageView = ImageView(this)
         if (square.pieceColor == PieceColor.WHITE){
             when(square.pieceType){
-                PieceType.PAWN -> pieceImageView.setImageResource(R.drawable.default_pawn_white)
-                PieceType.ROOK -> pieceImageView.setImageResource(R.drawable.default_rook_white)
-                PieceType.KNIGHT -> pieceImageView.setImageResource(R.drawable.default_knight_white)
-                PieceType.BISHOP -> pieceImageView.setImageResource(R.drawable.default_bishop_white)
-                PieceType.QUEEN -> pieceImageView.setImageResource(R.drawable.default_queen_white)
-                PieceType.KING -> pieceImageView.setImageResource(R.drawable.default_king_white)
+                PieceType.PAWN -> pieceImageView.setImageResource(R.drawable.piece_default_pawn_white)
+                PieceType.ROOK -> pieceImageView.setImageResource(R.drawable.piece_default_rook_white)
+                PieceType.KNIGHT -> pieceImageView.setImageResource(R.drawable.piece_default_knight_white)
+                PieceType.BISHOP -> pieceImageView.setImageResource(R.drawable.piece_default_bishop_white)
+                PieceType.QUEEN -> pieceImageView.setImageResource(R.drawable.piece_default_queen_white)
+                PieceType.KING -> pieceImageView.setImageResource(R.drawable.piece_default_king_white)
                 else -> throw IllegalArgumentException("Unexpected PieceType: ${square.pieceType}")
             }
         }else{
             when(square.pieceType){
-                PieceType.PAWN -> pieceImageView.setImageResource(R.drawable.default_pawn_black)
-                PieceType.ROOK -> pieceImageView.setImageResource(R.drawable.default_rook_black)
-                PieceType.KNIGHT -> pieceImageView.setImageResource(R.drawable.default_knight_black)
-                PieceType.BISHOP -> pieceImageView.setImageResource(R.drawable.default_bishop_black)
-                PieceType.QUEEN -> pieceImageView.setImageResource(R.drawable.default_queen_black)
-                PieceType.KING -> pieceImageView.setImageResource(R.drawable.default_king_black)
+                PieceType.PAWN -> pieceImageView.setImageResource(R.drawable.piece_default_pawn_black)
+                PieceType.ROOK -> pieceImageView.setImageResource(R.drawable.piece_default_rook_black)
+                PieceType.KNIGHT -> pieceImageView.setImageResource(R.drawable.piece_default_knight_black)
+                PieceType.BISHOP -> pieceImageView.setImageResource(R.drawable.piece_default_bishop_black)
+                PieceType.QUEEN -> pieceImageView.setImageResource(R.drawable.piece_default_queen_black)
+                PieceType.KING -> pieceImageView.setImageResource(R.drawable.piece_default_king_black)
                 else -> throw IllegalArgumentException("Unexpected PieceType: ${square.pieceType}")
             }
         }
