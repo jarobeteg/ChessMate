@@ -102,6 +102,8 @@ class ChessGameManager(private val listener: ChessGameListener) {
 
         val trackedMove = MoveTracker(move, turnNumber, player.playerColor, chessBot.botColor, isWhiteToMove)
         moveTracker.add(trackedMove)
+
+        switchTurns()
     }
 
     fun getLastTrackedMove(): Move{
@@ -160,7 +162,6 @@ class ChessGameManager(private val listener: ChessGameListener) {
                 }
             }
         }
-        switchTurns()
     }
 
     fun isPromotionSquareLegal(selectedSquare: Square, promotionSquare: Square): Boolean{
