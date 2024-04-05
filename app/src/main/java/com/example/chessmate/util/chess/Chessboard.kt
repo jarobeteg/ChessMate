@@ -84,6 +84,19 @@ class Chessboard{
         throw IllegalStateException("White king not found on the board")
     }
 
+    fun getAllPieces(pieceColor: PieceColor): List<PieceType>{
+        val resultPieces = mutableListOf<PieceType>()
+        for (row in 0 until 8){
+            for (col in 0 until 8){
+                val square = getSquare(row, col)
+                if (square.isOccupied && square.pieceColor == pieceColor){
+                    resultPieces.add(square.pieceType!!)
+                }
+            }
+        }
+        return resultPieces
+    }
+
     private fun regularMovePiece(fromRow: Int, fromCol: Int, toRow: Int, toCol: Int, isMoveReversed: Boolean = false){
         val sourceSquare = getSquare(fromRow, fromCol)
         val destinationSquare = getSquare(toRow, toCol)
