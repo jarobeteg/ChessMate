@@ -1,7 +1,6 @@
 package com.example.chessmate.util.chess
 
 class LegalMoveGenerator(private val chessboard: Chessboard){
-    private val chessboardEvaluator = ChessboardEvaluator(chessboard)
 
     fun generateLegalMoves(pieceColor: PieceColor, isForBot: Boolean = false): MutableList<Move>{
         val legalMoves = mutableListOf<Move>()
@@ -482,7 +481,6 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
         val kingSquare = chessboard.getKingSquare(pieceColor)
 
         if (!chessboard.isKingInCheck(kingSquare, pieceColor)) {
-            move.score = chessboardEvaluator.evaluatePosition()
             legalMoves.add(move)
         }
 

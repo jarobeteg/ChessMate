@@ -19,7 +19,7 @@ class ChessboardEvaluator(private val chessboard: Chessboard){
     }
 
     private fun materialBalance(): Float{
-        var materialBalance = 0.0F
+        var materialBalanceScore = 0.0F
 
         val whitePieces = chessboard.getAllPieces(PieceColor.WHITE)
         val blackPieces = chessboard.getAllPieces(PieceColor.BLACK)
@@ -28,13 +28,15 @@ class ChessboardEvaluator(private val chessboard: Chessboard){
             val whiteCount = whitePieces.count { it == pieceType }
             val blackCount = blackPieces.count { it == pieceType }
 
-            materialBalance += (whiteCount - blackCount) * value
+            materialBalanceScore += (whiteCount - blackCount) * value
         }
 
-        return materialBalance
+        return materialBalanceScore
     }
 
     private fun pieceMobility(): Float{
+        var pieceMobilityScore = 0.0F
+
         return 0.00F
     }
 
