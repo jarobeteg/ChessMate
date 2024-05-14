@@ -49,14 +49,10 @@ class CreateProfile : AbsThemeActivity() {
                 //this will return to the profile fragment with a true result if everything went correctly
                 lifecycleScope.launch {
                     if (createNewUserProfile()) {
-                        val resultIntent = Intent()
-                        resultIntent.putExtra("profileCreated", true)
-                        setResult(Activity.RESULT_OK, resultIntent)
+                        setResult(Activity.RESULT_OK)
                         finish()
                     } else {
-                        val resultIntent = Intent()
-                        resultIntent.putExtra("profileCreated", false)
-                        setResult(Activity.RESULT_OK, resultIntent)
+                        setResult(Activity.RESULT_CANCELED)
                         finish()
                     }
                 }
@@ -67,9 +63,7 @@ class CreateProfile : AbsThemeActivity() {
     //important code because registerForActivityResult needs this
     override fun onBackPressed() {
         super.onBackPressed()
-        val resultIntent = Intent()
-        resultIntent.putExtra("profileCreated", true)
-        setResult(Activity.RESULT_OK, resultIntent)
+        setResult(Activity.RESULT_CANCELED)
         finish()
     }
 

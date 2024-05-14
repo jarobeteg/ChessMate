@@ -51,9 +51,7 @@ class ChooseProfile : AbsThemeActivity() {
     //important code because registerForActivityResult needs this
     override fun onBackPressed() {
         super.onBackPressed()
-        val resultIntent = Intent()
-        resultIntent.putExtra("profileChosen", true)
-        setResult(Activity.RESULT_OK, resultIntent)
+        setResult(Activity.RESULT_CANCELED)
         finish()
     }
 
@@ -95,14 +93,10 @@ class ChooseProfile : AbsThemeActivity() {
     //this returns with a true or false. true if it could deactivate the current profile and activate the chosen profile
     private fun finishTheActivityWithResult(result: Boolean){
         if (result){
-            val resultIntent = Intent()
-            resultIntent.putExtra("profileChosen", true)
-            setResult(Activity.RESULT_OK, resultIntent)
+            setResult(Activity.RESULT_OK)
             finish()
         }else{
-            val resultIntent = Intent()
-            resultIntent.putExtra("profileChosen", false)
-            setResult(Activity.RESULT_OK, resultIntent)
+            setResult(Activity.RESULT_CANCELED)
             finish()
         }
     }

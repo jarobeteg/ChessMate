@@ -60,35 +60,17 @@ class ProfileFragment : Fragment() {
 
         //this waits for the CreateProfile activity's result. if the returned value is true it means that a profile has been created
         val profileCreationLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
-            if (result.resultCode == Activity.RESULT_OK){
-                val data: Intent? = result.data
-                val profileCreated = data?.getBooleanExtra("profileCreated", false) ?: false
-                if (profileCreated) {
-                    viewModel.onProfileCreationInitiated()
-                }
-            }
+            viewModel.onProfileCreationInitiated()
         }
 
         //this waits for the ChooseProfile activity's result. if the returned value is true it means that the user has changed to a different profile
         val chooseProfileLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
-            if (result.resultCode == Activity.RESULT_OK){
-                val data: Intent? = result.data
-                val profileChosen = data?.getBooleanExtra("profileChosen", false) ?: false
-                if (profileChosen) {
-                    viewModel.onChooseProfileInitiated()
-                }
-            }
+            viewModel.onChooseProfileInitiated()
         }
 
         //this waits for the ChooseProfile activity's result after a profile has been deleted. if the returned value is true it means that the user has changed to a different profile
         val deleteProfileLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
-            if (result.resultCode == Activity.RESULT_OK){
-                val data: Intent? = result.data
-                val profileChosen = data?.getBooleanExtra("profileChosen", false) ?: false
-                if (profileChosen) {
-                    viewModel.onDeleteProfileInitiated()
-                }
-            }
+            viewModel.onDeleteProfileInitiated()
         }
 
         //this observes the user profile data and displays it for the user
