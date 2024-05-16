@@ -528,6 +528,7 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
                    blackLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(kingDrawable, null, null, null)
                }
            }
+           PieceType.NONE -> {}
        }
     }
 
@@ -599,6 +600,7 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
                     blackLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(existingStartDrawable[0], null, kingDrawable, null)
                 }
             }
+            PieceType.NONE -> {}
         }
     }
 

@@ -7,8 +7,8 @@ data class Square(
     val row: Int,
     val col: Int,
     var isOccupied: Boolean,
-    var pieceColor: PieceColor?,
-    var pieceType: PieceType?,
+    var pieceColor: PieceColor,
+    var pieceType: PieceType,
     var hasMoved: Boolean = false,
     var frameLayout: FrameLayout? = null,
     var imageView: ImageView? = null
@@ -20,8 +20,8 @@ data class Square(
 
     fun clearSquare(){
         isOccupied = false
-        pieceColor = null
-        pieceType = null
+        pieceColor = PieceColor.NONE
+        pieceType = PieceType.NONE
     }
 
     fun movePerformed(){

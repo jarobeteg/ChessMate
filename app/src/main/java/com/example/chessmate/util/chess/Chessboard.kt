@@ -1,12 +1,12 @@
 package com.example.chessmate.util.chess
 
 class Chessboard{
-    private val board: Array<Array<Square>> = Array(8) { Array(8) { Square(0, 0, false, null, null) } }
+    private val board: Array<Array<Square>> = Array(8) { Array(8) { Square(0, 0, false,  PieceColor.NONE, PieceType.NONE) } }
 
     init {
         for (row in 0 until 8) {
             for (col in 0 until 8) {
-                board[row][col] = Square(row, col, false, null, null)
+                board[row][col] = Square(row, col, false, PieceColor.NONE, PieceType.NONE)
             }
         }
     }
@@ -39,7 +39,7 @@ class Chessboard{
     }
 
     fun isEmptySquare(row: Int, col: Int): Boolean{
-        return getSquare(row, col).pieceType == null
+        return getSquare(row, col).pieceType == PieceType.NONE
     }
 
     fun isOpponentPiece(row: Int, col: Int, pieceColor: PieceColor): Boolean{

@@ -144,7 +144,7 @@ class ChessGameManager(private val listener: ChessGameListener) {
         }
     }
 
-    fun handleSecondClick(square: Square, promotionPieceType: PieceType? = null){
+    fun handleSecondClick(square: Square, promotionPieceType: PieceType = PieceType.NONE){
         for (move in player.legalPlayerMoves){
             if (square.row == move.destinationSquare.row && square.col == move.destinationSquare.col) {
                 if (move is PawnPromotionMove && move.promotedPieceType == promotionPieceType){
@@ -155,7 +155,7 @@ class ChessGameManager(private val listener: ChessGameListener) {
                     chessboard.performMove(move)
                     listener.onMoveMade(move)
                     break
-                } else if (promotionPieceType == null){
+                } else if (promotionPieceType == PieceType.NONE){
                     chessboard.performMove(move)
                     listener.onMoveMade(move)
                     break
