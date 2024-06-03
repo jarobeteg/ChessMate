@@ -10,7 +10,9 @@ class ChessBot(private val chessboard: Chessboard, private val chessboardEvaluat
     }
 
     private fun findBestMoves(): Move?{
-        val legalMoves = legalMoveGenerator.generateLegalMoves(chessboard, botColor, true)
+        val isBotWhite = botColor == PieceColor.WHITE
+        var clonedChessboard = chessboard.cloneBoardWithoutUI()
+        val legalMoves = legalMoveGenerator.generateLegalMoves(clonedChessboard, botColor, true)
         if (legalMoves.isEmpty()){
             println("Bot checkmated")
         }

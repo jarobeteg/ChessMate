@@ -127,6 +127,7 @@ class ChessGameManager(private val listener: ChessGameListener) {
     private fun chessBotTurn(){
         //so far only the turn is being switched until I clean up the mess in this project
         //calling the chess bot to calculate its move needs to be in this method before switching the turn
+        chessBot.getBestMove()
         switchTurns()
     }
 
