@@ -3,6 +3,8 @@ package com.example.chessmate.util.chess
 class ChessGameManager(private val listener: ChessGameListener) {
     var moveTracker = mutableListOf<MoveTracker>()
     var chessboard: Chessboard = Chessboard()
+    var chessboardEvaluator: ChessboardEvaluator = ChessboardEvaluator()
+    var legalMoveGenerator: LegalMoveGenerator = LegalMoveGenerator()
     var isPlayerStarted: Boolean = true
     var isWhiteToMove: Boolean = true
     var turnNumber: Int = 1
@@ -13,9 +15,9 @@ class ChessGameManager(private val listener: ChessGameListener) {
         initializeStartingPosition(isPlayerStarting)
 
         isPlayerStarted = isPlayerStarting
-        chessBot = ChessBot(chessboard, botColor, botDepth)
+        chessBot = ChessBot(chessboard, chessboardEvaluator, legalMoveGenerator, botColor, botDepth)
         chessBot.isBotTurn = !isPlayerStarting
-        player = Player(chessboard, playerColor)
+        player = Player(chessboard, chessboardEvaluator, legalMoveGenerator, playerColor)
         player.isPlayerTurn = isPlayerStarting
     }
 

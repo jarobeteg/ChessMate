@@ -1,6 +1,7 @@
 package com.example.chessmate.util.chess
 
-class ChessBot(private val chessboard: Chessboard, val botColor: PieceColor, private val depth: Int){
+class ChessBot(private val chessboard: Chessboard, private val chessboardEvaluator: ChessboardEvaluator,
+               private val legalMoveGenerator: LegalMoveGenerator, val botColor: PieceColor, private val depth: Int){
     var isBotTurn: Boolean = false
 
     fun getBestMove(): Move?{
@@ -9,8 +10,7 @@ class ChessBot(private val chessboard: Chessboard, val botColor: PieceColor, pri
     }
 
     private fun findBestMoves(): Move?{
-        val legalMoveGenerator = LegalMoveGenerator(chessboard.cloneBoardWithoutUI())
-        val legalMoves = legalMoveGenerator.generateLegalMoves(botColor, true)
+        val legalMoves = legalMoveGenerator.generateLegalMoves(chessboard, botColor, true)
         if (legalMoves.isEmpty()){
             println("Bot checkmated")
         }

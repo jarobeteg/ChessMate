@@ -1,19 +1,19 @@
 package com.example.chessmate.util.chess
 
-class Player(private val chessboard: Chessboard, val playerColor: PieceColor) {
+class Player(private val chessboard: Chessboard, private val chessboardEvaluator: ChessboardEvaluator,
+             private val legalMoveGenerator: LegalMoveGenerator, val playerColor: PieceColor) {
     //need to evaluate the move for the player and check if the player had a better move
     var isPlayerTurn: Boolean = false
     var legalPlayerMoves: MutableList<Move> = mutableListOf()
 
     fun calculateLegalMoves(square: Square): MutableList<Move>{
-        val legalMoveGenerator = LegalMoveGenerator(chessboard.cloneBoardWithoutUI())
         val legalMoves = when(square.pieceType){
-            PieceType.PAWN -> legalMoveGenerator.generatePawnMoves(square.row, square.col, playerColor)
-            PieceType.ROOK -> legalMoveGenerator.generateRookMoves(square.row, square.col, playerColor)
-            PieceType.KNIGHT -> legalMoveGenerator.generateKnightMoves(square.row, square.col, playerColor)
-            PieceType.BISHOP -> legalMoveGenerator.generateBishopMoves(square.row, square.col, playerColor)
-            PieceType.QUEEN -> legalMoveGenerator.generateQueenMoves(square.row, square.col, playerColor)
-            PieceType.KING -> legalMoveGenerator.generateKingMoves(square.row, square.col, playerColor)
+            PieceType.PAWN -> legalMoveGenerator.generatePawnMoves(chessboard, square.row, square.col, playerColor)
+            PieceType.ROOK -> legalMoveGenerator.generateRookMoves(chessboard, square.row, square.col, playerColor)
+            PieceType.KNIGHT -> legalMoveGenerator.generateKnightMoves(chessboard, square.row, square.col, playerColor)
+            PieceType.BISHOP -> legalMoveGenerator.generateBishopMoves(chessboard, square.row, square.col, playerColor)
+            PieceType.QUEEN -> legalMoveGenerator.generateQueenMoves(chessboard, square.row, square.col, playerColor)
+            PieceType.KING -> legalMoveGenerator.generateKingMoves(chessboard, square.row, square.col, playerColor)
             else -> mutableListOf()
         }
 
@@ -39,8 +39,8 @@ class Player(private val chessboard: Chessboard, val playerColor: PieceColor) {
             chessboard.getSquare(move.sourceSquare.row, move.sourceSquare.col)
         val destinationSquare =
             chessboard.getSquare(move.destinationSquare.row, move.destinationSquare.col)
-        val sourcePieceColor = sourceSquare.pieceColor!!
-        val sourcePieceType = sourceSquare.pieceType!!
+        val sourcePieceColor = sourceSquare.pieceColor
+        val sourcePieceType = sourceSquare.pieceType
         val score = move.score
 
         val regularMove = RegularMove(sourceSquare, destinationSquare, sourcePieceColor, sourcePieceType, score)
@@ -52,8 +52,8 @@ class Player(private val chessboard: Chessboard, val playerColor: PieceColor) {
             chessboard.getSquare(move.sourceSquare.row, move.sourceSquare.col)
         val destinationSquare =
             chessboard.getSquare(move.destinationSquare.row, move.destinationSquare.col)
-        val sourcePieceColor = sourceSquare.pieceColor!!
-        val sourcePieceType = sourceSquare.pieceType!!
+        val sourcePieceColor = sourceSquare.pieceColor
+        val sourcePieceType = sourceSquare.pieceType
         val capturedPieceColor = move.capturedPieceColor
         val capturedPieceType = move.capturedPieceType
         val score = move.score
@@ -104,7 +104,7 @@ class Player(private val chessboard: Chessboard, val playerColor: PieceColor) {
             chessboard.getSquare(move.sourceSquare.row, move.sourceSquare.col)
         val destinationSquare =
             chessboard.getSquare(move.destinationSquare.row, move.destinationSquare.col)
-        val sourcePieceColor = sourceSquare.pieceColor!!
+        val sourcePieceColor = sourceSquare.pieceColor
         val rookSourceSquare =
             chessboard.getSquare(move.rookSourceSquare.row, move.rookSourceSquare.col)
         val rookDestinationSquare = chessboard.getSquare(
@@ -131,7 +131,7 @@ class Player(private val chessboard: Chessboard, val playerColor: PieceColor) {
             chessboard.getSquare(move.sourceSquare.row, move.sourceSquare.col)
         val destinationSquare =
             chessboard.getSquare(move.destinationSquare.row, move.destinationSquare.col)
-        val sourcePieceColor = sourceSquare.pieceColor!!
+        val sourcePieceColor = sourceSquare.pieceColor
         val opponentPawnSquare = chessboard.getSquare(
             move.opponentPawnSquare.row,
             move.opponentPawnSquare.col

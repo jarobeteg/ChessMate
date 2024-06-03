@@ -1,8 +1,8 @@
 package com.example.chessmate.util.chess
 
-class LegalMoveGenerator(private val chessboard: Chessboard){
+class LegalMoveGenerator(){
 
-    fun generateLegalMoves(pieceColor: PieceColor, isForBot: Boolean = false): MutableList<Move>{
+    fun generateLegalMoves(chessboard: Chessboard, pieceColor: PieceColor, isForBot: Boolean = false): MutableList<Move>{
         val legalMoves = mutableListOf<Move>()
 
         for (row in 0 until 8){
@@ -10,12 +10,12 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
                 val piece = chessboard.getSquare(row, col)
                 if (piece.pieceColor == pieceColor){
                     when (piece.pieceType){
-                        PieceType.PAWN -> legalMoves.addAll(generatePawnMoves(row, col, pieceColor, isForBot))
-                        PieceType.KNIGHT -> legalMoves.addAll(generateKnightMoves(row, col, pieceColor, isForBot))
-                        PieceType.BISHOP -> legalMoves.addAll(generateBishopMoves(row, col, pieceColor, isForBot))
-                        PieceType.ROOK -> legalMoves.addAll(generateRookMoves(row, col, pieceColor, isForBot))
-                        PieceType.QUEEN -> legalMoves.addAll(generateQueenMoves(row, col, pieceColor, isForBot))
-                        PieceType.KING -> legalMoves.addAll(generateKingMoves(row, col, pieceColor, isForBot))
+                        PieceType.PAWN -> legalMoves.addAll(generatePawnMoves(chessboard, row, col, pieceColor, isForBot))
+                        PieceType.KNIGHT -> legalMoves.addAll(generateKnightMoves(chessboard, row, col, pieceColor, isForBot))
+                        PieceType.BISHOP -> legalMoves.addAll(generateBishopMoves(chessboard, row, col, pieceColor, isForBot))
+                        PieceType.ROOK -> legalMoves.addAll(generateRookMoves(chessboard, row, col, pieceColor, isForBot))
+                        PieceType.QUEEN -> legalMoves.addAll(generateQueenMoves(chessboard, row, col, pieceColor, isForBot))
+                        PieceType.KING -> legalMoves.addAll(generateKingMoves(chessboard, row, col, pieceColor, isForBot))
                         else -> {}
                     }
                 }
@@ -25,25 +25,26 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
         return legalMoves
     }
 
-    fun generatePawnMoves(row: Int, col: Int, pieceColor: PieceColor, isForBot: Boolean = false): MutableList<Move>{
+    fun generatePawnMoves(chessboard: Chessboard, row: Int, col: Int, pieceColor: PieceColor, isForBot: Boolean = false): MutableList<Move>{
         val legalMoves = mutableListOf<Move>()
 
         val direction = if (isForBot) 1 else -1
 
-        addRegularPawnMove(row, col, direction, pieceColor, legalMoves, isForBot)
+        addRegularPawnMove(chessboard, row, col, direction, pieceColor, legalMoves, isForBot)
 
-        addDoublePawnMove(row, col, direction, pieceColor, legalMoves, isForBot)
+        addDoublePawnMove(chessboard, row, col, direction, pieceColor, legalMoves, isForBot)
 
-        addDiagonalPawnMoves(row, col, direction, pieceColor, legalMoves, isForBot)
+        addDiagonalPawnMoves(chessboard, row, col, direction, pieceColor, legalMoves, isForBot)
 
-        addEnPassantMoves(row, col, direction, pieceColor, legalMoves, isForBot)
+        addEnPassantMoves(chessboard, row, col, direction, pieceColor, legalMoves, isForBot)
 
-        addPawnPromotionMoves(row, col, direction, pieceColor, legalMoves, isForBot)
+        addPawnPromotionMoves(chessboard, row, col, direction, pieceColor, legalMoves, isForBot)
 
         return legalMoves
     }
 
     private fun addRegularPawnMove(
+        chessboard: Chessboard,
         row: Int,
         col: Int,
         direction: Int,
@@ -57,14 +58,15 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
             && newRow != 0 && newRow != 7) {
             val sourceSquare = chessboard.getSquare(row, col)
             val destinationSquare = chessboard.getSquare(newRow, col)
-            val sourcePieceColor = sourceSquare.pieceColor!!
-            val sourcePieceType = sourceSquare.pieceType!!
+            val sourcePieceColor = sourceSquare.pieceColor
+            val sourcePieceType = sourceSquare.pieceType
             val regularMove = RegularMove(sourceSquare, destinationSquare, sourcePieceColor, sourcePieceType)
-            applyMoveAndCheckForCheck(regularMove, pieceColor, legalMoves)
+            applyMoveAndCheckForCheck(chessboard, regularMove, pieceColor, legalMoves)
         }
     }
 
     private fun addDoublePawnMove(
+        chessboard: Chessboard,
         row: Int,
         col: Int,
         direction: Int,
@@ -78,15 +80,16 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
             if (chessboard.isEmptySquare(newRow, col) && chessboard.isEmptySquare(nextRow, col)) {
                 val sourceSquare = chessboard.getSquare(row, col)
                 val destinationSquare = chessboard.getSquare(nextRow, col)
-                val sourcePieceColor = sourceSquare.pieceColor!!
-                val sourcePieceType = sourceSquare.pieceType!!
+                val sourcePieceColor = sourceSquare.pieceColor
+                val sourcePieceType = sourceSquare.pieceType
                 val regularMove = RegularMove(sourceSquare, destinationSquare, sourcePieceColor, sourcePieceType)
-                applyMoveAndCheckForCheck(regularMove, pieceColor, legalMoves)
+                applyMoveAndCheckForCheck(chessboard, regularMove, pieceColor, legalMoves)
             }
         }
     }
 
     private fun addDiagonalPawnMoves(
+        chessboard: Chessboard,
         row: Int,
         col: Int,
         direction: Int,
@@ -98,11 +101,12 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
         val rightCol = col + 1
         val newRow = row + direction
 
-        addDiagonalPawnMove(row, col, newRow, leftCol, pieceColor, legalMoves, isForBot)
-        addDiagonalPawnMove(row, col, newRow, rightCol, pieceColor, legalMoves, isForBot)
+        addDiagonalPawnMove(chessboard, row, col, newRow, leftCol, pieceColor, legalMoves, isForBot)
+        addDiagonalPawnMove(chessboard, row, col, newRow, rightCol, pieceColor, legalMoves, isForBot)
     }
 
     private fun addDiagonalPawnMove(
+        chessboard: Chessboard,
         row: Int,
         col: Int,
         newRow: Int,
@@ -115,17 +119,18 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
             val sourceSquare = chessboard.getSquare(row, col)
             val destinationSquare = chessboard.getSquare(newRow, newCol)
             if (chessboard.isOpponentPiece(newRow, newCol, pieceColor) && !chessboard.isOpponentKingSquare(newRow, newCol, pieceColor)) {
-                val sourcePieceColor = sourceSquare.pieceColor!!
-                val sourcePieceType = sourceSquare.pieceType!!
-                val opponentPieceColor = destinationSquare.pieceColor!!
-                val opponentPieceType = destinationSquare.pieceType!!
+                val sourcePieceColor = sourceSquare.pieceColor
+                val sourcePieceType = sourceSquare.pieceType
+                val opponentPieceColor = destinationSquare.pieceColor
+                val opponentPieceType = destinationSquare.pieceType
                 val moveAndCapture = MoveAndCapture(sourceSquare, destinationSquare, sourcePieceColor, sourcePieceType, opponentPieceColor, opponentPieceType)
-                applyMoveAndCheckForCheck(moveAndCapture, pieceColor, legalMoves)
+                applyMoveAndCheckForCheck(chessboard, moveAndCapture, pieceColor, legalMoves)
             }
         }
     }
 
     private fun addEnPassantMoves(
+        chessboard: Chessboard,
         row: Int,
         col: Int,
         direction: Int,
@@ -137,6 +142,7 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
     }
 
     private fun addPawnPromotionMoves(
+        chessboard: Chessboard,
         row: Int,
         col: Int,
         direction: Int,
@@ -153,14 +159,15 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
                 val sourceSquare = chessboard.getSquare(row, col)
                 val destinationSquare = chessboard.getSquare(row + direction, col)
                 val pawnPromotionMove = PawnPromotionMove(sourceSquare, destinationSquare, pieceColor, pieceType)
-                applyMoveAndCheckForCheck(pawnPromotionMove, pieceColor, legalMoves)
+                applyMoveAndCheckForCheck(chessboard, pawnPromotionMove, pieceColor, legalMoves)
             }
 
-            addDiagonalPromotionMoves(row, col, direction, pieceColor, pieceType, legalMoves, isForBot)
+            addDiagonalPromotionMoves(chessboard, row, col, direction, pieceColor, pieceType, legalMoves, isForBot)
         }
     }
 
     private fun addDiagonalPromotionMoves(
+        chessboard: Chessboard,
         row: Int,
         col: Int,
         direction: Int,
@@ -173,11 +180,12 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
         val rightCol = col + 1
         val newRow = row + direction
 
-        addDiagonalPromotionMove(row, col, newRow, leftCol, pieceColor, pieceType, legalMoves, isForBot)
-        addDiagonalPromotionMove(row, col, newRow, rightCol, pieceColor, pieceType, legalMoves, isForBot)
+        addDiagonalPromotionMove(chessboard, row, col, newRow, leftCol, pieceColor, pieceType, legalMoves, isForBot)
+        addDiagonalPromotionMove(chessboard, row, col, newRow, rightCol, pieceColor, pieceType, legalMoves, isForBot)
     }
 
     private fun addDiagonalPromotionMove(
+        chessboard: Chessboard,
         row: Int,
         col: Int,
         newRow: Int,
@@ -191,8 +199,8 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
             val sourceSquare = chessboard.getSquare(row, col)
             val destinationSquare = chessboard.getSquare(newRow, newCol)
             if (chessboard.isOpponentPiece(newRow, newCol, pieceColor) && !chessboard.isOpponentKingSquare(newRow, newCol, pieceColor)) {
-                val capturedPieceColor = destinationSquare.pieceColor!!
-                val capturedPieceType = destinationSquare.pieceType!!
+                val capturedPieceColor = destinationSquare.pieceColor
+                val capturedPieceType = destinationSquare.pieceType
                 val pawnPromotionCaptureMove = PawnPromotionCaptureMove(
                     sourceSquare,
                     destinationSquare,
@@ -201,12 +209,12 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
                     capturedPieceColor,
                     capturedPieceType
                 )
-                applyMoveAndCheckForCheck(pawnPromotionCaptureMove, pieceColor, legalMoves)
+                applyMoveAndCheckForCheck(chessboard, pawnPromotionCaptureMove, pieceColor, legalMoves)
             }
         }
     }
 
-    fun generateKnightMoves(row: Int, col: Int, pieceColor: PieceColor, isForBot: Boolean = false):  MutableList<Move>{
+    fun generateKnightMoves(chessboard: Chessboard, row: Int, col: Int, pieceColor: PieceColor, isForBot: Boolean = false):  MutableList<Move>{
         val legalMoves = mutableListOf<Move>()
 
         val moves = arrayOf(
@@ -225,9 +233,9 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
                 val destinationSquare = chessboard.getSquare(newRow, newCol)
 
                 if (chessboard.isEmptySquare(newRow, newCol)){
-                    generateRegularMove(sourceSquare, destinationSquare, pieceColor, legalMoves)
+                    generateRegularMove(chessboard, sourceSquare, destinationSquare, pieceColor, legalMoves)
                 } else if (chessboard.isOpponentPiece(newRow, newCol, pieceColor) && !chessboard.isOpponentKingSquare(newRow, newCol, pieceColor)){
-                    generateMoveAndCapture(sourceSquare, destinationSquare, pieceColor, legalMoves)
+                    generateMoveAndCapture(chessboard, sourceSquare, destinationSquare, pieceColor, legalMoves)
                 }
             }
         }
@@ -235,7 +243,7 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
         return legalMoves
     }
 
-    fun generateBishopMoves(row: Int, col: Int, pieceColor: PieceColor, isForBot: Boolean = false): MutableList<Move>{
+    fun generateBishopMoves(chessboard: Chessboard, row: Int, col: Int, pieceColor: PieceColor, isForBot: Boolean = false): MutableList<Move>{
         val legalMoves = mutableListOf<Move>()
 
         val directions = arrayOf(
@@ -252,9 +260,9 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
                 val destinationSquare = chessboard.getSquare(newRow, newCol)
 
                 if (chessboard.isEmptySquare(newRow, newCol)){
-                    generateRegularMove(sourceSquare, destinationSquare, pieceColor, legalMoves)
+                    generateRegularMove(chessboard, sourceSquare, destinationSquare, pieceColor, legalMoves)
                 } else if (chessboard.isOpponentPiece(newRow, newCol, pieceColor) && !chessboard.isOpponentKingSquare(newRow, newCol, pieceColor)){
-                   generateMoveAndCapture(sourceSquare, destinationSquare, pieceColor, legalMoves)
+                   generateMoveAndCapture(chessboard, sourceSquare, destinationSquare, pieceColor, legalMoves)
                     break
                 } else {
                     break
@@ -268,7 +276,7 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
         return legalMoves
     }
 
-    fun generateRookMoves(row: Int, col: Int, pieceColor: PieceColor, isForBot: Boolean = false): MutableList<Move>{
+    fun generateRookMoves(chessboard: Chessboard, row: Int, col: Int, pieceColor: PieceColor, isForBot: Boolean = false): MutableList<Move>{
         val legalMoves = mutableListOf<Move>()
 
         val directions = arrayOf(
@@ -285,9 +293,9 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
                 val destinationSquare = chessboard.getSquare(newRow, newCol)
 
                 if (chessboard.isEmptySquare(newRow, newCol)){
-                    generateRegularMove(sourceSquare, destinationSquare, pieceColor, legalMoves)
+                    generateRegularMove(chessboard, sourceSquare, destinationSquare, pieceColor, legalMoves)
                 } else if (chessboard.isOpponentPiece(newRow, newCol, pieceColor) && !chessboard.isOpponentKingSquare(newRow, newCol, pieceColor)){
-                    generateMoveAndCapture(sourceSquare, destinationSquare, pieceColor, legalMoves)
+                    generateMoveAndCapture(chessboard, sourceSquare, destinationSquare, pieceColor, legalMoves)
                     break
                 } else {
                     break
@@ -301,16 +309,16 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
         return legalMoves
     }
 
-    fun generateQueenMoves(row: Int, col: Int, pieceColor: PieceColor, isForBot: Boolean = false): MutableList<Move>{
+    fun generateQueenMoves(chessboard: Chessboard, row: Int, col: Int, pieceColor: PieceColor, isForBot: Boolean = false): MutableList<Move>{
         val legalMoves = mutableListOf<Move>()
 
-        legalMoves.addAll(generateBishopMoves(row, col, pieceColor, isForBot))
-        legalMoves.addAll(generateRookMoves(row, col, pieceColor, isForBot))
+        legalMoves.addAll(generateBishopMoves(chessboard, row, col, pieceColor, isForBot))
+        legalMoves.addAll(generateRookMoves(chessboard, row, col, pieceColor, isForBot))
 
         return legalMoves
     }
 
-    fun generateKingMoves(row: Int, col: Int, pieceColor: PieceColor, isForBot: Boolean = false): MutableList<Move>{
+    fun generateKingMoves(chessboard: Chessboard, row: Int, col: Int, pieceColor: PieceColor, isForBot: Boolean = false): MutableList<Move>{
         val legalMoves = mutableListOf<Move>()
         val kingSquare = chessboard.getKingSquare(pieceColor)
         val isPlayerStarted = (!isForBot && pieceColor == PieceColor.WHITE) || (isForBot && pieceColor == PieceColor.BLACK)
@@ -330,18 +338,18 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
                 val destinationSquare = chessboard.getSquare(newRow, newCol)
 
                 if (chessboard.isEmptySquare(newRow, newCol)){
-                    generateRegularMove(sourceSquare, destinationSquare, pieceColor, legalMoves)
+                    generateRegularMove(chessboard, sourceSquare, destinationSquare, pieceColor, legalMoves)
                     if (!chessboard.isKingInCheck(kingSquare, pieceColor) && !kingSquare.hasMoved){
-                        if (isKingSideCastlePossible(isPlayerStarted, isForBot)){
-                            generateCastleMove(isPlayerStarted, isForBot, true, pieceColor, legalMoves)
+                        if (isKingSideCastlePossible(chessboard, isPlayerStarted, isForBot)){
+                            generateCastleMove(chessboard, isPlayerStarted, isForBot, true, pieceColor, legalMoves)
                         }
 
-                        if (isQueenSideCastlePossible(isPlayerStarted, isForBot)){
-                            generateCastleMove(isPlayerStarted, isForBot, false, pieceColor, legalMoves)
+                        if (isQueenSideCastlePossible(chessboard, isPlayerStarted, isForBot)){
+                            generateCastleMove(chessboard, isPlayerStarted, isForBot, false, pieceColor, legalMoves)
                         }
                     }
                 } else if (chessboard.isOpponentPiece(newRow, newCol, pieceColor) && !chessboard.isOpponentKingSquare(newRow, newCol, pieceColor)){
-                    generateMoveAndCapture(sourceSquare, destinationSquare, pieceColor, legalMoves)
+                    generateMoveAndCapture(chessboard, sourceSquare, destinationSquare, pieceColor, legalMoves)
                 }
             }
         }
@@ -349,7 +357,7 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
         return legalMoves
     }
 
-    private fun isKingSideCastlePossible(isPlayerStarted: Boolean, isForBot: Boolean): Boolean{
+    private fun isKingSideCastlePossible(chessboard: Chessboard, isPlayerStarted: Boolean, isForBot: Boolean): Boolean{
         val kingSquare = chessboard.getStartingKingSquare(isPlayerStarted, isForBot)
         val rookSquare = chessboard.getStartingKingSideRookSquare(isPlayerStarted, isForBot)
 
@@ -363,7 +371,7 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
                 if (chessboard.getSquare(kingSquare.row, kingSquare.col + (1 * i)).isOccupied){
                     return false
                 }
-                if (chessboard.isKingInCheck(updatedKingSquare, kingSquare.pieceColor!!)){
+                if (chessboard.isKingInCheck(updatedKingSquare, kingSquare.pieceColor)){
                     return false
                 }
             }
@@ -373,7 +381,7 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
                 if (chessboard.getSquare(kingSquare.row, kingSquare.col - (1 * i)).isOccupied){
                     return false
                 }
-                if (chessboard.isKingInCheck(updatedKingSquare, kingSquare.pieceColor!!)){
+                if (chessboard.isKingInCheck(updatedKingSquare, kingSquare.pieceColor)){
                     return false
                 }
             }
@@ -382,7 +390,7 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
         return true
     }
 
-    private fun isQueenSideCastlePossible(isPlayerStarted: Boolean, isForBot: Boolean): Boolean{
+    private fun isQueenSideCastlePossible(chessboard: Chessboard, isPlayerStarted: Boolean, isForBot: Boolean): Boolean{
         val kingSquare = chessboard.getStartingKingSquare(isPlayerStarted, isForBot)
         val rookSquare = chessboard.getStartingQueenSideRookSquare(isPlayerStarted, isForBot)
 
@@ -396,7 +404,7 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
                 if (chessboard.getSquare(kingSquare.row, kingSquare.col - (1 * i)).isOccupied){
                     return false
                 }
-                if (chessboard.isKingInCheck(updatedKingSquare, kingSquare.pieceColor!!)){
+                if (chessboard.isKingInCheck(updatedKingSquare, kingSquare.pieceColor)){
                     return false
                 }
             }
@@ -406,7 +414,7 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
                 if (chessboard.getSquare(kingSquare.row, kingSquare.col + (1 * i)).isOccupied){
                     return false
                 }
-                if (chessboard.isKingInCheck(updatedKingSquare, kingSquare.pieceColor!!)){
+                if (chessboard.isKingInCheck(updatedKingSquare, kingSquare.pieceColor)){
                     return false
                 }
             }
@@ -416,33 +424,36 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
     }
 
     private fun generateRegularMove(
+        chessboard: Chessboard,
         sourceSquare: Square,
         destinationSquare: Square,
         pieceColor: PieceColor,
         legalMoves: MutableList<Move>
     ) {
-        val sourcePieceColor = sourceSquare.pieceColor!!
-        val sourcePieceType = sourceSquare.pieceType!!
+        val sourcePieceColor = sourceSquare.pieceColor
+        val sourcePieceType = sourceSquare.pieceType
         val regularMove = RegularMove(sourceSquare, destinationSquare, sourcePieceColor, sourcePieceType)
-        applyMoveAndCheckForCheck(regularMove, pieceColor, legalMoves)
+        applyMoveAndCheckForCheck(chessboard, regularMove, pieceColor, legalMoves)
     }
 
     private fun generateMoveAndCapture(
+        chessboard: Chessboard,
         sourceSquare: Square,
         destinationSquare: Square,
         pieceColor: PieceColor,
         legalMoves: MutableList<Move>
     ) {
-        val sourcePieceColor = sourceSquare.pieceColor!!
-        val sourcePieceType = sourceSquare.pieceType!!
-        val opponentPieceColor = destinationSquare.pieceColor!!
-        val opponentPieceType = destinationSquare.pieceType!!
+        val sourcePieceColor = sourceSquare.pieceColor
+        val sourcePieceType = sourceSquare.pieceType
+        val opponentPieceColor = destinationSquare.pieceColor
+        val opponentPieceType = destinationSquare.pieceType
 
         val moveAndCapture = MoveAndCapture(sourceSquare, destinationSquare, sourcePieceColor, sourcePieceType, opponentPieceColor, opponentPieceType)
-        applyMoveAndCheckForCheck(moveAndCapture, pieceColor, legalMoves)
+        applyMoveAndCheckForCheck(chessboard, moveAndCapture, pieceColor, legalMoves)
     }
 
     private fun generateCastleMove(
+        chessboard: Chessboard,
         isPlayerStarted: Boolean,
         isForBot: Boolean,
         isKingSideCastles: Boolean,
@@ -453,7 +464,7 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
         val direction = if (isPlayerStarted) 1 else -1
         val kingDirection = 2 * direction
         val rookDirection = if (isKingSideCastles) 2 else 3
-        val sourcePieceColor = sourceSquare.pieceColor!!
+        val sourcePieceColor = sourceSquare.pieceColor
         lateinit var destinationSquare: Square
         lateinit var rookSourceSquare: Square
         lateinit var rookDestinationSquare: Square
@@ -469,10 +480,11 @@ class LegalMoveGenerator(private val chessboard: Chessboard){
         }
 
         val castleMove = CastleMove(sourceSquare, destinationSquare, sourcePieceColor, rookSourceSquare, rookDestinationSquare, isKingSideCastles)
-        applyMoveAndCheckForCheck(castleMove, pieceColor, legalMoves)
+        applyMoveAndCheckForCheck(chessboard, castleMove, pieceColor, legalMoves)
     }
 
     private fun applyMoveAndCheckForCheck(
+        chessboard: Chessboard,
         move: Move,
         pieceColor: PieceColor,
         legalMoves: MutableList<Move>

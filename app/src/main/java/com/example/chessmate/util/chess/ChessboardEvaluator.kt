@@ -1,6 +1,6 @@
 package com.example.chessmate.util.chess
 
-class ChessboardEvaluator(private val chessboard: Chessboard){
+class ChessboardEvaluator(){
 
     private val pieceValues = mapOf(
         PieceType.PAWN to 1.0F,
@@ -10,15 +10,15 @@ class ChessboardEvaluator(private val chessboard: Chessboard){
         PieceType.QUEEN to 9.0F
     )
 
-    fun evaluatePosition(): Float{
+    fun evaluatePosition(chessboard: Chessboard): Float{
         var positionScore = 0.00F
 
-        positionScore += materialBalance()
+        positionScore += materialBalance(chessboard)
 
         return positionScore
     }
 
-    private fun materialBalance(): Float{
+    private fun materialBalance(chessboard: Chessboard): Float{
         var materialBalanceScore = 0.0F
 
         val whitePieces = chessboard.getAllPieces(PieceColor.WHITE)
