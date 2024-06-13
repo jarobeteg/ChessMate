@@ -1,22 +1,22 @@
 package com.example.chessmate.util.chess
 
 sealed class Move {
-    abstract val sourceSquare: Square
-    abstract val destinationSquare: Square
+    abstract val sourcePosition: Position
+    abstract val destinationPosition: Position
     abstract var score: Float
 }
 
 data class RegularMove(
-    override val sourceSquare: Square,
-    override val destinationSquare: Square,
+    override val sourcePosition: Position,
+    override val destinationPosition: Position,
     val sourcePieceColor: PieceColor,
     val sourcePieceType: PieceType,
     override var score: Float = 0.00F
 ): Move()
 
 data class MoveAndCapture(
-    override val sourceSquare: Square,
-    override val destinationSquare: Square,
+    override val sourcePosition: Position,
+    override val destinationPosition: Position,
     val sourcePieceColor: PieceColor,
     val sourcePieceType: PieceType,
     val capturedPieceColor: PieceColor,
@@ -25,16 +25,16 @@ data class MoveAndCapture(
 ): Move()
 
 data class PawnPromotionMove(
-    override val sourceSquare: Square,
-    override val destinationSquare: Square,
+    override val sourcePosition: Position,
+    override val destinationPosition: Position,
     val promotedPieceColor: PieceColor,
     val promotedPieceType: PieceType,
     override var score: Float = 0.00F
 ): Move()
 
 data class PawnPromotionCaptureMove(
-    override val sourceSquare: Square,
-    override val destinationSquare: Square,
+    override val sourcePosition: Position,
+    override val destinationPosition: Position,
     val promotedPieceColor: PieceColor,
     val promotedPieceType: PieceType,
     val capturedPieceColor: PieceColor,
@@ -43,19 +43,19 @@ data class PawnPromotionCaptureMove(
 ): Move()
 
 data class EnPassantMove(
-    override val sourceSquare: Square,
-    override val destinationSquare: Square,
+    override val sourcePosition: Position,
+    override val destinationPosition: Position,
     val sourcePieceColor: PieceColor,
-    val opponentPawnSquare: Square,
+    val opponentPawnPosition: Position,
     override var score: Float = 0.00F
 ): Move()
 
 data class CastleMove(
-    override val sourceSquare: Square,
-    override val destinationSquare: Square,
+    override val sourcePosition: Position,
+    override val destinationPosition: Position,
     val sourcePieceColor: PieceColor,
-    val rookSourceSquare: Square,
-    val rookDestinationSquare: Square,
+    val rookSourcePosition: Position,
+    val rookDestinationPosition: Position,
     val isKingSideCastles: Boolean,
     override var score: Float = 0.00F
 ): Move()

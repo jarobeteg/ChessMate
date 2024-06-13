@@ -149,7 +149,7 @@ class ChessGameManager(private val listener: ChessGameListener) {
 
     fun handleSecondClick(square: Square, promotionPieceType: PieceType = PieceType.NONE){
         for (move in player.legalPlayerMoves){
-            if (square.row == move.destinationSquare.row && square.col == move.destinationSquare.col) {
+            if (square.row == move.destinationPosition.row && square.col == move.destinationPosition.col) {
                 if (move is PawnPromotionMove && move.promotedPieceType == promotionPieceType){
                     chessboard.performMove(move)
                     listener.onMoveMade(move)
@@ -180,9 +180,9 @@ class ChessGameManager(private val listener: ChessGameListener) {
         return false
     }
 
-    fun squareToNotation(square: Square): String{
-        val row = square.row
-        val col = square.col
+    fun squareToNotation(position: Position): String{
+        val row = position.row
+        val col = position.col
         val file: String
         val rank: String
 

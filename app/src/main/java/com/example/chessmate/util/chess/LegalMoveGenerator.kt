@@ -60,7 +60,9 @@ class LegalMoveGenerator(){
             val destinationSquare = chessboard.getSquare(newRow, col)
             val sourcePieceColor = sourceSquare.pieceColor
             val sourcePieceType = sourceSquare.pieceType
-            val regularMove = RegularMove(sourceSquare, destinationSquare, sourcePieceColor, sourcePieceType)
+            val sourcePosition = Position(sourceSquare.row, sourceSquare.col)
+            val destinationPosition = Position(destinationSquare.row, destinationSquare.col)
+            val regularMove = RegularMove(sourcePosition, destinationPosition, sourcePieceColor, sourcePieceType)
             applyMoveAndCheckForCheck(chessboard, regularMove, pieceColor, legalMoves)
         }
     }
@@ -82,7 +84,9 @@ class LegalMoveGenerator(){
                 val destinationSquare = chessboard.getSquare(nextRow, col)
                 val sourcePieceColor = sourceSquare.pieceColor
                 val sourcePieceType = sourceSquare.pieceType
-                val regularMove = RegularMove(sourceSquare, destinationSquare, sourcePieceColor, sourcePieceType)
+                val sourcePosition = Position(sourceSquare.row, sourceSquare.col)
+                val destinationPosition = Position(destinationSquare.row, destinationSquare.col)
+                val regularMove = RegularMove(sourcePosition, destinationPosition, sourcePieceColor, sourcePieceType)
                 applyMoveAndCheckForCheck(chessboard, regularMove, pieceColor, legalMoves)
             }
         }
@@ -123,7 +127,9 @@ class LegalMoveGenerator(){
                 val sourcePieceType = sourceSquare.pieceType
                 val opponentPieceColor = destinationSquare.pieceColor
                 val opponentPieceType = destinationSquare.pieceType
-                val moveAndCapture = MoveAndCapture(sourceSquare, destinationSquare, sourcePieceColor, sourcePieceType, opponentPieceColor, opponentPieceType)
+                val sourcePosition = Position(sourceSquare.row, sourceSquare.col)
+                val destinationPosition = Position(destinationSquare.row, destinationSquare.col)
+                val moveAndCapture = MoveAndCapture(sourcePosition, destinationPosition, sourcePieceColor, sourcePieceType, opponentPieceColor, opponentPieceType)
                 applyMoveAndCheckForCheck(chessboard, moveAndCapture, pieceColor, legalMoves)
             }
         }
@@ -158,7 +164,9 @@ class LegalMoveGenerator(){
                 && ((row == 1 && !isForBot) || (row == 6 && isForBot))) {
                 val sourceSquare = chessboard.getSquare(row, col)
                 val destinationSquare = chessboard.getSquare(row + direction, col)
-                val pawnPromotionMove = PawnPromotionMove(sourceSquare, destinationSquare, pieceColor, pieceType)
+                val sourcePosition = Position(sourceSquare.row, sourceSquare.col)
+                val destinationPosition = Position(destinationSquare.row, destinationSquare.col)
+                val pawnPromotionMove = PawnPromotionMove(sourcePosition, destinationPosition, pieceColor, pieceType)
                 applyMoveAndCheckForCheck(chessboard, pawnPromotionMove, pieceColor, legalMoves)
             }
 
@@ -201,9 +209,11 @@ class LegalMoveGenerator(){
             if (chessboard.isOpponentPiece(newRow, newCol, pieceColor) && !chessboard.isOpponentKingSquare(newRow, newCol, pieceColor)) {
                 val capturedPieceColor = destinationSquare.pieceColor
                 val capturedPieceType = destinationSquare.pieceType
+                val sourcePosition = Position(sourceSquare.row, sourceSquare.col)
+                val destinationPosition = Position(destinationSquare.row, destinationSquare.col)
                 val pawnPromotionCaptureMove = PawnPromotionCaptureMove(
-                    sourceSquare,
-                    destinationSquare,
+                    sourcePosition,
+                    destinationPosition,
                     pieceColor,
                     pieceType,
                     capturedPieceColor,
@@ -432,7 +442,9 @@ class LegalMoveGenerator(){
     ) {
         val sourcePieceColor = sourceSquare.pieceColor
         val sourcePieceType = sourceSquare.pieceType
-        val regularMove = RegularMove(sourceSquare, destinationSquare, sourcePieceColor, sourcePieceType)
+        val sourcePosition = Position(sourceSquare.row, sourceSquare.col)
+        val destinationPosition = Position(destinationSquare.row, destinationSquare.col)
+        val regularMove = RegularMove(sourcePosition, destinationPosition, sourcePieceColor, sourcePieceType)
         applyMoveAndCheckForCheck(chessboard, regularMove, pieceColor, legalMoves)
     }
 
@@ -447,8 +459,9 @@ class LegalMoveGenerator(){
         val sourcePieceType = sourceSquare.pieceType
         val opponentPieceColor = destinationSquare.pieceColor
         val opponentPieceType = destinationSquare.pieceType
-
-        val moveAndCapture = MoveAndCapture(sourceSquare, destinationSquare, sourcePieceColor, sourcePieceType, opponentPieceColor, opponentPieceType)
+        val sourcePosition = Position(sourceSquare.row, sourceSquare.col)
+        val destinationPosition = Position(destinationSquare.row, destinationSquare.col)
+        val moveAndCapture = MoveAndCapture(sourcePosition, destinationPosition, sourcePieceColor, sourcePieceType, opponentPieceColor, opponentPieceType)
         applyMoveAndCheckForCheck(chessboard, moveAndCapture, pieceColor, legalMoves)
     }
 
@@ -478,8 +491,11 @@ class LegalMoveGenerator(){
             rookSourceSquare = chessboard.getStartingQueenSideRookSquare(isPlayerStarted, isForBot)
             rookDestinationSquare = chessboard.getSquare(rookSourceSquare.row, rookSourceSquare.col + (rookDirection * direction))
         }
-
-        val castleMove = CastleMove(sourceSquare, destinationSquare, sourcePieceColor, rookSourceSquare, rookDestinationSquare, isKingSideCastles)
+        val sourcePosition = Position(sourceSquare.row, sourceSquare.col)
+        val destinationPosition = Position(destinationSquare.row, destinationSquare.col)
+        val rookSourcePosition = Position(rookSourceSquare.row, rookSourceSquare.col)
+        val rookDestinationPosition = Position(rookDestinationSquare.row, rookDestinationSquare.col)
+        val castleMove = CastleMove(sourcePosition, destinationPosition, sourcePieceColor, rookSourcePosition, rookDestinationPosition, isKingSideCastles)
         applyMoveAndCheckForCheck(chessboard, castleMove, pieceColor, legalMoves)
     }
 

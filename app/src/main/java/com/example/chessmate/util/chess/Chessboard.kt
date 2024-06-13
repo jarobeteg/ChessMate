@@ -97,9 +97,9 @@ class Chessboard{
         return resultPieces
     }
 
-    private fun regularMovePiece(fromRow: Int, fromCol: Int, toRow: Int, toCol: Int, isMoveReversed: Boolean = false){
-        val sourceSquare = getSquare(fromRow, fromCol)
-        val destinationSquare = getSquare(toRow, toCol)
+    private fun regularMovePiece(sourcePosition: Position, destinationPosition: Position, isMoveReversed: Boolean = false){
+        val sourceSquare = getSquare(sourcePosition.row, sourcePosition.col)
+        val destinationSquare = getSquare(destinationPosition.row, destinationPosition.col)
 
         destinationSquare.isOccupied = true
         destinationSquare.pieceColor = sourceSquare.pieceColor
@@ -112,12 +112,12 @@ class Chessboard{
             destinationSquare.moveReversed()
         }
 
-        removePiece(fromRow, fromCol)
+        removePiece(sourcePosition)
     }
 
-    private fun moveAndCapturePiece(fromRow: Int, fromCol: Int, toRow: Int, toCol: Int, capturedPieceColor: PieceColor, capturedPieceType: PieceType, isMoveReversed: Boolean = false){
-        val sourceSquare = getSquare(fromRow, fromCol)
-        val destinationSquare = getSquare(toRow, toCol)
+    private fun moveAndCapturePiece(sourcePosition: Position, destinationPosition: Position, capturedPieceColor: PieceColor, capturedPieceType: PieceType, isMoveReversed: Boolean = false){
+        val sourceSquare = getSquare(sourcePosition.row, sourcePosition.col)
+        val destinationSquare = getSquare(destinationPosition.row, destinationPosition.col)
 
         if (!isMoveReversed){
             destinationSquare.isOccupied = true
@@ -126,7 +126,7 @@ class Chessboard{
 
             sourceSquare.movePerformed()
             destinationSquare.movePerformed()
-            removePiece(fromRow, fromCol)
+            removePiece(sourcePosition)
         } else {
             destinationSquare.isOccupied = true
             destinationSquare.pieceColor = sourceSquare.pieceColor
@@ -140,9 +140,9 @@ class Chessboard{
         }
     }
 
-    private fun pawnPromotionMovePiece(fromRow: Int, fromCol: Int, toRow: Int, toCol: Int, promotedPieceColor: PieceColor, promotedPieceType: PieceType, isMoveReversed: Boolean = false){
-        val sourceSquare = getSquare(fromRow, fromCol)
-        val destinationSquare = getSquare(toRow, toCol)
+    private fun pawnPromotionMovePiece(sourcePosition: Position, destinationPosition: Position, promotedPieceColor: PieceColor, promotedPieceType: PieceType, isMoveReversed: Boolean = false){
+        val sourceSquare = getSquare(sourcePosition.row, sourcePosition.col)
+        val destinationSquare = getSquare(destinationPosition.row, destinationPosition.col)
 
         if (!isMoveReversed){
             destinationSquare.isOccupied = true
@@ -151,20 +151,20 @@ class Chessboard{
 
             sourceSquare.movePerformed()
             destinationSquare.movePerformed()
-            removePiece(fromRow, fromCol)
+            removePiece(sourcePosition)
         } else {
             destinationSquare.isOccupied = true
             destinationSquare.pieceColor = promotedPieceColor
             destinationSquare.pieceType = PieceType.PAWN
 
             destinationSquare.moveReversed()
-            removePiece(fromRow, fromCol)
+            removePiece(sourcePosition)
         }
     }
 
-    private fun pawnPromotionCaptureMovePiece(fromRow: Int, fromCol: Int, toRow: Int, toCol: Int, promotedPieceColor: PieceColor, promotedPieceType: PieceType, capturedPieceColor: PieceColor, capturedPieceType: PieceType, isMoveReversed: Boolean = false){
-        val sourceSquare = getSquare(fromRow, fromCol)
-        val destinationSquare = getSquare(toRow, toCol)
+    private fun pawnPromotionCaptureMovePiece(sourcePosition: Position, destinationPosition: Position, promotedPieceColor: PieceColor, promotedPieceType: PieceType, capturedPieceColor: PieceColor, capturedPieceType: PieceType, isMoveReversed: Boolean = false){
+        val sourceSquare = getSquare(sourcePosition.row, sourcePosition.col)
+        val destinationSquare = getSquare(destinationPosition.row, destinationPosition.col)
 
         if (!isMoveReversed){
             destinationSquare.isOccupied = true
@@ -173,7 +173,7 @@ class Chessboard{
 
             sourceSquare.movePerformed()
             destinationSquare.movePerformed()
-            removePiece(fromRow, fromCol)
+            removePiece(sourcePosition)
         } else {
             destinationSquare.isOccupied = true
             destinationSquare.pieceColor = promotedPieceColor
@@ -187,21 +187,21 @@ class Chessboard{
         }
     }
 
-    private fun enPassantMovePiece(fromRow: Int, fromCol: Int, toRow: Int, toCol: Int, opponentPawnRow: Int, opponentPawnCol: Int, isMoveReversed: Boolean = false){
+    private fun enPassantMovePiece(sourcePosition: Position, destinationPosition: Position, opponentPawnPosition: Position, isMoveReversed: Boolean = false){
         TODO("Not yet implemented")
     }
 
-    private fun castleMovePiece(fromRow: Int, fromCol: Int, toRow: Int, toCol: Int, fromRookRow: Int, fromRookCol: Int, toRookRow: Int, toRookCol: Int, isMoveReversed: Boolean = false){
-        val sourceSquare = getSquare(fromRow, fromCol)
-        val destinationSquare = getSquare(toRow, toCol)
-        val rookSourceSquare = getSquare(fromRookRow, fromRookCol)
-        val rookDestinationSquare = getSquare(toRookRow, toRookCol)
+    private fun castleMovePiece(sourcePosition: Position, destinationPosition: Position, rookSourcePosition: Position, rookDestinationPosition: Position, isMoveReversed: Boolean = false){
+        val sourceSquare = getSquare(sourcePosition.row, sourcePosition.col)
+        val destinationSquare = getSquare(destinationPosition.row, destinationPosition.col)
+        val rookSourceSquare = getSquare(rookSourcePosition.row, rookSourcePosition.col)
+        val rookDestinationSquare = getSquare(rookDestinationPosition.row, rookDestinationPosition.col)
 
         destinationSquare.isOccupied = true
         destinationSquare.pieceColor = sourceSquare.pieceColor
         destinationSquare.pieceType = sourceSquare.pieceType
 
-        removePiece(fromRow, fromCol)
+        removePiece(sourcePosition)
 
         rookDestinationSquare.isOccupied = true
         rookDestinationSquare.pieceColor = rookSourceSquare.pieceColor
@@ -217,45 +217,38 @@ class Chessboard{
             rookDestinationSquare.moveReversed()
         }
 
-        removePiece(fromRookRow, fromRookCol)
+        removePiece(rookSourcePosition)
     }
 
-    private fun removePiece(row: Int, col: Int) {
-        getSquare(row, col).clearSquare()
+    private fun removePiece(position: Position) {
+        getSquare(position.row, position.col).clearSquare()
     }
 
     fun performMove(move: Move){
         when (move){
             is RegularMove -> {
-                regularMovePiece(move.sourceSquare.row, move.sourceSquare.col,
-                    move.destinationSquare.row, move.destinationSquare.col)
+                regularMovePiece(move.sourcePosition, move.destinationPosition)
             }
             is MoveAndCapture -> {
-                moveAndCapturePiece(move.sourceSquare.row, move.sourceSquare.col,
-                    move.destinationSquare.row, move.destinationSquare.col,
+                moveAndCapturePiece(move.sourcePosition, move.destinationPosition,
                     move.capturedPieceColor, move.capturedPieceType)
             }
             is PawnPromotionMove -> {
-                pawnPromotionMovePiece(move.sourceSquare.row, move.sourceSquare.col,
-                    move.destinationSquare.row, move.destinationSquare.col,
+                pawnPromotionMovePiece(move.sourcePosition, move.destinationPosition,
                     move.promotedPieceColor, move.promotedPieceType)
             }
             is PawnPromotionCaptureMove -> {
-                pawnPromotionCaptureMovePiece(move.sourceSquare.row, move.sourceSquare.col,
-                    move.destinationSquare.row, move.destinationSquare.col,
+                pawnPromotionCaptureMovePiece(move.sourcePosition, move.destinationPosition,
                     move.promotedPieceColor, move.promotedPieceType,
                     move.capturedPieceColor, move.capturedPieceType)
             }
             is EnPassantMove -> {
-                enPassantMovePiece(move.sourceSquare.row, move.sourceSquare.col,
-                    move.destinationSquare.row, move.destinationSquare.col,
-                    move.opponentPawnSquare.row, move.opponentPawnSquare.col)
+                enPassantMovePiece(move.sourcePosition, move.destinationPosition,
+                    move.opponentPawnPosition)
             }
             is CastleMove -> {
-                castleMovePiece(move.sourceSquare.row, move.sourceSquare.col,
-                    move.destinationSquare.row, move.destinationSquare.col,
-                    move.rookSourceSquare.row, move.rookSourceSquare.col,
-                    move.rookDestinationSquare.row, move.rookDestinationSquare.col)
+                castleMovePiece(move.sourcePosition, move.destinationPosition,
+                    move.rookSourcePosition, move.rookDestinationPosition)
             }
         }
     }
@@ -263,35 +256,28 @@ class Chessboard{
     fun reverseMove(move: Move){
         when (move){
             is RegularMove -> {
-                regularMovePiece(move.destinationSquare.row, move.destinationSquare.col,
-                    move.sourceSquare.row, move.sourceSquare.col, true)
+                regularMovePiece(move.destinationPosition, move.sourcePosition,true)
             }
             is MoveAndCapture -> {
-                moveAndCapturePiece(move.destinationSquare.row, move.destinationSquare.col,
-                    move.sourceSquare.row, move.sourceSquare.col,
+                moveAndCapturePiece(move.destinationPosition, move.sourcePosition,
                     move.capturedPieceColor, move.capturedPieceType, true)
             }
             is PawnPromotionMove -> {
-                pawnPromotionMovePiece(move.destinationSquare.row, move.destinationSquare.col,
-                    move.sourceSquare.row, move.sourceSquare.col,
+                pawnPromotionMovePiece(move.destinationPosition, move.sourcePosition,
                     move.promotedPieceColor, move.promotedPieceType, true)
             }
             is PawnPromotionCaptureMove -> {
-                pawnPromotionCaptureMovePiece(move.destinationSquare.row, move.destinationSquare.col,
-                    move.sourceSquare.row, move.sourceSquare.col,
+                pawnPromotionCaptureMovePiece(move.destinationPosition, move.sourcePosition,
                     move.promotedPieceColor, move.promotedPieceType,
                     move.capturedPieceColor, move.capturedPieceType, true)
             }
             is EnPassantMove -> {
-                enPassantMovePiece(move.destinationSquare.row, move.destinationSquare.col,
-                    move.sourceSquare.row, move.sourceSquare.col,
-                    move.opponentPawnSquare.row, move.opponentPawnSquare.col, true)
+                enPassantMovePiece(move.destinationPosition, move.sourcePosition,
+                    move.opponentPawnPosition, true)
             }
             is CastleMove -> {
-                castleMovePiece(move.destinationSquare.row, move.destinationSquare.col,
-                    move.sourceSquare.row, move.sourceSquare.col,
-                    move.rookDestinationSquare.row, move.rookDestinationSquare.col,
-                    move.rookSourceSquare.row, move.rookSourceSquare.col, true)
+                castleMovePiece(move.destinationPosition, move.sourcePosition,
+                    move.rookDestinationPosition, move.rookSourcePosition, true)
             }
         }
     }

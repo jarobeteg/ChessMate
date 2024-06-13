@@ -23,6 +23,7 @@ import com.example.chessmate.util.chess.MoveAndCapture
 import com.example.chessmate.util.chess.PawnPromotionCaptureMove
 import com.example.chessmate.util.chess.PawnPromotionMove
 import com.example.chessmate.util.chess.PieceType
+import com.example.chessmate.util.chess.Position
 import com.example.chessmate.util.chess.PromotionDialogFragment
 import com.example.chessmate.util.chess.RegularMove
 import com.example.chessmate.util.chess.Square
@@ -222,8 +223,8 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
         removeHighlightOpponents()
         removeMoveHighlights()
 
-        addMoveHighlights(move.sourceSquare.row, move.sourceSquare.col)
-        addMoveHighlights(move.destinationSquare.row, move.destinationSquare.col)
+        addMoveHighlights(move.sourcePosition.row, move.sourcePosition.col)
+        addMoveHighlights(move.destinationPosition.row, move.destinationPosition.col)
 
         when (move){
             is RegularMove -> {
@@ -256,26 +257,26 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
     }
 
     private fun updateRegularMoveUI(move: RegularMove) {
-        removePieceUI(move.sourceSquare)
-        addPieceUI(move.destinationSquare)
+        removePieceUI(move.sourcePosition)
+        addPieceUI(move.destinationPosition)
     }
 
     private fun updateMoveAndCaptureUI(move: MoveAndCapture) {
-        removePieceUI(move.sourceSquare)
-        removePieceUI(move.destinationSquare)
-        addPieceUI(move.destinationSquare)
+        removePieceUI(move.sourcePosition)
+        removePieceUI(move.destinationPosition)
+        addPieceUI(move.destinationPosition)
     }
 
     private fun updatePawnPromotionMoveUI(move: PawnPromotionMove) {
-        removePieceUI(move.sourceSquare)
-        addPieceUI(move.destinationSquare)
+        removePieceUI(move.sourcePosition)
+        addPieceUI(move.destinationPosition)
 
     }
 
     private fun updatePawnPromotionCaptureMoveUI(move: PawnPromotionCaptureMove) {
-        removePieceUI(move.sourceSquare)
-        removePieceUI(move.destinationSquare)
-        addPieceUI(move.destinationSquare)
+        removePieceUI(move.sourcePosition)
+        removePieceUI(move.destinationPosition)
+        addPieceUI(move.destinationPosition)
     }
 
     private fun updateEnPassantMoveUI(move: EnPassantMove) {
@@ -283,39 +284,40 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
     }
 
     private fun updateCastleMoveUI(move: CastleMove) {
-        removePieceUI(move.sourceSquare)
-        addPieceUI(move.destinationSquare)
-        removePieceUI(move.rookSourceSquare)
-        addPieceUI(move.rookDestinationSquare)
+        removePieceUI(move.sourcePosition)
+        addPieceUI(move.destinationPosition)
+        removePieceUI(move.rookSourcePosition)
+        addPieceUI(move.rookDestinationPosition)
     }
 
     override fun onPlayerMoveCalculated(legalMoves: MutableList<Move>, square: Square) {
         selectedSquare = square
         for (move in legalMoves){
+            val destinationSquare = chessGameManager.chessboard.getSquare(move.destinationPosition.row, move.destinationPosition.col)
             when (move){
                 is RegularMove -> {
-                    if (!move.destinationSquare.isOccupied){
-                        addHighlightSquare(move.destinationSquare.row, move.destinationSquare.col)
+                    if (!destinationSquare.isOccupied){
+                        addHighlightSquare(move.destinationPosition.row, move.destinationPosition.col)
                     }
                 }
                 is MoveAndCapture -> {
-                    if (move.destinationSquare.isOccupied){
-                        addHighlightOpponent(move.destinationSquare.row, move.destinationSquare.col)
+                    if (destinationSquare.isOccupied){
+                        addHighlightOpponent(move.destinationPosition.row, move.destinationPosition.col)
                     }
                 }
                 is PawnPromotionMove -> {
-                    if (!move.destinationSquare.isOccupied){
-                        addHighlightSquare(move.destinationSquare.row, move.destinationSquare.col)
+                    if (!destinationSquare.isOccupied){
+                        addHighlightSquare(move.destinationPosition.row, move.destinationPosition.col)
                     }
                 }
                 is PawnPromotionCaptureMove -> {
-                    if (move.destinationSquare.isOccupied){
-                        addHighlightOpponent(move.destinationSquare.row, move.destinationSquare.col)
+                    if (destinationSquare.isOccupied){
+                        addHighlightOpponent(move.destinationPosition.row, move.destinationPosition.col)
                     }
                 }
                 is EnPassantMove -> {}
                 is CastleMove -> {
-                    addHighlightSquare(move.destinationSquare.row, move.destinationSquare.col)
+                    addHighlightSquare(move.destinationPosition.row, move.destinationPosition.col)
                 }
             }
         }
@@ -335,8 +337,8 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
         updateTurnNumberUI()
         when (lastMove){
             is RegularMove -> {
-                val sourceSquareNotation = chessGameManager.squareToNotation(lastMove.sourceSquare)
-                val destinationSquareNotation = chessGameManager.squareToNotation(lastMove.destinationSquare)
+                val sourceSquareNotation = chessGameManager.squareToNotation(lastMove.sourcePosition)
+                val destinationSquareNotation = chessGameManager.squareToNotation(lastMove.destinationPosition)
 
                 val resultNotation = StringBuilder()
                 resultNotation.append(sourceSquareNotation)
@@ -354,8 +356,8 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
                 addDrawableStartCompat(lastMove.sourcePieceType, lastMove.sourcePieceColor)
             }
             is MoveAndCapture -> {
-                val sourceSquareNotation = chessGameManager.squareToNotation(lastMove.sourceSquare)
-                val destinationSquareNotation = chessGameManager.squareToNotation(lastMove.destinationSquare)
+                val sourceSquareNotation = chessGameManager.squareToNotation(lastMove.sourcePosition)
+                val destinationSquareNotation = chessGameManager.squareToNotation(lastMove.destinationPosition)
 
                 val resultNotation = StringBuilder()
                 resultNotation.append(sourceSquareNotation)
@@ -373,8 +375,8 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
                 addDrawableStartCompat(lastMove.sourcePieceType, lastMove.sourcePieceColor)
             }
             is PawnPromotionMove -> {
-                val sourceSquareNotation = chessGameManager.squareToNotation(lastMove.sourceSquare)
-                val destinationSquareNotation = chessGameManager.squareToNotation(lastMove.destinationSquare)
+                val sourceSquareNotation = chessGameManager.squareToNotation(lastMove.sourcePosition)
+                val destinationSquareNotation = chessGameManager.squareToNotation(lastMove.destinationPosition)
 
                 val resultNotation = StringBuilder()
                 resultNotation.append(sourceSquareNotation)
@@ -392,8 +394,8 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
                 addDrawableEndCompat(lastMove.promotedPieceType, lastMove.promotedPieceColor)
             }
             is PawnPromotionCaptureMove -> {
-                val sourceSquareNotation = chessGameManager.squareToNotation(lastMove.sourceSquare)
-                val destinationSquareNotation = chessGameManager.squareToNotation(lastMove.destinationSquare)
+                val sourceSquareNotation = chessGameManager.squareToNotation(lastMove.sourcePosition)
+                val destinationSquareNotation = chessGameManager.squareToNotation(lastMove.destinationPosition)
 
                 val resultNotation = StringBuilder()
                 resultNotation.append(sourceSquareNotation)
@@ -411,8 +413,8 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
                 addDrawableEndCompat(lastMove.promotedPieceType, lastMove.promotedPieceColor)
             }
             is EnPassantMove -> {
-                val sourceSquareNotation = chessGameManager.squareToNotation(lastMove.sourceSquare)
-                val destinationSquareNotation = chessGameManager.squareToNotation(lastMove.destinationSquare)
+                val sourceSquareNotation = chessGameManager.squareToNotation(lastMove.sourcePosition)
+                val destinationSquareNotation = chessGameManager.squareToNotation(lastMove.destinationPosition)
 
                 val resultNotation = StringBuilder()
                 resultNotation.append(sourceSquareNotation)
@@ -614,13 +616,15 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
         blackLastMove.setCompoundDrawablesRelativeWithIntrinsicBounds(existingStartDrawable[0], null, null, null)
     }
 
-    private fun addPieceUI(square: Square) {
+    private fun addPieceUI(position: Position) {
+        val square = chessGameManager.chessboard.getSquare(position.row, position.col)
         val pieceImageView = createPieceImageView(square)
         square.imageView = pieceImageView
         square.frameLayout?.addView(pieceImageView)
     }
 
-    private fun removePieceUI(square: Square) {
+    private fun removePieceUI(position: Position) {
+        val square = chessGameManager.chessboard.getSquare(position.row, position.col)
         square.frameLayout?.removeView(square.imageView)
         square.clearUI()
     }
