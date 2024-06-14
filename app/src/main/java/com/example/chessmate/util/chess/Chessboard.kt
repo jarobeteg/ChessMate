@@ -38,6 +38,10 @@ class Chessboard{
         return row in 0 until 8 && col in 0 until 8
     }
 
+    fun isValidPosition(position: Position): Boolean {
+        return position.row in 0 until 8 && position.col in 0 until 8
+    }
+
     fun isEmptySquare(row: Int, col: Int): Boolean{
         return getSquare(row, col).pieceType == PieceType.NONE
     }
