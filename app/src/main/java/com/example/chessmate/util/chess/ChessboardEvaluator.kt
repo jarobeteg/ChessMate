@@ -148,22 +148,31 @@ class ChessboardEvaluator(){
 
     private fun evaluateOpenFiles(chessboard: Chessboard, kingSquare: Square): Float {
         var openFilesScore = 0.0F
-        val col = kingSquare.col
+        var openFileCounter = 0
+        var whitePawnCounter = 0
+        var blackPawnCounter = 0
 
-        val isFileOpen = (0..7).all { row ->
-            val square = chessboard.getSquare(row, col)
-            !square.isOccupied || square.pieceType != PieceType.PAWN
-        }
+        for (col in 0 until 8) {
+            for (row in 0 until 8) {
+                val square = chessboard.getSquare(row, col)
+                if (square.pieceType != PieceType.PAWN) {
+                    openFileCounter++
+                } else if (square.pieceType == PieceType.PAWN && square.pieceColor == PieceColor.WHITE) {
+                    whitePawnCounter++
+                } else if (square.pieceType == PieceType.PAWN && square.pieceColor == PieceColor.BLACK) {
+                    blackPawnCounter++
+                }
+            }
 
-        val isFileSemiOpen = (0..7).all { row ->
-            val square = chessboard.getSquare(row, col)
-            (square.isOccupied && square.pieceColor != kingSquare.pieceColor && square.pieceType == PieceType.PAWN)
-        }
-
-        if (isFileOpen) {
-            openFilesScore = 1.0F
-        } else if (isFileSemiOpen) {
-            openFilesScore = 0.5F
+            if (openFileCounter == 8) {
+                openFilesScore += 1.0F
+            }
+            if ((whitePawnCounter > 0 && blackPawnCounter == 0) || (whitePawnCounter == 0 && blackPawnCounter > 0)) {
+                openFilesScore += 0.5F
+            }
+            openFileCounter = 0
+            whitePawnCounter = 0
+            blackPawnCounter = 0
         }
 
         return openFilesScore
