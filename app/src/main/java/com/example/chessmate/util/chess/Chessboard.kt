@@ -34,6 +34,10 @@ class Chessboard{
         return board[row][col]
     }
 
+    fun getSquare(position: Position): Square {
+        return board[position.row][position.col]
+    }
+
     fun isValidSquare(row: Int, col: Int): Boolean{
         return row in 0 until 8 && col in 0 until 8
     }
