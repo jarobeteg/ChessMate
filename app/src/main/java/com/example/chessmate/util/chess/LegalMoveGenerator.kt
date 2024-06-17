@@ -1,5 +1,7 @@
 package com.example.chessmate.util.chess
 
+import android.system.Os
+
 class LegalMoveGenerator(){
 
     fun generateLegalMoves(chessboard: Chessboard, pieceColor: PieceColor, isForBot: Boolean = false): MutableList<Move>{
@@ -23,6 +25,62 @@ class LegalMoveGenerator(){
         }
 
         return legalMoves
+    }
+
+    fun canMoveTo(chessboard: Chessboard, square: Square, position: Position, isForBot: Boolean): Boolean{
+        when (square.pieceType) {
+            PieceType.PAWN -> {
+                val legalMoves = generatePawnMoves(chessboard, square.row, square.col, square.pieceColor, isForBot)
+                for (move in legalMoves) {
+                    if (move.destinationPosition.row == position.row && move.destinationPosition.col == position.col) {
+                        return true
+                    }
+                }
+            }
+            PieceType.KNIGHT -> {
+                val legalMoves = generateKnightMoves(chessboard, square.row, square.col, square.pieceColor, isForBot)
+                for (move in legalMoves) {
+                    if (move.destinationPosition.row == position.row && move.destinationPosition.col == position.col) {
+                        return true
+                    }
+                }
+            }
+            PieceType.BISHOP -> {
+                val legalMoves = generateBishopMoves(chessboard, square.row, square.col, square.pieceColor, isForBot)
+                for (move in legalMoves) {
+                    if (move.destinationPosition.row == position.row && move.destinationPosition.col == position.col) {
+                        return true
+                    }
+                }
+            }
+            PieceType.ROOK -> {
+                val legalMoves = generateRookMoves(chessboard, square.row, square.col, square.pieceColor, isForBot)
+                for (move in legalMoves) {
+                    if (move.destinationPosition.row == position.row && move.destinationPosition.col == position.col) {
+                        return true
+                    }
+                }
+            }
+            PieceType.QUEEN -> {
+                val legalMoves = generateQueenMoves(chessboard, square.row, square.col, square.pieceColor, isForBot)
+                for (move in legalMoves) {
+                    if (move.destinationPosition.row == position.row && move.destinationPosition.col == position.col) {
+                        return true
+                    }
+                }
+            }
+            PieceType.KING -> {
+                val legalMoves = generateKingMoves(chessboard, square.row, square.col, square.pieceColor, isForBot)
+                for (move in legalMoves) {
+                    if (move.destinationPosition.row == position.row && move.destinationPosition.col == position.col) {
+                        return true
+                    }
+                }
+            }
+            PieceType.NONE -> {}
+        }
+
+        return false
     }
 
     fun generatePawnMoves(chessboard: Chessboard, row: Int, col: Int, pieceColor: PieceColor, isForBot: Boolean = false): MutableList<Move>{

@@ -21,6 +21,8 @@ class ChessboardEvaluator(){
 
         positionScore += kingSafety(chessboard)
 
+        positionScore += centerControl(chessboard, legalMoveGenerator, botColor)
+
         return positionScore
     }
 
@@ -73,7 +75,7 @@ class ChessboardEvaluator(){
         val surroundingSquares = getSurroundingPositions(chessboard, Position(kingSquare.row, kingSquare.col))
 
         surroundingSquares.forEach { position ->
-            val square = chessboard.getSquare(position.row, position.col)
+            val square = chessboard.getSquare(position)
             if (square.isOccupied) {
                 if (square.pieceColor == kingColor) {
                     safetyScore += getProtectionScore(square.pieceType)
@@ -136,7 +138,7 @@ class ChessboardEvaluator(){
 
         positionToCheck.forEach { position ->
             if (chessboard.isValidPosition(position)) {
-                val square = chessboard.getSquare(position.row, position.col)
+                val square = chessboard.getSquare(position)
                 if (square.isOccupied && square.pieceColor == kingColor && square.pieceType == PieceType.PAWN){
                     pawnShieldScore += 0.5F
                 }
@@ -178,43 +180,96 @@ class ChessboardEvaluator(){
         return openFilesScore
     }
 
-    private fun centerControl(): Float{
+    private fun centerControl(chessboard: Chessboard, legalMoveGenerator: LegalMoveGenerator, botColor: PieceColor): Float{
         var centerControlScore = 0.0F
+
+        val centralSquares = listOf(Position(3,3), Position(3,4), Position(4,3), Position(4,4))
+        val extendedCentralSquares = listOf(
+            Position(2,2), Position(2,3), Position(2,4), Position(2,5),
+            Position(3,2), Position(3, 5), Position(4,2), Position(4,5),
+            Position(5,2), Position(5,3), Position(5,4), Position(5,5)
+        )
+
+        val centralSquareScore = 1.0F
+        val extendedCentralSquareScore = 0.5F
+
+        centerControlScore += evaluateControl(chessboard, legalMoveGenerator, centralSquares, centralSquareScore, botColor)
+        centerControlScore += evaluateControl(chessboard, legalMoveGenerator, extendedCentralSquares, extendedCentralSquareScore, botColor)
 
         return centerControlScore
     }
 
-    private fun pieceDevelopment(): Float{
+    private fun evaluateControl(chessboard: Chessboard, legalMoveGenerator: LegalMoveGenerator,
+                                positions: List<Position>, score: Float, botColor: PieceColor): Float {
+        var controlScore = 0.0F
+
+        positions.forEach { position ->
+            var num = isControlledBy(chessboard, legalMoveGenerator, position, PieceColor.WHITE, botColor == PieceColor.WHITE)
+            controlScore += num * score
+
+            num = isControlledBy(chessboard, legalMoveGenerator, position, PieceColor.BLACK, botColor == PieceColor.BLACK)
+            controlScore -= num * score
+        }
+
+        return controlScore
+    }
+
+    private fun isControlledBy(chessboard: Chessboard, legalMoveGenerator: LegalMoveGenerator,
+                               position: Position, color: PieceColor, isForBot: Boolean): Int {
+        val controllingPieces = getControllingPieces(chessboard, legalMoveGenerator, position, color, isForBot)
+
+        return controllingPieces.count()
+    }
+
+    private fun getControllingPieces(chessboard: Chessboard, legalMoveGenerator: LegalMoveGenerator, position: Position, color: PieceColor, isForBot: Boolean): List<Square> {
+        var controllingPieces = mutableListOf<Square>()
+
+        for (row in 0 until 8) {
+            for (col in 0 until 8) {
+                val square = chessboard.getSquare(row, col)
+                if (square.isOccupied && square.pieceColor == color) {
+                    if (legalMoveGenerator.canMoveTo(chessboard, square, position, isForBot)) {
+                        controllingPieces.add(square)
+                    }
+                }
+            }
+        }
+
+
+        return controllingPieces
+    }
+
+    private fun pieceDevelopment(chessboard: Chessboard): Float{
         var pieceDevelopmentScore = 0.0F
 
         return pieceDevelopmentScore
     }
 
-    private fun pawnPromotion(): Float{
+    private fun pawnPromotion(chessboard: Chessboard): Float{
         var pawnPromotionScore = 0.0F
 
         return pawnPromotionScore
     }
 
-    private fun pawnChains(): Float{
+    private fun pawnChains(chessboard: Chessboard): Float{
         var pawnChainsScore = 0.0F
 
         return pawnChainsScore
     }
 
-    private fun kingActivity(): Float{
+    private fun kingActivity(chessboard: Chessboard): Float{
         var kingActivityScore = 0.0F
 
         return kingActivityScore
     }
 
-    private fun tacticalOpportunities(): Float{
+    private fun tacticalOpportunities(chessboard: Chessboard): Float{
         var tacticalOpportunitiesScore = 0.0F
 
         return tacticalOpportunitiesScore
     }
 
-    private fun tempo(): Float{
+    private fun tempo(chessboard: Chessboard): Float{
         var tempoScore = 0.0F
 
         return tempoScore
