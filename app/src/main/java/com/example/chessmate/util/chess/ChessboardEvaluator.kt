@@ -12,7 +12,7 @@ class ChessboardEvaluator(){
         PieceType.QUEEN to 9.0F
     )
 
-    fun evaluatePosition(chessboard: Chessboard, legalMoveGenerator: LegalMoveGenerator, playerColor: PieceColor, botColor: PieceColor, gamePhase: String): Float{
+    fun evaluatePosition(chessboard: Chessboard, legalMoveGenerator: LegalMoveGenerator, playerColor: PieceColor, botColor: PieceColor, gamePhase: String = "none"): Float{
         var positionScore = 0.00F
 
         positionScore += materialBalance(chessboard)
@@ -24,6 +24,8 @@ class ChessboardEvaluator(){
         positionScore += centerControl(chessboard, legalMoveGenerator, botColor)
 
         positionScore += pieceDevelopment(chessboard)
+
+        positionScore += pawnPromotion(chessboard, botColor)
 
         return positionScore
     }
@@ -297,8 +299,19 @@ class ChessboardEvaluator(){
         return developmentScore
     }
 
-    private fun pawnPromotion(chessboard: Chessboard): Float{
+    private fun pawnPromotion(chessboard: Chessboard, botColor: PieceColor): Float{
         var pawnPromotionScore = 0.0F
+        val promotionProximityScore = listOf(0.0F, 0.2F, 0.4F, 0.8F, 1.0F, 1.2F, 1.5F)
+
+        for (row in 0 until 8) {
+            for (col in 0 until 8) {
+                val square = chessboard.getSquare(row, col)
+                if (square.pieceType == PieceType.PAWN){
+                    val proximityScore = if (square.pieceColor == botColor) promotionProximityScore[row] else promotionProximityScore[7 - row]
+                    pawnPromotionScore += if (square.pieceColor == PieceColor.WHITE) proximityScore else -proximityScore
+                }
+            }
+        }
 
         return pawnPromotionScore
     }
