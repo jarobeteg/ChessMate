@@ -2,7 +2,9 @@ package com.example.chessmate.util.chess
 
 class Chessboard{
     private val board: Array<Array<Square>> = Array(8) { Array(8) { Square(0, 0, false,  PieceColor.NONE, PieceType.NONE) } }
-    var gamePhase: GamePhase = GamePhase.NONE
+    private var isBlackCastled = false
+    private var isWhiteCastled = false
+    private var gamePhase: GamePhase = GamePhase.NONE
 
     init {
         for (row in 0 until 8) {
@@ -67,6 +69,18 @@ class Chessboard{
             return false
         }
         return getSquare(row, col).pieceType == PieceType.KING && getSquare(row, col).pieceColor != pieceColor
+    }
+
+    fun getGamePhase(): GamePhase {
+        return this.gamePhase
+    }
+
+    fun updateGamePhase(gamePhase: GamePhase) {
+        this.gamePhase = gamePhase
+    }
+
+    fun isKingCastled(kingColor: PieceColor): Boolean {
+        return if (kingColor == PieceColor.WHITE) isWhiteCastled else isBlackCastled
     }
 
     fun getKingSquare(color: PieceColor): Square{
@@ -204,7 +218,7 @@ class Chessboard{
         TODO("Not yet implemented")
     }
 
-    private fun castleMovePiece(sourcePosition: Position, destinationPosition: Position, rookSourcePosition: Position, rookDestinationPosition: Position, isMoveReversed: Boolean = false){
+    private fun castleMovePiece(sourcePosition: Position, destinationPosition: Position, rookSourcePosition: Position, rookDestinationPosition: Position, sourcePieceColor: PieceColor, isMoveReversed: Boolean = false){
         val sourceSquare = getSquare(sourcePosition.row, sourcePosition.col)
         val destinationSquare = getSquare(destinationPosition.row, destinationPosition.col)
         val rookSourceSquare = getSquare(rookSourcePosition.row, rookSourcePosition.col)
@@ -225,9 +239,21 @@ class Chessboard{
             destinationSquare.movePerformed()
             rookSourceSquare.movePerformed()
             rookDestinationSquare.movePerformed()
+
+            if (sourcePieceColor == PieceColor.WHITE) {
+                isWhiteCastled = true
+            } else {
+                isBlackCastled = true
+            }
         } else {
             destinationSquare.moveReversed()
             rookDestinationSquare.moveReversed()
+
+            if (sourcePieceColor == PieceColor.WHITE) {
+                isWhiteCastled = false
+            }else {
+                isBlackCastled = false
+            }
         }
 
         removePiece(rookSourcePosition)
@@ -261,7 +287,7 @@ class Chessboard{
             }
             is CastleMove -> {
                 castleMovePiece(move.sourcePosition, move.destinationPosition,
-                    move.rookSourcePosition, move.rookDestinationPosition)
+                    move.rookSourcePosition, move.rookDestinationPosition, move.sourcePieceColor)
             }
         }
     }
@@ -290,7 +316,7 @@ class Chessboard{
             }
             is CastleMove -> {
                 castleMovePiece(move.destinationPosition, move.sourcePosition,
-                    move.rookDestinationPosition, move.rookSourcePosition, true)
+                    move.rookDestinationPosition, move.rookSourcePosition, move.sourcePieceColor, true)
             }
         }
     }
