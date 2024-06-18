@@ -12,7 +12,7 @@ class ChessboardEvaluator(){
         PieceType.QUEEN to 9.0F
     )
 
-    fun evaluatePosition(chessboard: Chessboard, legalMoveGenerator: LegalMoveGenerator, playerColor: PieceColor, botColor: PieceColor, gamePhase: String = "none"): Float{
+    fun evaluatePosition(chessboard: Chessboard, legalMoveGenerator: LegalMoveGenerator, playerColor: PieceColor, botColor: PieceColor): Float{
         var positionScore = 0.00F
 
         positionScore += materialBalance(chessboard)
@@ -23,11 +23,19 @@ class ChessboardEvaluator(){
 
         positionScore += centerControl(chessboard, legalMoveGenerator, botColor)
 
-        positionScore += pieceDevelopment(chessboard)
+        if (chessboard.getGamePhase() != GamePhase.ENDGAME) {
+            positionScore += pieceDevelopment(chessboard)
+        }
 
         positionScore += pawnPromotion(chessboard, botColor)
 
         positionScore += pawnChains(chessboard, playerColor, botColor)
+
+        positionScore += kingActivity(chessboard)
+
+        positionScore += tacticalOpportunities(chessboard)
+
+        positionScore += tempo(chessboard)
 
         return positionScore
     }
@@ -363,7 +371,50 @@ class ChessboardEvaluator(){
     private fun kingActivity(chessboard: Chessboard): Float{
         var kingActivityScore = 0.0F
 
+        val whiteKingPosition = chessboard.getKingPosition(PieceColor.WHITE)
+        val blackKingPosition = chessboard.getKingPosition(PieceColor.BLACK)
+
+        if (chessboard.getGamePhase() == GamePhase.OPENING || chessboard.getGamePhase() == GamePhase.MIDGAME) {
+            if (chessboard.isKingCastled(PieceColor.WHITE)) {
+                kingActivityScore += 1.0F
+            } else {
+                kingActivityScore -= 1.0F
+            }
+
+            if (chessboard.isKingCastled(PieceColor.BLACK)) {
+                kingActivityScore -= 1.0F
+            } else {
+                kingActivityScore += 1.0F
+            }
+        }
+
+        if (chessboard.getGamePhase() == GamePhase.ENDGAME) {
+            kingActivityScore += evaluateKingCentralization(whiteKingPosition)
+            kingActivityScore -= evaluateKingCentralization(blackKingPosition)
+        }
+
         return kingActivityScore
+    }
+
+    private fun evaluateKingCentralization(kingPosition: Position): Float {
+        var centralizationScore = 0.0F
+
+        val centralSquares = listOf(Position(3,3), Position(3,4), Position(4,3), Position(4,4))
+        val extendedCentralSquares = listOf(
+            Position(2,2), Position(2,3), Position(2,4), Position(2,5),
+            Position(3,2), Position(3, 5), Position(4,2), Position(4,5),
+            Position(5,2), Position(5,3), Position(5,4), Position(5,5)
+        )
+
+        if (centralSquares.contains(kingPosition)) {
+            centralizationScore += 2.0F
+        }
+
+        if (extendedCentralSquares.contains(kingPosition)) {
+            centralizationScore += 1.0F
+        }
+
+        return centralizationScore
     }
 
     private fun tacticalOpportunities(chessboard: Chessboard): Float{

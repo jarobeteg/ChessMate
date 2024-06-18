@@ -16,6 +16,9 @@ class Chessboard{
 
     fun cloneBoardWithoutUI(): Chessboard{
         val clonedBoard = Chessboard()
+        clonedBoard.isWhiteCastled = this.isWhiteCastled
+        clonedBoard.isBlackCastled = this.isBlackCastled
+        clonedBoard.gamePhase = this.gamePhase
 
         for (row in 0 until 8){
             for (col in 0 until 8){
@@ -80,14 +83,20 @@ class Chessboard{
     }
 
     fun isKingCastled(kingColor: PieceColor): Boolean {
-        return if (kingColor == PieceColor.WHITE) isWhiteCastled else isBlackCastled
+        return if (kingColor == PieceColor.WHITE) this.isWhiteCastled else this.isBlackCastled
     }
 
-    fun getKingSquare(color: PieceColor): Square{
+    fun getKingSquare(color: PieceColor): Square {
         return if (color == PieceColor.BLACK) getBlackKingSquare() else getWhiteKingSquare()
     }
 
-    private fun getWhiteKingSquare(): Square{
+    fun getKingPosition(color: PieceColor): Position {
+        val square = getKingSquare(color)
+        val position = Position(square.row, square.col)
+        return position
+    }
+
+    private fun getWhiteKingSquare(): Square {
         for (row in 0 until 8) {
             for (col in 0 until 8) {
                 val square = getSquare(row, col)
@@ -99,7 +108,7 @@ class Chessboard{
         throw IllegalStateException("White king not found on the board")
     }
 
-    private fun getBlackKingSquare(): Square{
+    private fun getBlackKingSquare(): Square {
         for (row in 0 until 8) {
             for (col in 0 until 8) {
                 val square = getSquare(row, col)
@@ -241,18 +250,18 @@ class Chessboard{
             rookDestinationSquare.movePerformed()
 
             if (sourcePieceColor == PieceColor.WHITE) {
-                isWhiteCastled = true
+                this.isWhiteCastled = true
             } else {
-                isBlackCastled = true
+                this.isBlackCastled = true
             }
         } else {
             destinationSquare.moveReversed()
             rookDestinationSquare.moveReversed()
 
             if (sourcePieceColor == PieceColor.WHITE) {
-                isWhiteCastled = false
+                this.isWhiteCastled = false
             }else {
-                isBlackCastled = false
+                this.isBlackCastled = false
             }
         }
 
