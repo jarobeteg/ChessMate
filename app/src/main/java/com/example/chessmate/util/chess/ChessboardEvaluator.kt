@@ -12,7 +12,7 @@ class ChessboardEvaluator(){
         PieceType.QUEEN to 9.0F
     )
 
-    fun evaluatePosition(chessboard: Chessboard, legalMoveGenerator: LegalMoveGenerator, playerColor: PieceColor, botColor: PieceColor): Float{
+    fun evaluatePosition(chessboard: Chessboard, legalMoveGenerator: LegalMoveGenerator, playerColor: PieceColor, botColor: PieceColor, gamePhase: String): Float{
         var positionScore = 0.00F
 
         positionScore += materialBalance(chessboard)
@@ -22,6 +22,8 @@ class ChessboardEvaluator(){
         positionScore += kingSafety(chessboard)
 
         positionScore += centerControl(chessboard, legalMoveGenerator, botColor)
+
+        positionScore += pieceDevelopment(chessboard)
 
         return positionScore
     }
@@ -242,7 +244,57 @@ class ChessboardEvaluator(){
     private fun pieceDevelopment(chessboard: Chessboard): Float{
         var pieceDevelopmentScore = 0.0F
 
+        val knightDevelopmentSquares = listOf(
+            Position(2,2), Position(2,5),
+            Position(5,2), Position(5,5),
+            Position(1,3), Position(1,4),
+            Position(6,3), Position(6,4),
+        )
+
+        val bishopDevelopmentSquares = listOf(
+            Position(2,2), Position(2,5),
+            Position(5,2), Position(5,5),
+            Position(2,3), Position(2,4),
+            Position(5,3), Position(5,4),
+            Position(1,1), Position(1,6),
+            Position(6,1), Position(6,6),
+            Position(1,3), Position(1,4),
+            Position(6,3), Position(6,4),
+            Position(3,5), Position(3,2),
+            Position(4,5), Position(4,2),
+        )
+
+        val rookDevelopmentSquares = listOf(
+            Position(0,0), Position(0,7),
+            Position(7,0), Position(7,7),
+            Position(0,3), Position(0,4),
+            Position(7,3), Position(7,4),
+        )
+
+        val knightDevelopmentScore = 0.5F
+        val bishopDevelopmentScore = 0.5F
+        val rookDevelopmentScore = 0.5F
+
+        pieceDevelopmentScore += evaluateDevelopment(chessboard, knightDevelopmentSquares, knightDevelopmentScore, PieceType.KNIGHT)
+        pieceDevelopmentScore += evaluateDevelopment(chessboard, bishopDevelopmentSquares, bishopDevelopmentScore, PieceType.BISHOP)
+        pieceDevelopmentScore += evaluateDevelopment(chessboard, rookDevelopmentSquares, rookDevelopmentScore, PieceType.ROOK)
+
         return pieceDevelopmentScore
+    }
+
+    private fun evaluateDevelopment(chessboard: Chessboard, developmentSquares: List<Position>, score: Float, pieceType: PieceType): Float {
+        var developmentScore = 0.0F
+
+        for (square in chessboard.getSquares().flatten()) {
+            if (square.isOccupied && square.pieceType == pieceType) {
+                val position = Position(square.row, square.col)
+                if (position in developmentSquares) {
+                    developmentScore += if (square.pieceColor == PieceColor.WHITE) score else -score
+                }
+            }
+        }
+
+        return developmentScore
     }
 
     private fun pawnPromotion(chessboard: Chessboard): Float{
