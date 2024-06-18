@@ -27,6 +27,8 @@ class ChessboardEvaluator(){
 
         positionScore += pawnPromotion(chessboard, botColor)
 
+        positionScore += pawnChains(chessboard, playerColor, botColor)
+
         return positionScore
     }
 
@@ -316,8 +318,44 @@ class ChessboardEvaluator(){
         return pawnPromotionScore
     }
 
-    private fun pawnChains(chessboard: Chessboard): Float{
+    private fun pawnChains(chessboard: Chessboard, playerColor: PieceColor, botColor: PieceColor): Float{
         var pawnChainsScore = 0.0F
+        val chainScore = 0.5F
+
+        for (row in 0 until 8) {
+            for (col in 0 until 8) {
+                val square = chessboard.getSquare(row, col)
+                if (square.pieceType == PieceType.PAWN) {
+                    if (chessboard.isValidSquare(row + 1, col - 1)) {
+                        val diagonalBotPawn = chessboard.getSquare(row + 1, col - 1)
+                        if (diagonalBotPawn.pieceType == PieceType.PAWN && diagonalBotPawn.pieceColor == botColor) {
+                            pawnChainsScore += if (botColor == PieceColor.WHITE) chainScore else -chainScore
+                        }
+                    }
+
+                    if (chessboard.isValidSquare(row + 1, col + 1)) {
+                        val diagonalBotPawn = chessboard.getSquare(row + 1, col + 1)
+                        if (diagonalBotPawn.pieceType == PieceType.PAWN && diagonalBotPawn.pieceColor == botColor) {
+                            pawnChainsScore += if (botColor == PieceColor.WHITE) chainScore else -chainScore
+                        }
+                    }
+
+                    if (chessboard.isValidSquare(row - 1, col - 1)) {
+                        val diagonalPlayerPawn = chessboard.getSquare(row - 1, col - 1)
+                        if (diagonalPlayerPawn.pieceType == PieceType.PAWN && diagonalPlayerPawn.pieceColor == playerColor) {
+                            pawnChainsScore += if (playerColor == PieceColor.WHITE) chainScore else -chainScore
+                        }
+                    }
+
+                    if (chessboard.isValidSquare(row - 1, col + 1)) {
+                        val diagonalPlayerPawn = chessboard.getSquare(row - 1, col + 1)
+                        if (diagonalPlayerPawn.pieceType == PieceType.PAWN && diagonalPlayerPawn.pieceColor == playerColor) {
+                            pawnChainsScore += if (playerColor == PieceColor.WHITE) chainScore else -chainScore
+                        }
+                    }
+                }
+            }
+        }
 
         return pawnChainsScore
     }
