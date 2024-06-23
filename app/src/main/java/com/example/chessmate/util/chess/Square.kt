@@ -1,38 +1,16 @@
 package com.example.chessmate.util.chess
 
-import android.widget.FrameLayout
-import android.widget.ImageView
-
 data class Square(
     val row: Int,
     val col: Int,
-    var isOccupied: Boolean,
-    var pieceColor: PieceColor,
-    var pieceType: PieceType,
-    var hasMoved: Boolean = false,
-    var frameLayout: FrameLayout? = null,
-    var imageView: ImageView? = null
-){
-
-    fun copyWithoutUI(): Square{
-        return Square(row, col, isOccupied, pieceColor, pieceType, hasMoved)
+    var piece: Piece = Piece(PieceColor.NONE, PieceType.NONE)
+) {
+    fun copy(): Square {
+        return Square(row, col, piece.copy())
     }
 
-    fun clearSquare(){
-        isOccupied = false
-        pieceColor = PieceColor.NONE
-        pieceType = PieceType.NONE
-    }
-
-    fun movePerformed(){
-        hasMoved = true
-    }
-
-    fun moveReversed(){
-        hasMoved = false
-    }
-
-    fun clearUI(){
-        imageView = null
+    fun clear() {
+        this.piece.color = PieceColor.NONE
+        this.piece.type = PieceType.NONE
     }
 }

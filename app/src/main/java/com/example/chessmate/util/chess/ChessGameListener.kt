@@ -1,10 +1,10 @@
 package com.example.chessmate.util.chess
 
 interface ChessGameListener {
-    fun onMoveMade(move: Move)
-    fun onPlayerMoveCalculated(legalMoves: MutableList<Move>, square: Square)
-    fun kingIsInCheck(square: Square)
-    fun updateMoveTrackerUI()
-    fun checkForStalemate()
-    fun checkForCheckmate()
+    fun setupInitialBoardUI(chessboard: Chessboard)
+    fun setupSquareListener(chessboard: Chessboard)
+    fun onMoveMade(chessboard: Chessboard)
+    fun onPlayerMoveCalculated(moves: MutableList<Move>, square: Square)
+    fun onPlayerMoveMade(chessboard: Chessboard)
+    fun updateMoveHighlights(from: Position, to: Position)
 }
