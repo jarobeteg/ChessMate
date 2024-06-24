@@ -15,11 +15,13 @@ import com.example.chessmate.util.chess.bitboard.BitPiece
 import com.example.chessmate.util.chess.bitboard.Bitboard
 import com.example.chessmate.util.chess.bitboard.BitboardListener
 import com.example.chessmate.util.chess.bitboard.BitboardManager
+import com.example.chessmate.util.chess.bitboard.BitboardUIMapper
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BitboardActivity : AbsThemeActivity(), BitboardListener {
     private lateinit var chessboardLayout: GridLayout
     private lateinit var gameManager: BitboardManager
+    private lateinit var uiMapper: BitboardUIMapper
     private lateinit var uiSquares: Array<Array<FrameLayout>>
     private lateinit var turnNumber: TextView
     private lateinit var whiteLastMove: TextView
@@ -39,11 +41,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
         gameManager = BitboardManager(this)
         chessboardLayout = findViewById(R.id.bitboard)
 
-        uiSquares = Array(8) { row ->
-            Array(8) { col ->
-                findViewById(resources.getIdentifier("bit_square_${row}${col}", "id", packageName))
-            }
-        }
+        uiMapper = BitboardUIMapper(this)
 
         turnNumber = findViewById(R.id.bitboard_turn_number)
         whiteLastMove = findViewById(R.id.bitboard_white_last_move)
@@ -66,34 +64,38 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
         val screenSize = resources.displayMetrics.widthPixels
         squareSize = screenSize / 8
 
-        uiSquares = Array(8) {
-            Array(8) {
+        uiSquares = Array(8) { row ->
+            Array(8) { col ->
                 val squareLayout = FrameLayout(this).apply {
                     layoutParams = ViewGroup.LayoutParams(squareSize, squareSize)
                 }
                 chessboardLayout.addView(squareLayout)
+                val position = 1L shl ((7 - row) * 8 + col)
+                uiMapper.addSquare(position, squareLayout)
                 squareLayout
             }
         }
     }
 
     override fun setupInitialBoardUI(bitboard: Bitboard) {
-        for (row in 0..7) {
+        for (row in 7 downTo 0) {
             for (col in 0..7) {
-                val position = 1L shl (row * 8 + col)
+                val position = 1L shl ((7 - row) * 8 + col)
                 val piece = bitboard.getPiece(position)
-                updateSquareUI(piece, uiSquares[row][col])
-                setupSquareColors(Position(row, col), uiSquares[row][col])
-                addRowAndColumnIdentifiers(Position(row, col), uiSquares[row][col])
+                val squareLayout = uiMapper.getSquareView(position)
+                updateSquareUI(piece, squareLayout)
+                setupSquareColors(Position(row, col), squareLayout)
+                addRowAndColumnIdentifiers(Position(row, col), squareLayout)
             }
         }
     }
 
     override fun setupSquareListener(bitboard: Bitboard) {
-        for (row in 0..7) {
+        for (row in 7 downTo 0) {
             for (col in 0..7) {
-                uiSquares[row][col].setOnClickListener {
-                    val position = 1L shl (row * 8 + col)
+                val position = 1L shl ((7 - row) * 8 + col)
+                val squareLayout = uiMapper.getSquareView(position)
+                squareLayout.setOnClickListener {
                     handleSquareClick(position)
                 }
             }
@@ -189,7 +191,8 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
 
     private fun handleSquareClick(position: Long) {
         val piece = gameManager.getBitPiece(position)
-        println("piece: $piece")
+        val squareNotation = gameManager.getSquareNotation(piece.position)
+        println("piece: $squareNotation, ${piece.piece}")
     }
 
     private fun bottomNavItemClicked(item: MenuItem): Boolean{

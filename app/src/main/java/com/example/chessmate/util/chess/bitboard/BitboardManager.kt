@@ -22,7 +22,20 @@ class BitboardManager(private var listener: BitboardListener) {
         println("game started on bitboard")
     }
 
-    fun getBitPiece(position: Long): BitPiece {
-        return bitboard.getPiece(position)
+    fun getBitPiece(position: Long): BitSquare {
+        val piece = bitboard.getPiece(position)
+        return BitSquare(position, piece)
+    }
+
+    fun getSquareNotation(position: Long): String {
+        val fileNames = "ABCDEFGH"
+        val rankNames = "12345678"
+
+        val index = position.toULong().countTrailingZeroBits().toInt()
+
+        val file = fileNames[index % 8]
+        val rank = rankNames[index / 8]
+
+        return "$file$rank"
     }
 }
