@@ -1,4 +1,6 @@
-package com.example.chessmate.util.chess
+package com.example.chessmate.util.chess.chessboard
+
+import com.example.chessmate.util.chess.Position
 
 class LegalMoveGenerator {
     private val knightMoves = arrayOf(
@@ -153,7 +155,12 @@ class LegalMoveGenerator {
     }
 
     private fun generatePromotionMoves(from: Position, to: Position, color: PieceColor): List<Move> {
-        val promotionTypes = listOf(PieceType.QUEEN, PieceType.ROOK, PieceType.BISHOP, PieceType.KNIGHT)
+        val promotionTypes = listOf(
+            PieceType.QUEEN,
+            PieceType.ROOK,
+            PieceType.BISHOP,
+            PieceType.KNIGHT
+        )
         return promotionTypes.map { promotionType -> Move(from, to, Piece(color, PieceType.PAWN), promotion = promotionType) }
     }
 

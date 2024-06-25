@@ -1,4 +1,4 @@
-package com.example.chessmate.util.chess
+package com.example.chessmate.util.chess.chessboard
 
 data class Square(
     val row: Int,

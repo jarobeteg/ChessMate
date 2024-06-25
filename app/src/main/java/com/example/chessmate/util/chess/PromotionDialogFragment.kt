@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.fragment.app.DialogFragment
 import com.example.chessmate.R
+import com.example.chessmate.util.chess.chessboard.PieceType
+import com.example.chessmate.util.chess.chessboard.Square
 
 class PromotionDialogFragment(private val isPlayerWhite: Boolean, private val listener: PromotionDialogListener,
-                              private val destinationSquare: Square ) : DialogFragment() {
+                              private val destinationSquare: Square
+) : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

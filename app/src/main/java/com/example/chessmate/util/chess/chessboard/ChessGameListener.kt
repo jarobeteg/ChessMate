@@ -1,4 +1,6 @@
-package com.example.chessmate.util.chess
+package com.example.chessmate.util.chess.chessboard
+
+import com.example.chessmate.util.chess.Position
 
 interface ChessGameListener {
     fun setupInitialBoardUI(chessboard: Chessboard)

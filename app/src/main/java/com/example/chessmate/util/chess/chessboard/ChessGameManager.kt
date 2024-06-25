@@ -1,8 +1,8 @@
-package com.example.chessmate.util.chess
+package com.example.chessmate.util.chess.chessboard
 
-import com.example.chessmate.util.chess.bitboard.BitPiece
-import com.example.chessmate.util.chess.bitboard.Bitboard
-import kotlin.system.measureTimeMillis
+import com.example.chessmate.util.chess.ChessBot
+import com.example.chessmate.util.chess.Player
+import com.example.chessmate.util.chess.Position
 
 class ChessGameManager(private var listener: ChessGameListener) {
     private val chessboard = Chessboard()

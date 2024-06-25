@@ -1,4 +1,6 @@
-package com.example.chessmate.util.chess
+package com.example.chessmate.util.chess.chessboard
+
+import com.example.chessmate.util.chess.Position
 
 data class Move(
     val from: Position,

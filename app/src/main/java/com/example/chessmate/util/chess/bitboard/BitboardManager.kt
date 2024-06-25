@@ -1,7 +1,7 @@
 package com.example.chessmate.util.chess.bitboard
 
 import com.example.chessmate.util.chess.ChessBot
-import com.example.chessmate.util.chess.Move
+import com.example.chessmate.util.chess.chessboard.Move
 import com.example.chessmate.util.chess.Player
 
 class BitboardManager(private var listener: BitboardListener) {

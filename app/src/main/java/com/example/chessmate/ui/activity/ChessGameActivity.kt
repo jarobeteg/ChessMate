@@ -13,19 +13,20 @@ import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.chessmate.R
-import com.example.chessmate.util.chess.ChessGameManager
-import com.example.chessmate.util.chess.ChessGameListener
-import com.example.chessmate.util.chess.Chessboard
-import com.example.chessmate.util.chess.Move
-import com.example.chessmate.util.chess.Piece
-import com.example.chessmate.util.chess.PieceColor
-import com.example.chessmate.util.chess.PieceType
+import com.example.chessmate.util.chess.chessboard.ChessGameManager
+import com.example.chessmate.util.chess.chessboard.ChessGameListener
+import com.example.chessmate.util.chess.chessboard.Chessboard
+import com.example.chessmate.util.chess.chessboard.Move
+import com.example.chessmate.util.chess.chessboard.Piece
+import com.example.chessmate.util.chess.chessboard.PieceColor
+import com.example.chessmate.util.chess.chessboard.PieceType
 import com.example.chessmate.util.chess.Position
 import com.example.chessmate.util.chess.PromotionDialogFragment
-import com.example.chessmate.util.chess.Square
+import com.example.chessmate.util.chess.chessboard.Square
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogListener, ChessGameListener {
+class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogListener,
+    ChessGameListener {
     private lateinit var chessboardLayout: GridLayout
     private lateinit var gameManager: ChessGameManager
     private lateinit var uiSquares: Array<Array<FrameLayout>>
