@@ -3,18 +3,18 @@ package com.example.chessmate.util.chess.bitboard
 import com.example.chessmate.util.chess.chessboard.PieceColor
 
 class Bitboard {
-    private var whitePawns: Long = 0L
-    private var whiteKnights: Long = 0L
-    private var whiteBishops: Long = 0L
-    private var whiteRooks: Long = 0L
-    private var whiteQueens: Long = 0L
-    private var whiteKing: Long = 0L
-    private var blackPawns: Long = 0L
-    private var blackKnights: Long = 0L
-    private var blackBishops: Long = 0L
-    private var blackRooks: Long = 0L
-    private var blackQueens: Long = 0L
-    private var blackKing: Long = 0L
+    var whitePawns: Long = 0L
+    var whiteKnights: Long = 0L
+    var whiteBishops: Long = 0L
+    var whiteRooks: Long = 0L
+    var whiteQueens: Long = 0L
+    var whiteKing: Long = 0L
+    var blackPawns: Long = 0L
+    var blackKnights: Long = 0L
+    var blackBishops: Long = 0L
+    var blackRooks: Long = 0L
+    var blackQueens: Long = 0L
+    var blackKing: Long = 0L
 
     companion object {
         const val A1 = 1L shl 0

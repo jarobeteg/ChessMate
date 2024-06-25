@@ -7,7 +7,7 @@ import com.example.chessmate.util.chess.chessboard.PieceColor
 
 class BitboardManager(private var listener: BitboardListener) {
     private val bitboard = Bitboard()
-    private val bitboardMoveGenerator = BitboardMoveGenerator()
+    private val bitboardMoveGenerator = BitboardMoveGenerator(bitboard)
     var isPlayerTurn = false
     private var availablePlayerMoves = mutableListOf<BitMove>()
     private lateinit var player: Player
@@ -42,6 +42,10 @@ class BitboardManager(private var listener: BitboardListener) {
 
     fun startGame() {
         println("game started on bitboard")
+        val moves = bitboardMoveGenerator.generateAllLegalMoves()
+        for (move in moves) {
+            println("move: ${positionToRowCol(move)}")
+        }
     }
 
     fun processFirstClick(square: BitSquare) {

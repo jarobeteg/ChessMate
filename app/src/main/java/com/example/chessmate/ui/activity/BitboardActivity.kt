@@ -19,7 +19,6 @@ import com.example.chessmate.util.chess.bitboard.Bitboard
 import com.example.chessmate.util.chess.bitboard.BitboardListener
 import com.example.chessmate.util.chess.bitboard.BitboardManager
 import com.example.chessmate.util.chess.bitboard.BitboardUIMapper
-import com.example.chessmate.util.chess.chessboard.PieceType
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BitboardActivity : AbsThemeActivity(), BitboardListener {
@@ -207,7 +206,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
     }
 
     private fun handleSquareClick(square: BitSquare) {
-        println("clicked square: $square")
+        println("clicked square: ${gameManager.positionToRowCol(square.position)}")
         if (gameManager.isPlayerTurn && square.color == gameManager.playerColor() && selectedSquare == null) {
             removeHighlightOpponentsAndSquares()
             gameManager.processFirstClick(square)
