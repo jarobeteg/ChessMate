@@ -219,8 +219,7 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
             selectedSquare = null
         } else if (gameManager.isPlayerTurn && selectedSquare != null && square.piece.color == gameManager.playerColor()) {
             removeHighlightOpponentsAndSquares()
-            selectedSquare = null
-            handleSquareClick(square)
+            gameManager.processFirstClick(square)
         } else if (gameManager.isPlayerTurn && selectedSquare != null) {
             gameManager.processSecondClick(square)
         }

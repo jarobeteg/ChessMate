@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.GridLayout
@@ -11,11 +12,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.chessmate.R
 import com.example.chessmate.util.chess.Position
+import com.example.chessmate.util.chess.bitboard.BitMove
 import com.example.chessmate.util.chess.bitboard.BitPiece
+import com.example.chessmate.util.chess.bitboard.BitSquare
 import com.example.chessmate.util.chess.bitboard.Bitboard
 import com.example.chessmate.util.chess.bitboard.BitboardListener
 import com.example.chessmate.util.chess.bitboard.BitboardManager
 import com.example.chessmate.util.chess.bitboard.BitboardUIMapper
+import com.example.chessmate.util.chess.chessboard.PieceType
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BitboardActivity : AbsThemeActivity(), BitboardListener {
@@ -26,11 +30,12 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
     private lateinit var turnNumber: TextView
     private lateinit var whiteLastMove: TextView
     private lateinit var blackLastMove: TextView
-    private var isPlayerStarted = true
+    private var isPlayerStarted: Boolean = true
     private var squareSize: Int = 0
     private val highlightCircleTag = "highlight_circle"
     private val highlightOpponentTag = "highlight_opponent"
     private val highlightMoveTag = "highlight_move"
+    private var selectedSquare: BitSquare? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,14 +46,14 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
         gameManager = BitboardManager(this)
         chessboardLayout = findViewById(R.id.bitboard)
 
-        uiMapper = BitboardUIMapper(this)
+        uiMapper = BitboardUIMapper()
 
         turnNumber = findViewById(R.id.bitboard_turn_number)
         whiteLastMove = findViewById(R.id.bitboard_white_last_move)
         blackLastMove = findViewById(R.id.bitboard_black_last_move)
 
         initializeBitboardUI()
-        gameManager.initializeUIAndSquareListener()
+        gameManager.initializeUIAndSquareListener(isPlayerStarted)
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             return@setOnItemSelectedListener bottomNavItemClicked(item)
@@ -70,7 +75,11 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
                     layoutParams = ViewGroup.LayoutParams(squareSize, squareSize)
                 }
                 chessboardLayout.addView(squareLayout)
-                val position = 1L shl ((7 - row) * 8 + col)
+                val position = if (isPlayerStarted) {
+                    1L shl ((7 - row) * 8 + col)
+                } else {
+                    1L shl (row * 8 + (7 - col))
+                }
                 uiMapper.addSquare(position, squareLayout)
                 squareLayout
             }
@@ -80,10 +89,14 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
     override fun setupInitialBoardUI(bitboard: Bitboard) {
         for (row in 7 downTo 0) {
             for (col in 0..7) {
-                val position = 1L shl ((7 - row) * 8 + col)
-                val piece = bitboard.getPiece(position)
+                val position = if (isPlayerStarted) {
+                    1L shl ((7 - row) * 8 + col)
+                } else {
+                    1L shl (row * 8 + (7 - col))
+                }
+                val square = bitboard.getPiece(position)
                 val squareLayout = uiMapper.getSquareView(position)
-                updateSquareUI(piece, squareLayout)
+                updateSquareUI(square, squareLayout)
                 setupSquareColors(Position(row, col), squareLayout)
                 addRowAndColumnIdentifiers(Position(row, col), squareLayout)
             }
@@ -93,16 +106,20 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
     override fun setupSquareListener(bitboard: Bitboard) {
         for (row in 7 downTo 0) {
             for (col in 0..7) {
-                val position = 1L shl ((7 - row) * 8 + col)
+                val position = if (isPlayerStarted) {
+                    1L shl ((7 - row) * 8 + col)
+                } else {
+                    1L shl (row * 8 + (7 - col))
+                }
                 val squareLayout = uiMapper.getSquareView(position)
                 squareLayout.setOnClickListener {
-                    handleSquareClick(position)
+                    handleSquareClick(gameManager.getBitPiece(position))
                 }
             }
         }
     }
 
-    private fun updateSquareUI(piece: BitPiece, frameLayout: FrameLayout) {
+    private fun updateSquareUI(square: BitSquare, frameLayout: FrameLayout) {
         val existingPieceImageView = frameLayout.findViewWithTag<ImageView>("pieceImageView")
         existingPieceImageView?.let {
             frameLayout.removeView(it)
@@ -110,7 +127,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
 
         val pieceImageView = ImageView(this)
         pieceImageView.tag = "pieceImageView"
-        val resourceId = getPieceResourceId(piece)
+        val resourceId = getPieceResourceId(square.piece)
         pieceImageView.setImageResource(resourceId)
         frameLayout.addView(pieceImageView)
     }
@@ -189,10 +206,83 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
         }
     }
 
-    private fun handleSquareClick(position: Long) {
-        val piece = gameManager.getBitPiece(position)
-        val squareNotation = gameManager.getSquareNotation(piece.position)
-        println("piece: $squareNotation, ${piece.piece}")
+    private fun handleSquareClick(square: BitSquare) {
+        println("clicked square: $square")
+        if (gameManager.isPlayerTurn && square.color == gameManager.playerColor() && selectedSquare == null) {
+            removeHighlightOpponentsAndSquares()
+            gameManager.processFirstClick(square)
+        } else if (gameManager.isPlayerTurn && selectedSquare != null && selectedSquare == square) {
+            removeHighlightOpponentsAndSquares()
+            selectedSquare = null
+        } else if (gameManager.isPlayerTurn && selectedSquare != null && square.color == gameManager.playerColor()) {
+            removeHighlightOpponentsAndSquares()
+            gameManager.processFirstClick(square)
+        } else if (gameManager.isPlayerTurn && selectedSquare != null) {
+            gameManager.processSecondClick(square)
+        }
+    }
+
+    override fun onPlayerMoveCalculated(moves: MutableList<BitMove>, square: BitSquare) {
+        for (move in moves) {
+            if (move.capturedPiece != null) {
+                addHighlightOpponent(move.to, move.capturedPiece)
+            } else {
+                addHighlightSquare(move.to)
+            }
+        }
+        selectedSquare = square
+        println("selected square: $selectedSquare")
+    }
+
+    private fun addHighlightSquare(position: Long) {
+        val pos = gameManager.positionToRowCol(position)
+        val frameLayout = uiSquares[pos.row][pos.col]
+        val squareSize = chessboardLayout.width / 8
+        val circleSize = squareSize / 3
+
+        val circleParams = FrameLayout.LayoutParams(circleSize, circleSize).apply {
+            gravity = Gravity.CENTER
+        }
+
+        val imageView = ImageView(this).apply {
+            setImageResource(R.drawable.highlight_square_circle)
+            tag = highlightCircleTag
+        }
+
+        frameLayout.addView(imageView, circleParams)
+    }
+
+    private fun addHighlightOpponent(position: Long, opponentPiece: BitPiece) {
+        val pos = gameManager.positionToRowCol(position)
+        if (opponentPiece.name.contains("KING")) return
+        val squareFrameLayout = uiSquares[pos.row][pos.col]
+        val squareImageView = squareFrameLayout.findViewWithTag<ImageView>("pieceImageView")
+        val imageView = ImageView(this)
+        imageView.setImageResource(R.drawable.highlight_square_opponent)
+        imageView.tag = highlightOpponentTag
+        squareFrameLayout.removeView(squareImageView)
+        squareFrameLayout.addView(imageView)
+        squareFrameLayout.addView(squareImageView)
+    }
+
+    private fun removeHighlightOpponentsAndSquares() {
+        for (row in 0..7) {
+            for (col in 0..7) {
+                val frameLayout = uiSquares[row][col]
+                val highlightToRemove = mutableListOf<View>()
+
+                for (i in 0 until frameLayout.childCount) {
+                    val view = frameLayout.getChildAt(i)
+                    if (view.tag == highlightCircleTag || view.tag == highlightOpponentTag) {
+                        highlightToRemove.add(view)
+                    }
+                }
+
+                highlightToRemove.forEach { highlight ->
+                    frameLayout.removeView(highlight)
+                }
+            }
+        }
     }
 
     private fun bottomNavItemClicked(item: MenuItem): Boolean{
