@@ -42,10 +42,6 @@ class BitboardManager(private var listener: BitboardListener) {
 
     fun startGame() {
         println("game started on bitboard")
-        val moves = bitboardMoveGenerator.generateAllLegalMoves()
-        for (move in moves) {
-            println("move: ${positionToRowCol(move)}")
-        }
     }
 
     fun processFirstClick(square: BitSquare) {
