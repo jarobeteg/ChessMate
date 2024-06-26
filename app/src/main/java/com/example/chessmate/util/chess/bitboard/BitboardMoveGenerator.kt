@@ -1,5 +1,7 @@
 package com.example.chessmate.util.chess.bitboard
 
+import kotlin.math.abs
+
 class BitboardMoveGenerator(private val bitboard: Bitboard) {
 
     companion object {
@@ -9,8 +11,18 @@ class BitboardMoveGenerator(private val bitboard: Bitboard) {
         val queenOffsets = knightOffsets + rookOffsets
         val kingOffsets = listOf(1, -1, 8, -8, 9, -9, 7, -7)
 
-        fun isLegalPosition(position: Long): Boolean {
+        fun isLegalPawnMove(position: Long): Boolean {
             return position != 0L && position and (position - 1) == 0L
+        }
+
+        fun isLegalKnightMove(fromIndex: Int, toIndex: Int): Boolean {
+            if (toIndex !in 0..63) return false
+
+            val fromFile = fromIndex % 8
+            val toFile = toIndex % 8
+            val fileDiff = abs(fromFile - toFile)
+
+            return fileDiff == 1 || fileDiff == 2
         }
     }
 
@@ -33,6 +45,8 @@ class BitboardMoveGenerator(private val bitboard: Bitboard) {
 
         moves.addAll(generatePawnMoves(bitboard.whitePawns, blackPieces, emptySquares, false))
         moves.addAll(generatePawnMoves(bitboard.blackPawns, whitePieces, emptySquares, true))
+        moves.addAll(generateKnightMoves(bitboard.whiteKnights, blackPieces, emptySquares))
+        moves.addAll(generateKnightMoves(bitboard.blackKnights, whitePieces, emptySquares))
 
         return moves
     }
@@ -50,6 +64,7 @@ class BitboardMoveGenerator(private val bitboard: Bitboard) {
         while (pawnsCopy != 0L) {
             val position = pawnsCopy.takeLowestOneBit()
             val singleMove = if (isForBot) position shr 8 else position shl 8
+
             if ((singleMove and emptySquares) != 0L) {
                 if ((singleMove and promotionRowMask) != 0L) {
                     moves.add(singleMove)
@@ -68,15 +83,38 @@ class BitboardMoveGenerator(private val bitboard: Bitboard) {
 
             val captureLeft = if (isForBot) position shr 7 else position shl 7
             val captureRight = if (isForBot) position shr 9 else position shl 9
-            if ((captureLeft and opponentPieces) != 0L && isLegalPosition(captureLeft)) {
+            if ((captureLeft and opponentPieces) != 0L && isLegalPawnMove(captureLeft)) {
                 moves.add(captureLeft)
             }
-            if ((captureRight and opponentPieces) != 0L && isLegalPosition(captureRight)) {
+            if ((captureRight and opponentPieces) != 0L && isLegalPawnMove(captureRight)) {
                 moves.add(captureRight)
             }
 
             pawnsCopy = pawnsCopy xor position
         }
+        return moves
+    }
+
+    fun generateKnightMoves(knights: Long, opponentPieces: Long, emptySquares: Long): ArrayDeque<Long> {
+        val moves = ArrayDeque<Long>()
+        var knightsCopy = knights
+
+        while (knightsCopy != 0L) {
+            val position = knightsCopy.takeLowestOneBit()
+            val positionIndex = knightsCopy.countTrailingZeroBits()
+
+            for (offset in knightOffsets) {
+                val targetIndex = positionIndex + offset
+                if (isLegalKnightMove(positionIndex, targetIndex)) {
+                    val target = 1L shl targetIndex
+                    if ((target and emptySquares != 0L) || (target and opponentPieces) != 0L) {
+                        moves.add(target)
+                    }
+                }
+            }
+            knightsCopy = knightsCopy xor position
+        }
+
         return moves
     }
 }
