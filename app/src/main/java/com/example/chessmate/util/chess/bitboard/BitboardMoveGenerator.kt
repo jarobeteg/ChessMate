@@ -1,48 +1,118 @@
 package com.example.chessmate.util.chess.bitboard
 
+import com.example.chessmate.util.chess.chessboard.PieceColor
 import kotlin.math.abs
 
-class BitboardMoveGenerator (private val bitboard: Bitboard) {
+class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerColor: PieceColor, private val botColor: PieceColor) {
     private val knightOffsets = intArrayOf(15, 6, 10, 17, -17, -10, -6, -15)
     private val bishopOffsets = intArrayOf(9, -9, 7, -7)
     private val rookOffsets = intArrayOf(1, -1, 8, -8)
     private val queenOffsets = intArrayOf(1, -1, 7, -7, 8, -8, 9, -9)
     private val kingOffsets = intArrayOf(1, -1, 7, -7, 8, -8, 9, -9)
 
-    fun generateAllLegalMoves(): ArrayDeque<Long>  {
-        val allPieces = bitboard.whitePawns or bitboard.whiteKnights or
+    private var allPieces: Long = bitboard.whitePawns or bitboard.whiteKnights or
+            bitboard.whiteBishops or bitboard.whiteRooks or
+            bitboard.whiteQueens or bitboard.whiteKing or
+            bitboard.blackPawns or bitboard.blackKnights or
+            bitboard.blackBishops or bitboard.blackRooks or
+            bitboard.blackQueens or bitboard.blackKing
+
+    private var emptySquares: Long = allPieces.inv()
+
+    private var playerPawns = if (playerColor == PieceColor.WHITE) bitboard.whitePawns else bitboard.blackPawns
+    private var playerKnights = if (playerColor == PieceColor.WHITE) bitboard.whiteKnights else bitboard.blackKnights
+    private var playerBishops = if (playerColor == PieceColor.WHITE) bitboard.whiteBishops else bitboard.blackBishops
+    private var playerRooks = if (playerColor == PieceColor.WHITE) bitboard.whiteRooks else bitboard.blackRooks
+    private var playerQueens = if (playerColor == PieceColor.WHITE) bitboard.whiteQueens else bitboard.blackQueens
+    private var playerKing = if (playerColor == PieceColor.WHITE) bitboard.whiteKing else bitboard.blackKing
+    private var playerPieces = playerPawns or playerKnights or
+            playerBishops or playerRooks or
+            playerQueens or playerKing
+
+    private var botPawns = if (botColor == PieceColor.WHITE) bitboard.whitePawns else bitboard.blackPawns
+    private var botKnights = if (botColor == PieceColor.WHITE) bitboard.whiteKnights else bitboard.blackKnights
+    private var botBishops = if (botColor == PieceColor.WHITE) bitboard.whiteBishops else bitboard.blackBishops
+    private var botRooks = if (botColor == PieceColor.WHITE) bitboard.whiteRooks else bitboard.blackRooks
+    private var botQueens = if (botColor == PieceColor.WHITE) bitboard.whiteQueens else bitboard.blackQueens
+    private var botKing = if (botColor == PieceColor.WHITE) bitboard.whiteKing else bitboard.blackKing
+    private var botPieces = botPawns or botKnights or
+            botBishops or botRooks or
+            botQueens or botKing
+
+    fun updateBoards() {
+        allPieces = bitboard.whitePawns or bitboard.whiteKnights or
                 bitboard.whiteBishops or bitboard.whiteRooks or
                 bitboard.whiteQueens or bitboard.whiteKing or
                 bitboard.blackPawns or bitboard.blackKnights or
                 bitboard.blackBishops or bitboard.blackRooks or
                 bitboard.blackQueens or bitboard.blackKing
-        val emptySquares = allPieces.inv()
-        val whitePieces = bitboard.whitePawns or bitboard.whiteKnights or
-                bitboard.whiteBishops or bitboard.whiteRooks or
-                bitboard.whiteQueens or bitboard.whiteKing
-        val blackPieces = bitboard.blackPawns or bitboard.blackKnights or
-                bitboard.blackBishops or bitboard.blackRooks or
-                bitboard.blackQueens or bitboard.blackKing
 
+        emptySquares = allPieces.inv()
+
+        playerPawns = if (playerColor == PieceColor.WHITE) bitboard.whitePawns else bitboard.blackPawns
+        playerKnights = if (playerColor == PieceColor.WHITE) bitboard.whiteKnights else bitboard.blackKnights
+        playerBishops = if (playerColor == PieceColor.WHITE) bitboard.whiteBishops else bitboard.blackBishops
+        playerRooks = if (playerColor == PieceColor.WHITE) bitboard.whiteRooks else bitboard.blackRooks
+        playerQueens = if (playerColor == PieceColor.WHITE) bitboard.whiteQueens else bitboard.blackQueens
+        playerKing = if (playerColor == PieceColor.WHITE) bitboard.whiteKing else bitboard.blackKing
+        playerPieces = playerPawns or playerKnights or
+                playerBishops or playerRooks or
+                playerQueens or playerKing
+
+        botPawns = if (botColor == PieceColor.WHITE) bitboard.whitePawns else bitboard.blackPawns
+        botKnights = if (botColor == PieceColor.WHITE) bitboard.whiteKnights else bitboard.blackKnights
+        botBishops = if (botColor == PieceColor.WHITE) bitboard.whiteBishops else bitboard.blackBishops
+        botRooks = if (botColor == PieceColor.WHITE) bitboard.whiteRooks else bitboard.blackRooks
+        botQueens = if (botColor == PieceColor.WHITE) bitboard.whiteQueens else bitboard.blackQueens
+        botKing = if (botColor == PieceColor.WHITE) bitboard.whiteKing else bitboard.blackKing
+        botPieces = botPawns or botKnights or
+                botBishops or botRooks or
+                botQueens or botKing
+    }
+
+    fun generateAllLegalMoves(): ArrayDeque<Long>  {
+        updateBoards()
         val moves = ArrayDeque<Long>()
 
-        moves.addAll(generatePawnMoves(bitboard.whitePawns, blackPieces, emptySquares, false))
-        moves.addAll(generatePawnMoves(bitboard.blackPawns, whitePieces, emptySquares, true))
-        moves.addAll(generateKnightMoves(bitboard.whiteKnights, blackPieces, emptySquares))
-        moves.addAll(generateKnightMoves(bitboard.blackKnights, whitePieces, emptySquares))
-        moves.addAll(generateBishopMoves(bitboard.whiteBishops, allPieces, blackPieces))
-        moves.addAll(generateBishopMoves(bitboard.blackBishops, allPieces, whitePieces))
-        moves.addAll(generateRookMoves(bitboard.whiteRooks, allPieces, blackPieces))
-        moves.addAll(generateRookMoves(bitboard.blackRooks, allPieces, whitePieces))
-        moves.addAll(generateQueenMoves(bitboard.whiteQueens, allPieces, blackPieces))
-        moves.addAll(generateQueenMoves(bitboard.blackQueens, allPieces, whitePieces))
+        moves.addAll(generatePawnMoves(playerPawns, botPieces, emptySquares, false))
+        moves.addAll(generatePawnMoves(botPawns, playerPieces, emptySquares, true))
+        moves.addAll(generateKnightMoves(playerKnights, botPieces, emptySquares))
+        moves.addAll(generateKnightMoves(botKnights, playerPieces, emptySquares))
+        moves.addAll(generateBishopMoves(playerBishops, botPieces, allPieces))
+        moves.addAll(generateBishopMoves(botBishops, playerPieces, allPieces))
+        moves.addAll(generateRookMoves(playerRooks, botPieces, allPieces))
+        moves.addAll(generateRookMoves(botRooks, playerPieces, allPieces))
+        moves.addAll(generateQueenMoves(playerQueens, botPieces, allPieces))
+        moves.addAll(generateQueenMoves(botQueens, playerPieces, allPieces))
 
         return moves
     }
 
-    fun generateLegalMoveForBot() {}
+    fun generateLegalMovesForBot(): ArrayDeque<Long> {
+        updateBoards()
+        val moves = ArrayDeque<Long>()
 
-    fun generateLegalMovesForPlayer(){}
+        moves.addAll(generatePawnMoves(botPawns, playerPieces, emptySquares, true))
+        moves.addAll(generateKnightMoves(botKnights, playerPieces, emptySquares))
+        moves.addAll(generateBishopMoves(botBishops, playerPieces, allPieces))
+        moves.addAll(generateRookMoves(botRooks, playerPieces, allPieces))
+        moves.addAll(generateQueenMoves(botQueens, playerPieces, allPieces))
+
+        return moves
+    }
+
+    fun generateLegalMovesForPlayer(): ArrayDeque<Long> {
+        updateBoards()
+        val moves = ArrayDeque<Long>()
+
+        moves.addAll(generatePawnMoves(playerPawns, botPieces, emptySquares, false))
+        moves.addAll(generateKnightMoves(playerKnights, botPieces, emptySquares))
+        moves.addAll(generateBishopMoves(playerBishops, botPieces, allPieces))
+        moves.addAll(generateRookMoves(playerRooks, botPieces, allPieces))
+        moves.addAll(generateQueenMoves(playerQueens, botPieces, allPieces))
+
+        return moves
+    }
 
     fun generatePawnMoves(pawns: Long, opponentPieces: Long, emptySquares: Long, isForBot: Boolean): ArrayDeque<Long> {
         val moves = ArrayDeque<Long>()
@@ -107,14 +177,14 @@ class BitboardMoveGenerator (private val bitboard: Bitboard) {
         return moves
     }
 
-    fun generateBishopMoves(bishops: Long, allPieces: Long, opponentPieces: Long): ArrayDeque<Long> = generateSlidingMoves(bishops, allPieces, opponentPieces, bishopOffsets)
+    fun generateBishopMoves(bishops: Long, opponentPieces: Long, allPieces: Long): ArrayDeque<Long> = generateSlidingMoves(bishops, opponentPieces, allPieces, bishopOffsets)
 
-    fun generateRookMoves(rooks: Long, allPieces: Long, opponentPieces: Long): ArrayDeque<Long> = generateSlidingMoves(rooks, allPieces, opponentPieces, rookOffsets)
+    fun generateRookMoves(rooks: Long, opponentPieces: Long, allPieces: Long): ArrayDeque<Long> = generateSlidingMoves(rooks, opponentPieces, allPieces, rookOffsets)
 
-    fun generateQueenMoves(queens: Long, allPieces: Long, opponentPieces: Long): ArrayDeque<Long> = generateSlidingMoves(queens, allPieces, opponentPieces, queenOffsets)
+    fun generateQueenMoves(queens: Long, opponentPieces: Long, allPieces: Long): ArrayDeque<Long> = generateSlidingMoves(queens, opponentPieces, allPieces, queenOffsets)
 
     //sliding moves such as bishop, rook and queens
-    fun generateSlidingMoves(pieces: Long, allPieces: Long, opponentPieces: Long, offsets: IntArray): ArrayDeque<Long> {
+    fun generateSlidingMoves(pieces: Long, opponentPieces: Long, allPieces: Long, offsets: IntArray): ArrayDeque<Long> {
         val moves = ArrayDeque<Long>()
         var piecesCopy = pieces
 
