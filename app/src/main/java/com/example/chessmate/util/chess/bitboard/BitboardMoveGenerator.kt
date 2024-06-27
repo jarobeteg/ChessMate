@@ -2,48 +2,12 @@ package com.example.chessmate.util.chess.bitboard
 
 import kotlin.math.abs
 
-class BitboardMoveGenerator(private val bitboard: Bitboard) {
-
-    companion object {
-        val knightOffsets = listOf(15, 6, 10, 17, -17, -10, -6, -15)
-        val bishopOffsets = listOf(9, -9, 7, -7)
-        val rookOffsets = listOf(1, -1, 8, -8)
-        val queenOffsets = listOf(1, -1, 7, -7, 8, -8, 9, -9)
-        val kingOffsets = listOf(1, -1, 7, -7, 8, -8, 9, -9)
-
-        fun isLegalPawnMove(position: Long): Boolean {
-            return position != 0L && position and (position - 1) == 0L
-        }
-
-        fun isLegalKnightMove(fromIndex: Int, toIndex: Int): Boolean {
-            if (toIndex !in 0..63) return false
-
-            val fromFile = fromIndex % 8
-            val toFile = toIndex % 8
-            val fileDiff = abs(fromFile - toFile)
-
-            return fileDiff == 1 || fileDiff == 2
-        }
-
-        fun isSameRankOrFile(fromIndex: Int, toIndex: Int, direction: Int): Boolean {
-            val fromFile = fromIndex % 8
-            val toFile = toIndex % 8
-            val fromRank = fromIndex / 8
-            val toRank = toIndex / 8
-
-            return when (direction) {
-                1, -1 -> fromRank == toRank
-                8, -8 -> fromFile == toFile
-                7, -7 -> abs(fromFile - toFile) == abs(fromRank - toRank)
-                9, -9 -> abs(fromFile - toFile) == abs(fromRank - toRank)
-                else -> false
-            }
-        }
-
-        fun isWithinBounds(index: Int): Boolean {
-            return index in 0..63
-        }
-    }
+class BitboardMoveGenerator (private val bitboard: Bitboard) {
+    private val knightOffsets = intArrayOf(15, 6, 10, 17, -17, -10, -6, -15)
+    private val bishopOffsets = intArrayOf(9, -9, 7, -7)
+    private val rookOffsets = intArrayOf(1, -1, 8, -8)
+    private val queenOffsets = intArrayOf(1, -1, 7, -7, 8, -8, 9, -9)
+    private val kingOffsets = intArrayOf(1, -1, 7, -7, 8, -8, 9, -9)
 
     fun generateAllLegalMoves(): ArrayDeque<Long>  {
         val allPieces = bitboard.whitePawns or bitboard.whiteKnights or
@@ -150,7 +114,7 @@ class BitboardMoveGenerator(private val bitboard: Bitboard) {
     fun generateQueenMoves(queens: Long, allPieces: Long, opponentPieces: Long): ArrayDeque<Long> = generateSlidingMoves(queens, allPieces, opponentPieces, queenOffsets)
 
     //sliding moves such as bishop, rook and queens
-    fun generateSlidingMoves(pieces: Long, allPieces: Long, opponentPieces: Long, directions: List<Int>): ArrayDeque<Long> {
+    fun generateSlidingMoves(pieces: Long, allPieces: Long, opponentPieces: Long, offsets: IntArray): ArrayDeque<Long> {
         val moves = ArrayDeque<Long>()
         var piecesCopy = pieces
 
@@ -158,12 +122,12 @@ class BitboardMoveGenerator(private val bitboard: Bitboard) {
             val position = piecesCopy.takeLowestOneBit()
             val positionIndex = piecesCopy.countTrailingZeroBits()
 
-            for (direction in directions) {
+            for (offset in offsets) {
                 var targetIndex = positionIndex
                 while (true) {
-                    targetIndex += direction
+                    targetIndex += offset
 
-                    if (!isWithinBounds(targetIndex) || !isSameRankOrFile(positionIndex, targetIndex, direction)) {
+                    if (!isWithinBounds(targetIndex) || !isSameRankOrFile(positionIndex, targetIndex, offset)) {
                         break
                     }
 
@@ -183,5 +147,38 @@ class BitboardMoveGenerator(private val bitboard: Bitboard) {
         }
 
         return moves
+    }
+
+    fun isLegalPawnMove(position: Long): Boolean {
+        return position != 0L && position and (position - 1) == 0L
+    }
+
+    fun isLegalKnightMove(fromIndex: Int, toIndex: Int): Boolean {
+        if (toIndex !in 0..63) return false
+
+        val fromFile = fromIndex % 8
+        val toFile = toIndex % 8
+        val fileDiff = abs(fromFile - toFile)
+
+        return fileDiff == 1 || fileDiff == 2
+    }
+
+    fun isSameRankOrFile(fromIndex: Int, toIndex: Int, direction: Int): Boolean {
+        val fromFile = fromIndex % 8
+        val toFile = toIndex % 8
+        val fromRank = fromIndex / 8
+        val toRank = toIndex / 8
+
+        return when (direction) {
+            1, -1 -> fromRank == toRank
+            8, -8 -> fromFile == toFile
+            7, -7 -> abs(fromFile - toFile) == abs(fromRank - toRank)
+            9, -9 -> abs(fromFile - toFile) == abs(fromRank - toRank)
+            else -> false
+        }
+    }
+
+    fun isWithinBounds(index: Int): Boolean {
+        return index in 0..63
     }
 }
