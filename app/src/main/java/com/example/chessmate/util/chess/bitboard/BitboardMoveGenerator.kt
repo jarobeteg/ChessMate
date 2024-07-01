@@ -1,6 +1,5 @@
 package com.example.chessmate.util.chess.bitboard
 
-import com.example.chessmate.util.chess.Position
 import com.example.chessmate.util.chess.chessboard.PieceColor
 import kotlin.math.abs
 
@@ -73,21 +72,10 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
     }
 
     fun generateAllLegalMoves(): ArrayDeque<Long>  {
-        updateBoards()
         val moves = ArrayDeque<Long>()
 
-        moves.addAll(generatePawnMoves(playerPawns, botPieces, emptySquares, false))
-        moves.addAll(generatePawnMoves(botPawns, playerPieces, emptySquares, true))
-        moves.addAll(generateKnightMoves(playerKnights, botPieces, emptySquares))
-        moves.addAll(generateKnightMoves(botKnights, playerPieces, emptySquares))
-        moves.addAll(generateBishopMoves(playerBishops, botPieces, allPieces))
-        moves.addAll(generateBishopMoves(botBishops, playerPieces, allPieces))
-        moves.addAll(generateRookMoves(playerRooks, botPieces, allPieces))
-        moves.addAll(generateRookMoves(botRooks, playerPieces, allPieces))
-        moves.addAll(generateQueenMoves(playerQueens, botPieces, allPieces))
-        moves.addAll(generateQueenMoves(botQueens, playerPieces, allPieces))
-        moves.addAll(generateKingMoves(playerKing, playerPieces))
-        moves.addAll(generateKingMoves(botKing, botPieces))
+        moves.addAll(generateLegalMovesForBot())
+        moves.addAll(generateLegalMovesForPlayer())
 
         return moves
     }
