@@ -13,5 +13,10 @@ enum class BitPiece {
     BLACK_ROOK,
     BLACK_QUEEN,
     BLACK_KING,
-    NONE
+    NONE;
+
+    companion object {
+        fun fromOrdinal(ordinal: Int): BitPiece = entries.toTypedArray().getOrElse(ordinal) { NONE }
+        fun toOrdinal(bitPiece: BitPiece): Int = bitPiece.ordinal
+    }
 }

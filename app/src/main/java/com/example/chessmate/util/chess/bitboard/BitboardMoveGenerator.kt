@@ -123,16 +123,16 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
 
             if ((singleMove and emptySquares) != 0L) {
                 if ((singleMove and promotionRowMask) != 0L) {
-                    moves.add(encodeMove(fromIndex, singleMoveIndex))
+                    moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex)))
                 } else {
-                    moves.add(encodeMove(fromIndex, singleMoveIndex))
+                    moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex)))
 
                     if ((position and startRowMask) != 0L) {
                         val intermediateMove = if (isForBot) singleMove shr 8 else singleMove shl 8
                         val doubleMove = if (isForBot) position shr 16 else position shl 16
                         val doubleMoveIndex = doubleMove.countTrailingZeroBits()
                         if ((doubleMove and emptySquares) != 0L && (intermediateMove and emptySquares) != 0L) {
-                            moves.add(encodeMove(fromIndex, doubleMoveIndex))
+                            moves.add(encodeMove(fromIndex, doubleMoveIndex, determinePiece(fromIndex)))
                         }
                     }
                 }
@@ -143,10 +143,10 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
             val captureLeftIndex = captureLeft.countTrailingZeroBits()
             val captureRightIndex = captureRight.countTrailingZeroBits()
             if ((captureLeft and opponentPieces) != 0L && isLegalPosition(captureLeft)) {
-                moves.add(encodeMove(fromIndex, captureLeftIndex))
+                moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex)))
             }
             if ((captureRight and opponentPieces) != 0L && isLegalPosition(captureRight)) {
-                moves.add(encodeMove(fromIndex, captureRightIndex))
+                moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex)))
             }
 
             pawnsCopy = pawnsCopy xor position
@@ -167,7 +167,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
                 if (isLegalKnightMove(positionIndex, targetIndex)) {
                     val target = 1L shl targetIndex
                     if ((target and emptySquares != 0L) || (target and opponentPieces) != 0L) {
-                        moves.add(encodeMove(positionIndex, targetIndex))
+                        moves.add(encodeMove(positionIndex, targetIndex, determinePiece(positionIndex)))
                     }
                 }
             }
@@ -205,11 +205,11 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
 
                     if (target and allPieces != 0L) {
                         if (target and opponentPieces != 0L) {
-                            moves.add(encodeMove(positionIndex, targetIndex))
+                            moves.add(encodeMove(positionIndex, targetIndex, determinePiece(positionIndex)))
                         }
                         break
                     }
-                    moves.add(encodeMove(positionIndex, targetIndex))
+                    moves.add(encodeMove(positionIndex, targetIndex, determinePiece(positionIndex)))
                 }
             }
 
@@ -228,7 +228,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
             if (isWithinBounds(targetIndex)) {
                 val target = 1L shl targetIndex
                 if ((target and friendlyPieces) == 0L) {
-                    moves.add(encodeMove(kingIndex, targetIndex))
+                    moves.add(encodeMove(kingIndex, targetIndex, determinePiece(kingIndex)))
                 }
             }
         }
@@ -236,14 +236,60 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return moves
     }
 
-    fun encodeMove(fromPosition: Int, toPosition: Int): Long {
-        return (fromPosition.toLong() and 0x3FL) or ((toPosition.toLong() and 0x3FL) shl 6)
+    fun determinePiece(index: Int): Int {
+        if ((1L shl index) and bitboard.whitePawns != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_PAWN)
+        if ((1L shl index) and bitboard.whiteKnights != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_KNIGHT)
+        if ((1L shl index) and bitboard.whiteBishops != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_BISHOP)
+        if ((1L shl index) and bitboard.whiteRooks != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_ROOK)
+        if ((1L shl index) and bitboard.whiteQueens != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_QUEEN)
+        if ((1L shl index) and bitboard.whiteKing != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_KING)
+        if ((1L shl index) and bitboard.blackPawns != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_PAWN)
+        if ((1L shl index) and bitboard.blackKnights != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_KNIGHT)
+        if ((1L shl index) and bitboard.blackBishops != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_BISHOP)
+        if ((1L shl index) and bitboard.blackRooks != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_ROOK)
+        if ((1L shl index) and bitboard.blackQueens != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_QUEEN)
+        if ((1L shl index) and bitboard.blackKing != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_KING)
+        return BitPiece.toOrdinal(BitPiece.NONE)
     }
 
-    fun decodeMove(move: Long): Pair<Long, Long> {
-        val fromPosition = (move and 0x3FL).toInt()
-        val toPosition = ((move shr 6) and 0x3FL).toInt()
-        return Pair(1L shl fromPosition, 1L shl toPosition)
+    fun encodeMove(
+        from: Int,
+        to: Int,
+        piece: Int,
+        capturedPiece: Int = 0,
+        promotion: Int = 0,
+        isCastling: Boolean = false,
+        isEnPassant: Boolean = false
+    ): Long {
+        var encodedMove: Long = 0
+        encodedMove = encodedMove or (from.toLong() and 0x3FL)
+        encodedMove = encodedMove or ((to.toLong() and 0x3FL) shl 6)
+        encodedMove = encodedMove or ((piece.toLong() and 0xFL) shl 12)
+        encodedMove = encodedMove or ((capturedPiece.toLong() and 0xFL) shl 16)
+        encodedMove = encodedMove or ((promotion.toLong() and 0xFL) shl 20)
+        if (isCastling) encodedMove = encodedMove or (1L shl 24)
+        if (isEnPassant) encodedMove = encodedMove or (1L shl 25)
+        return encodedMove
+    }
+
+    fun decodeMove(encodedMove: Long): BitMove {
+        val from = (encodedMove and 0x3FL).toInt()
+        val to = ((encodedMove shr 6) and 0x3FL).toInt()
+        val piece = ((encodedMove shr 12) and 0xFL).toInt()
+        val capturedPiece = ((encodedMove shr 16) and 0xFL).toInt()
+        val promotion = ((encodedMove shr 20) and 0xFL).toInt()
+        val isCastling = (encodedMove shr 24) and 1L == 1L
+        val isEnPassant = (encodedMove shr 25) and 1L == 1L
+
+        return BitMove(
+            from = 1L shl from,
+            to = 1L shl to,
+            piece = BitPiece.fromOrdinal(piece),
+            capturedPiece = if (capturedPiece != 0) BitPiece.fromOrdinal(capturedPiece) else null,
+            promotion = if (promotion != 0) BitPiece.fromOrdinal(promotion) else null,
+            isCastling = isCastling,
+            isEnPassant = isEnPassant
+        )
     }
 
     fun isLegalPosition(position: Long): Boolean {
