@@ -1,5 +1,6 @@
 package com.example.chessmate.util.chess.bitboard
 
+import com.example.chessmate.util.chess.Position
 import com.example.chessmate.util.chess.chessboard.PieceColor
 import kotlin.math.abs
 
@@ -9,6 +10,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
     private val rookOffsets = intArrayOf(1, -1, 8, -8)
     private val queenOffsets = intArrayOf(1, -1, 7, -7, 8, -8, 9, -9)
     private val kingOffsets = intArrayOf(1, -1, 7, -7, 8, -8, 9, -9)
+    private val pawnAttackOffsets = intArrayOf(7, 9)
 
     private var allPieces: Long = bitboard.whitePawns or bitboard.whiteKnights or
             bitboard.whiteBishops or bitboard.whiteRooks or
@@ -74,17 +76,17 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         updateBoards()
         val moves = ArrayDeque<Long>()
 
-        //moves.addAll(generatePawnMoves(playerPawns, botPieces, emptySquares, false))
-        //moves.addAll(generatePawnMoves(botPawns, playerPieces, emptySquares, true))
-        //moves.addAll(generateKnightMoves(playerKnights, botPieces, emptySquares))
-        //moves.addAll(generateKnightMoves(botKnights, playerPieces, emptySquares))
-        //moves.addAll(generateBishopMoves(playerBishops, botPieces, allPieces))
-        //moves.addAll(generateBishopMoves(botBishops, playerPieces, allPieces))
-        //moves.addAll(generateRookMoves(playerRooks, botPieces, allPieces))
-        //moves.addAll(generateRookMoves(botRooks, playerPieces, allPieces))
-        //moves.addAll(generateQueenMoves(playerQueens, botPieces, allPieces))
-        //moves.addAll(generateQueenMoves(botQueens, playerPieces, allPieces))
-        //moves.addAll(generateKingMoves(playerKing, playerPieces))
+        moves.addAll(generatePawnMoves(playerPawns, botPieces, emptySquares, false))
+        moves.addAll(generatePawnMoves(botPawns, playerPieces, emptySquares, true))
+        moves.addAll(generateKnightMoves(playerKnights, botPieces, emptySquares))
+        moves.addAll(generateKnightMoves(botKnights, playerPieces, emptySquares))
+        moves.addAll(generateBishopMoves(playerBishops, botPieces, allPieces))
+        moves.addAll(generateBishopMoves(botBishops, playerPieces, allPieces))
+        moves.addAll(generateRookMoves(playerRooks, botPieces, allPieces))
+        moves.addAll(generateRookMoves(botRooks, playerPieces, allPieces))
+        moves.addAll(generateQueenMoves(playerQueens, botPieces, allPieces))
+        moves.addAll(generateQueenMoves(botQueens, playerPieces, allPieces))
+        moves.addAll(generateKingMoves(playerKing, playerPieces))
         moves.addAll(generateKingMoves(botKing, botPieces))
 
         return moves
@@ -128,17 +130,21 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
             val position = pawnsCopy.takeLowestOneBit()
             val singleMove = if (isForBot) position shr 8 else position shl 8
 
+            val fromIndex = position.countTrailingZeroBits()
+            val singleMoveIndex = singleMove.countTrailingZeroBits()
+
             if ((singleMove and emptySquares) != 0L) {
                 if ((singleMove and promotionRowMask) != 0L) {
-                    moves.add(singleMove)
+                    moves.add(encodeMove(fromIndex, singleMoveIndex))
                 } else {
-                    moves.add(singleMove)
+                    moves.add(encodeMove(fromIndex, singleMoveIndex))
 
                     if ((position and startRowMask) != 0L) {
                         val intermediateMove = if (isForBot) singleMove shr 8 else singleMove shl 8
                         val doubleMove = if (isForBot) position shr 16 else position shl 16
+                        val doubleMoveIndex = doubleMove.countTrailingZeroBits()
                         if ((doubleMove and emptySquares) != 0L && (intermediateMove and emptySquares) != 0L) {
-                            moves.add(doubleMove)
+                            moves.add(encodeMove(fromIndex, doubleMoveIndex))
                         }
                     }
                 }
@@ -146,11 +152,13 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
 
             val captureLeft = if (isForBot) position shr 7 else position shl 7
             val captureRight = if (isForBot) position shr 9 else position shl 9
+            val captureLeftIndex = captureLeft.countTrailingZeroBits()
+            val captureRightIndex = captureRight.countTrailingZeroBits()
             if ((captureLeft and opponentPieces) != 0L && isLegalPosition(captureLeft)) {
-                moves.add(captureLeft)
+                moves.add(encodeMove(fromIndex, captureLeftIndex))
             }
             if ((captureRight and opponentPieces) != 0L && isLegalPosition(captureRight)) {
-                moves.add(captureRight)
+                moves.add(encodeMove(fromIndex, captureRightIndex))
             }
 
             pawnsCopy = pawnsCopy xor position
@@ -164,14 +172,14 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
 
         while (knightsCopy != 0L) {
             val position = knightsCopy.takeLowestOneBit()
-            val positionIndex = knightsCopy.countTrailingZeroBits()
+            val positionIndex = position.countTrailingZeroBits()
 
             for (offset in knightOffsets) {
                 val targetIndex = positionIndex + offset
                 if (isLegalKnightMove(positionIndex, targetIndex)) {
                     val target = 1L shl targetIndex
                     if ((target and emptySquares != 0L) || (target and opponentPieces) != 0L) {
-                        moves.add(target)
+                        moves.add(encodeMove(positionIndex, targetIndex))
                     }
                 }
             }
@@ -194,7 +202,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
 
         while (piecesCopy != 0L) {
             val position = piecesCopy.takeLowestOneBit()
-            val positionIndex = piecesCopy.countTrailingZeroBits()
+            val positionIndex = position.countTrailingZeroBits()
 
             for (offset in offsets) {
                 var targetIndex = positionIndex
@@ -209,11 +217,11 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
 
                     if (target and allPieces != 0L) {
                         if (target and opponentPieces != 0L) {
-                            moves.add(target)
+                            moves.add(encodeMove(positionIndex, targetIndex))
                         }
                         break
                     }
-                    moves.add(target)
+                    moves.add(encodeMove(positionIndex, targetIndex))
                 }
             }
 
@@ -225,15 +233,29 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
 
     fun generateKingMoves(king: Long, friendlyPieces: Long): ArrayDeque<Long> {
         val moves = ArrayDeque<Long>()
+        val kingIndex = king.countTrailingZeroBits()
 
         for (offset in kingOffsets) {
-            val target = if (offset > 0) king shl offset else king shr -offset
-            if (isLegalPosition(target) && (target and friendlyPieces) == 0L) {
-                moves.add(target)
+            val targetIndex = kingIndex + offset
+            if (isWithinBounds(targetIndex)) {
+                val target = 1L shl targetIndex
+                if ((target and friendlyPieces) == 0L) {
+                    moves.add(encodeMove(kingIndex, targetIndex))
+                }
             }
         }
 
         return moves
+    }
+
+    fun encodeMove(fromPosition: Int, toPosition: Int): Long {
+        return (fromPosition.toLong() and 0x3FL) or ((toPosition.toLong() and 0x3FL) shl 6)
+    }
+
+    fun decodeMove(move: Long): Pair<Long, Long> {
+        val fromPosition = (move and 0x3FL).toInt()
+        val toPosition = ((move shr 6) and 0x3FL).toInt()
+        return Pair(1L shl fromPosition, 1L shl toPosition)
     }
 
     fun isLegalPosition(position: Long): Boolean {
