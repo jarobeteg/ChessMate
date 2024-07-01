@@ -74,16 +74,18 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         updateBoards()
         val moves = ArrayDeque<Long>()
 
-        moves.addAll(generatePawnMoves(playerPawns, botPieces, emptySquares, false))
-        moves.addAll(generatePawnMoves(botPawns, playerPieces, emptySquares, true))
-        moves.addAll(generateKnightMoves(playerKnights, botPieces, emptySquares))
-        moves.addAll(generateKnightMoves(botKnights, playerPieces, emptySquares))
-        moves.addAll(generateBishopMoves(playerBishops, botPieces, allPieces))
-        moves.addAll(generateBishopMoves(botBishops, playerPieces, allPieces))
-        moves.addAll(generateRookMoves(playerRooks, botPieces, allPieces))
-        moves.addAll(generateRookMoves(botRooks, playerPieces, allPieces))
-        moves.addAll(generateQueenMoves(playerQueens, botPieces, allPieces))
-        moves.addAll(generateQueenMoves(botQueens, playerPieces, allPieces))
+        //moves.addAll(generatePawnMoves(playerPawns, botPieces, emptySquares, false))
+        //moves.addAll(generatePawnMoves(botPawns, playerPieces, emptySquares, true))
+        //moves.addAll(generateKnightMoves(playerKnights, botPieces, emptySquares))
+        //moves.addAll(generateKnightMoves(botKnights, playerPieces, emptySquares))
+        //moves.addAll(generateBishopMoves(playerBishops, botPieces, allPieces))
+        //moves.addAll(generateBishopMoves(botBishops, playerPieces, allPieces))
+        //moves.addAll(generateRookMoves(playerRooks, botPieces, allPieces))
+        //moves.addAll(generateRookMoves(botRooks, playerPieces, allPieces))
+        //moves.addAll(generateQueenMoves(playerQueens, botPieces, allPieces))
+        //moves.addAll(generateQueenMoves(botQueens, playerPieces, allPieces))
+        //moves.addAll(generateKingMoves(playerKing, playerPieces))
+        moves.addAll(generateKingMoves(botKing, botPieces))
 
         return moves
     }
@@ -97,6 +99,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         moves.addAll(generateBishopMoves(botBishops, playerPieces, allPieces))
         moves.addAll(generateRookMoves(botRooks, playerPieces, allPieces))
         moves.addAll(generateQueenMoves(botQueens, playerPieces, allPieces))
+        moves.addAll(generateKingMoves(botKing, botPieces))
 
         return moves
     }
@@ -110,6 +113,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         moves.addAll(generateBishopMoves(playerBishops, botPieces, allPieces))
         moves.addAll(generateRookMoves(playerRooks, botPieces, allPieces))
         moves.addAll(generateQueenMoves(playerQueens, botPieces, allPieces))
+        moves.addAll(generateKingMoves(playerKing, playerPieces))
 
         return moves
     }
@@ -142,10 +146,10 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
 
             val captureLeft = if (isForBot) position shr 7 else position shl 7
             val captureRight = if (isForBot) position shr 9 else position shl 9
-            if ((captureLeft and opponentPieces) != 0L && isLegalPawnMove(captureLeft)) {
+            if ((captureLeft and opponentPieces) != 0L && isLegalPosition(captureLeft)) {
                 moves.add(captureLeft)
             }
-            if ((captureRight and opponentPieces) != 0L && isLegalPawnMove(captureRight)) {
+            if ((captureRight and opponentPieces) != 0L && isLegalPosition(captureRight)) {
                 moves.add(captureRight)
             }
 
@@ -219,7 +223,20 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return moves
     }
 
-    fun isLegalPawnMove(position: Long): Boolean {
+    fun generateKingMoves(king: Long, friendlyPieces: Long): ArrayDeque<Long> {
+        val moves = ArrayDeque<Long>()
+
+        for (offset in kingOffsets) {
+            val target = if (offset > 0) king shl offset else king shr -offset
+            if (isLegalPosition(target) && (target and friendlyPieces) == 0L) {
+                moves.add(target)
+            }
+        }
+
+        return moves
+    }
+
+    fun isLegalPosition(position: Long): Boolean {
         return position != 0L && position and (position - 1) == 0L
     }
 
