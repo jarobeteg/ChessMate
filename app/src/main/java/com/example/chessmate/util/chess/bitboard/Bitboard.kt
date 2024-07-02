@@ -196,18 +196,20 @@ class Bitboard {
         return "$file$rank"
     }
 
-    fun clear() {
-        whitePawns = 0L
-        whiteKnights = 0L
-        whiteBishops = 0L
-        whiteRooks = 0L
-        whiteQueens = 0L
-        whiteKing = 0L
-        blackPawns = 0L
-        blackKnights = 0L
-        blackBishops = 0L
-        blackRooks = 0L
-        blackQueens = 0L
-        blackKing = 0L
+    fun copy(): Bitboard {
+        val copy = Bitboard()
+        copy.whitePawns = this.whitePawns
+        copy.whiteKnights = this.whiteKnights
+        copy.whiteBishops = this.whiteBishops
+        copy.whiteRooks = this.whiteRooks
+        copy.whiteQueens = this.whiteQueens
+        copy.whiteKing = this.whiteKing
+        copy.blackPawns = this.blackPawns
+        copy.blackKnights = this.blackKnights
+        copy.blackBishops = this.blackBishops
+        copy.blackRooks = this.blackRooks
+        copy.blackQueens = this.blackQueens
+        copy.blackKing = this.blackKing
+        return copy
     }
 }
