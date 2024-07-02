@@ -4,6 +4,65 @@ import com.example.chessmate.util.chess.chessboard.PieceColor
 import kotlin.math.abs
 
 class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerColor: PieceColor, private val botColor: PieceColor) {
+
+    companion object {
+        fun determinePiece(bitboard: Bitboard, index: Int): Int {
+            if ((1L shl index) and bitboard.whitePawns != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_PAWN)
+            if ((1L shl index) and bitboard.whiteKnights != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_KNIGHT)
+            if ((1L shl index) and bitboard.whiteBishops != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_BISHOP)
+            if ((1L shl index) and bitboard.whiteRooks != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_ROOK)
+            if ((1L shl index) and bitboard.whiteQueens != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_QUEEN)
+            if ((1L shl index) and bitboard.whiteKing != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_KING)
+            if ((1L shl index) and bitboard.blackPawns != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_PAWN)
+            if ((1L shl index) and bitboard.blackKnights != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_KNIGHT)
+            if ((1L shl index) and bitboard.blackBishops != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_BISHOP)
+            if ((1L shl index) and bitboard.blackRooks != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_ROOK)
+            if ((1L shl index) and bitboard.blackQueens != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_QUEEN)
+            if ((1L shl index) and bitboard.blackKing != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_KING)
+            return BitPiece.toOrdinal(BitPiece.NONE)
+        }
+
+        fun encodeMove(
+            from: Int,
+            to: Int,
+            piece: Int,
+            capturedPiece: Int = 0,
+            promotion: Int = 0,
+            isCastling: Boolean = false,
+            isEnPassant: Boolean = false
+        ): Long {
+            var encodedMove: Long = 0
+            encodedMove = encodedMove or (from.toLong() and 0x3FL)
+            encodedMove = encodedMove or ((to.toLong() and 0x3FL) shl 6)
+            encodedMove = encodedMove or ((piece.toLong() and 0xFL) shl 12)
+            encodedMove = encodedMove or ((capturedPiece.toLong() and 0xFL) shl 16)
+            encodedMove = encodedMove or ((promotion.toLong() and 0xFL) shl 20)
+            if (isCastling) encodedMove = encodedMove or (1L shl 24)
+            if (isEnPassant) encodedMove = encodedMove or (1L shl 25)
+            return encodedMove
+        }
+
+        fun decodeMove(encodedMove: Long): BitMove {
+            val from = (encodedMove and 0x3FL).toInt()
+            val to = ((encodedMove shr 6) and 0x3FL).toInt()
+            val piece = ((encodedMove shr 12) and 0xFL).toInt()
+            val capturedPiece = ((encodedMove shr 16) and 0xFL).toInt()
+            val promotion = ((encodedMove shr 20) and 0xFL).toInt()
+            val isCastling = (encodedMove shr 24) and 1L == 1L
+            val isEnPassant = (encodedMove shr 25) and 1L == 1L
+
+            return BitMove(
+                from = 1L shl from,
+                to = 1L shl to,
+                piece = BitPiece.fromOrdinal(piece),
+                capturedPiece = if (capturedPiece != 0) BitPiece.fromOrdinal(capturedPiece) else null,
+                promotion = if (promotion != 0) BitPiece.fromOrdinal(promotion) else null,
+                isCastling = isCastling,
+                isEnPassant = isEnPassant
+            )
+        }
+    }
+
     private val knightOffsets = intArrayOf(15, 6, 10, 17, -17, -10, -6, -15)
     private val bishopOffsets = intArrayOf(9, -9, 7, -7)
     private val rookOffsets = intArrayOf(1, -1, 8, -8)
@@ -236,7 +295,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return moves
     }
 
-    fun determinePiece(index: Int): Int {
+    private fun determinePiece(index: Int): Int {
         if ((1L shl index) and bitboard.whitePawns != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_PAWN)
         if ((1L shl index) and bitboard.whiteKnights != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_KNIGHT)
         if ((1L shl index) and bitboard.whiteBishops != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_BISHOP)
@@ -250,46 +309,6 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         if ((1L shl index) and bitboard.blackQueens != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_QUEEN)
         if ((1L shl index) and bitboard.blackKing != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_KING)
         return BitPiece.toOrdinal(BitPiece.NONE)
-    }
-
-    fun encodeMove(
-        from: Int,
-        to: Int,
-        piece: Int,
-        capturedPiece: Int = 0,
-        promotion: Int = 0,
-        isCastling: Boolean = false,
-        isEnPassant: Boolean = false
-    ): Long {
-        var encodedMove: Long = 0
-        encodedMove = encodedMove or (from.toLong() and 0x3FL)
-        encodedMove = encodedMove or ((to.toLong() and 0x3FL) shl 6)
-        encodedMove = encodedMove or ((piece.toLong() and 0xFL) shl 12)
-        encodedMove = encodedMove or ((capturedPiece.toLong() and 0xFL) shl 16)
-        encodedMove = encodedMove or ((promotion.toLong() and 0xFL) shl 20)
-        if (isCastling) encodedMove = encodedMove or (1L shl 24)
-        if (isEnPassant) encodedMove = encodedMove or (1L shl 25)
-        return encodedMove
-    }
-
-    fun decodeMove(encodedMove: Long): BitMove {
-        val from = (encodedMove and 0x3FL).toInt()
-        val to = ((encodedMove shr 6) and 0x3FL).toInt()
-        val piece = ((encodedMove shr 12) and 0xFL).toInt()
-        val capturedPiece = ((encodedMove shr 16) and 0xFL).toInt()
-        val promotion = ((encodedMove shr 20) and 0xFL).toInt()
-        val isCastling = (encodedMove shr 24) and 1L == 1L
-        val isEnPassant = (encodedMove shr 25) and 1L == 1L
-
-        return BitMove(
-            from = 1L shl from,
-            to = 1L shl to,
-            piece = BitPiece.fromOrdinal(piece),
-            capturedPiece = if (capturedPiece != 0) BitPiece.fromOrdinal(capturedPiece) else null,
-            promotion = if (promotion != 0) BitPiece.fromOrdinal(promotion) else null,
-            isCastling = isCastling,
-            isEnPassant = isEnPassant
-        )
     }
 
     fun isLegalPosition(position: Long): Boolean {

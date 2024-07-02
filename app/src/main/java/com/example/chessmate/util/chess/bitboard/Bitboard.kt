@@ -196,6 +196,21 @@ class Bitboard {
         return "$file$rank"
     }
 
+    fun restore(bitboard: Bitboard) {
+        this.whitePawns = bitboard.whitePawns
+        this.whiteKnights = bitboard.whiteKnights
+        this.whiteBishops = bitboard.whiteBishops
+        this.whiteRooks = bitboard.whiteRooks
+        this.whiteQueens = bitboard.whiteQueens
+        this.whiteKing = bitboard.whiteKing
+        this.blackPawns = bitboard.blackPawns
+        this.blackKnights = bitboard.blackKnights
+        this.blackBishops = bitboard.blackBishops
+        this.blackRooks = bitboard.blackRooks
+        this.blackQueens = bitboard.blackQueens
+        this.blackKing = bitboard.blackKing
+    }
+
     fun copy(): Bitboard {
         val copy = Bitboard()
         copy.whitePawns = this.whitePawns
