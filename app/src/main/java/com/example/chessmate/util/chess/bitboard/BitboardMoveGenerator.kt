@@ -68,7 +68,22 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
     private val rookOffsets = intArrayOf(1, -1, 8, -8)
     private val queenOffsets = intArrayOf(1, -1, 7, -7, 8, -8, 9, -9)
     private val kingOffsets = intArrayOf(1, -1, 7, -7, 8, -8, 9, -9)
-    private val pawnAttackOffsets = intArrayOf(7, 9)
+
+    private val playerPiecesArray = if (playerColor == PieceColor.WHITE) {
+        arrayOf(bitboard.whitePawns, bitboard.whiteKnights, bitboard.whiteBishops,
+            bitboard.whiteRooks, bitboard.whiteQueens, bitboard.whiteKing)
+    } else {
+        arrayOf(bitboard.blackPawns, bitboard.blackKnights, bitboard.blackBishops,
+            bitboard.blackRooks, bitboard.blackQueens, bitboard.blackKing)
+    }
+
+    private val botPiecesArray = if (botColor == PieceColor.WHITE) {
+        arrayOf(bitboard.whitePawns, bitboard.whiteKnights, bitboard.whiteBishops,
+            bitboard.whiteRooks, bitboard.whiteQueens, bitboard.whiteKing)
+    } else {
+        arrayOf(bitboard.blackPawns, bitboard.blackKnights, bitboard.blackBishops,
+            bitboard.blackRooks, bitboard.blackQueens, bitboard.blackKing)
+    }
 
     private var allPieces: Long = bitboard.whitePawns or bitboard.whiteKnights or
             bitboard.whiteBishops or bitboard.whiteRooks or
@@ -79,22 +94,22 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
 
     private var emptySquares: Long = allPieces.inv()
 
-    private var playerPawns = if (playerColor == PieceColor.WHITE) bitboard.whitePawns else bitboard.blackPawns
-    private var playerKnights = if (playerColor == PieceColor.WHITE) bitboard.whiteKnights else bitboard.blackKnights
-    private var playerBishops = if (playerColor == PieceColor.WHITE) bitboard.whiteBishops else bitboard.blackBishops
-    private var playerRooks = if (playerColor == PieceColor.WHITE) bitboard.whiteRooks else bitboard.blackRooks
-    private var playerQueens = if (playerColor == PieceColor.WHITE) bitboard.whiteQueens else bitboard.blackQueens
-    private var playerKing = if (playerColor == PieceColor.WHITE) bitboard.whiteKing else bitboard.blackKing
+    private var playerPawns = playerPiecesArray[0]
+    private var playerKnights = playerPiecesArray[1]
+    private var playerBishops = playerPiecesArray[2]
+    private var playerRooks = playerPiecesArray[3]
+    private var playerQueens = playerPiecesArray[4]
+    private var playerKing = playerPiecesArray[5]
     private var playerPieces = playerPawns or playerKnights or
             playerBishops or playerRooks or
             playerQueens or playerKing
 
-    private var botPawns = if (botColor == PieceColor.WHITE) bitboard.whitePawns else bitboard.blackPawns
-    private var botKnights = if (botColor == PieceColor.WHITE) bitboard.whiteKnights else bitboard.blackKnights
-    private var botBishops = if (botColor == PieceColor.WHITE) bitboard.whiteBishops else bitboard.blackBishops
-    private var botRooks = if (botColor == PieceColor.WHITE) bitboard.whiteRooks else bitboard.blackRooks
-    private var botQueens = if (botColor == PieceColor.WHITE) bitboard.whiteQueens else bitboard.blackQueens
-    private var botKing = if (botColor == PieceColor.WHITE) bitboard.whiteKing else bitboard.blackKing
+    private var botPawns = botPiecesArray[0]
+    private var botKnights = botPiecesArray[1]
+    private var botBishops = botPiecesArray[2]
+    private var botRooks = botPiecesArray[3]
+    private var botQueens = botPiecesArray[4]
+    private var botKing = botPiecesArray[5]
     private var botPieces = botPawns or botKnights or
             botBishops or botRooks or
             botQueens or botKing
@@ -109,22 +124,22 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
 
         emptySquares = allPieces.inv()
 
-        playerPawns = if (playerColor == PieceColor.WHITE) bitboard.whitePawns else bitboard.blackPawns
-        playerKnights = if (playerColor == PieceColor.WHITE) bitboard.whiteKnights else bitboard.blackKnights
-        playerBishops = if (playerColor == PieceColor.WHITE) bitboard.whiteBishops else bitboard.blackBishops
-        playerRooks = if (playerColor == PieceColor.WHITE) bitboard.whiteRooks else bitboard.blackRooks
-        playerQueens = if (playerColor == PieceColor.WHITE) bitboard.whiteQueens else bitboard.blackQueens
-        playerKing = if (playerColor == PieceColor.WHITE) bitboard.whiteKing else bitboard.blackKing
+        playerPawns = playerPiecesArray[0]
+        playerKnights = playerPiecesArray[1]
+        playerBishops = playerPiecesArray[2]
+        playerRooks = playerPiecesArray[3]
+        playerQueens = playerPiecesArray[4]
+        playerKing = playerPiecesArray[5]
         playerPieces = playerPawns or playerKnights or
                 playerBishops or playerRooks or
                 playerQueens or playerKing
 
-        botPawns = if (botColor == PieceColor.WHITE) bitboard.whitePawns else bitboard.blackPawns
-        botKnights = if (botColor == PieceColor.WHITE) bitboard.whiteKnights else bitboard.blackKnights
-        botBishops = if (botColor == PieceColor.WHITE) bitboard.whiteBishops else bitboard.blackBishops
-        botRooks = if (botColor == PieceColor.WHITE) bitboard.whiteRooks else bitboard.blackRooks
-        botQueens = if (botColor == PieceColor.WHITE) bitboard.whiteQueens else bitboard.blackQueens
-        botKing = if (botColor == PieceColor.WHITE) bitboard.whiteKing else bitboard.blackKing
+        botPawns = botPiecesArray[0]
+        botKnights = botPiecesArray[1]
+        botBishops = botPiecesArray[2]
+        botRooks = botPiecesArray[3]
+        botQueens = botPiecesArray[4]
+        botKing = botPiecesArray[5]
         botPieces = botPawns or botKnights or
                 botBishops or botRooks or
                 botQueens or botKing
