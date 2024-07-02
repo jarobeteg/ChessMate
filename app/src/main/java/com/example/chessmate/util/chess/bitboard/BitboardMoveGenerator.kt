@@ -130,6 +130,15 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
                 botQueens or botKing
     }
 
+    fun generateAllMoves(): ArrayDeque<Long> {
+        val moves = ArrayDeque<Long>()
+
+        moves.addAll(generateMovesForBot())
+        moves.addAll(generateMovesForPlayer())
+
+        return moves
+    }
+
     fun generateAllLegalMoves(): ArrayDeque<Long>  {
         val moves = ArrayDeque<Long>()
 
@@ -139,7 +148,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return moves
     }
 
-    fun generateLegalMovesForBot(): ArrayDeque<Long> {
+    fun generateMovesForBot(): ArrayDeque<Long> {
         updateBoards()
         val moves = ArrayDeque<Long>()
 
@@ -148,12 +157,16 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         moves.addAll(generateBishopMoves(botBishops, playerPieces, allPieces))
         moves.addAll(generateRookMoves(botRooks, playerPieces, allPieces))
         moves.addAll(generateQueenMoves(botQueens, playerPieces, allPieces))
-        moves.addAll(generateKingMoves(botKing, botPieces))
+        moves.addAll(generateKingMoves(botKing, botPieces, playerPieces))
 
         return moves
     }
 
-    fun generateLegalMovesForPlayer(): ArrayDeque<Long> {
+    fun generateLegalMovesForBot(): ArrayDeque<Long> {
+        return filterOutIllegalMoves(generateMovesForBot(), botKing, true)
+    }
+
+    fun generateMovesForPlayer(): ArrayDeque<Long> {
         updateBoards()
         val moves = ArrayDeque<Long>()
 
@@ -162,9 +175,13 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         moves.addAll(generateBishopMoves(playerBishops, botPieces, allPieces))
         moves.addAll(generateRookMoves(playerRooks, botPieces, allPieces))
         moves.addAll(generateQueenMoves(playerQueens, botPieces, allPieces))
-        moves.addAll(generateKingMoves(playerKing, playerPieces))
+        moves.addAll(generateKingMoves(playerKing, playerPieces, botPieces))
 
         return moves
+    }
+
+    fun generateLegalMovesForPlayer(): ArrayDeque<Long> {
+        return filterOutIllegalMoves(generateMovesForPlayer(), playerKing, false)
     }
 
     fun generatePawnMoves(pawns: Long, opponentPieces: Long, emptySquares: Long, isForBot: Boolean): ArrayDeque<Long> {
@@ -202,10 +219,10 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
             val captureLeftIndex = captureLeft.countTrailingZeroBits()
             val captureRightIndex = captureRight.countTrailingZeroBits()
             if ((captureLeft and opponentPieces) != 0L && isLegalPosition(captureLeft)) {
-                moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex)))
+                moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex)))
             }
             if ((captureRight and opponentPieces) != 0L && isLegalPosition(captureRight)) {
-                moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex)))
+                moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex)))
             }
 
             pawnsCopy = pawnsCopy xor position
@@ -225,8 +242,10 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
                 val targetIndex = positionIndex + offset
                 if (isLegalKnightMove(positionIndex, targetIndex)) {
                     val target = 1L shl targetIndex
-                    if ((target and emptySquares != 0L) || (target and opponentPieces) != 0L) {
+                    if (target and emptySquares != 0L) {
                         moves.add(encodeMove(positionIndex, targetIndex, determinePiece(positionIndex)))
+                    } else if (target and opponentPieces != 0L) {
+                        moves.add(encodeMove(positionIndex, targetIndex, determinePiece(positionIndex), determinePiece(targetIndex)))
                     }
                 }
             }
@@ -264,7 +283,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
 
                     if (target and allPieces != 0L) {
                         if (target and opponentPieces != 0L) {
-                            moves.add(encodeMove(positionIndex, targetIndex, determinePiece(positionIndex)))
+                            moves.add(encodeMove(positionIndex, targetIndex, determinePiece(positionIndex), determinePiece(targetIndex)))
                         }
                         break
                     }
@@ -278,7 +297,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return moves
     }
 
-    fun generateKingMoves(king: Long, friendlyPieces: Long): ArrayDeque<Long> {
+    fun generateKingMoves(king: Long, friendlyPieces: Long, opponentPieces: Long): ArrayDeque<Long> {
         val moves = ArrayDeque<Long>()
         val kingIndex = king.countTrailingZeroBits()
 
@@ -287,12 +306,143 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
             if (isWithinBounds(targetIndex)) {
                 val target = 1L shl targetIndex
                 if ((target and friendlyPieces) == 0L) {
-                    moves.add(encodeMove(kingIndex, targetIndex, determinePiece(kingIndex)))
+                    if (target and opponentPieces != 0L) {
+                        moves.add(encodeMove(kingIndex, targetIndex, determinePiece(kingIndex), determinePiece(targetIndex)))
+                    } else {
+                        moves.add(encodeMove(kingIndex, targetIndex, determinePiece(kingIndex)))
+                    }
                 }
             }
         }
 
         return moves
+    }
+
+    fun filterOutIllegalMoves(moves: ArrayDeque<Long>, king: Long, isForBot: Boolean): ArrayDeque<Long> {
+        val legalMoves = ArrayDeque<Long>()
+        val originalBitboard = bitboard.copy()
+
+        for (move in moves) {
+            val decodedMove = decodeMove(move)
+            bitboard.movePiece(decodedMove)
+
+            val kingPosition = if (decodedMove.piece == BitPiece.WHITE_KING || decodedMove.piece == BitPiece.BLACK_KING) {
+                decodedMove.to
+            } else {
+                king
+            }
+
+            if (!isSquareUnderAttack(kingPosition, isForBot)) {
+                legalMoves.add(move)
+            }
+            bitboard.restore(originalBitboard)
+        }
+
+        return legalMoves
+    }
+
+    fun isSquareUnderAttack(square: Long, isForBot: Boolean): Boolean {
+        updateBoards()
+        val opponentPawns = if (isForBot) playerPawns else botPawns
+        val opponentKnights = if (isForBot) playerKnights else botKnights
+        val opponentBishops = if (isForBot) playerBishops else botBishops
+        val opponentRooks = if (isForBot) playerRooks else botRooks
+        val opponentQueens = if (isForBot) playerQueens else botQueens
+        val opponentKing = if (isForBot) playerKing else botKing
+
+        val pawnAttacks = getPawnAttackMask(opponentPawns, isForBot)
+        val knightAttacks = getKnightAttackMask(opponentKnights)
+        val bishopAttacks = getBishopAttackMask(opponentBishops, allPieces)
+        val rookAttacks = getRookAttackMask(opponentRooks, allPieces)
+        val queenAttacks = getQueenAttackMask(opponentQueens, allPieces)
+        val kingAttacks = getKingAttackMask(opponentKing)
+
+        val allAttacks = pawnAttacks or knightAttacks or bishopAttacks or rookAttacks or queenAttacks or kingAttacks
+        return (square and allAttacks) != 0L
+    }
+
+    fun getPawnAttackMask(pawns: Long, isForBot: Boolean): Long {
+        var attacks = 0L
+        var pawnsCopy = pawns
+
+        while (pawnsCopy != 0L) {
+            val position = pawnsCopy.takeLowestOneBit()
+            if (isForBot) {
+                attacks = attacks or (position shl 7) or (position shl 9)
+            } else {
+                attacks = attacks or (position shr 7) or (position shr 9)
+            }
+            pawnsCopy = pawnsCopy xor position
+        }
+
+        return attacks
+    }
+
+    fun getKnightAttackMask(knights: Long): Long {
+        var attacks = 0L
+        var knightsCopy = knights
+
+        while (knightsCopy != 0L) {
+            val position = knightsCopy.takeLowestOneBit()
+            val positionIndex = position.countTrailingZeroBits()
+
+            for (offset in knightOffsets) {
+                val targetIndex = positionIndex + offset
+                if (isWithinBounds(targetIndex)) {
+                    attacks = attacks or (1L shl targetIndex)
+                }
+            }
+            knightsCopy = knightsCopy xor position
+        }
+        return attacks
+    }
+
+    fun getSlidingPieceAttackMask(pieces: Long, allPieces: Long, offsets: IntArray): Long {
+        var attacks = 0L
+        var piecesCopy = pieces
+
+        while (piecesCopy != 0L) {
+            val position = piecesCopy.takeLowestOneBit()
+            val positionIndex = position.countTrailingZeroBits()
+
+            for (offset in offsets) {
+                var targetIndex = positionIndex
+                while (true) {
+                    targetIndex += offset
+                    if (!isWithinBounds(targetIndex) || !isSameRankOrFile(positionIndex, targetIndex, offset)) break
+                    val target = 1L shl targetIndex
+                    attacks = attacks or target
+                    if ((target and allPieces) != 0L) break
+                }
+            }
+            piecesCopy = piecesCopy xor position
+        }
+        return attacks
+    }
+
+    fun getBishopAttackMask(bishops: Long, allPieces: Long): Long {
+        return getSlidingPieceAttackMask(bishops, allPieces, bishopOffsets)
+    }
+
+    fun getRookAttackMask(rooks: Long, allPieces: Long): Long {
+        return getSlidingPieceAttackMask(rooks, allPieces, rookOffsets)
+    }
+
+    fun getQueenAttackMask(queens: Long, allPieces: Long): Long {
+        return getSlidingPieceAttackMask(queens, allPieces, queenOffsets)
+    }
+
+    fun getKingAttackMask(king: Long): Long {
+        var attacks = 0L
+        val kingIndex = king.countTrailingZeroBits()
+
+        for (offset in kingOffsets) {
+            val targetIndex = kingIndex + offset
+            if (isWithinBounds(targetIndex)) {
+                attacks = attacks or (1L shl targetIndex)
+            }
+        }
+        return attacks
     }
 
     private fun determinePiece(index: Int): Int {

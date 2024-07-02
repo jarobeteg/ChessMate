@@ -180,6 +180,9 @@ class Bitboard {
     }
 
     fun movePiece(move: BitMove) {
+        if (move.capturedPiece != null) {
+            removePiece(move.to)
+        }
         setPiece(move.piece, move.to)
         removePiece(move.from)
     }
