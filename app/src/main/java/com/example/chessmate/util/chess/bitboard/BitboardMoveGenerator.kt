@@ -63,6 +63,21 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         }
     }
 
+    private val pieceBitboards = arrayOf(
+        bitboard.whitePawns to BitPiece.WHITE_PAWN,
+        bitboard.whiteKnights to BitPiece.WHITE_KNIGHT,
+        bitboard.whiteBishops to BitPiece.WHITE_BISHOP,
+        bitboard.whiteRooks to BitPiece.WHITE_ROOK,
+        bitboard.whiteQueens to BitPiece.WHITE_QUEEN,
+        bitboard.whiteKing to BitPiece.WHITE_KING,
+        bitboard.blackPawns to BitPiece.BLACK_PAWN,
+        bitboard.blackKnights to BitPiece.BLACK_KNIGHT,
+        bitboard.blackBishops to BitPiece.BLACK_BISHOP,
+        bitboard.blackRooks to BitPiece.BLACK_ROOK,
+        bitboard.blackQueens to BitPiece.BLACK_QUEEN,
+        bitboard.blackKing to BitPiece.BLACK_KING
+    )
+
     private val knightOffsets = intArrayOf(15, 6, 10, 17, -17, -10, -6, -15)
     private val bishopOffsets = intArrayOf(9, -9, 7, -7)
     private val rookOffsets = intArrayOf(1, -1, 8, -8)
@@ -460,19 +475,13 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return attacks
     }
 
-    private fun determinePiece(index: Int): Int {
-        if ((1L shl index) and bitboard.whitePawns != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_PAWN)
-        if ((1L shl index) and bitboard.whiteKnights != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_KNIGHT)
-        if ((1L shl index) and bitboard.whiteBishops != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_BISHOP)
-        if ((1L shl index) and bitboard.whiteRooks != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_ROOK)
-        if ((1L shl index) and bitboard.whiteQueens != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_QUEEN)
-        if ((1L shl index) and bitboard.whiteKing != 0L) return BitPiece.toOrdinal(BitPiece.WHITE_KING)
-        if ((1L shl index) and bitboard.blackPawns != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_PAWN)
-        if ((1L shl index) and bitboard.blackKnights != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_KNIGHT)
-        if ((1L shl index) and bitboard.blackBishops != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_BISHOP)
-        if ((1L shl index) and bitboard.blackRooks != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_ROOK)
-        if ((1L shl index) and bitboard.blackQueens != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_QUEEN)
-        if ((1L shl index) and bitboard.blackKing != 0L) return BitPiece.toOrdinal(BitPiece.BLACK_KING)
+    fun determinePiece(index: Int): Int {
+        val mask = 1L shl index
+        for ((bitboard, piece) in pieceBitboards) {
+            if ((mask and bitboard) != 0L) {
+                return BitPiece.toOrdinal(piece)
+            }
+        }
         return BitPiece.toOrdinal(BitPiece.NONE)
     }
 
