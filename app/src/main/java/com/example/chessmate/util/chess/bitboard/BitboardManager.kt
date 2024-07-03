@@ -7,7 +7,7 @@ import com.example.chessmate.util.chess.chessboard.PieceColor
 
 class BitboardManager(private var listener: BitboardListener) {
     private val bitboard = Bitboard()
-    private val bitboardMoveGenerator = BitboardMoveGenerator(bitboard)
+    private lateinit var moveGenerator: BitboardMoveGenerator
     var isPlayerTurn = false
     private var availablePlayerMoves = mutableListOf<BitMove>()
     private lateinit var player: Player
@@ -16,6 +16,7 @@ class BitboardManager(private var listener: BitboardListener) {
     fun initializeUIAndSquareListener(isPlayerStarted: Boolean) {
         initPlayerColors(isPlayerStarted)
         bitboard.setupInitialBoard()
+        moveGenerator = BitboardMoveGenerator(bitboard, playerColor(), botColor())
         listener.setupInitialBoardUI(bitboard)
         listener.setupSquareListener(bitboard)
     }
@@ -45,10 +46,26 @@ class BitboardManager(private var listener: BitboardListener) {
     }
 
     fun processFirstClick(square: BitSquare) {
+        availablePlayerMoves.clear()
+        val legalMoves = moveGenerator.generateLegalMovesForPlayer()
+        for (move in legalMoves) {
+            val decodedMove = BitboardMoveGenerator.decodeMove(move)
+            if (square.position == decodedMove.from) {
+                availablePlayerMoves.add(decodedMove)
+            }
+        }
         listener.onPlayerMoveCalculated(availablePlayerMoves, square)
     }
 
-    fun processSecondClick(square: BitSquare) {}
+    fun processSecondClick(square: BitSquare) {
+        for (move in availablePlayerMoves) {
+            if (move.to == square.position) {
+                bitboard.movePiece(move)
+                listener.onPlayerMoveMade(bitboard, move)
+                break
+            }
+        }
+    }
 
     fun getBitPiece(position: Long): BitSquare {
         return bitboard.getPiece(position)
