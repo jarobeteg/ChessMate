@@ -234,8 +234,11 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
     }
 
     override fun onPlayerMoveMade(bitboard: Bitboard, move: BitMove) {
+        removeHighlightMoves()
         removeHighlightOpponentsAndSquares()
         selectedSquare = null
+        addHighlightMove(move.from)
+        addHighlightMove(move.to)
         for (row in 7 downTo 0) {
             for (col in 0..7) {
                 val position = if (isPlayerStarted) {
@@ -281,6 +284,16 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
         squareFrameLayout.addView(squareImageView)
     }
 
+    private fun addHighlightMove(position: Long) {
+        val pos = gameManager.positionToRowCol(position)
+        val squareFrameLayout = uiSquares[pos.row][pos.col]
+        val imageView = ImageView(this)
+        imageView.setImageResource(R.drawable.highlight_square_move)
+        imageView.tag = highlightMoveTag
+        squareFrameLayout.addView(imageView)
+
+    }
+
     private fun removeHighlightOpponentsAndSquares() {
         for (row in 0..7) {
             for (col in 0..7) {
@@ -290,6 +303,26 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
                 for (i in 0 until frameLayout.childCount) {
                     val view = frameLayout.getChildAt(i)
                     if (view.tag == highlightCircleTag || view.tag == highlightOpponentTag) {
+                        highlightToRemove.add(view)
+                    }
+                }
+
+                highlightToRemove.forEach { highlight ->
+                    frameLayout.removeView(highlight)
+                }
+            }
+        }
+    }
+
+    private fun removeHighlightMoves() {
+        for (row in 0..7) {
+            for (col in 0..7) {
+                val frameLayout = uiSquares[row][col]
+                val highlightToRemove = mutableListOf<View>()
+
+                for (i in 0 until frameLayout.childCount) {
+                    val view = frameLayout.getChildAt(i)
+                    if (view.tag == highlightMoveTag) {
                         highlightToRemove.add(view)
                     }
                 }
