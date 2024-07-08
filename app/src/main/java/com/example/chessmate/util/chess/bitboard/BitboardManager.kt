@@ -34,11 +34,11 @@ class BitboardManager(private var listener: BitboardListener) {
     }
 
     fun playerColor(): PieceColor {
-        return player.color
+        return this.player.color
     }
 
     fun botColor(): PieceColor {
-        return bot.color
+        return this.bot.color
     }
 
     fun startGame() {

@@ -83,6 +83,14 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
                 squareLayout
             }
         }
+
+        if (!isPlayerStarted) {
+            uiSquares = Array(8) { row ->
+                Array(8) { col ->
+                    uiSquares[7 - row][7 - col]
+                }
+            }
+        }
     }
 
     override fun setupInitialBoardUI(bitboard: Bitboard) {
@@ -206,7 +214,8 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
     }
 
     private fun handleSquareClick(square: BitSquare) {
-        println("handleSquareClick: $square")
+        val pos = gameManager.positionToRowCol(square.position)
+        println("position $pos, handleSquareClick: $square")
         if (gameManager.isPlayerTurn && square.color == gameManager.playerColor() && selectedSquare == null) {
             removeHighlightOpponentsAndSquares()
             gameManager.processFirstClick(square)
@@ -224,7 +233,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
     override fun onPlayerMoveCalculated(moves: MutableList<BitMove>, square: BitSquare) {
         removeHighlightOpponentsAndSquares()
         for (move in moves) {
-            if (move.capturedPiece != null) {
+            if (move.capturedPiece != BitPiece.NONE) {
                 addHighlightOpponent(move.to, move.capturedPiece)
             } else {
                 addHighlightSquare(move.to)

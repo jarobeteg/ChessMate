@@ -10,8 +10,8 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
             from: Int,
             to: Int,
             piece: Int,
-            capturedPiece: Int = 0,
-            promotion: Int = 0,
+            capturedPiece: Int = 12,
+            promotion: Int = 12,
             isCastling: Boolean = false,
             isEnPassant: Boolean = false
         ): Long {
@@ -39,28 +39,13 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
                 from = 1L shl from,
                 to = 1L shl to,
                 piece = BitPiece.fromOrdinal(piece),
-                capturedPiece = if (capturedPiece != 0) BitPiece.fromOrdinal(capturedPiece) else null,
-                promotion = if (promotion != 0) BitPiece.fromOrdinal(promotion) else null,
+                capturedPiece = if (capturedPiece != 12) BitPiece.fromOrdinal(capturedPiece) else BitPiece.NONE,
+                promotion = if (promotion != 12) BitPiece.fromOrdinal(promotion) else BitPiece.NONE,
                 isCastling = isCastling,
                 isEnPassant = isEnPassant
             )
         }
     }
-
-    private var pieceBitboards = arrayOf(
-        bitboard.whitePawns to BitPiece.WHITE_PAWN,
-        bitboard.whiteKnights to BitPiece.WHITE_KNIGHT,
-        bitboard.whiteBishops to BitPiece.WHITE_BISHOP,
-        bitboard.whiteRooks to BitPiece.WHITE_ROOK,
-        bitboard.whiteQueens to BitPiece.WHITE_QUEEN,
-        bitboard.whiteKing to BitPiece.WHITE_KING,
-        bitboard.blackPawns to BitPiece.BLACK_PAWN,
-        bitboard.blackKnights to BitPiece.BLACK_KNIGHT,
-        bitboard.blackBishops to BitPiece.BLACK_BISHOP,
-        bitboard.blackRooks to BitPiece.BLACK_ROOK,
-        bitboard.blackQueens to BitPiece.BLACK_QUEEN,
-        bitboard.blackKing to BitPiece.BLACK_KING
-    )
 
     private val knightOffsets = intArrayOf(15, 6, 10, 17, -17, -10, -6, -15)
     private val bishopOffsets = intArrayOf(9, -9, 7, -7)
@@ -68,111 +53,45 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
     private val queenOffsets = intArrayOf(1, -1, 7, -7, 8, -8, 9, -9)
     private val kingOffsets = intArrayOf(1, -1, 7, -7, 8, -8, 9, -9)
 
-    private var playerPiecesArray = if (playerColor == PieceColor.WHITE) {
-        arrayOf(bitboard.whitePawns, bitboard.whiteKnights, bitboard.whiteBishops,
-            bitboard.whiteRooks, bitboard.whiteQueens, bitboard.whiteKing)
-    } else {
-        arrayOf(bitboard.blackPawns, bitboard.blackKnights, bitboard.blackBishops,
-            bitboard.blackRooks, bitboard.blackQueens, bitboard.blackKing)
-    }
+    private var playerPiecesArray: LongArray
+    private var playerPieces: Long
+    private var botPiecesArray: LongArray
+    private var botPieces: Long
+    private var allPieces: Long
+    private var emptySquares: Long
 
-    private var botPiecesArray = if (botColor == PieceColor.WHITE) {
-        arrayOf(bitboard.whitePawns, bitboard.whiteKnights, bitboard.whiteBishops,
-            bitboard.whiteRooks, bitboard.whiteQueens, bitboard.whiteKing)
-    } else {
-        arrayOf(bitboard.blackPawns, bitboard.blackKnights, bitboard.blackBishops,
-            bitboard.blackRooks, bitboard.blackQueens, bitboard.blackKing)
-    }
-
-    private var allPieces: Long = bitboard.whitePawns or bitboard.whiteKnights or
-            bitboard.whiteBishops or bitboard.whiteRooks or
-            bitboard.whiteQueens or bitboard.whiteKing or
-            bitboard.blackPawns or bitboard.blackKnights or
-            bitboard.blackBishops or bitboard.blackRooks or
-            bitboard.blackQueens or bitboard.blackKing
-
-    private var emptySquares: Long = allPieces.inv()
-
-    private var playerPawns = playerPiecesArray[0]
-    private var playerKnights = playerPiecesArray[1]
-    private var playerBishops = playerPiecesArray[2]
-    private var playerRooks = playerPiecesArray[3]
-    private var playerQueens = playerPiecesArray[4]
-    private var playerKing = playerPiecesArray[5]
-    private var playerPieces = playerPawns or playerKnights or
-            playerBishops or playerRooks or
-            playerQueens or playerKing
-
-    private var botPawns = botPiecesArray[0]
-    private var botKnights = botPiecesArray[1]
-    private var botBishops = botPiecesArray[2]
-    private var botRooks = botPiecesArray[3]
-    private var botQueens = botPiecesArray[4]
-    private var botKing = botPiecesArray[5]
-    private var botPieces = botPawns or botKnights or
-            botBishops or botRooks or
-            botQueens or botKing
-
-    fun updateBoards() {
-        pieceBitboards = arrayOf(
-            bitboard.whitePawns to BitPiece.WHITE_PAWN,
-            bitboard.whiteKnights to BitPiece.WHITE_KNIGHT,
-            bitboard.whiteBishops to BitPiece.WHITE_BISHOP,
-            bitboard.whiteRooks to BitPiece.WHITE_ROOK,
-            bitboard.whiteQueens to BitPiece.WHITE_QUEEN,
-            bitboard.whiteKing to BitPiece.WHITE_KING,
-            bitboard.blackPawns to BitPiece.BLACK_PAWN,
-            bitboard.blackKnights to BitPiece.BLACK_KNIGHT,
-            bitboard.blackBishops to BitPiece.BLACK_BISHOP,
-            bitboard.blackRooks to BitPiece.BLACK_ROOK,
-            bitboard.blackQueens to BitPiece.BLACK_QUEEN,
-            bitboard.blackKing to BitPiece.BLACK_KING
-        )
-
-        allPieces = bitboard.whitePawns or bitboard.whiteKnights or
-                bitboard.whiteBishops or bitboard.whiteRooks or
-                bitboard.whiteQueens or bitboard.whiteKing or
-                bitboard.blackPawns or bitboard.blackKnights or
-                bitboard.blackBishops or bitboard.blackRooks or
-                bitboard.blackQueens or bitboard.blackKing
-
+    init {
+        allPieces = bitboard.getAllPieces()
         emptySquares = allPieces.inv()
 
-        playerPiecesArray = if (playerColor == PieceColor.WHITE) {
-            arrayOf(bitboard.whitePawns, bitboard.whiteKnights, bitboard.whiteBishops,
-                bitboard.whiteRooks, bitboard.whiteQueens, bitboard.whiteKing)
+        if (playerColor == PieceColor.WHITE) {
+            playerPiecesArray = bitboard.getWhitePieceBitboards()
+            playerPieces = bitboard.getAllWhitePieces()
+            botPiecesArray = bitboard.getBlackPieceBitboards()
+            botPieces = bitboard.getAllBlackPieces()
         } else {
-            arrayOf(bitboard.blackPawns, bitboard.blackKnights, bitboard.blackBishops,
-                bitboard.blackRooks, bitboard.blackQueens, bitboard.blackKing)
+            playerPiecesArray = bitboard.getBlackPieceBitboards()
+            playerPieces = bitboard.getAllBlackPieces()
+            botPiecesArray = bitboard.getWhitePieceBitboards()
+            botPieces = bitboard.getAllWhitePieces()
         }
+    }
 
-        botPiecesArray = if (botColor == PieceColor.WHITE) {
-            arrayOf(bitboard.whitePawns, bitboard.whiteKnights, bitboard.whiteBishops,
-                bitboard.whiteRooks, bitboard.whiteQueens, bitboard.whiteKing)
+    fun updateBoards() {
+        allPieces = bitboard.getAllPieces()
+        emptySquares = allPieces.inv()
+
+        if (playerColor == PieceColor.WHITE) {
+            playerPiecesArray = bitboard.getWhitePieceBitboards()
+            playerPieces = bitboard.getAllWhitePieces()
+            botPiecesArray = bitboard.getBlackPieceBitboards()
+            botPieces = bitboard.getAllBlackPieces()
         } else {
-            arrayOf(bitboard.blackPawns, bitboard.blackKnights, bitboard.blackBishops,
-                bitboard.blackRooks, bitboard.blackQueens, bitboard.blackKing)
+            playerPiecesArray = bitboard.getBlackPieceBitboards()
+            playerPieces = bitboard.getAllBlackPieces()
+            botPiecesArray = bitboard.getWhitePieceBitboards()
+            botPieces = bitboard.getAllWhitePieces()
         }
-
-        playerPawns = playerPiecesArray[0]
-        playerKnights = playerPiecesArray[1]
-        playerBishops = playerPiecesArray[2]
-        playerRooks = playerPiecesArray[3]
-        playerQueens = playerPiecesArray[4]
-        playerKing = playerPiecesArray[5]
-        playerPieces = playerPawns or playerKnights or
-                playerBishops or playerRooks or
-                playerQueens or playerKing
-
-        botPawns = botPiecesArray[0]
-        botKnights = botPiecesArray[1]
-        botBishops = botPiecesArray[2]
-        botRooks = botPiecesArray[3]
-        botQueens = botPiecesArray[4]
-        botKing = botPiecesArray[5]
-        botPieces = botPawns or botKnights or
-                botBishops or botRooks or
-                botQueens or botKing
     }
 
     fun generateAllMoves(): ArrayDeque<Long> {
@@ -197,47 +116,47 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         updateBoards()
         val moves = ArrayDeque<Long>()
 
-        moves.addAll(generatePawnMoves(botPawns, playerPieces, emptySquares, true))
-        moves.addAll(generateKnightMoves(botKnights, playerPieces, emptySquares))
-        moves.addAll(generateBishopMoves(botBishops, playerPieces, allPieces))
-        moves.addAll(generateRookMoves(botRooks, playerPieces, allPieces))
-        moves.addAll(generateQueenMoves(botQueens, playerPieces, allPieces))
-        moves.addAll(generateKingMoves(botKing, botPieces, playerPieces))
+        moves.addAll(generatePawnMoves(botPiecesArray[0], playerPieces, emptySquares, botColor))
+        moves.addAll(generateKnightMoves(botPiecesArray[1], playerPieces, emptySquares))
+        moves.addAll(generateBishopMoves(botPiecesArray[2], playerPieces, allPieces))
+        moves.addAll(generateRookMoves(botPiecesArray[3], playerPieces, allPieces))
+        moves.addAll(generateQueenMoves(botPiecesArray[4], playerPieces, allPieces))
+        moves.addAll(generateKingMoves(botPiecesArray[5], playerPieces, botPieces))
 
         return moves
     }
 
     fun generateLegalMovesForBot(): ArrayDeque<Long> {
-        return filterOutIllegalMoves(generateMovesForBot(), botKing, true)
+        return filterOutIllegalMoves(generateMovesForBot(), botPiecesArray[5], true, botColor)
     }
 
     fun generateMovesForPlayer(): ArrayDeque<Long> {
         updateBoards()
         val moves = ArrayDeque<Long>()
 
-        moves.addAll(generatePawnMoves(playerPawns, botPieces, emptySquares, false))
-        moves.addAll(generateKnightMoves(playerKnights, botPieces, emptySquares))
-        moves.addAll(generateBishopMoves(playerBishops, botPieces, allPieces))
-        moves.addAll(generateRookMoves(playerRooks, botPieces, allPieces))
-        moves.addAll(generateQueenMoves(playerQueens, botPieces, allPieces))
-        moves.addAll(generateKingMoves(playerKing, playerPieces, botPieces))
+        moves.addAll(generatePawnMoves(playerPiecesArray[0], botPieces, emptySquares, playerColor))
+        moves.addAll(generateKnightMoves(playerPiecesArray[1], botPieces, emptySquares))
+        moves.addAll(generateBishopMoves(playerPiecesArray[2], botPieces, allPieces))
+        moves.addAll(generateRookMoves(playerPiecesArray[3], botPieces, allPieces))
+        moves.addAll(generateQueenMoves(playerPiecesArray[4], botPieces, allPieces))
+        moves.addAll(generateKingMoves(playerPiecesArray[5], botPieces, playerPieces))
 
         return moves
     }
 
     fun generateLegalMovesForPlayer(): ArrayDeque<Long> {
-        return filterOutIllegalMoves(generateMovesForPlayer(), playerKing, false)
+        return filterOutIllegalMoves(generateMovesForPlayer(), playerPiecesArray[5], false, playerColor)
     }
 
-    fun generatePawnMoves(pawns: Long, opponentPieces: Long, emptySquares: Long, isForBot: Boolean): ArrayDeque<Long> {
+    fun generatePawnMoves(pawns: Long, opponentPieces: Long, emptySquares: Long, color: PieceColor): ArrayDeque<Long> {
         val moves = ArrayDeque<Long>()
-        val startRowMask: Long = if (isForBot) 0x00FF000000000000 else 0x000000000000FF00
-        val promotionRowMask: Long = if (isForBot) 0x000000000000FF00 else 0x00FF000000000000
+        val startRowMask: Long = if (color == PieceColor.BLACK) 0x00FF000000000000 else 0x000000000000FF00
+        val promotionRowMask: Long = if (color == PieceColor.BLACK) 0x000000000000FF00 else 0x00FF000000000000
 
         var pawnsCopy = pawns
         while (pawnsCopy != 0L) {
             val position = pawnsCopy.takeLowestOneBit()
-            val singleMove = if (isForBot) position shr 8 else position shl 8
+            val singleMove = if (color == PieceColor.BLACK) position shr 8 else position shl 8
 
             val fromIndex = position.countTrailingZeroBits()
             val singleMoveIndex = singleMove.countTrailingZeroBits()
@@ -249,8 +168,8 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
                     moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex)))
 
                     if ((position and startRowMask) != 0L) {
-                        val intermediateMove = if (isForBot) singleMove shr 8 else singleMove shl 8
-                        val doubleMove = if (isForBot) position shr 16 else position shl 16
+                        val intermediateMove = if (color == PieceColor.BLACK) singleMove shr 8 else singleMove shl 8
+                        val doubleMove = if (color == PieceColor.BLACK) position shr 16 else position shl 16
                         val doubleMoveIndex = doubleMove.countTrailingZeroBits()
                         if ((doubleMove and emptySquares) != 0L && (intermediateMove and emptySquares) != 0L) {
                             moves.add(encodeMove(fromIndex, doubleMoveIndex, determinePiece(fromIndex)))
@@ -259,14 +178,14 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
                 }
             }
 
-            val captureLeft = if (isForBot) position shr 7 else position shl 7
-            val captureRight = if (isForBot) position shr 9 else position shl 9
+            val captureLeft = if (color == PieceColor.BLACK) position shr 7 else position shl 7
+            val captureRight = if (color == PieceColor.BLACK) position shr 9 else position shl 9
             val captureLeftIndex = captureLeft.countTrailingZeroBits()
             val captureRightIndex = captureRight.countTrailingZeroBits()
-            if ((captureLeft and opponentPieces) != 0L && isLegalPosition(captureLeft)) {
+            if ((captureLeft and opponentPieces) != 0L && isLegalPosition(captureLeft) && isSameRankOrFile(fromIndex, captureLeftIndex, 7)) {
                 moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex)))
             }
-            if ((captureRight and opponentPieces) != 0L && isLegalPosition(captureRight)) {
+            if ((captureRight and opponentPieces) != 0L && isLegalPosition(captureRight) && isSameRankOrFile(fromIndex, captureRightIndex, 9)) {
                 moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex)))
             }
 
@@ -342,7 +261,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return moves
     }
 
-    fun generateKingMoves(king: Long, friendlyPieces: Long, opponentPieces: Long): ArrayDeque<Long> {
+    fun generateKingMoves(king: Long, opponentPieces: Long, friendlyPieces: Long): ArrayDeque<Long> {
         val moves = ArrayDeque<Long>()
         val kingIndex = king.countTrailingZeroBits()
 
@@ -363,7 +282,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return moves
     }
 
-    fun filterOutIllegalMoves(moves: ArrayDeque<Long>, king: Long, isForBot: Boolean): ArrayDeque<Long> {
+    fun filterOutIllegalMoves(moves: ArrayDeque<Long>, king: Long, isForBot: Boolean, color: PieceColor): ArrayDeque<Long> {
         val legalMoves = ArrayDeque<Long>()
         val originalBitboard = bitboard.copy()
 
@@ -377,7 +296,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
                 king
             }
 
-            if (!isSquareUnderAttack(kingPosition, isForBot)) {
+            if (!isSquareUnderAttack(kingPosition, isForBot, color)) {
                 legalMoves.add(move)
             }
             bitboard.restore(originalBitboard)
@@ -386,16 +305,16 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return legalMoves
     }
 
-    fun isSquareUnderAttack(square: Long, isForBot: Boolean): Boolean {
+    fun isSquareUnderAttack(square: Long, isForBot: Boolean, color: PieceColor): Boolean {
         updateBoards()
-        val opponentPawns = if (isForBot) playerPawns else botPawns
-        val opponentKnights = if (isForBot) playerKnights else botKnights
-        val opponentBishops = if (isForBot) playerBishops else botBishops
-        val opponentRooks = if (isForBot) playerRooks else botRooks
-        val opponentQueens = if (isForBot) playerQueens else botQueens
-        val opponentKing = if (isForBot) playerKing else botKing
+        val opponentPawns = if (isForBot) playerPiecesArray[0] else botPiecesArray[0]
+        val opponentKnights = if (isForBot) playerPiecesArray[1] else botPiecesArray[1]
+        val opponentBishops = if (isForBot) playerPiecesArray[2] else botPiecesArray[2]
+        val opponentRooks = if (isForBot) playerPiecesArray[3] else botPiecesArray[3]
+        val opponentQueens = if (isForBot) playerPiecesArray[4] else botPiecesArray[4]
+        val opponentKing = if (isForBot) playerPiecesArray[5] else botPiecesArray[5]
 
-        val pawnAttacks = getPawnAttackMask(opponentPawns, isForBot)
+        val pawnAttacks = getPawnAttackMask(opponentPawns, color)
         val knightAttacks = getKnightAttackMask(opponentKnights)
         val bishopAttacks = getBishopAttackMask(opponentBishops, allPieces)
         val rookAttacks = getRookAttackMask(opponentRooks, allPieces)
@@ -406,13 +325,13 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return (square and allAttacks) != 0L
     }
 
-    fun getPawnAttackMask(pawns: Long, isForBot: Boolean): Long {
+    fun getPawnAttackMask(pawns: Long, color: PieceColor): Long {
         var attacks = 0L
         var pawnsCopy = pawns
 
         while (pawnsCopy != 0L) {
             val position = pawnsCopy.takeLowestOneBit()
-            if (isForBot) {
+            if (color == PieceColor.BLACK) {
                 attacks = attacks or (position shl 7) or (position shl 9)
             } else {
                 attacks = attacks or (position shr 7) or (position shr 9)
@@ -491,13 +410,12 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
     }
 
     fun determinePiece(index: Int): Int {
-        val mask = 1L shl index
-        for ((bitboard, piece) in pieceBitboards) {
-            if ((mask and bitboard) != 0L) {
-                return BitPiece.toOrdinal(piece)
+        for (piece in bitboard.bitboards.indices) {
+            if ((bitboard.bitboards[piece] and (1L shl index)) != 0L) {
+                return piece
             }
         }
-        return BitPiece.toOrdinal(BitPiece.NONE)
+        return 0
     }
 
     fun isLegalPosition(position: Long): Boolean {
