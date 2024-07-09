@@ -34,6 +34,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
     private val highlightCircleTag = "highlight_circle"
     private val highlightOpponentTag = "highlight_opponent"
     private val highlightMoveTag = "highlight_move"
+    private val highlightSelectedTag = "highlight_selected_square"
     private var selectedSquare: BitSquare? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -217,13 +218,13 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
         val pos = gameManager.positionToRowCol(square.position)
         println("position $pos, handleSquareClick: $square")
         if (gameManager.isPlayerTurn && square.color == gameManager.playerColor() && selectedSquare == null) {
-            removeHighlightOpponentsAndSquares()
+            removeHighlightsFromSquares()
             gameManager.processFirstClick(square)
         } else if (gameManager.isPlayerTurn && selectedSquare != null && selectedSquare == square) {
-            removeHighlightOpponentsAndSquares()
+            removeHighlightsFromSquares()
             selectedSquare = null
         } else if (gameManager.isPlayerTurn && selectedSquare != null && square.color == gameManager.playerColor()) {
-            removeHighlightOpponentsAndSquares()
+            removeHighlightsFromSquares()
             gameManager.processFirstClick(square)
         } else if (gameManager.isPlayerTurn && selectedSquare != null) {
             gameManager.processSecondClick(square)
@@ -231,7 +232,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
     }
 
     override fun onPlayerMoveCalculated(moves: MutableList<BitMove>, square: BitSquare) {
-        removeHighlightOpponentsAndSquares()
+        removeHighlightsFromSquares()
         for (move in moves) {
             if (move.capturedPiece != BitPiece.NONE) {
                 addHighlightOpponent(move.to, move.capturedPiece)
@@ -240,11 +241,12 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
             }
         }
         selectedSquare = square
+        addHighlightSelectedSquare(square.position)
     }
 
     override fun onPlayerMoveMade(bitboard: Bitboard, move: BitMove) {
         removeHighlightMoves()
-        removeHighlightOpponentsAndSquares()
+        removeHighlightsFromSquares()
         selectedSquare = null
         addHighlightMove(move.from)
         addHighlightMove(move.to)
@@ -260,6 +262,18 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
                 updateSquareUI(square, squareLayout)
             }
         }
+    }
+
+    private fun addHighlightSelectedSquare(position: Long) {
+        val pos = gameManager.positionToRowCol(position)
+        val squareFrameLayout = uiSquares[pos.row][pos.col]
+        val squareImageView = squareFrameLayout.findViewWithTag<ImageView>("pieceImageView")
+        val imageView = ImageView(this)
+        imageView.setImageResource(R.drawable.highlight_selected_square)
+        imageView.tag = highlightSelectedTag
+        squareFrameLayout.removeView(squareImageView)
+        squareFrameLayout.addView(imageView)
+        squareFrameLayout.addView(squareImageView)
     }
 
     private fun addHighlightSquare(position: Long) {
@@ -303,7 +317,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
 
     }
 
-    private fun removeHighlightOpponentsAndSquares() {
+    private fun removeHighlightsFromSquares() {
         for (row in 0..7) {
             for (col in 0..7) {
                 val frameLayout = uiSquares[row][col]
@@ -311,7 +325,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
 
                 for (i in 0 until frameLayout.childCount) {
                     val view = frameLayout.getChildAt(i)
-                    if (view.tag == highlightCircleTag || view.tag == highlightOpponentTag) {
+                    if (view.tag == highlightCircleTag || view.tag == highlightOpponentTag || view.tag == highlightSelectedTag) {
                         highlightToRemove.add(view)
                     }
                 }
