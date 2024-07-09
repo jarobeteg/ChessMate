@@ -4,6 +4,14 @@ import com.example.chessmate.util.chess.chessboard.PieceColor
 
 class Bitboard {
     var bitboards = LongArray(12)
+    var castlingRights: Int = 0xF
+
+    private val castlingRightsMap = mapOf(
+        BitPiece.WHITE_KING to listOf(WHITE_KINGSIDE, WHITE_QUEENSIDE),
+        BitPiece.BLACK_KING to listOf(BLACK_KINGSIDE, BLACK_QUEENSIDE),
+        BitPiece.WHITE_ROOK to mapOf(BitCell.A1.bit to WHITE_QUEENSIDE, BitCell.H1.bit to WHITE_KINGSIDE),
+        BitPiece.BLACK_ROOK to mapOf(BitCell.A8.bit to BLACK_QUEENSIDE, BitCell.H8.bit to BLACK_KINGSIDE)
+    )
 
     companion object {
         const val RANK_1 = 0xFFL
@@ -23,6 +31,11 @@ class Bitboard {
         const val FILE_F = FILE_A shl 5
         const val FILE_G = FILE_A shl 6
         const val FILE_H = FILE_A shl 7
+
+        const val WHITE_KINGSIDE = 0x1
+        const val WHITE_QUEENSIDE = 0x2
+        const val BLACK_KINGSIDE = 0x4
+        const val BLACK_QUEENSIDE = 0x8
     }
 
     fun setupInitialBoard() {
@@ -65,12 +78,82 @@ class Bitboard {
     }
 
     fun movePiece(move: BitMove) {
-        removePiece(move.capturedPiece, move.to)
-        setPiece(move.piece, move.to)
-        removePiece(move.piece, move.from)
+        castlingRightsMap[move.piece].let { rights ->
+            when (rights) {
+                is List<*> -> rights.forEach { revokeCastlingRights(it as Int) }
+                is Map<*, *> -> {
+                    val right = rights[move.from] as? Int
+                    if (right != null) {
+                        revokeCastlingRights(right)
+                    }
+                }
+            }
+        }
+
+        if (move.isCastling) {
+            handleCastlingMove(move)
+        } else if (move.isEnPassant) {
+            handleEnPassantMove(move)
+        } else {
+            removePiece(move.capturedPiece, move.to)
+            setPiece(move.piece, move.to)
+            removePiece(move.piece, move.from)
+        }
     }
 
-    fun getSquareNotation(position: Long): String {
+    private fun handleEnPassantMove(move: BitMove) {
+
+    }
+
+    private fun handleCastlingMove(move: BitMove) {
+        if (move.piece == BitPiece.WHITE_KING) {
+            if (move.to == BitCell.G1.bit) { //white kingside castles
+                setPiece(BitPiece.WHITE_KING, BitCell.G1.bit)
+                removePiece(BitPiece.WHITE_KING, BitCell.E1.bit)
+
+                setPiece(BitPiece.WHITE_ROOK, BitCell.F1.bit)
+                removePiece(BitPiece.WHITE_ROOK, BitCell.H1.bit)
+            } else if (move.to == BitCell.C1.bit) { //white queenside castles
+                setPiece(BitPiece.WHITE_KING, BitCell.C1.bit)
+                removePiece(BitPiece.WHITE_KING, BitCell.E1.bit)
+
+                setPiece(BitPiece.WHITE_ROOK, BitCell.D1.bit)
+                removePiece(BitPiece.WHITE_ROOK, BitCell.A1.bit)
+            }
+        } else if (move.piece == BitPiece.BLACK_KING) {
+            if (move.to == BitCell.G8.bit) { //black kingside castles
+                setPiece(BitPiece.BLACK_KING, BitCell.G8.bit)
+                removePiece(BitPiece.BLACK_KING, BitCell.E8.bit)
+
+                setPiece(BitPiece.BLACK_ROOK, BitCell.F8.bit)
+                removePiece(BitPiece.BLACK_ROOK, BitCell.H8.bit)
+            } else if (move.to == BitCell.C8.bit) { //black queenside castles
+                setPiece(BitPiece.BLACK_KING, BitCell.C8.bit)
+                removePiece(BitPiece.BLACK_KING, BitCell.E8.bit)
+
+                setPiece(BitPiece.BLACK_ROOK, BitCell.D8.bit)
+                removePiece(BitPiece.BLACK_ROOK, BitCell.A8.bit)
+            }
+        }
+    }
+
+    private fun revokeCastlingRights(rights: Int) {
+        castlingRights = castlingRights and rights.inv()
+    }
+
+    fun grantCastlingRights(rights: Int) {
+        castlingRights = castlingRights or rights
+    }
+
+    fun hasCastlingRights(rights: Int): Boolean {
+        return (castlingRights and rights) != 0
+    }
+
+    fun isSquareEmpty(square: Long): Boolean {
+        return (getAllPieces() and square) == 0L
+    }
+
+    private fun getSquareNotation(position: Long): String {
         val fileNames = "ABCDEFGH"
         val rankNames = "12345678"
 
@@ -128,11 +211,13 @@ class Bitboard {
 
     fun restore(bitboard: Bitboard) {
         this.bitboards = bitboard.bitboards.clone()
+        this.castlingRights = bitboard.castlingRights
     }
 
     fun copy(): Bitboard {
         val copy = Bitboard()
         copy.bitboards = this.bitboards.clone()
+        copy.castlingRights = this.castlingRights
         return copy
     }
 

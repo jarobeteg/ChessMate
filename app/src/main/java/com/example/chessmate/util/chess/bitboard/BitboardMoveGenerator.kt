@@ -121,7 +121,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         moves.addAll(generateBishopMoves(botPiecesArray[2], playerPieces, allPieces))
         moves.addAll(generateRookMoves(botPiecesArray[3], playerPieces, allPieces))
         moves.addAll(generateQueenMoves(botPiecesArray[4], playerPieces, allPieces))
-        moves.addAll(generateKingMoves(botPiecesArray[5], playerPieces, botPieces))
+        moves.addAll(generateKingMoves(botPiecesArray[5], playerPieces, botPieces, true))
 
         return moves
     }
@@ -139,7 +139,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         moves.addAll(generateBishopMoves(playerPiecesArray[2], botPieces, allPieces))
         moves.addAll(generateRookMoves(playerPiecesArray[3], botPieces, allPieces))
         moves.addAll(generateQueenMoves(playerPiecesArray[4], botPieces, allPieces))
-        moves.addAll(generateKingMoves(playerPiecesArray[5], botPieces, playerPieces))
+        moves.addAll(generateKingMoves(playerPiecesArray[5], botPieces, playerPieces, false))
 
         return moves
     }
@@ -261,13 +261,15 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return moves
     }
 
-    fun generateKingMoves(king: Long, opponentPieces: Long, friendlyPieces: Long): ArrayDeque<Long> {
+    fun generateKingMoves(king: Long, opponentPieces: Long, friendlyPieces: Long, isForBot: Boolean): ArrayDeque<Long> {
         val moves = ArrayDeque<Long>()
         val kingIndex = king.countTrailingZeroBits()
+        val canWhiteKingCastle = kingIndex == 4
+        val canBlackKingCastle = kingIndex == 60
 
         for (offset in kingOffsets) {
             val targetIndex = kingIndex + offset
-            if (isWithinBounds(targetIndex)) {
+            if (isWithinBounds(targetIndex) && isSameRankOrFile(kingIndex, targetIndex, offset)) {
                 val target = 1L shl targetIndex
                 if ((target and friendlyPieces) == 0L) {
                     if (target and opponentPieces != 0L) {
@@ -276,6 +278,40 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
                         moves.add(encodeMove(kingIndex, targetIndex, determinePiece(kingIndex)))
                     }
                 }
+            }
+        }
+
+        if (canWhiteKingCastle) {
+            if (bitboard.hasCastlingRights(Bitboard.WHITE_KINGSIDE) &&
+                bitboard.isSquareEmpty(BitCell.F1.bit) && bitboard.isSquareEmpty(BitCell.G1.bit) &&
+                !isSquareUnderAttack(BitCell.E1.bit, isForBot, PieceColor.WHITE) &&
+                !isSquareUnderAttack(BitCell.F1.bit, isForBot, PieceColor.WHITE) &&
+                !isSquareUnderAttack(BitCell.G1.bit, isForBot, PieceColor.WHITE)) {
+                moves.add(encodeMove(BitCell.E1.ordinal, BitCell.G1.ordinal, BitPiece.WHITE_KING.ordinal, isCastling = true))
+            }
+
+            if (bitboard.hasCastlingRights(Bitboard.WHITE_QUEENSIDE) &&
+                bitboard.isSquareEmpty(BitCell.B1.bit) && bitboard.isSquareEmpty(BitCell.C1.bit) && bitboard.isSquareEmpty(BitCell.D1.bit) &&
+                !isSquareUnderAttack(BitCell.E1.bit, isForBot, PieceColor.WHITE) &&
+                !isSquareUnderAttack(BitCell.D1.bit, isForBot, PieceColor.WHITE) &&
+                !isSquareUnderAttack(BitCell.C1.bit, isForBot, PieceColor.WHITE)) {
+                moves.add(encodeMove(BitCell.E1.ordinal, BitCell.C1.ordinal, BitPiece.WHITE_KING.ordinal, isCastling = true))
+            }
+        } else if (canBlackKingCastle) {
+            if (bitboard.hasCastlingRights(Bitboard.BLACK_KINGSIDE) &&
+                bitboard.isSquareEmpty(BitCell.F8.bit) && bitboard.isSquareEmpty(BitCell.G8.bit) &&
+                !isSquareUnderAttack(BitCell.E8.bit, isForBot, PieceColor.BLACK) &&
+                !isSquareUnderAttack(BitCell.F8.bit, isForBot, PieceColor.BLACK) &&
+                !isSquareUnderAttack(BitCell.G8.bit, isForBot, PieceColor.BLACK)) {
+                moves.add(encodeMove(BitCell.E8.ordinal, BitCell.G8.ordinal, BitPiece.BLACK_KING.ordinal, isCastling = true))
+            }
+
+            if (bitboard.hasCastlingRights(Bitboard.BLACK_QUEENSIDE) &&
+                bitboard.isSquareEmpty(BitCell.B8.bit) && bitboard.isSquareEmpty(BitCell.C8.bit) && bitboard.isSquareEmpty(BitCell.D8.bit) &&
+                !isSquareUnderAttack(BitCell.E8.bit, isForBot, PieceColor.BLACK) &&
+                !isSquareUnderAttack(BitCell.D8.bit, isForBot, PieceColor.BLACK) &&
+                !isSquareUnderAttack(BitCell.C8.bit, isForBot, PieceColor.BLACK)) {
+                moves.add(encodeMove(BitCell.E8.ordinal, BitCell.C8.ordinal, BitPiece.BLACK_KING.ordinal, isCastling = true))
             }
         }
 
