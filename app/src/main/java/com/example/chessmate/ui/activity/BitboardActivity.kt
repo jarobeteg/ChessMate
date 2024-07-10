@@ -219,18 +219,48 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     private fun handleSquareClick(square: BitSquare) {
         val pos = gameManager.positionToRowCol(square.position)
         println("position $pos, handleSquareClick: $square")
-        if (gameManager.isPlayerTurn && square.color == gameManager.playerColor() && selectedSquare == null) {
-            removeHighlightsFromSquares()
-            gameManager.processFirstClick(square)
-        } else if (gameManager.isPlayerTurn && selectedSquare != null && selectedSquare == square) {
-            removeHighlightsFromSquares()
-            selectedSquare = null
-        } else if (gameManager.isPlayerTurn && selectedSquare != null && square.color == gameManager.playerColor()) {
-            removeHighlightsFromSquares()
-            gameManager.processFirstClick(square)
-        } else if (gameManager.isPlayerTurn && selectedSquare != null) {
-            gameManager.processSecondClick(square)
+        when {
+            isFirstSelection(square) -> handleFirstSelection(square)
+            isDeselecting(square) -> handleDeselect()
+            isNewSelection(square) -> handleNewSelection(square)
+            isSecondClick() -> handleSecondClick(square)
+            else -> {}
         }
+    }
+
+    private fun isFirstSelection(square: BitSquare): Boolean {
+        return gameManager.isPlayerTurn && square.color == gameManager.playerColor() && selectedSquare == null
+    }
+
+    private fun handleFirstSelection(square: BitSquare) {
+        removeHighlightsFromSquares()
+        gameManager.processFirstClick(square)
+    }
+
+    private fun isDeselecting(square: BitSquare): Boolean {
+        return gameManager.isPlayerTurn && selectedSquare != null && selectedSquare == square
+    }
+
+    private fun handleDeselect() {
+        removeHighlightsFromSquares()
+        selectedSquare = null
+    }
+
+    private fun isNewSelection(square: BitSquare): Boolean {
+        return gameManager.isPlayerTurn && square.color == gameManager.playerColor() && selectedSquare != null
+    }
+
+    private fun handleNewSelection(square: BitSquare) {
+        removeHighlightsFromSquares()
+        gameManager.processFirstClick(square)
+    }
+
+    private fun isSecondClick(): Boolean {
+        return gameManager.isPlayerTurn && selectedSquare != null
+    }
+
+    private fun handleSecondClick(square: BitSquare) {
+        gameManager.processSecondClick(square)
     }
 
     override fun onPlayerMoveCalculated(moves: MutableList<BitMove>, square: BitSquare) {

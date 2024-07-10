@@ -77,7 +77,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         }
     }
 
-    fun updateBoards() {
+    private fun updateBoards() {
         allPieces = bitboard.getAllPieces()
         emptySquares = allPieces.inv()
 
@@ -112,7 +112,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return moves
     }
 
-    fun generateMovesForBot(): ArrayDeque<Long> {
+    private fun generateMovesForBot(): ArrayDeque<Long> {
         updateBoards()
         val moves = ArrayDeque<Long>()
 
@@ -130,7 +130,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return filterOutIllegalMoves(generateMovesForBot(), botPiecesArray[5], true, botColor)
     }
 
-    fun generateMovesForPlayer(): ArrayDeque<Long> {
+    private fun generateMovesForPlayer(): ArrayDeque<Long> {
         updateBoards()
         val moves = ArrayDeque<Long>()
 
@@ -148,7 +148,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return filterOutIllegalMoves(generateMovesForPlayer(), playerPiecesArray[5], false, playerColor)
     }
 
-    fun generatePawnMoves(pawns: Long, opponentPieces: Long, emptySquares: Long, color: PieceColor): ArrayDeque<Long> {
+    private fun generatePawnMoves(pawns: Long, opponentPieces: Long, emptySquares: Long, color: PieceColor): ArrayDeque<Long> {
         val moves = ArrayDeque<Long>()
         val startRowMask: Long = if (color == PieceColor.BLACK) Bitboard.RANK_7 else Bitboard.RANK_2
         val promotionRowMask: Long = if (color == PieceColor.BLACK) Bitboard.RANK_1 else Bitboard.RANK_8
@@ -163,26 +163,16 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
 
             if ((singleMove and emptySquares) != 0L) {
                 if ((singleMove and promotionRowMask) != 0L) {
-                    if (color == PieceColor.WHITE) {
-                        moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_QUEEN)))
-                        moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_ROOK)))
-                        moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_BISHOP)))
-                        moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_KNIGHT)))
-                    } else {
-                        moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_QUEEN)))
-                        moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_ROOK)))
-                        moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_BISHOP)))
-                        moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_KNIGHT)))
-                    }
+                    moves.addAll(generatePawnPromotionMoves(fromIndex, singleMoveIndex, determinePiece(fromIndex), determinePiece(singleMoveIndex), color))
                 } else {
-                    moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex)))
+                    moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex), determinePiece(singleMoveIndex)))
 
                     if ((position and startRowMask) != 0L) {
                         val intermediateMove = if (color == PieceColor.BLACK) singleMove shr 8 else singleMove shl 8
                         val doubleMove = if (color == PieceColor.BLACK) position shr 16 else position shl 16
                         val doubleMoveIndex = doubleMove.countTrailingZeroBits()
                         if ((doubleMove and emptySquares) != 0L && (intermediateMove and emptySquares) != 0L) {
-                            moves.add(encodeMove(fromIndex, doubleMoveIndex, determinePiece(fromIndex)))
+                            moves.add(encodeMove(fromIndex, doubleMoveIndex, determinePiece(fromIndex), determinePiece(singleMoveIndex)))
                         }
                     }
                 }
@@ -194,34 +184,14 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
             val captureRightIndex = captureRight.countTrailingZeroBits()
             if ((captureLeft and opponentPieces) != 0L && isLegalPosition(captureLeft) && isSameRankOrFile(fromIndex, captureLeftIndex, 7)) {
                 if ((captureLeft and promotionRowMask) != 0L) {
-                    if (color == PieceColor.WHITE) {
-                        moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_QUEEN)))
-                        moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_ROOK)))
-                        moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_BISHOP)))
-                        moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_KNIGHT)))
-                    } else {
-                        moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_QUEEN)))
-                        moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_ROOK)))
-                        moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_BISHOP)))
-                        moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_KNIGHT)))
-                    }
+                    moves.addAll(generatePawnPromotionMoves(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex), color))
                 } else {
                     moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex)))
                 }
             }
             if ((captureRight and opponentPieces) != 0L && isLegalPosition(captureRight) && isSameRankOrFile(fromIndex, captureRightIndex, 9)) {
                 if ((captureRight and promotionRowMask) != 0L) {
-                    if (color == PieceColor.WHITE) {
-                        moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_QUEEN)))
-                        moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_ROOK)))
-                        moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_BISHOP)))
-                        moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_KNIGHT)))
-                    } else {
-                        moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_QUEEN)))
-                        moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_ROOK)))
-                        moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_BISHOP)))
-                        moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_KNIGHT)))
-                    }
+                    moves.addAll(generatePawnPromotionMoves(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex), color))
                 } else {
                     moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex)))
                 }
@@ -232,7 +202,25 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return moves
     }
 
-    fun generateKnightMoves(knights: Long, opponentPieces: Long, emptySquares: Long): ArrayDeque<Long> {
+    private fun generatePawnPromotionMoves(fromIndex: Int, toIndex: Int, piece: Int, capturedPiece: Int, color: PieceColor): ArrayDeque<Long> {
+        val moves = ArrayDeque<Long>()
+
+        if (color == PieceColor.WHITE) {
+            moves.add(encodeMove(fromIndex, toIndex, piece, capturedPiece, BitPiece.toOrdinal(BitPiece.WHITE_QUEEN)))
+            moves.add(encodeMove(fromIndex, toIndex, piece, capturedPiece, BitPiece.toOrdinal(BitPiece.WHITE_ROOK)))
+            moves.add(encodeMove(fromIndex, toIndex, piece, capturedPiece, BitPiece.toOrdinal(BitPiece.WHITE_BISHOP)))
+            moves.add(encodeMove(fromIndex, toIndex, piece, capturedPiece, BitPiece.toOrdinal(BitPiece.WHITE_KNIGHT)))
+        } else {
+            moves.add(encodeMove(fromIndex, toIndex, piece, capturedPiece, BitPiece.toOrdinal(BitPiece.BLACK_QUEEN)))
+            moves.add(encodeMove(fromIndex, toIndex, piece, capturedPiece, BitPiece.toOrdinal(BitPiece.BLACK_ROOK)))
+            moves.add(encodeMove(fromIndex, toIndex, piece, capturedPiece, BitPiece.toOrdinal(BitPiece.BLACK_BISHOP)))
+            moves.add(encodeMove(fromIndex, toIndex, piece, capturedPiece, BitPiece.toOrdinal(BitPiece.BLACK_KNIGHT)))
+        }
+
+        return moves
+    }
+
+    private fun generateKnightMoves(knights: Long, opponentPieces: Long, emptySquares: Long): ArrayDeque<Long> {
         val moves = ArrayDeque<Long>()
         var knightsCopy = knights
 
@@ -257,14 +245,14 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return moves
     }
 
-    fun generateBishopMoves(bishops: Long, opponentPieces: Long, allPieces: Long): ArrayDeque<Long> = generateSlidingMoves(bishops, opponentPieces, allPieces, bishopOffsets)
+    private fun generateBishopMoves(bishops: Long, opponentPieces: Long, allPieces: Long): ArrayDeque<Long> = generateSlidingMoves(bishops, opponentPieces, allPieces, bishopOffsets)
 
-    fun generateRookMoves(rooks: Long, opponentPieces: Long, allPieces: Long): ArrayDeque<Long> = generateSlidingMoves(rooks, opponentPieces, allPieces, rookOffsets)
+    private fun generateRookMoves(rooks: Long, opponentPieces: Long, allPieces: Long): ArrayDeque<Long> = generateSlidingMoves(rooks, opponentPieces, allPieces, rookOffsets)
 
-    fun generateQueenMoves(queens: Long, opponentPieces: Long, allPieces: Long): ArrayDeque<Long> = generateSlidingMoves(queens, opponentPieces, allPieces, queenOffsets)
+    private fun generateQueenMoves(queens: Long, opponentPieces: Long, allPieces: Long): ArrayDeque<Long> = generateSlidingMoves(queens, opponentPieces, allPieces, queenOffsets)
 
     //sliding moves such as bishop, rook and queens
-    fun generateSlidingMoves(pieces: Long, opponentPieces: Long, allPieces: Long, offsets: IntArray): ArrayDeque<Long> {
+    private fun generateSlidingMoves(pieces: Long, opponentPieces: Long, allPieces: Long, offsets: IntArray): ArrayDeque<Long> {
         val moves = ArrayDeque<Long>()
         var piecesCopy = pieces
 
@@ -299,11 +287,9 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return moves
     }
 
-    fun generateKingMoves(king: Long, opponentPieces: Long, friendlyPieces: Long, isForBot: Boolean): ArrayDeque<Long> {
+    private fun generateKingMoves(king: Long, opponentPieces: Long, friendlyPieces: Long, isForBot: Boolean): ArrayDeque<Long> {
         val moves = ArrayDeque<Long>()
         val kingIndex = king.countTrailingZeroBits()
-        val canWhiteKingCastle = kingIndex == 4
-        val canBlackKingCastle = kingIndex == 60
 
         for (offset in kingOffsets) {
             val targetIndex = kingIndex + offset
@@ -318,6 +304,16 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
                 }
             }
         }
+
+        moves.addAll(generateCastleMoves(kingIndex, isForBot))
+
+        return moves
+    }
+
+    private fun generateCastleMoves(kingIndex: Int, isForBot: Boolean): ArrayDeque<Long> {
+        val moves = ArrayDeque<Long>()
+        val canWhiteKingCastle = kingIndex == 4
+        val canBlackKingCastle = kingIndex == 60
 
         if (canWhiteKingCastle) {
             if (bitboard.hasCastlingRights(Bitboard.WHITE_KINGSIDE) &&
@@ -352,11 +348,10 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
                 moves.add(encodeMove(BitCell.E8.ordinal, BitCell.C8.ordinal, BitPiece.BLACK_KING.ordinal, isCastling = true))
             }
         }
-
         return moves
     }
 
-    fun filterOutIllegalMoves(moves: ArrayDeque<Long>, king: Long, isForBot: Boolean, color: PieceColor): ArrayDeque<Long> {
+    private fun filterOutIllegalMoves(moves: ArrayDeque<Long>, king: Long, isForBot: Boolean, color: PieceColor): ArrayDeque<Long> {
         val legalMoves = ArrayDeque<Long>()
         val originalBitboard = bitboard.copy()
 
@@ -379,7 +374,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return legalMoves
     }
 
-    fun isSquareUnderAttack(square: Long, isForBot: Boolean, color: PieceColor): Boolean {
+    private fun isSquareUnderAttack(square: Long, isForBot: Boolean, color: PieceColor): Boolean {
         updateBoards()
         val opponentPawns = if (isForBot) playerPiecesArray[0] else botPiecesArray[0]
         val opponentKnights = if (isForBot) playerPiecesArray[1] else botPiecesArray[1]
@@ -399,7 +394,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return (square and allAttacks) != 0L
     }
 
-    fun getPawnAttackMask(pawns: Long, color: PieceColor): Long {
+    private fun getPawnAttackMask(pawns: Long, color: PieceColor): Long {
         var attacks = 0L
         var pawnsCopy = pawns
 
@@ -416,7 +411,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return attacks
     }
 
-    fun getKnightAttackMask(knights: Long): Long {
+    private fun getKnightAttackMask(knights: Long): Long {
         var attacks = 0L
         var knightsCopy = knights
 
@@ -435,7 +430,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return attacks
     }
 
-    fun getSlidingPieceAttackMask(pieces: Long, allPieces: Long, offsets: IntArray): Long {
+    private fun getSlidingPieceAttackMask(pieces: Long, allPieces: Long, offsets: IntArray): Long {
         var attacks = 0L
         var piecesCopy = pieces
 
@@ -458,19 +453,19 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return attacks
     }
 
-    fun getBishopAttackMask(bishops: Long, allPieces: Long): Long {
+    private fun getBishopAttackMask(bishops: Long, allPieces: Long): Long {
         return getSlidingPieceAttackMask(bishops, allPieces, bishopOffsets)
     }
 
-    fun getRookAttackMask(rooks: Long, allPieces: Long): Long {
+    private fun getRookAttackMask(rooks: Long, allPieces: Long): Long {
         return getSlidingPieceAttackMask(rooks, allPieces, rookOffsets)
     }
 
-    fun getQueenAttackMask(queens: Long, allPieces: Long): Long {
+    private fun getQueenAttackMask(queens: Long, allPieces: Long): Long {
         return getSlidingPieceAttackMask(queens, allPieces, queenOffsets)
     }
 
-    fun getKingAttackMask(king: Long): Long {
+    private fun getKingAttackMask(king: Long): Long {
         var attacks = 0L
         val kingIndex = king.countTrailingZeroBits()
 
@@ -483,20 +478,20 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return attacks
     }
 
-    fun determinePiece(index: Int): Int {
+    private fun determinePiece(index: Int): Int {
         for (piece in bitboard.bitboards.indices) {
             if ((bitboard.bitboards[piece] and (1L shl index)) != 0L) {
                 return piece
             }
         }
-        return 0
+        return 12
     }
 
-    fun isLegalPosition(position: Long): Boolean {
+    private fun isLegalPosition(position: Long): Boolean {
         return position != 0L && position and (position - 1) == 0L
     }
 
-    fun isLegalKnightMove(fromIndex: Int, toIndex: Int): Boolean {
+    private fun isLegalKnightMove(fromIndex: Int, toIndex: Int): Boolean {
         if (toIndex !in 0..63) return false
 
         val fromFile = fromIndex % 8
@@ -506,7 +501,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return fileDiff == 1 || fileDiff == 2
     }
 
-    fun isSameRankOrFile(fromIndex: Int, toIndex: Int, direction: Int): Boolean {
+    private fun isSameRankOrFile(fromIndex: Int, toIndex: Int, direction: Int): Boolean {
         val fromFile = fromIndex % 8
         val toFile = toIndex % 8
         val fromRank = fromIndex / 8
@@ -521,7 +516,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         }
     }
 
-    fun isWithinBounds(index: Int): Boolean {
+    private fun isWithinBounds(index: Int): Boolean {
         return index in 0..63
     }
 }
