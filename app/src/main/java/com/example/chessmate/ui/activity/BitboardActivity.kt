@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.chessmate.R
 import com.example.chessmate.util.chess.Position
+import com.example.chessmate.util.chess.PromotionDialogFragment
 import com.example.chessmate.util.chess.bitboard.BitMove
 import com.example.chessmate.util.chess.bitboard.BitPiece
 import com.example.chessmate.util.chess.bitboard.BitSquare
@@ -19,9 +20,10 @@ import com.example.chessmate.util.chess.bitboard.Bitboard
 import com.example.chessmate.util.chess.bitboard.BitboardListener
 import com.example.chessmate.util.chess.bitboard.BitboardManager
 import com.example.chessmate.util.chess.bitboard.BitboardUIMapper
+import com.example.chessmate.util.chess.chessboard.PieceType
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class BitboardActivity : AbsThemeActivity(), BitboardListener {
+class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFragment.PromotionDialogListener {
     private lateinit var chessboardLayout: GridLayout
     private lateinit var gameManager: BitboardManager
     private lateinit var uiMapper: BitboardUIMapper
@@ -366,6 +368,15 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
                 }
             }
         }
+    }
+
+    override fun showPromotionDialog(square: BitSquare) {
+        val dialog = PromotionDialogFragment(isPlayerStarted, this, selectedSquare!!, square)
+        dialog.show(supportFragmentManager, PromotionDialogFragment.TAG)
+    }
+
+    override fun onPieceSelected(pieceType: PieceType, fromSquare: BitSquare, toSquare: BitSquare) {
+        gameManager.processPawnPromotion(pieceType, fromSquare, toSquare)
     }
 
     private fun bottomNavItemClicked(item: MenuItem): Boolean{

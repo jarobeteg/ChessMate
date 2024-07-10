@@ -92,6 +92,10 @@ class Bitboard {
 
         if (move.isCastling) {
             handleCastlingMove(move)
+        } else if (move.promotion != BitPiece.NONE) {
+            removePiece(move.capturedPiece, move.to)
+            setPiece(move.promotion, move.to)
+            removePiece(move.piece, move.from)
         } else if (move.isEnPassant) {
             handleEnPassantMove(move)
         } else {

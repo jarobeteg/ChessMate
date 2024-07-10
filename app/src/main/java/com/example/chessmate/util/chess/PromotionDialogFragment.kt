@@ -7,12 +7,15 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.fragment.app.DialogFragment
 import com.example.chessmate.R
+import com.example.chessmate.util.chess.bitboard.BitSquare
 import com.example.chessmate.util.chess.chessboard.PieceType
-import com.example.chessmate.util.chess.chessboard.Square
 
 class PromotionDialogFragment(private val isPlayerWhite: Boolean, private val listener: PromotionDialogListener,
-                              private val destinationSquare: Square
-) : DialogFragment() {
+                              private val fromSquare: BitSquare, private val toSquare: BitSquare) : DialogFragment() {
+    companion object {
+        const val TAG = "PromotionDialogFragment"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,27 +44,27 @@ class PromotionDialogFragment(private val isPlayerWhite: Boolean, private val li
         }
 
         promoteToQueen.setOnClickListener {
-            listener.onPieceSelected(PieceType.QUEEN, destinationSquare)
+            listener.onPieceSelected(PieceType.QUEEN, fromSquare, toSquare)
             dismiss()
         }
 
         promoteToRook.setOnClickListener {
-            listener.onPieceSelected(PieceType.ROOK, destinationSquare)
+            listener.onPieceSelected(PieceType.ROOK, fromSquare, toSquare)
             dismiss()
         }
 
         promoteToBishop.setOnClickListener {
-            listener.onPieceSelected(PieceType.BISHOP, destinationSquare)
+            listener.onPieceSelected(PieceType.BISHOP, fromSquare, toSquare)
             dismiss()
         }
 
         promoteToKnight.setOnClickListener {
-            listener.onPieceSelected(PieceType.KNIGHT, destinationSquare)
+            listener.onPieceSelected(PieceType.KNIGHT, fromSquare, toSquare)
             dismiss()
         }
     }
 
     interface PromotionDialogListener {
-        fun onPieceSelected(pieceType: PieceType, destinationSquare: Square)
+        fun onPieceSelected(pieceType: PieceType, fromSquare: BitSquare, toSquare: BitSquare)
     }
 }

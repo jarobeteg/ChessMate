@@ -21,12 +21,10 @@ import com.example.chessmate.util.chess.chessboard.Piece
 import com.example.chessmate.util.chess.chessboard.PieceColor
 import com.example.chessmate.util.chess.chessboard.PieceType
 import com.example.chessmate.util.chess.Position
-import com.example.chessmate.util.chess.PromotionDialogFragment
 import com.example.chessmate.util.chess.chessboard.Square
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionDialogListener,
-    ChessGameListener {
+class ChessGameActivity : AbsThemeActivity(), ChessGameListener {
     private lateinit var chessboardLayout: GridLayout
     private lateinit var gameManager: ChessGameManager
     private lateinit var uiSquares: Array<Array<FrameLayout>>
@@ -392,16 +390,6 @@ class ChessGameActivity : AbsThemeActivity(), PromotionDialogFragment.PromotionD
                     frameLayout.removeView(highlight)
                 }
             }
-        }
-    }
-
-    override fun onPieceSelected(pieceType: PieceType, destinationSquare: Square) {
-        when(pieceType){
-            PieceType.QUEEN -> {}
-            PieceType.ROOK -> {}
-            PieceType.BISHOP -> {}
-            PieceType.KNIGHT -> {}
-            else -> throw IllegalArgumentException("Unexpected PieceType: $pieceType")
         }
     }
 }

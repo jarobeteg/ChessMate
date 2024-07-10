@@ -4,6 +4,7 @@ import com.example.chessmate.util.chess.ChessBot
 import com.example.chessmate.util.chess.Player
 import com.example.chessmate.util.chess.Position
 import com.example.chessmate.util.chess.chessboard.PieceColor
+import com.example.chessmate.util.chess.chessboard.PieceType
 
 class BitboardManager(private var listener: BitboardListener) {
     private val bitboard = Bitboard()
@@ -60,10 +61,42 @@ class BitboardManager(private var listener: BitboardListener) {
     fun processSecondClick(square: BitSquare) {
         for (move in availablePlayerMoves) {
             if (move.to == square.position) {
+                if (move.promotion != BitPiece.NONE) {
+                    listener.showPromotionDialog(square)
+                    break
+                }
                 bitboard.movePiece(move)
                 listener.onPlayerMoveMade(bitboard, move)
                 break
             }
+        }
+    }
+
+    fun processPawnPromotion(piece: PieceType, fromSquare: BitSquare, toSquare: BitSquare) {
+        val bitPiece = convertPieceTypeToBitPiece(piece, fromSquare.color)
+        println("bitPiece: $bitPiece")
+        for (move in availablePlayerMoves) {
+            if (move.to == toSquare.position && move.promotion == bitPiece) {
+                println("move: $move")
+                bitboard.movePiece(move)
+                listener.onPlayerMoveMade(bitboard, move)
+                break
+            }
+        }
+    }
+
+    private fun convertPieceTypeToBitPiece(piece: PieceType, color: PieceColor): BitPiece {
+        println("piece: $piece, color: $color")
+        return when (piece to color) {
+            PieceType.QUEEN to PieceColor.WHITE -> BitPiece.WHITE_QUEEN
+            PieceType.ROOK to PieceColor.WHITE -> BitPiece.WHITE_ROOK
+            PieceType.BISHOP to PieceColor.WHITE -> BitPiece.WHITE_BISHOP
+            PieceType.KNIGHT to PieceColor.WHITE -> BitPiece.WHITE_KNIGHT
+            PieceType.QUEEN to PieceColor.BLACK -> BitPiece.BLACK_QUEEN
+            PieceType.ROOK to PieceColor.BLACK -> BitPiece.BLACK_ROOK
+            PieceType.BISHOP to PieceColor.BLACK -> BitPiece.BLACK_BISHOP
+            PieceType.KNIGHT to PieceColor.BLACK -> BitPiece.BLACK_KNIGHT
+            else -> BitPiece.NONE
         }
     }
 

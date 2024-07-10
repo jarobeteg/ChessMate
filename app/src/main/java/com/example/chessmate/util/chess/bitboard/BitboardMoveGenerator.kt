@@ -150,8 +150,8 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
 
     fun generatePawnMoves(pawns: Long, opponentPieces: Long, emptySquares: Long, color: PieceColor): ArrayDeque<Long> {
         val moves = ArrayDeque<Long>()
-        val startRowMask: Long = if (color == PieceColor.BLACK) 0x00FF000000000000 else 0x000000000000FF00
-        val promotionRowMask: Long = if (color == PieceColor.BLACK) 0x000000000000FF00 else 0x00FF000000000000
+        val startRowMask: Long = if (color == PieceColor.BLACK) Bitboard.RANK_7 else Bitboard.RANK_2
+        val promotionRowMask: Long = if (color == PieceColor.BLACK) Bitboard.RANK_1 else Bitboard.RANK_8
 
         var pawnsCopy = pawns
         while (pawnsCopy != 0L) {
@@ -163,7 +163,17 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
 
             if ((singleMove and emptySquares) != 0L) {
                 if ((singleMove and promotionRowMask) != 0L) {
-                    moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex)))
+                    if (color == PieceColor.WHITE) {
+                        moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_QUEEN)))
+                        moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_ROOK)))
+                        moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_BISHOP)))
+                        moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_KNIGHT)))
+                    } else {
+                        moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_QUEEN)))
+                        moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_ROOK)))
+                        moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_BISHOP)))
+                        moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_KNIGHT)))
+                    }
                 } else {
                     moves.add(encodeMove(fromIndex, singleMoveIndex, determinePiece(fromIndex)))
 
@@ -183,10 +193,38 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
             val captureLeftIndex = captureLeft.countTrailingZeroBits()
             val captureRightIndex = captureRight.countTrailingZeroBits()
             if ((captureLeft and opponentPieces) != 0L && isLegalPosition(captureLeft) && isSameRankOrFile(fromIndex, captureLeftIndex, 7)) {
-                moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex)))
+                if ((captureLeft and promotionRowMask) != 0L) {
+                    if (color == PieceColor.WHITE) {
+                        moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_QUEEN)))
+                        moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_ROOK)))
+                        moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_BISHOP)))
+                        moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_KNIGHT)))
+                    } else {
+                        moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_QUEEN)))
+                        moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_ROOK)))
+                        moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_BISHOP)))
+                        moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_KNIGHT)))
+                    }
+                } else {
+                    moves.add(encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), determinePiece(captureLeftIndex)))
+                }
             }
             if ((captureRight and opponentPieces) != 0L && isLegalPosition(captureRight) && isSameRankOrFile(fromIndex, captureRightIndex, 9)) {
-                moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex)))
+                if ((captureRight and promotionRowMask) != 0L) {
+                    if (color == PieceColor.WHITE) {
+                        moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_QUEEN)))
+                        moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_ROOK)))
+                        moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_BISHOP)))
+                        moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex), promotion = BitPiece.toOrdinal(BitPiece.WHITE_KNIGHT)))
+                    } else {
+                        moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_QUEEN)))
+                        moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_ROOK)))
+                        moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_BISHOP)))
+                        moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex), promotion = BitPiece.toOrdinal(BitPiece.BLACK_KNIGHT)))
+                    }
+                } else {
+                    moves.add(encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), determinePiece(captureRightIndex)))
+                }
             }
 
             pawnsCopy = pawnsCopy xor position
