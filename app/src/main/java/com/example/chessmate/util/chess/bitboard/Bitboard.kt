@@ -95,6 +95,14 @@ class Bitboard {
         } else if (move.isEnPassant) {
             handleEnPassantMove(move)
         } else {
+            if (move.capturedPiece == BitPiece.WHITE_ROOK) {
+                if (move.to == BitCell.A1.bit) revokeCastlingRights(WHITE_QUEENSIDE)
+                if (move.to == BitCell.H1.bit) revokeCastlingRights(WHITE_KINGSIDE)
+            }
+            if (move.capturedPiece == BitPiece.BLACK_ROOK) {
+                if (move.to == BitCell.A8.bit) revokeCastlingRights(BLACK_QUEENSIDE)
+                if (move.to == BitCell.H8.bit) revokeCastlingRights(BLACK_KINGSIDE)
+            }
             removePiece(move.capturedPiece, move.to)
             setPiece(move.piece, move.to)
             removePiece(move.piece, move.from)

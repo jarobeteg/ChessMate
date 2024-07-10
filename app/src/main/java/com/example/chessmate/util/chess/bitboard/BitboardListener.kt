@@ -5,4 +5,5 @@ interface BitboardListener {
     fun setupSquareListener(bitboard: Bitboard)
     fun onPlayerMoveCalculated(moves: MutableList<BitMove>, square: BitSquare)
     fun onPlayerMoveMade(bitboard: Bitboard, move: BitMove)
+    fun onBotMoveMade(bitboard: Bitboard, move: BitMove)
 }

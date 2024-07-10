@@ -250,6 +250,17 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener {
         selectedSquare = null
         addHighlightMove(move.from)
         addHighlightMove(move.to)
+        updateBitboardStateUI(bitboard)
+    }
+
+    override fun onBotMoveMade(bitboard: Bitboard, move: BitMove) {
+        removeHighlightMoves()
+        addHighlightMove(move.from)
+        addHighlightMove(move.to)
+        updateBitboardStateUI(bitboard)
+    }
+
+    private fun updateBitboardStateUI(bitboard: Bitboard) {
         for (row in 7 downTo 0) {
             for (col in 0..7) {
                 val position = if (isPlayerStarted) {
