@@ -53,28 +53,15 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
     private val queenOffsets = intArrayOf(1, -1, 7, -7, 8, -8, 9, -9)
     private val kingOffsets = intArrayOf(1, -1, 7, -7, 8, -8, 9, -9)
 
-    private var playerPiecesArray: LongArray
-    private var playerPieces: Long
-    private var botPiecesArray: LongArray
-    private var botPieces: Long
-    private var allPieces: Long
-    private var emptySquares: Long
+    private lateinit var playerPiecesArray: LongArray
+    private var playerPieces: Long = 0L
+    private lateinit var botPiecesArray: LongArray
+    private var botPieces: Long = 0L
+    private var allPieces: Long = 0L
+    private var emptySquares: Long = 0L
 
     init {
-        allPieces = bitboard.getAllPieces()
-        emptySquares = allPieces.inv()
-
-        if (playerColor == PieceColor.WHITE) {
-            playerPiecesArray = bitboard.getWhitePieceBitboards()
-            playerPieces = bitboard.getAllWhitePieces()
-            botPiecesArray = bitboard.getBlackPieceBitboards()
-            botPieces = bitboard.getAllBlackPieces()
-        } else {
-            playerPiecesArray = bitboard.getBlackPieceBitboards()
-            playerPieces = bitboard.getAllBlackPieces()
-            botPiecesArray = bitboard.getWhitePieceBitboards()
-            botPieces = bitboard.getAllWhitePieces()
-        }
+        updateBoards()
     }
 
     private fun updateBoards() {
