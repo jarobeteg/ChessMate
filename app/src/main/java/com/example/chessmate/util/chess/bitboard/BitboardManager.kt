@@ -9,6 +9,7 @@ import com.example.chessmate.util.chess.chessboard.PieceType
 class BitboardManager(private var listener: BitboardListener) {
     private val bitboard = Bitboard()
     private lateinit var moveGenerator: BitboardMoveGenerator
+    private lateinit var evaluator: BitboardEvaluator
     var isPlayerTurn = false
     private var availablePlayerMoves = mutableListOf<BitMove>()
     private lateinit var player: Player
@@ -18,6 +19,7 @@ class BitboardManager(private var listener: BitboardListener) {
         initPlayerColors(isPlayerStarted)
         bitboard.setupInitialBoard()
         moveGenerator = BitboardMoveGenerator(bitboard, playerColor(), botColor())
+        evaluator = BitboardEvaluator(bitboard)
         listener.setupInitialBoardUI(bitboard)
         listener.setupSquareListener(bitboard)
     }
