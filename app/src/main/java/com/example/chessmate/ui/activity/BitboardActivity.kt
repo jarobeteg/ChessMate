@@ -264,6 +264,10 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     }
 
     override fun onPlayerMoveCalculated(moves: MutableList<BitMove>, square: BitSquare) {
+        if (moves.isEmpty()) {
+            selectedSquare = null
+            return
+        }
         removeHighlightsFromSquares()
         for (move in moves) {
             if (move.capturedPiece != BitPiece.NONE) {
