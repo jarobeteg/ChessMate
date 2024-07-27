@@ -287,6 +287,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         addHighlightMove(move.from)
         addHighlightMove(move.to)
         updateBitboardStateUI(bitboard)
+        gameManager.switchTurns()
     }
 
     override fun onBotMoveMade(bitboard: Bitboard, move: BitMove) {
@@ -294,6 +295,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         addHighlightMove(move.from)
         addHighlightMove(move.to)
         updateBitboardStateUI(bitboard)
+        gameManager.switchTurns()
     }
 
     private fun updateBitboardStateUI(bitboard: Bitboard) {

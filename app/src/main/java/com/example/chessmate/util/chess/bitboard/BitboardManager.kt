@@ -5,6 +5,7 @@ import com.example.chessmate.util.chess.Player
 import com.example.chessmate.util.chess.Position
 import com.example.chessmate.util.chess.chessboard.PieceColor
 import com.example.chessmate.util.chess.chessboard.PieceType
+import kotlinx.coroutines.*
 
 class BitboardManager(private var listener: BitboardListener) {
     private val bitboard = Bitboard()
@@ -46,6 +47,32 @@ class BitboardManager(private var listener: BitboardListener) {
 
     fun startGame() {
         println("game started on bitboard")
+        if (!isPlayerTurn) {
+            makeBotMove()
+        }
+    }
+
+    fun switchTurns() {
+        isPlayerTurn = !isPlayerTurn
+        if (!isPlayerTurn) {
+            makeBotMove()
+        }
+    }
+
+    private fun makeBotMove() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val move: BitMove? = withContext(Dispatchers.Default) {
+                bot.findBestMove(bitboard, 5, botColor() == PieceColor.WHITE)
+            }
+
+            if (move != null) {
+                bitboard.movePiece(move)
+                listener.onBotMoveMade(bitboard, move)
+            } else {
+                println("null move switching turns")
+                switchTurns()
+            }
+        }
     }
 
     fun processFirstClick(square: BitSquare) {
