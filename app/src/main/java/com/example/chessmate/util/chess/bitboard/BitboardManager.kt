@@ -15,7 +15,7 @@ class BitboardManager(private var listener: BitboardListener) {
     private lateinit var bot: ChessBot
     private var availablePlayerMoves = mutableListOf<BitMove>()
     private var isMoveMadeByWhite = true
-    var trackedMoves: MutableList<BitMoveTracker> = mutableListOf()
+    private var trackedMoves: MutableList<BitMoveTracker> = mutableListOf()
     var isPlayerTurn = false
     var turnNumber = 1
 
@@ -138,8 +138,38 @@ class BitboardManager(private var listener: BitboardListener) {
         }
     }
 
+    fun getLastTrackedMove(): BitMoveTracker {
+        return trackedMoves.last()
+    }
+
+    fun getLastTrackedWhiteMove(): BitMoveTracker {
+        return trackedMoves.filter { it.isMoveMadeByWhite }.maxByOrNull { it.turnNumber } ?: throw NoSuchElementException("No move made by white found")
+    }
+
+    fun getLastTrackedBlackMove(): BitMoveTracker {
+        return trackedMoves.filter { !it.isMoveMadeByWhite }.maxByOrNull { it.turnNumber } ?: throw NoSuchElementException("No move made by black found")
+    }
+
     fun getBitPiece(position: Long): BitSquare {
         return bitboard.getPiece(position)
+    }
+
+    fun getSquareNotation(position: Long): String {
+        return "${getFileName(position)}${getRankName(position)}"
+    }
+
+    fun getFileName(position: Long): String {
+        val fileNames = "abcdefgh"
+        val index = position.toULong().countTrailingZeroBits()
+        val file = fileNames[index % 8]
+        return "$file"
+    }
+
+    fun getRankName(position: Long): String {
+        val rankNames = "12345678"
+        val index = position.toULong().countTrailingZeroBits()
+        val rank = rankNames[index / 8]
+        return "$rank"
     }
 
     fun positionToRowCol(position: Long): Position {

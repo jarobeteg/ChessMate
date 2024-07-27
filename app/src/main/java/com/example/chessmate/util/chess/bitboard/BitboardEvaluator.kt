@@ -80,13 +80,13 @@ class BitboardEvaluator(private val bitboard: Bitboard) {
         evaluateWhitePieces(bitboard.bitboards[2], pst::getBishopValue)
         evaluateWhitePieces(bitboard.bitboards[3], pst::getRookValue)
         evaluateWhitePieces(bitboard.bitboards[4], pst::getQueenValue)
-        evaluateWhitePieces(bitboard.bitboards[5], pst::getKingEndGameValue)
+        evaluateWhitePieces(bitboard.bitboards[5], pst::getKingMidGameValue)
         evaluateBlackPieces(bitboard.bitboards[6], pst::getPawnValue)
         evaluateBlackPieces(bitboard.bitboards[7], pst::getKnightValue)
         evaluateBlackPieces(bitboard.bitboards[8], pst::getBishopValue)
         evaluateBlackPieces(bitboard.bitboards[9], pst::getRookValue)
         evaluateBlackPieces(bitboard.bitboards[10], pst::getQueenValue)
-        evaluateBlackPieces(bitboard.bitboards[11], pst::getKingEndGameValue)
+        evaluateBlackPieces(bitboard.bitboards[11], pst::getKingMidGameValue)
 
         return pstScore
     }

@@ -13,7 +13,9 @@ import android.widget.TextView
 import com.example.chessmate.R
 import com.example.chessmate.util.chess.Position
 import com.example.chessmate.util.chess.PromotionDialogFragment
+import com.example.chessmate.util.chess.bitboard.BitCell
 import com.example.chessmate.util.chess.bitboard.BitMove
+import com.example.chessmate.util.chess.bitboard.BitMoveTracker
 import com.example.chessmate.util.chess.bitboard.BitPiece
 import com.example.chessmate.util.chess.bitboard.BitSquare
 import com.example.chessmate.util.chess.bitboard.Bitboard
@@ -287,6 +289,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         addHighlightMove(move.from)
         addHighlightMove(move.to)
         updateBitboardStateUI(bitboard)
+        updateMoveTrackerToolbar()
         gameManager.switchTurns()
     }
 
@@ -295,7 +298,98 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         addHighlightMove(move.from)
         addHighlightMove(move.to)
         updateBitboardStateUI(bitboard)
+        updateMoveTrackerToolbar()
         gameManager.switchTurns()
+    }
+
+    private fun updateMoveTrackerToolbar() {
+        turnNumber.visibility = View.VISIBLE
+        val text = "${gameManager.turnNumber}."
+        turnNumber.text = text
+        val lastTrackedMove = gameManager.getLastTrackedMove()
+        if (lastTrackedMove.isMoveMadeByWhite) {
+            updateWhiteLastMove()
+        } else {
+            updateBlackLastMove()
+        }
+    }
+
+    private fun updateWhiteLastMove() {
+        whiteLastMove.visibility = View.VISIBLE
+        val lastTrackedMove = gameManager.getLastTrackedWhiteMove()
+        val moveNotation = getWhiteMoveNotation(lastTrackedMove.bitMove)
+        whiteLastMove.text = moveNotation
+    }
+
+    private fun getWhiteMoveNotation(move: BitMove): String {
+        return when {
+            move.isCastling -> getCastlingNotation(move.to)
+            move.piece == BitPiece.WHITE_PAWN -> getPawnNotation(move)
+            move.piece in listOf(BitPiece.WHITE_KNIGHT, BitPiece.WHITE_BISHOP, BitPiece.WHITE_ROOK, BitPiece.WHITE_QUEEN, BitPiece.WHITE_KING) -> getPieceNotation(move)
+            else -> "---"
+        }
+    }
+
+    private fun updateBlackLastMove() {
+        blackLastMove.visibility = View.VISIBLE
+        val lastTrackedMove = gameManager.getLastTrackedBlackMove()
+        val moveNotation = getBlackMoveNotation(lastTrackedMove.bitMove)
+        blackLastMove.text = moveNotation
+    }
+
+    private fun getBlackMoveNotation(move: BitMove): String {
+        return when {
+            move.isCastling -> getCastlingNotation(move.to)
+            move.piece == BitPiece.BLACK_PAWN -> getPawnNotation(move)
+            move.piece in listOf(BitPiece.BLACK_KNIGHT, BitPiece.BLACK_BISHOP, BitPiece.BLACK_ROOK, BitPiece.BLACK_QUEEN, BitPiece.BLACK_KING) -> getPieceNotation(move)
+            else -> "---"
+        }
+    }
+
+    private fun getPieceNotation(move: BitMove): String {
+        val pieceNotation = when (move.piece) {
+            BitPiece.WHITE_KNIGHT, BitPiece.BLACK_KNIGHT -> "N"
+            BitPiece.WHITE_BISHOP, BitPiece.BLACK_BISHOP -> "B"
+            BitPiece.WHITE_ROOK, BitPiece.BLACK_ROOK -> "R"
+            BitPiece.WHITE_QUEEN, BitPiece.BLACK_QUEEN -> "Q"
+            BitPiece.WHITE_KING, BitPiece.BLACK_KING -> "K"
+            else -> ""
+        }
+        val toSquare = gameManager.getSquareNotation(move.to)
+        return if (move.capturedPiece != BitPiece.NONE) {
+            "$pieceNotation${gameManager.getFileName(move.from)}x$toSquare"
+        } else {
+            "$pieceNotation${gameManager.getFileName(move.from)}$toSquare"
+        }
+    }
+
+    private fun getPawnNotation(move: BitMove): String {
+        val toSquare = gameManager.getSquareNotation(move.to)
+        return if (move.promotion != BitPiece.NONE) {
+            "${gameManager.getSquareNotation(move.to)}=${getPromotionNotation(move.promotion)}"
+        } else if (move.capturedPiece != BitPiece.NONE) {
+            "${gameManager.getFileName(move.from)}x$toSquare"
+        } else {
+            toSquare
+        }
+    }
+
+    private fun getCastlingNotation(to: Long): String {
+        return when (to) {
+            BitCell.G1.bit, BitCell.G8.bit -> "O-O"
+            BitCell.C1.bit, BitCell.C8.bit -> "O-O-O"
+            else -> "---"
+        }
+    }
+
+    private fun getPromotionNotation(promotion: BitPiece): String {
+        return when (promotion) {
+            BitPiece.WHITE_KNIGHT, BitPiece.BLACK_KNIGHT -> "N"
+            BitPiece.WHITE_BISHOP, BitPiece.BLACK_BISHOP -> "B"
+            BitPiece.WHITE_ROOK, BitPiece.BLACK_ROOK -> "R"
+            BitPiece.WHITE_QUEEN, BitPiece.BLACK_QUEEN -> "Q"
+            else -> "---"
+        }
     }
 
     private fun updateBitboardStateUI(bitboard: Bitboard) {
