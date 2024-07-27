@@ -11,10 +11,13 @@ class BitboardManager(private var listener: BitboardListener) {
     private val bitboard = Bitboard()
     private lateinit var moveGenerator: BitboardMoveGenerator
     private lateinit var evaluator: BitboardEvaluator
-    var isPlayerTurn = false
-    private var availablePlayerMoves = mutableListOf<BitMove>()
     private lateinit var player: Player
     private lateinit var bot: ChessBot
+    private var availablePlayerMoves = mutableListOf<BitMove>()
+    private var isMoveMadeByWhite = true
+    var trackedMoves: MutableList<BitMoveTracker> = mutableListOf()
+    var isPlayerTurn = false
+    var turnNumber = 1
 
     fun initializeUIAndSquareListener(isPlayerStarted: Boolean) {
         initPlayerColors(isPlayerStarted)
@@ -54,6 +57,10 @@ class BitboardManager(private var listener: BitboardListener) {
 
     fun switchTurns() {
         isPlayerTurn = !isPlayerTurn
+        isMoveMadeByWhite = !isMoveMadeByWhite
+        if (isMoveMadeByWhite) {
+            turnNumber++
+        }
         if (!isPlayerTurn) {
             makeBotMove()
         }
@@ -67,6 +74,7 @@ class BitboardManager(private var listener: BitboardListener) {
 
             if (move != null) {
                 bitboard.movePiece(move)
+                trackedMoves.add(BitMoveTracker(move, turnNumber, playerColor(), botColor(), isMoveMadeByWhite))
                 listener.onBotMoveMade(bitboard, move)
             } else {
                 println("null move switching turns")
@@ -95,6 +103,7 @@ class BitboardManager(private var listener: BitboardListener) {
                     break
                 }
                 bitboard.movePiece(move)
+                trackedMoves.add(BitMoveTracker(move, turnNumber, playerColor(), botColor(), isMoveMadeByWhite))
                 listener.onPlayerMoveMade(bitboard, move)
                 break
             }
@@ -106,8 +115,8 @@ class BitboardManager(private var listener: BitboardListener) {
         println("bitPiece: $bitPiece")
         for (move in availablePlayerMoves) {
             if (move.to == toSquare.position && move.promotion == bitPiece) {
-                println("move: $move")
                 bitboard.movePiece(move)
+                trackedMoves.add(BitMoveTracker(move, turnNumber, playerColor(), botColor(), isMoveMadeByWhite))
                 listener.onPlayerMoveMade(bitboard, move)
                 break
             }
