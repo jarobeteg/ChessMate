@@ -138,6 +138,20 @@ class BitboardManager(private var listener: BitboardListener) {
         }
     }
 
+    fun isKingInCheck(isForBot: Boolean): Boolean {
+        if (!isForBot) {
+            val kingPosition = if (playerColor() == PieceColor.WHITE) bitboard.getWhiteKing() else bitboard.getBlackKing()
+            return moveGenerator.isSquareUnderAttack(kingPosition, isForBot, playerColor())
+        } else {
+            val kingPosition = if (botColor() == PieceColor.WHITE) bitboard.getWhiteKing() else bitboard.getBlackKing()
+            return moveGenerator.isSquareUnderAttack(kingPosition, isForBot, botColor())
+        }
+    }
+
+    fun getPlayerKingPosition(): Long {
+        return if (playerColor() == PieceColor.WHITE) bitboard.getWhiteKing() else bitboard.getBlackKing()
+    }
+
     fun getLastTrackedMove(): BitMoveTracker {
         return trackedMoves.last()
     }

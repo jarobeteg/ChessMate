@@ -221,6 +221,14 @@ class Bitboard {
         return getAllWhitePieces() or getAllBlackPieces()
     }
 
+    fun getWhiteKing(): Long {
+        return bitboards[BitPiece.WHITE_KING.ordinal]
+    }
+
+    fun getBlackKing(): Long {
+        return bitboards[BitPiece.BLACK_KING.ordinal]
+    }
+
     fun restore(bitboard: Bitboard) {
         this.bitboards = bitboard.bitboards.clone()
         this.castlingRights = bitboard.castlingRights

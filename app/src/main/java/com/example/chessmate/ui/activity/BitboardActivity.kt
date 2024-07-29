@@ -1,6 +1,7 @@
 package com.example.chessmate.ui.activity
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.MenuItem
@@ -15,7 +16,6 @@ import com.example.chessmate.util.chess.Position
 import com.example.chessmate.util.chess.PromotionDialogFragment
 import com.example.chessmate.util.chess.bitboard.BitCell
 import com.example.chessmate.util.chess.bitboard.BitMove
-import com.example.chessmate.util.chess.bitboard.BitMoveTracker
 import com.example.chessmate.util.chess.bitboard.BitPiece
 import com.example.chessmate.util.chess.bitboard.BitSquare
 import com.example.chessmate.util.chess.bitboard.Bitboard
@@ -267,6 +267,9 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
 
     override fun onPlayerMoveCalculated(moves: MutableList<BitMove>, square: BitSquare) {
         if (moves.isEmpty()) {
+            if (isPlayerInCheck()) {
+                addHighlightCheck(gameManager.getPlayerKingPosition())
+            }
             selectedSquare = null
             return
         }
@@ -282,6 +285,14 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         addHighlightSelectedSquare(square.position)
     }
 
+    private fun isPlayerInCheck(): Boolean {
+        return gameManager.isKingInCheck(false)
+    }
+
+    private fun isBotInCheck(): Boolean {
+        return gameManager.isKingInCheck(true)
+    }
+
     override fun onPlayerMoveMade(bitboard: Bitboard, move: BitMove) {
         removeHighlightMoves()
         removeHighlightsFromSquares()
@@ -289,7 +300,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         addHighlightMove(move.from)
         addHighlightMove(move.to)
         updateBitboardStateUI(bitboard)
-        updateMoveTrackerToolbar()
+        updateMoveTrackerToolbar(isBotInCheck())
         gameManager.switchTurns()
     }
 
@@ -298,26 +309,27 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         addHighlightMove(move.from)
         addHighlightMove(move.to)
         updateBitboardStateUI(bitboard)
-        updateMoveTrackerToolbar()
+        updateMoveTrackerToolbar(isPlayerInCheck())
         gameManager.switchTurns()
     }
 
-    private fun updateMoveTrackerToolbar() {
+    private fun updateMoveTrackerToolbar(wasCheckGiven: Boolean) {
         turnNumber.visibility = View.VISIBLE
         val text = "${gameManager.turnNumber}."
         turnNumber.text = text
         val lastTrackedMove = gameManager.getLastTrackedMove()
         if (lastTrackedMove.isMoveMadeByWhite) {
-            updateWhiteLastMove()
+            updateWhiteLastMove(wasCheckGiven)
         } else {
-            updateBlackLastMove()
+            updateBlackLastMove(wasCheckGiven)
         }
     }
 
-    private fun updateWhiteLastMove() {
+    private fun updateWhiteLastMove(wasCheckGiven: Boolean) {
         whiteLastMove.visibility = View.VISIBLE
         val lastTrackedMove = gameManager.getLastTrackedWhiteMove()
-        val moveNotation = getWhiteMoveNotation(lastTrackedMove.bitMove)
+        var moveNotation = getWhiteMoveNotation(lastTrackedMove.bitMove)
+        if (wasCheckGiven) moveNotation += "+"
         whiteLastMove.text = moveNotation
     }
 
@@ -330,10 +342,11 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         }
     }
 
-    private fun updateBlackLastMove() {
+    private fun updateBlackLastMove(wasCheckGiven: Boolean) {
         blackLastMove.visibility = View.VISIBLE
         val lastTrackedMove = gameManager.getLastTrackedBlackMove()
-        val moveNotation = getBlackMoveNotation(lastTrackedMove.bitMove)
+        var moveNotation = getBlackMoveNotation(lastTrackedMove.bitMove)
+        if (wasCheckGiven) moveNotation += "+"
         blackLastMove.text = moveNotation
     }
 
@@ -458,6 +471,38 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         imageView.tag = highlightMoveTag
         squareFrameLayout.addView(imageView)
 
+    }
+
+    private fun addHighlightCheck(position: Long){
+        val pos = gameManager.positionToRowCol(position)
+        val squareFrameLayout = uiSquares[pos.row][pos.col]
+        val squareImageView = squareFrameLayout.findViewWithTag<ImageView>("pieceImageView")
+        val imageView = ImageView(this)
+        imageView.setImageResource(R.drawable.highlight_square_opponent)
+        imageView.tag = highlightOpponentTag
+
+        squareFrameLayout.removeView(squareImageView)
+        squareFrameLayout.addView(imageView)
+        squareFrameLayout.addView(squareImageView)
+
+        val countdownTimer = object : CountDownTimer(3000, 500) {
+            override fun onTick(millisUntilFinished: Long) {
+                when (millisUntilFinished){
+                    in 0..500 -> imageView.visibility = View.INVISIBLE
+                    in 501..1000 -> imageView.visibility = View.VISIBLE
+                    in 1001..1500 -> imageView.visibility = View.INVISIBLE
+                    in 1501..2000 -> imageView.visibility = View.VISIBLE
+                    in 2001..2500 -> imageView.visibility = View.INVISIBLE
+                    in 2501..3000 -> imageView.visibility = View.VISIBLE
+                }
+            }
+
+            override fun onFinish() {
+                squareFrameLayout.removeView(imageView)
+            }
+        }
+
+        countdownTimer.start()
     }
 
     private fun removeHighlightsFromSquares() {

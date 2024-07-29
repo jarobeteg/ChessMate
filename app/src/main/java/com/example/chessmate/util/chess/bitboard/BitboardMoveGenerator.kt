@@ -361,7 +361,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         return legalMoves
     }
 
-    private fun isSquareUnderAttack(square: Long, isForBot: Boolean, color: PieceColor): Boolean {
+    fun isSquareUnderAttack(square: Long, isForBot: Boolean, color: PieceColor): Boolean {
         updateBoards()
         val opponentPawns = if (isForBot) playerPiecesArray[0] else botPiecesArray[0]
         val opponentKnights = if (isForBot) playerPiecesArray[1] else botPiecesArray[1]
