@@ -4,7 +4,8 @@ import com.example.chessmate.util.chess.chessboard.PieceColor
 
 class Bitboard {
     var bitboards = LongArray(12)
-    var castlingRights: Int = 0xF
+    private var castlingRights: Int = 0xF
+    private var lastMove: Long = 0
 
     private val castlingRightsMap = mapOf(
         BitPiece.WHITE_KING to listOf(WHITE_KINGSIDE, WHITE_QUEENSIDE),
@@ -90,31 +91,32 @@ class Bitboard {
             }
         }
 
+        lastMove = BitboardMoveGenerator.encodeMove(move)
+
+        if (move.capturedPiece == BitPiece.WHITE_ROOK || move.capturedPiece == BitPiece.BLACK_ROOK) revokeRookCastleRight(move)
+
         if (move.isCastling) {
             handleCastlingMove(move)
         } else if (move.promotion != BitPiece.NONE) {
-            removePiece(move.capturedPiece, move.to)
-            setPiece(move.promotion, move.to)
-            removePiece(move.piece, move.from)
+            handlePromotionMove(move)
         } else if (move.isEnPassant) {
             handleEnPassantMove(move)
         } else {
-            if (move.capturedPiece == BitPiece.WHITE_ROOK) {
-                if (move.to == BitCell.A1.bit) revokeCastlingRights(WHITE_QUEENSIDE)
-                if (move.to == BitCell.H1.bit) revokeCastlingRights(WHITE_KINGSIDE)
-            }
-            if (move.capturedPiece == BitPiece.BLACK_ROOK) {
-                if (move.to == BitCell.A8.bit) revokeCastlingRights(BLACK_QUEENSIDE)
-                if (move.to == BitCell.H8.bit) revokeCastlingRights(BLACK_KINGSIDE)
-            }
             removePiece(move.capturedPiece, move.to)
             setPiece(move.piece, move.to)
             removePiece(move.piece, move.from)
         }
     }
 
-    private fun handleEnPassantMove(move: BitMove) {
-
+    private fun revokeRookCastleRight(move: BitMove) {
+        if (move.capturedPiece == BitPiece.WHITE_ROOK) {
+            if (move.to == BitCell.A1.bit) revokeCastlingRights(WHITE_QUEENSIDE)
+            if (move.to == BitCell.H1.bit) revokeCastlingRights(WHITE_KINGSIDE)
+        }
+        if (move.capturedPiece == BitPiece.BLACK_ROOK) {
+            if (move.to == BitCell.A8.bit) revokeCastlingRights(BLACK_QUEENSIDE)
+            if (move.to == BitCell.H8.bit) revokeCastlingRights(BLACK_KINGSIDE)
+        }
     }
 
     private fun handleCastlingMove(move: BitMove) {
@@ -147,6 +149,19 @@ class Bitboard {
                 removePiece(BitPiece.BLACK_ROOK, BitCell.A8.bit)
             }
         }
+    }
+
+    private fun handlePromotionMove(move: BitMove) {
+        removePiece(move.capturedPiece, move.to)
+        setPiece(move.promotion, move.to)
+        removePiece(move.piece, move.from)
+    }
+
+    private fun handleEnPassantMove(move: BitMove) {
+        val capturedPawnPosition = if (move.to > move.from) move.to shr 8 else move.to shl 8
+        removePiece(move.capturedPiece, capturedPawnPosition)
+        setPiece(move.piece, move.to)
+        removePiece(move.piece, move.from)
     }
 
     private fun revokeCastlingRights(rights: Int) {
@@ -229,15 +244,21 @@ class Bitboard {
         return bitboards[BitPiece.BLACK_KING.ordinal]
     }
 
+    fun getLastMove(): Long {
+        return lastMove
+    }
+
     fun restore(bitboard: Bitboard) {
         this.bitboards = bitboard.bitboards.clone()
         this.castlingRights = bitboard.castlingRights
+        this.lastMove = bitboard.lastMove
     }
 
     fun copy(): Bitboard {
         val copy = Bitboard()
         copy.bitboards = this.bitboards.clone()
         copy.castlingRights = this.castlingRights
+        copy.lastMove = this.lastMove
         return copy
     }
 

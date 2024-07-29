@@ -26,6 +26,27 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
             return encodedMove
         }
 
+        fun encodeMove(move: BitMove): Long {
+            val from = move.from.takeHighestOneBit().countTrailingZeroBits()
+            val to = move.to.takeHighestOneBit().countTrailingZeroBits()
+            val piece = move.piece.ordinal
+            val capturedPiece = move.capturedPiece.ordinal
+            val promotion = move.promotion.ordinal
+            val isCastling = if (move.isCastling) 1L else 0L
+            val isEnPassant = if (move.isEnPassant) 1L else 0L
+
+            var encodedMove: Long = 0
+            encodedMove = encodedMove or (from.toLong() and 0x3FL)
+            encodedMove = encodedMove or ((to.toLong() and 0x3FL) shl 6)
+            encodedMove = encodedMove or ((piece.toLong() and 0xFL) shl 12)
+            encodedMove = encodedMove or ((capturedPiece.toLong() and 0xFL) shl 16)
+            encodedMove = encodedMove or ((promotion.toLong() and 0xFL) shl 20)
+            encodedMove = encodedMove or (isCastling shl 24)
+            encodedMove = encodedMove or (isEnPassant shl 25)
+
+            return encodedMove
+        }
+
         fun decodeMove(encodedMove: Long): BitMove {
             val from = (encodedMove and 0x3FL).toInt()
             val to = ((encodedMove shr 6) and 0x3FL).toInt()
@@ -184,9 +205,59 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
                 }
             }
 
+            val enPassantMove = generateEnPassantMove(position, color)
+            if (enPassantMove != null) {
+                moves.add(enPassantMove)
+            }
+
             pawnsCopy = pawnsCopy xor position
         }
         return moves
+    }
+
+    private fun generateEnPassantMove(position: Long, color: PieceColor): Long? {
+        val lastMove = bitboard.getLastMove()
+
+        val lastFrom = (lastMove and 0x3FL).toInt()
+        val lastTo = ((lastMove shr 6) and 0x3FL).toInt()
+        val lastPiece = ((lastMove shr 12) and 0xFL).toInt()
+
+        val fromIndex = position.countTrailingZeroBits()
+        val to = 1L shl lastTo
+
+        val wasDoublePawnMove = (lastPiece == BitPiece.WHITE_PAWN.ordinal || lastPiece == BitPiece.BLACK_PAWN.ordinal) && (abs(lastFrom - lastTo) == 16)
+        if (!wasDoublePawnMove) return null
+
+        if (color == PieceColor.BLACK) {
+            val enPassantTargetRank = to shr 8
+            val captureLeft = position shr 7
+            val captureRight = position shr 9
+
+            val enPassantTargetIndex = enPassantTargetRank.countTrailingZeroBits()
+            val captureLeftIndex = captureLeft.countTrailingZeroBits()
+            val captureRightIndex = captureRight.countTrailingZeroBits()
+
+            if (enPassantTargetIndex == captureLeftIndex) {
+                return encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), lastPiece, isEnPassant = true)
+            } else if (enPassantTargetIndex == captureRightIndex) {
+                return encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), lastPiece, isEnPassant = true)
+            }
+        } else if (color == PieceColor.WHITE) {
+            val enPassantTargetRank = to shl 8
+            val captureLeft = position shl 7
+            val captureRight = position shl 9
+
+            val enPassantTargetIndex = enPassantTargetRank.countTrailingZeroBits()
+            val captureLeftIndex = captureLeft.countTrailingZeroBits()
+            val captureRightIndex = captureRight.countTrailingZeroBits()
+
+            if (enPassantTargetIndex == captureLeftIndex) {
+                return encodeMove(fromIndex, captureLeftIndex, determinePiece(fromIndex), lastPiece, isEnPassant = true)
+            } else if (enPassantTargetIndex == captureRightIndex) {
+                return encodeMove(fromIndex, captureRightIndex, determinePiece(fromIndex), lastPiece, isEnPassant = true)
+            }
+        }
+        return null
     }
 
     private fun generatePawnPromotionMoves(fromIndex: Int, toIndex: Int, piece: Int, capturedPiece: Int, color: PieceColor): ArrayDeque<Long> {
