@@ -2,6 +2,7 @@ package com.example.chessmate.util.chess.bitboard
 
 import com.example.chessmate.util.chess.chessboard.PieceColor
 import kotlin.math.abs
+import kotlin.math.max
 
 class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerColor: PieceColor, private val botColor: PieceColor) {
 
@@ -118,6 +119,16 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         moves.addAll(generateLegalMovesForPlayer())
 
         return moves
+    }
+
+    fun generateLegalMovesForAlphaBeta(maximizingPlayer: Boolean): ArrayDeque<Long> {
+        return when {
+            maximizingPlayer && botColor == PieceColor.WHITE -> generateLegalMovesForBot()
+            maximizingPlayer && playerColor == PieceColor.WHITE -> generateLegalMovesForPlayer()
+            !maximizingPlayer && botColor == PieceColor.BLACK -> generateLegalMovesForBot()
+            !maximizingPlayer && playerColor == PieceColor.BLACK -> generateLegalMovesForPlayer()
+            else -> ArrayDeque()
+        }
     }
 
     private fun generateMovesForBot(): ArrayDeque<Long> {
