@@ -14,7 +14,7 @@ class ChessBot(val color: PieceColor){
 
     private fun alphaBeta(board: Bitboard, depth: Int, alpha: Float, beta: Float, maximizingPlayer: Boolean, currentColor: PieceColor): Pair<Float, BitMove?> {
         if (depth == 0) {
-            val evaluator = BitboardEvaluator(board)
+            val evaluator = BitboardEvaluator(board, color.opposite(), color)
             return Pair(evaluator.evaluate(), null)
         }
 
@@ -23,7 +23,7 @@ class ChessBot(val color: PieceColor){
         val evaluatedMoves = legalMoves.map { move ->
             val decodedMove = BitboardMoveGenerator.decodeMove(move)
             val newBoard = board.copy().apply { movePiece(decodedMove) }
-            val evaluator = BitboardEvaluator(newBoard)
+            val evaluator = BitboardEvaluator(newBoard, color.opposite(), color)
             Pair(decodedMove, evaluator.evaluate())
         }
 

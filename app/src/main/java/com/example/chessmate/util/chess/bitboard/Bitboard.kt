@@ -1,9 +1,11 @@
 package com.example.chessmate.util.chess.bitboard
 
+import com.example.chessmate.util.chess.GamePhase
 import com.example.chessmate.util.chess.chessboard.PieceColor
 
 class Bitboard {
     var bitboards = LongArray(12)
+    private var gamePhase: GamePhase = GamePhase.OPENING
     private var castlingRights: Int = 0xF
     private var lastMove: Long = 0
 
@@ -248,8 +250,17 @@ class Bitboard {
         return lastMove
     }
 
+    fun getGamePhase(): GamePhase {
+        return gamePhase
+    }
+
+    fun updateGamePhase(newGamePhase: GamePhase) {
+        gamePhase = newGamePhase
+    }
+
     fun restore(bitboard: Bitboard) {
         this.bitboards = bitboard.bitboards.clone()
+        this.gamePhase = bitboard.gamePhase
         this.castlingRights = bitboard.castlingRights
         this.lastMove = bitboard.lastMove
     }
@@ -257,6 +268,7 @@ class Bitboard {
     fun copy(): Bitboard {
         val copy = Bitboard()
         copy.bitboards = this.bitboards.clone()
+        copy.gamePhase = this.gamePhase
         copy.castlingRights = this.castlingRights
         copy.lastMove = this.lastMove
         return copy

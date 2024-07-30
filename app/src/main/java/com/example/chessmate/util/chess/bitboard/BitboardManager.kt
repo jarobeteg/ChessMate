@@ -23,7 +23,7 @@ class BitboardManager(private var listener: BitboardListener) {
         initPlayerColors(isPlayerStarted)
         bitboard.setupInitialBoard()
         moveGenerator = BitboardMoveGenerator(bitboard, playerColor(), botColor())
-        evaluator = BitboardEvaluator(bitboard)
+        evaluator = BitboardEvaluator(bitboard, playerColor(), botColor())
         listener.setupInitialBoardUI(bitboard)
         listener.setupSquareListener(bitboard)
     }
