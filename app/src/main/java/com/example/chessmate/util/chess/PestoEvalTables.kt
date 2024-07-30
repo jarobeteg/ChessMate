@@ -139,10 +139,11 @@ class PestoEvalTables {
     private fun mirrorArray(array: FloatArray): FloatArray {
         val mirroredArray = FloatArray(64)
 
-        for (i in 0 until 8) {
-            for (j in 0 until 8) {
-                mirroredArray[i * 8 + j] = array[(7 - i) * 8 + j]
-            }
+        for (i in array.indices) {
+            val row = i / 8
+            val col = i % 8
+            val mirroredIndex = (7 - row) * 8 + col
+            mirroredArray[mirroredIndex] = array[i]
         }
 
         return mirroredArray
