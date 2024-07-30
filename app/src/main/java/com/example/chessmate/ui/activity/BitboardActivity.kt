@@ -33,7 +33,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     private lateinit var turnNumber: TextView
     private lateinit var whiteLastMove: TextView
     private lateinit var blackLastMove: TextView
-    private var isPlayerStarted: Boolean = false
+    private var isPlayerStarted: Boolean = true
     private var squareSize: Int = 0
     private val highlightCircleTag = "highlight_circle"
     private val highlightOpponentTag = "highlight_opponent"

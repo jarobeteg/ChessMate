@@ -26,7 +26,6 @@ class BitboardManager(private var listener: BitboardListener) {
         evaluator = BitboardEvaluator(bitboard)
         listener.setupInitialBoardUI(bitboard)
         listener.setupSquareListener(bitboard)
-        //startGame()
     }
 
     private fun initPlayerColors(isPlayerStarted: Boolean) {
