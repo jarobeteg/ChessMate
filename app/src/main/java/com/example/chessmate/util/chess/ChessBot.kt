@@ -39,7 +39,7 @@ class ChessBot(val color: PieceColor){
             var bestValue = Float.NEGATIVE_INFINITY
             for (move in topMoves) {
                 val newBoard = board.copy().apply { movePiece(move) }
-                val (value, _) = alphaBeta(newBoard, depth - 1, localAlpha, localBeta, false, color.opposite())
+                val (value, _) = alphaBeta(newBoard, depth - 1, localAlpha, localBeta, false, currentColor.opposite())
                 if (value > bestValue) {
                     bestValue = value
                     if (currentColor == color) {
@@ -54,7 +54,7 @@ class ChessBot(val color: PieceColor){
             var bestValue = Float.POSITIVE_INFINITY
             for (move in topMoves) {
                 val newBoard = board.copy().apply { movePiece(move) }
-                val (value, _) = alphaBeta(newBoard, depth - 1, localAlpha, localBeta, true, color.opposite())
+                val (value, _) = alphaBeta(newBoard, depth - 1, localAlpha, localBeta, true, currentColor.opposite())
                 if (value < bestValue) {
                     bestValue = value
                     if (currentColor == color) {
