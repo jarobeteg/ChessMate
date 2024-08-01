@@ -20,6 +20,11 @@ class ChessBot(val color: PieceColor){
 
         val moveGenerator = BitboardMoveGenerator(board, color.opposite(), color)
         val legalMoves = moveGenerator.generateLegalMovesForAlphaBeta(maximizingPlayer)
+        if (legalMoves.isEmpty()) {
+            val evaluator = BitboardEvaluator(board, color.opposite(), color)
+            return Pair(evaluator.evaluate(), null)
+        }
+
         val evaluatedMoves = legalMoves.map { move ->
             val decodedMove = BitboardMoveGenerator.decodeMove(move)
             val newBoard = board.copy().apply { movePiece(decodedMove) }
