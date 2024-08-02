@@ -77,7 +77,8 @@ class BitboardManager(private var listener: BitboardListener) {
                 trackedMoves.add(BitMoveTracker(move, turnNumber, playerColor(), botColor(), isMoveMadeByWhite))
                 listener.onBotMoveMade(bitboard, move)
             } else {
-                println("null move switching turns")
+                println("checkmate or stalemate")
+                println("switching turns...")
                 switchTurns()
             }
         }

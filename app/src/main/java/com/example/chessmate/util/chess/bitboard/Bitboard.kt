@@ -7,6 +7,7 @@ class Bitboard {
     var bitboards = LongArray(12)
     private var gamePhase: GamePhase = GamePhase.OPENING
     private var castlingRights: Int = 0xF
+    private var fiftyMoveRule: Int = 0
     private var lastMove: Long = 0
 
     private val castlingRightsMap = mapOf(
@@ -92,6 +93,8 @@ class Bitboard {
                 }
             }
         }
+
+        updateFiftyMoveRule(move)
 
         lastMove = BitboardMoveGenerator.encodeMove(move)
 
@@ -182,6 +185,40 @@ class Bitboard {
         return (getAllPieces() and square) == 0L
     }
 
+    fun isGameADraw(): Boolean {
+        return when {
+            isThreefold() -> true
+            isStalemate() -> true
+            isInsufficientMaterial() -> true
+            isFiftyMoveRule() -> true
+            else -> false
+        }
+    }
+
+    private fun isThreefold(): Boolean {
+        TODO("not yet implemented")
+    }
+
+    private fun isStalemate(): Boolean {
+        TODO("not yet implemented")
+    }
+
+    private fun isInsufficientMaterial(): Boolean {
+        TODO("not yet implemented")
+    }
+
+    private fun isFiftyMoveRule(): Boolean {
+        return fiftyMoveRule == 100
+    }
+
+    private fun updateFiftyMoveRule(move: BitMove) {
+        if (move.piece != BitPiece.WHITE_PAWN && move.piece != BitPiece.BLACK_PAWN && move.capturedPiece == BitPiece.NONE) {
+            fiftyMoveRule ++
+        } else {
+            fiftyMoveRule = 0
+        }
+    }
+
     private fun getSquareNotation(position: Long): String {
         val fileNames = "ABCDEFGH"
         val rankNames = "12345678"
@@ -262,6 +299,7 @@ class Bitboard {
         this.bitboards = bitboard.bitboards.clone()
         this.gamePhase = bitboard.gamePhase
         this.castlingRights = bitboard.castlingRights
+        this.fiftyMoveRule = bitboard.fiftyMoveRule
         this.lastMove = bitboard.lastMove
     }
 
@@ -270,6 +308,7 @@ class Bitboard {
         copy.bitboards = this.bitboards.clone()
         copy.gamePhase = this.gamePhase
         copy.castlingRights = this.castlingRights
+        copy.fiftyMoveRule = this.fiftyMoveRule
         copy.lastMove = this.lastMove
         return copy
     }

@@ -20,6 +20,9 @@ class ChessBot(val color: PieceColor){
 
         val moveGenerator = BitboardMoveGenerator(board, color.opposite(), color)
         val legalMoves = moveGenerator.generateLegalMovesForAlphaBeta(maximizingPlayer)
+        //this means checkmate or stalemate
+        //checkmate if the king is in check and has no legal moves, and to block the check, and to remove the piece giving the check
+        //stalemate if the king is not in check and has no legal moves
         if (legalMoves.isEmpty()) {
             val evaluator = BitboardEvaluator(board, color.opposite(), color)
             return Pair(evaluator.evaluate(), null)
