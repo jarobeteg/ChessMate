@@ -199,15 +199,21 @@ class Bitboard {
     }
 
     private fun isThreefold(): Boolean {
-        TODO("not yet implemented")
+        val stateCounts = mutableMapOf<BoardStateTracker, Int>()
+
+        for (state in stateTracker) {
+            stateCounts[state] = stateCounts.getOrDefault(state, 0) + 1
+        }
+
+        return stateCounts.any { it.value >= 3 }
     }
 
     private fun isStalemate(): Boolean {
-        TODO("not yet implemented")
+        return false
     }
 
     private fun isInsufficientMaterial(): Boolean {
-        TODO("not yet implemented")
+        return false
     }
 
     private fun isFiftyMoveRule(): Boolean {
