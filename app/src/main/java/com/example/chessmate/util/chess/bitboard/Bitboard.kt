@@ -6,6 +6,7 @@ import com.example.chessmate.util.chess.chessboard.PieceColor
 class Bitboard {
     var bitboards = LongArray(12)
     private var gamePhase: GamePhase = GamePhase.OPENING
+    private var stateTracker = ArrayDeque<BoardStateTracker>()
     private var castlingRights: Int = 0xF
     private var fiftyMoveRule: Int = 0
     private var lastMove: Long = 0
@@ -111,6 +112,8 @@ class Bitboard {
             setPiece(move.piece, move.to)
             removePiece(move.piece, move.from)
         }
+
+        this.stateTracker.add(BoardStateTracker(bitboards.clone(), move.piece.color()))
     }
 
     private fun revokeRookCastleRight(move: BitMove) {
@@ -298,6 +301,7 @@ class Bitboard {
     fun restore(bitboard: Bitboard) {
         this.bitboards = bitboard.bitboards.clone()
         this.gamePhase = bitboard.gamePhase
+        this.stateTracker = ArrayDeque(bitboard.stateTracker.map { it.copy() })
         this.castlingRights = bitboard.castlingRights
         this.fiftyMoveRule = bitboard.fiftyMoveRule
         this.lastMove = bitboard.lastMove
@@ -307,10 +311,10 @@ class Bitboard {
         val copy = Bitboard()
         copy.bitboards = this.bitboards.clone()
         copy.gamePhase = this.gamePhase
+        copy.stateTracker = ArrayDeque(this.stateTracker.map { it.copy() })
         copy.castlingRights = this.castlingRights
         copy.fiftyMoveRule = this.fiftyMoveRule
         copy.lastMove = this.lastMove
         return copy
     }
-
 }
