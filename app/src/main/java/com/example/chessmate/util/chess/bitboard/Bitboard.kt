@@ -236,8 +236,65 @@ class Bitboard {
     }
 
     private fun isInsufficientMaterial(): Boolean {
+        val whitePieces = getWhitePieceBitboards()
+        val blackPieces = getBlackPieceBitboards()
+
+        val totalWhitePieces = whitePieces.sumOf { java.lang.Long.bitCount(it) }
+        val totalBlackPieces = blackPieces.sumOf { java.lang.Long.bitCount(it) }
+
+        //king vs king
+        if (totalWhitePieces == 1 && totalBlackPieces == 1) return true
+
+        //king vs king and knight
+        if (totalWhitePieces == 1 && totalBlackPieces == 2 && containsOnly(blackPieces, BitPiece.BLACK_KING, BitPiece.BLACK_KNIGHT)) return true
+        if (totalBlackPieces == 1 && totalWhitePieces == 2 && containsOnly(whitePieces, BitPiece.WHITE_KING, BitPiece.WHITE_KNIGHT)) return true
+
+        //king vs king and bishop
+        if (totalWhitePieces == 1 && totalBlackPieces == 2 && containsOnly(blackPieces, BitPiece.BLACK_KING, BitPiece.BLACK_BISHOP)) return true
+        if (totalBlackPieces == 1 && totalWhitePieces == 2 && containsOnly(whitePieces, BitPiece.WHITE_KING, BitPiece.WHITE_BISHOP)) return true
+
+        //king and bishop vs king and bishop of same color
+        if (totalWhitePieces == 2 && totalBlackPieces == 2
+            && containsOnly(whitePieces, BitPiece.WHITE_KING, BitPiece.WHITE_BISHOP)
+            && containsOnly(blackPieces, BitPiece.BLACK_KING, BitPiece.BLACK_BISHOP)
+            && areBishopsOnSameColor()) return true
+
         return false
     }
+
+    private fun containsOnly(pieceBitboards: LongArray, vararg pieces: BitPiece): Boolean {
+        val pieceSet = pieces.map { it.ordinal }.toSet()
+        return pieceBitboards.indices.all { idx -> pieceBitboards[idx] == 0L || pieceSet.contains(idx) }
+    }
+
+    private fun areBishopsOnSameColor(): Boolean {
+        val whiteBishopPositions = bitboards[BitPiece.WHITE_BISHOP.ordinal]
+        val blackBishopPositions = bitboards[BitPiece.BLACK_BISHOP.ordinal]
+
+        val whiteBishopsOnLightSquares = countBishopsOnColorSquares(whiteBishopPositions, isLightSquare = true)
+        val whiteBishopsOnDarkSquares = countBishopsOnColorSquares(whiteBishopPositions, isLightSquare = false)
+        val blackBishopsOnLightSquares = countBishopsOnColorSquares(blackBishopPositions, isLightSquare = true)
+        val blackBishopsOnDarkSquares = countBishopsOnColorSquares(blackBishopPositions, isLightSquare = false)
+
+        return (whiteBishopsOnLightSquares > 0 && blackBishopsOnLightSquares > 0) ||
+                (whiteBishopsOnDarkSquares > 0 && blackBishopsOnDarkSquares > 0)
+    }
+
+    private fun countBishopsOnColorSquares(bishopPositions: Long, isLightSquare: Boolean): Int {
+        var count = 0
+        for (i in 0 until 64) {
+            if ((bishopPositions and (1L shl i)) != 0L) {
+                val file = i % 8
+                val rank = i / 8
+                val isCurrentSquareLight = (file + rank) % 2 == 0
+                if (isCurrentSquareLight == isLightSquare) {
+                    count++
+                }
+            }
+        }
+        return count
+    }
+
 
     private fun isFiftyMoveRule(): Boolean {
         return fiftyMoveRule == 100
