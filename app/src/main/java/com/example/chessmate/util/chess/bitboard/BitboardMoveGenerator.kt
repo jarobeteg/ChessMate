@@ -2,9 +2,8 @@ package com.example.chessmate.util.chess.bitboard
 
 import com.example.chessmate.util.chess.chessboard.PieceColor
 import kotlin.math.abs
-import kotlin.math.max
 
-class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerColor: PieceColor, private val botColor: PieceColor) {
+class BitboardMoveGenerator (private val bitboard: Bitboard) {
 
     companion object {
         fun encodeMove(
@@ -90,7 +89,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         allPieces = bitboard.getAllPieces()
         emptySquares = allPieces.inv()
 
-        if (playerColor == PieceColor.WHITE) {
+        if (GameContext.playerColor == PieceColor.WHITE) {
             playerPiecesArray = bitboard.getWhitePieceBitboards()
             playerPieces = bitboard.getAllWhitePieces()
             botPiecesArray = bitboard.getBlackPieceBitboards()
@@ -123,10 +122,10 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
 
     fun generateLegalMovesForAlphaBeta(maximizingPlayer: Boolean): ArrayDeque<Long> {
         return when {
-            maximizingPlayer && botColor == PieceColor.WHITE -> generateLegalMovesForBot()
-            maximizingPlayer && playerColor == PieceColor.WHITE -> generateLegalMovesForPlayer()
-            !maximizingPlayer && botColor == PieceColor.BLACK -> generateLegalMovesForBot()
-            !maximizingPlayer && playerColor == PieceColor.BLACK -> generateLegalMovesForPlayer()
+            maximizingPlayer && GameContext.botColor == PieceColor.WHITE -> generateLegalMovesForBot()
+            maximizingPlayer && GameContext.playerColor == PieceColor.WHITE -> generateLegalMovesForPlayer()
+            !maximizingPlayer && GameContext.botColor == PieceColor.BLACK -> generateLegalMovesForBot()
+            !maximizingPlayer && GameContext.playerColor == PieceColor.BLACK -> generateLegalMovesForPlayer()
             else -> ArrayDeque()
         }
     }
@@ -135,7 +134,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
         updateBoards()
         val moves = ArrayDeque<Long>()
 
-        moves.addAll(generatePawnMoves(botPiecesArray[0], playerPieces, emptySquares, botColor))
+        moves.addAll(generatePawnMoves(botPiecesArray[0], playerPieces, emptySquares, GameContext.botColor))
         moves.addAll(generateKnightMoves(botPiecesArray[1], playerPieces, emptySquares))
         moves.addAll(generateBishopMoves(botPiecesArray[2], playerPieces, allPieces))
         moves.addAll(generateRookMoves(botPiecesArray[3], playerPieces, allPieces))
@@ -146,14 +145,14 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
     }
 
     fun generateLegalMovesForBot(): ArrayDeque<Long> {
-        return filterOutIllegalMoves(generateMovesForBot(), botPiecesArray[5], true, botColor)
+        return filterOutIllegalMoves(generateMovesForBot(), botPiecesArray[5], true, GameContext.botColor)
     }
 
     private fun generateMovesForPlayer(): ArrayDeque<Long> {
         updateBoards()
         val moves = ArrayDeque<Long>()
 
-        moves.addAll(generatePawnMoves(playerPiecesArray[0], botPieces, emptySquares, playerColor))
+        moves.addAll(generatePawnMoves(playerPiecesArray[0], botPieces, emptySquares, GameContext.playerColor))
         moves.addAll(generateKnightMoves(playerPiecesArray[1], botPieces, emptySquares))
         moves.addAll(generateBishopMoves(playerPiecesArray[2], botPieces, allPieces))
         moves.addAll(generateRookMoves(playerPiecesArray[3], botPieces, allPieces))
@@ -164,7 +163,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard, private val playerC
     }
 
     fun generateLegalMovesForPlayer(): ArrayDeque<Long> {
-        return filterOutIllegalMoves(generateMovesForPlayer(), playerPiecesArray[5], false, playerColor)
+        return filterOutIllegalMoves(generateMovesForPlayer(), playerPiecesArray[5], false, GameContext.playerColor)
     }
 
     private fun generatePawnMoves(pawns: Long, opponentPieces: Long, emptySquares: Long, color: PieceColor): ArrayDeque<Long> {

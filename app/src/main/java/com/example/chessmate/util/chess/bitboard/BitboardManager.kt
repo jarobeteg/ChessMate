@@ -1,6 +1,7 @@
 package com.example.chessmate.util.chess.bitboard
 
 import com.example.chessmate.util.chess.ChessBot
+import com.example.chessmate.util.chess.GamePhase
 import com.example.chessmate.util.chess.Player
 import com.example.chessmate.util.chess.Position
 import com.example.chessmate.util.chess.chessboard.PieceColor
@@ -22,34 +23,31 @@ class BitboardManager(private var listener: BitboardListener) {
     fun initializeUIAndSquareListener(isPlayerStarted: Boolean) {
         initPlayerColors(isPlayerStarted)
         bitboard.setupInitialBoard()
-        moveGenerator = BitboardMoveGenerator(bitboard, playerColor(), botColor())
-        evaluator = BitboardEvaluator(bitboard, playerColor(), botColor())
+        moveGenerator = BitboardMoveGenerator(bitboard)
+        evaluator = BitboardEvaluator(bitboard)
         listener.setupInitialBoardUI(bitboard)
         listener.setupSquareListener(bitboard)
     }
 
     private fun initPlayerColors(isPlayerStarted: Boolean) {
         if (isPlayerStarted) {
+            GameContext.playerColor = PieceColor.WHITE
+            GameContext.botColor = PieceColor.BLACK
             this.player = Player(PieceColor.WHITE)
             this.bot = ChessBot(PieceColor.BLACK)
             isPlayerTurn = true
         } else {
+            GameContext.playerColor = PieceColor.WHITE
+            GameContext.botColor = PieceColor.BLACK
             this.player = Player(PieceColor.BLACK)
             this.bot = ChessBot(PieceColor.WHITE)
             isPlayerTurn = false
         }
     }
 
-    fun playerColor(): PieceColor {
-        return this.player.color
-    }
-
-    fun botColor(): PieceColor {
-        return this.bot.color
-    }
-
     fun startGame() {
         println("game started on bitboard")
+        GameContext.gamePhase = GamePhase.OPENING
         if (!isPlayerTurn) {
             makeBotMove()
         }
@@ -69,12 +67,12 @@ class BitboardManager(private var listener: BitboardListener) {
     private fun makeBotMove() {
         CoroutineScope(Dispatchers.Main).launch {
             val move: BitMove? = withContext(Dispatchers.Default) {
-                bot.findBestMove(bitboard, 5, botColor() == PieceColor.WHITE)
+                bot.findBestMove(bitboard, 5, GameContext.botColor == PieceColor.WHITE)
             }
 
             if (move != null) {
                 bitboard.movePiece(move)
-                trackedMoves.add(BitMoveTracker(move, turnNumber, playerColor(), botColor(), isMoveMadeByWhite))
+                trackedMoves.add(BitMoveTracker(move, turnNumber, GameContext.playerColor, GameContext.botColor, isMoveMadeByWhite))
                 listener.onBotMoveMade(bitboard, move)
             } else {
                 println("checkmate or stalemate")
@@ -104,7 +102,7 @@ class BitboardManager(private var listener: BitboardListener) {
                     break
                 }
                 bitboard.movePiece(move)
-                trackedMoves.add(BitMoveTracker(move, turnNumber, playerColor(), botColor(), isMoveMadeByWhite))
+                trackedMoves.add(BitMoveTracker(move, turnNumber, GameContext.playerColor, GameContext.botColor, isMoveMadeByWhite))
                 listener.onPlayerMoveMade(bitboard, move)
                 break
             }
@@ -117,7 +115,7 @@ class BitboardManager(private var listener: BitboardListener) {
         for (move in availablePlayerMoves) {
             if (move.to == toSquare.position && move.promotion == bitPiece) {
                 bitboard.movePiece(move)
-                trackedMoves.add(BitMoveTracker(move, turnNumber, playerColor(), botColor(), isMoveMadeByWhite))
+                trackedMoves.add(BitMoveTracker(move, turnNumber, GameContext.playerColor, GameContext.botColor, isMoveMadeByWhite))
                 listener.onPlayerMoveMade(bitboard, move)
                 break
             }
@@ -141,16 +139,16 @@ class BitboardManager(private var listener: BitboardListener) {
 
     fun isKingInCheck(isForBot: Boolean): Boolean {
         if (!isForBot) {
-            val kingPosition = if (playerColor() == PieceColor.WHITE) bitboard.getWhiteKing() else bitboard.getBlackKing()
-            return moveGenerator.isSquareUnderAttack(kingPosition, isForBot, playerColor())
+            val kingPosition = if (GameContext.playerColor == PieceColor.WHITE) bitboard.getWhiteKing() else bitboard.getBlackKing()
+            return moveGenerator.isSquareUnderAttack(kingPosition, isForBot, GameContext.playerColor)
         } else {
-            val kingPosition = if (botColor() == PieceColor.WHITE) bitboard.getWhiteKing() else bitboard.getBlackKing()
-            return moveGenerator.isSquareUnderAttack(kingPosition, isForBot, botColor())
+            val kingPosition = if (GameContext.botColor == PieceColor.WHITE) bitboard.getWhiteKing() else bitboard.getBlackKing()
+            return moveGenerator.isSquareUnderAttack(kingPosition, isForBot, GameContext.botColor)
         }
     }
 
     fun getPlayerKingPosition(): Long {
-        return if (playerColor() == PieceColor.WHITE) bitboard.getWhiteKing() else bitboard.getBlackKing()
+        return if (GameContext.playerColor == PieceColor.WHITE) bitboard.getWhiteKing() else bitboard.getBlackKing()
     }
 
     fun getLastTrackedMove(): BitMoveTracker {
@@ -195,6 +193,6 @@ class BitboardManager(private var listener: BitboardListener) {
     }
 
     fun rowColToPosition(position: Position): Long {
-        return if (playerColor() == PieceColor.WHITE) 1L shl ((7 - position.row) * 8 + position.col) else 1L shl (position.row * 8 + (7 - position.col))
+        return if (GameContext.playerColor == PieceColor.WHITE) 1L shl ((7 - position.row) * 8 + position.col) else 1L shl (position.row * 8 + (7 - position.col))
     }
 }

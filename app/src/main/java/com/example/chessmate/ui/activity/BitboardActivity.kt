@@ -22,6 +22,7 @@ import com.example.chessmate.util.chess.bitboard.Bitboard
 import com.example.chessmate.util.chess.bitboard.BitboardListener
 import com.example.chessmate.util.chess.bitboard.BitboardManager
 import com.example.chessmate.util.chess.bitboard.BitboardUIMapper
+import com.example.chessmate.util.chess.bitboard.GameContext
 import com.example.chessmate.util.chess.chessboard.PieceType
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -231,7 +232,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     }
 
     private fun isFirstSelection(square: BitSquare): Boolean {
-        return gameManager.isPlayerTurn && square.color == gameManager.playerColor() && selectedSquare == null
+        return gameManager.isPlayerTurn && square.color == GameContext.playerColor && selectedSquare == null
     }
 
     private fun handleFirstSelection(square: BitSquare) {
@@ -249,7 +250,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     }
 
     private fun isNewSelection(square: BitSquare): Boolean {
-        return gameManager.isPlayerTurn && square.color == gameManager.playerColor() && selectedSquare != null
+        return gameManager.isPlayerTurn && square.color == GameContext.playerColor && selectedSquare != null
     }
 
     private fun handleNewSelection(square: BitSquare) {

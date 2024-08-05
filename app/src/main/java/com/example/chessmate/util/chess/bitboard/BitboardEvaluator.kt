@@ -6,7 +6,7 @@ import com.example.chessmate.util.chess.chessboard.PieceColor
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-class BitboardEvaluator(private val bitboard: Bitboard, private val playerColor: PieceColor, private val botColor: PieceColor) {
+class BitboardEvaluator(private val bitboard: Bitboard) {
 
     companion object {
         const val PAWN_VALUE = 1.0F
@@ -59,17 +59,17 @@ class BitboardEvaluator(private val bitboard: Bitboard, private val playerColor:
     private fun evaluatePesto(): Float {
         var pestoScore = BigDecimal.ZERO
 
-        val playerOffset = if (playerColor == PieceColor.WHITE) 0 else 6
-        val botOffset = if (botColor == PieceColor.WHITE) 0 else 6
+        val playerOffset = if (GameContext.playerColor == PieceColor.WHITE) 0 else 6
+        val botOffset = if (GameContext.botColor == PieceColor.WHITE) 0 else 6
 
-        val isMidGame = bitboard.getGamePhase() == GamePhase.OPENING || bitboard.getGamePhase() == GamePhase.MIDGAME
+        val isMidGame = GameContext.gamePhase == GamePhase.OPENING || GameContext.gamePhase == GamePhase.MIDGAME
 
         fun evaluatePieces(bitboard: Long, getValue: (Int, Boolean) -> Float, isForBot: Boolean) {
             var pieces = bitboard
             while (pieces != 0L) {
                 val position = pieces.takeLowestOneBit()
                 val index = position.countTrailingZeroBits()
-                val isBlack = if (isForBot) botColor == PieceColor.BLACK else playerColor == PieceColor.BLACK
+                val isBlack = if (isForBot) GameContext.botColor == PieceColor.BLACK else GameContext.playerColor == PieceColor.BLACK
                 var score = getValue(index, isBlack)
                 if (isBlack) {
                     score *= -1.0F

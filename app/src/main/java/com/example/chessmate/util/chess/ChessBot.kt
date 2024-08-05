@@ -14,24 +14,24 @@ class ChessBot(val color: PieceColor){
 
     private fun alphaBeta(board: Bitboard, depth: Int, alpha: Float, beta: Float, maximizingPlayer: Boolean, currentColor: PieceColor): Pair<Float, BitMove?> {
         if (depth == 0) {
-            val evaluator = BitboardEvaluator(board, color.opposite(), color)
+            val evaluator = BitboardEvaluator(board)
             return Pair(evaluator.evaluate(), null)
         }
 
-        val moveGenerator = BitboardMoveGenerator(board, color.opposite(), color)
+        val moveGenerator = BitboardMoveGenerator(board)
         val legalMoves = moveGenerator.generateLegalMovesForAlphaBeta(maximizingPlayer)
         //this means checkmate or stalemate
         //checkmate if the king is in check and has no legal moves, and to block the check, and to remove the piece giving the check
         //stalemate if the king is not in check and has no legal moves
         if (legalMoves.isEmpty()) {
-            val evaluator = BitboardEvaluator(board, color.opposite(), color)
+            val evaluator = BitboardEvaluator(board)
             return Pair(evaluator.evaluate(), null)
         }
 
         val evaluatedMoves = legalMoves.map { move ->
             val decodedMove = BitboardMoveGenerator.decodeMove(move)
             val newBoard = board.copy().apply { movePiece(decodedMove) }
-            val evaluator = BitboardEvaluator(newBoard, color.opposite(), color)
+            val evaluator = BitboardEvaluator(newBoard)
             Pair(decodedMove, evaluator.evaluate())
         }
 
