@@ -186,7 +186,25 @@ class Bitboard {
         return (getAllPieces() and square) == 0L
     }
 
-    fun isGameADraw(): Boolean {
+    fun isGameEnded(): Boolean {
+        return isPlayerCheckmated() || isBotCheckmated() || isGameADraw()
+    }
+
+    fun isPlayerCheckmated(): Boolean {
+        val moveGenerator = BitboardMoveGenerator(this)
+        val playerMoves = moveGenerator.generateLegalMovesForPlayer()
+
+        return playerMoves.isEmpty() && isPlayerInCheck()
+    }
+
+    fun isBotCheckmated(): Boolean {
+        val moveGenerator = BitboardMoveGenerator(this)
+        val botMoves = moveGenerator.generateLegalMovesForBot()
+
+        return botMoves.isEmpty() && isBotInCheck()
+    }
+
+    private fun isGameADraw(): Boolean {
         return when {
             isThreefold() -> true
             isStalemate() -> true
@@ -207,6 +225,13 @@ class Bitboard {
     }
 
     private fun isStalemate(): Boolean {
+        val moveGenerator = BitboardMoveGenerator(this)
+        if (GameContext.isPlayerTurn) {
+            return moveGenerator.generateLegalMovesForPlayer().isEmpty() && !isPlayerInCheck()
+        } else if (GameContext.isBotTurn) {
+            return moveGenerator.generateLegalMovesForBot().isEmpty() && !isBotInCheck()
+        }
+
         return false
     }
 
@@ -224,6 +249,20 @@ class Bitboard {
         } else {
             fiftyMoveRule = 0
         }
+    }
+
+    private fun isPlayerInCheck(): Boolean {
+        val moveGenerator = BitboardMoveGenerator(this)
+        val kingPosition = if (GameContext.playerColor == PieceColor.WHITE) getWhiteKing() else getBlackKing()
+
+        return moveGenerator.isSquareUnderAttack(kingPosition, false, GameContext.playerColor)
+    }
+
+    private fun isBotInCheck(): Boolean {
+        val moveGenerator = BitboardMoveGenerator(this)
+        val kingPosition = if (GameContext.botColor == PieceColor.WHITE) getWhiteKing() else getBlackKing()
+
+        return moveGenerator.isSquareUnderAttack(kingPosition, true, GameContext.botColor)
     }
 
     private fun getSquareNotation(position: Long): String {

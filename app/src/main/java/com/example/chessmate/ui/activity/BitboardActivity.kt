@@ -232,7 +232,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     }
 
     private fun isFirstSelection(square: BitSquare): Boolean {
-        return gameManager.isPlayerTurn && square.color == GameContext.playerColor && selectedSquare == null
+        return GameContext.isPlayerTurn && square.color == GameContext.playerColor && selectedSquare == null
     }
 
     private fun handleFirstSelection(square: BitSquare) {
@@ -241,7 +241,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     }
 
     private fun isDeselecting(square: BitSquare): Boolean {
-        return gameManager.isPlayerTurn && selectedSquare != null && selectedSquare == square
+        return GameContext.isPlayerTurn && selectedSquare != null && selectedSquare == square
     }
 
     private fun handleDeselect() {
@@ -250,7 +250,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     }
 
     private fun isNewSelection(square: BitSquare): Boolean {
-        return gameManager.isPlayerTurn && square.color == GameContext.playerColor && selectedSquare != null
+        return GameContext.isPlayerTurn && square.color == GameContext.playerColor && selectedSquare != null
     }
 
     private fun handleNewSelection(square: BitSquare) {
@@ -259,7 +259,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     }
 
     private fun isSecondClick(): Boolean {
-        return gameManager.isPlayerTurn && selectedSquare != null
+        return GameContext.isPlayerTurn && selectedSquare != null
     }
 
     private fun handleSecondClick(square: BitSquare) {

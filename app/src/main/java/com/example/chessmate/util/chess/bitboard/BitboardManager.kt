@@ -17,7 +17,6 @@ class BitboardManager(private var listener: BitboardListener) {
     private var availablePlayerMoves = mutableListOf<BitMove>()
     private var isMoveMadeByWhite = true
     private var trackedMoves: MutableList<BitMoveTracker> = mutableListOf()
-    var isPlayerTurn = false
     var turnNumber = 1
 
     fun initializeUIAndSquareListener(isPlayerStarted: Boolean) {
@@ -33,33 +32,34 @@ class BitboardManager(private var listener: BitboardListener) {
         if (isPlayerStarted) {
             GameContext.playerColor = PieceColor.WHITE
             GameContext.botColor = PieceColor.BLACK
+            GameContext.isPlayerTurn = true
             this.player = Player(PieceColor.WHITE)
             this.bot = ChessBot(PieceColor.BLACK)
-            isPlayerTurn = true
         } else {
             GameContext.playerColor = PieceColor.WHITE
             GameContext.botColor = PieceColor.BLACK
+            GameContext.isBotTurn = true
             this.player = Player(PieceColor.BLACK)
             this.bot = ChessBot(PieceColor.WHITE)
-            isPlayerTurn = false
         }
     }
 
     fun startGame() {
         println("game started on bitboard")
         GameContext.gamePhase = GamePhase.OPENING
-        if (!isPlayerTurn) {
+        if (GameContext.isBotTurn) {
             makeBotMove()
         }
     }
 
     fun switchTurns() {
-        isPlayerTurn = !isPlayerTurn
+        GameContext.isPlayerTurn = !GameContext.isPlayerTurn
+        GameContext.isBotTurn = !GameContext.isBotTurn
         isMoveMadeByWhite = !isMoveMadeByWhite
         if (isMoveMadeByWhite) {
             turnNumber++
         }
-        if (!isPlayerTurn) {
+        if (GameContext.isBotTurn) {
             makeBotMove()
         }
     }
