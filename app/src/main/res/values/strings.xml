@@ -14,8 +14,6 @@
     <string name="bottom_nav_more">More</string>
     <string name="title_settings_menu">Settings Menu</string>
     <string name="title_activity_settings" translatable="false">SettingsActivity</string>
-    <string name="title_activity_bitboard" translatable="false">BitboardActivity</string>
-    <string name="title_bitboard_menu" translatable="false">Bitboard (experimental)</string>
 
     <!--Preference Titles-->
     <string name="settings_activity_title">Settings</string>

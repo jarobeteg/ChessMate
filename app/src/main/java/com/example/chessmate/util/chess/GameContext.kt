@@ -1,7 +1,4 @@
-package com.example.chessmate.util.chess.bitboard
-
-import com.example.chessmate.util.chess.GamePhase
-import com.example.chessmate.util.chess.chessboard.PieceColor
+package com.example.chessmate.util.chess
 
 object GameContext {
     var gamePhase: GamePhase = GamePhase.NONE
@@ -9,4 +6,6 @@ object GameContext {
     var botColor: PieceColor = PieceColor.NONE
     var isPlayerTurn: Boolean = false
     var isBotTurn: Boolean = false
+    var topMoveSearch: Int = 3
+    var depth: Int = 4
 }

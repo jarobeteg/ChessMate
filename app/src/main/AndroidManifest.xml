@@ -16,9 +16,6 @@
             android:name=".ui.activity.BitboardActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activity.ChessGameActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.activity.PlayActivity"
             android:exported="false" />
         <activity

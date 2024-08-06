@@ -1,4 +1,4 @@
-package com.example.chessmate.util.chess.chessboard
+package com.example.chessmate.util.chess
 
 enum class PieceColor {
     WHITE,

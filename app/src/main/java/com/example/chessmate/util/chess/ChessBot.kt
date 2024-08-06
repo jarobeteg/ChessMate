@@ -4,7 +4,6 @@ import com.example.chessmate.util.chess.bitboard.BitMove
 import com.example.chessmate.util.chess.bitboard.Bitboard
 import com.example.chessmate.util.chess.bitboard.BitboardEvaluator
 import com.example.chessmate.util.chess.bitboard.BitboardMoveGenerator
-import com.example.chessmate.util.chess.chessboard.PieceColor
 
 class ChessBot(val color: PieceColor){
 
@@ -42,7 +41,7 @@ class ChessBot(val color: PieceColor){
         var bestMove: BitMove? = null
 
         if (maximizingPlayer) {
-            val topMoves = sortedMoves.take(3)
+            val topMoves = sortedMoves.take(GameContext.topMoveSearch)
             var bestValue = Float.NEGATIVE_INFINITY
             for (move in topMoves) {
                 val newBoard = board.copy().apply { movePiece(move) }
@@ -58,7 +57,7 @@ class ChessBot(val color: PieceColor){
             }
             return Pair(bestValue, bestMove)
         } else {
-            val topMoves = sortedMoves.reversed().take(3)
+            val topMoves = sortedMoves.reversed().take(GameContext.topMoveSearch)
             var bestValue = Float.POSITIVE_INFINITY
             for (move in topMoves) {
                 val newBoard = board.copy().apply { movePiece(move) }

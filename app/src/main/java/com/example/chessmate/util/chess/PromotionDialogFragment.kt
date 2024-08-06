@@ -8,7 +8,6 @@ import android.widget.ImageButton
 import androidx.fragment.app.DialogFragment
 import com.example.chessmate.R
 import com.example.chessmate.util.chess.bitboard.BitSquare
-import com.example.chessmate.util.chess.chessboard.PieceType
 
 class PromotionDialogFragment(private val isPlayerWhite: Boolean, private val listener: PromotionDialogListener,
                               private val fromSquare: BitSquare, private val toSquare: BitSquare) : DialogFragment() {

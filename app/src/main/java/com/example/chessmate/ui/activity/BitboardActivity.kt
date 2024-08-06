@@ -1,5 +1,6 @@
 package com.example.chessmate.ui.activity
 
+import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.TypedValue
@@ -22,8 +23,8 @@ import com.example.chessmate.util.chess.bitboard.Bitboard
 import com.example.chessmate.util.chess.bitboard.BitboardListener
 import com.example.chessmate.util.chess.bitboard.BitboardManager
 import com.example.chessmate.util.chess.bitboard.BitboardUIMapper
-import com.example.chessmate.util.chess.bitboard.GameContext
-import com.example.chessmate.util.chess.chessboard.PieceType
+import com.example.chessmate.util.chess.GameContext
+import com.example.chessmate.util.chess.PieceType
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFragment.PromotionDialogListener {
@@ -47,6 +48,18 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         setContentView(R.layout.activity_bitboard)
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bitboard_bottom_navigation)
+
+        val sharedPreferences = getSharedPreferences("chess_game", Context.MODE_PRIVATE)
+        var startingSide = sharedPreferences.getString("starting_side", "random")
+        GameContext.depth = 4 + sharedPreferences.getInt("depth", 0)
+        GameContext.topMoveSearch = GameContext.depth - 1
+        if (startingSide == "random") {
+            val random = java.util.Random()
+            val isWhite = random.nextBoolean()
+            startingSide = if (isWhite) "white" else "black"
+        }
+
+        isPlayerStarted = startingSide == "white"
 
         gameManager = BitboardManager(this)
         chessboardLayout = findViewById(R.id.bitboard)
@@ -220,8 +233,6 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     }
 
     private fun handleSquareClick(square: BitSquare) {
-        val pos = gameManager.positionToRowCol(square.position)
-        println("position $pos, handleSquareClick: $square")
         when {
             isFirstSelection(square) -> handleFirstSelection(square)
             isDeselecting(square) -> handleDeselect()

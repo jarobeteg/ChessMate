@@ -1,6 +1,6 @@
 package com.example.chessmate.util.chess.bitboard
 
-import com.example.chessmate.util.chess.chessboard.PieceColor
+import com.example.chessmate.util.chess.PieceColor
 
 data class BoardStateTracker(
     val bitboards: LongArray,

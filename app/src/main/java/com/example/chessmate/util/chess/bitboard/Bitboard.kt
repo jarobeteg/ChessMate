@@ -1,6 +1,7 @@
 package com.example.chessmate.util.chess.bitboard
 
-import com.example.chessmate.util.chess.chessboard.PieceColor
+import com.example.chessmate.util.chess.GameContext
+import com.example.chessmate.util.chess.PieceColor
 
 class Bitboard {
     var bitboards = LongArray(12)

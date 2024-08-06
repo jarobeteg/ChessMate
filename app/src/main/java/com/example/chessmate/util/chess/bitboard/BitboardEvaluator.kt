@@ -1,8 +1,9 @@
 package com.example.chessmate.util.chess.bitboard
 
+import com.example.chessmate.util.chess.GameContext
 import com.example.chessmate.util.chess.GamePhase
 import com.example.chessmate.util.chess.PestoEvalTables
-import com.example.chessmate.util.chess.chessboard.PieceColor
+import com.example.chessmate.util.chess.PieceColor
 import java.math.BigDecimal
 import java.math.RoundingMode
 
