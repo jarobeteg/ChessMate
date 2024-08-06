@@ -40,6 +40,8 @@ class Bitboard {
         const val WHITE_QUEENSIDE = 0x2
         const val BLACK_KINGSIDE = 0x4
         const val BLACK_QUEENSIDE = 0x8
+        const val WHITE_CASTLED = 0x10
+        const val BLACK_CASTLED = 0x20
     }
 
     fun setupInitialBoard() {
@@ -128,6 +130,7 @@ class Bitboard {
 
     private fun handleCastlingMove(move: BitMove) {
         if (move.piece == BitPiece.WHITE_KING) {
+            setWhiteCastled()
             if (move.to == BitCell.G1.bit) { //white kingside castles
                 setPiece(BitPiece.WHITE_KING, BitCell.G1.bit)
                 removePiece(BitPiece.WHITE_KING, BitCell.E1.bit)
@@ -142,6 +145,7 @@ class Bitboard {
                 removePiece(BitPiece.WHITE_ROOK, BitCell.A1.bit)
             }
         } else if (move.piece == BitPiece.BLACK_KING) {
+            setBlackCastled()
             if (move.to == BitCell.G8.bit) { //black kingside castles
                 setPiece(BitPiece.BLACK_KING, BitCell.G8.bit)
                 removePiece(BitPiece.BLACK_KING, BitCell.E8.bit)
@@ -175,12 +179,24 @@ class Bitboard {
         castlingRights = castlingRights and rights.inv()
     }
 
-    fun grantCastlingRights(rights: Int) {
-        castlingRights = castlingRights or rights
-    }
-
     fun hasCastlingRights(rights: Int): Boolean {
         return (castlingRights and rights) != 0
+    }
+
+    private fun setWhiteCastled() {
+        castlingRights = castlingRights or WHITE_CASTLED
+    }
+
+    private fun setBlackCastled() {
+        castlingRights = castlingRights or BLACK_CASTLED
+    }
+
+    fun hasWhiteCastled(): Boolean {
+        return (castlingRights and WHITE_CASTLED) != 0
+    }
+
+    fun hasBlackCastled(): Boolean {
+        return (castlingRights and BLACK_CASTLED) != 0
     }
 
     fun isSquareEmpty(square: Long): Boolean {
@@ -396,6 +412,15 @@ class Bitboard {
 
     fun getLastMove(): Long {
         return lastMove
+    }
+
+    fun getBitPiece(position: Long): BitPiece {
+        for ((index, bitboard) in bitboards.withIndex()) {
+            if ((bitboard and position) != 0L) {
+                return BitPiece.entries[index]
+            }
+        }
+        return BitPiece.NONE
     }
 
     fun restore(bitboard: Bitboard) {

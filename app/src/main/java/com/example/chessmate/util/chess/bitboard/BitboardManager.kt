@@ -53,6 +53,7 @@ class BitboardManager(private var listener: BitboardListener) {
     }
 
     fun switchTurns() {
+        updateGamePhase()
         GameContext.isPlayerTurn = !GameContext.isPlayerTurn
         GameContext.isBotTurn = !GameContext.isBotTurn
         isMoveMadeByWhite = !isMoveMadeByWhite
@@ -121,6 +122,93 @@ class BitboardManager(private var listener: BitboardListener) {
         }
     }
 
+    private fun updateGamePhase() {
+        val currentPhase = GameContext.gamePhase
+        when (currentPhase) {
+            GamePhase.OPENING -> if (isMidGame()) GameContext.gamePhase = GamePhase.MIDGAME
+            GamePhase.MIDGAME -> if (isEndGame()) GameContext.gamePhase = GamePhase.ENDGAME
+            else -> {}
+        }
+    }
+
+    private fun isMidGame(): Boolean {
+        val developedMinorPieces = countDevelopedMinorPieces()
+        val kingsCastled = isKingCastled(PieceColor.WHITE) || isKingCastled(PieceColor.BLACK)
+        val centralPawnsMoved = centralPawnsMoved()
+
+        return developedMinorPieces >= 4 && kingsCastled && centralPawnsMoved
+    }
+
+    private fun countDevelopedMinorPieces(): Int {
+        val whiteInitialPositions = arrayOf(
+            Pair(BitCell.B1.bit, BitPiece.WHITE_KNIGHT),
+            Pair(BitCell.G1.bit, BitPiece.WHITE_KNIGHT),
+            Pair(BitCell.C1.bit, BitPiece.WHITE_BISHOP),
+            Pair(BitCell.F1.bit, BitPiece.WHITE_BISHOP)
+        )
+        val blackInitialPositions = arrayOf(
+            Pair(BitCell.B8.bit, BitPiece.BLACK_KNIGHT),
+            Pair(BitCell.G8.bit, BitPiece.BLACK_KNIGHT),
+            Pair(BitCell.C8.bit, BitPiece.BLACK_BISHOP),
+            Pair(BitCell.F8.bit, BitPiece.BLACK_BISHOP)
+        )
+
+        val initialPositions = whiteInitialPositions + blackInitialPositions
+
+        return initialPositions.count { (pos, piece) ->
+            val currentPiece = bitboard.getBitPiece(pos)
+            currentPiece != piece
+        }
+    }
+
+    private fun isKingCastled(color: PieceColor): Boolean {
+        return if (color == PieceColor.WHITE) bitboard.hasWhiteCastled() else bitboard.hasBlackCastled()
+    }
+
+    private fun centralPawnsMoved(): Boolean {
+        val initialPositions = arrayOf(
+            Pair(BitCell.D2.bit, BitPiece.WHITE_PAWN),
+            Pair(BitCell.E2.bit, BitPiece.WHITE_PAWN),
+            Pair(BitCell.D7.bit, BitPiece.BLACK_PAWN),
+            Pair(BitCell.E7.bit, BitPiece.BLACK_PAWN)
+        )
+
+        return initialPositions.any { (pos, piece) ->
+            val currentPiece = bitboard.getBitPiece(pos)
+            currentPiece != piece
+        }
+    }
+
+    private fun isEndGame(): Boolean {
+        val totalPieces = countTotalPieces()
+        val fewPawns = countPawns() <= 9
+        val queenAbsent = areQueensAbsent()
+
+        return totalPieces <= 12 || fewPawns || queenAbsent
+    }
+
+    private fun countTotalPieces(): Int {
+        val allPieces = bitboard.getAllPieces()
+        return java.lang.Long.bitCount(allPieces)
+    }
+
+    private fun countPawns(): Int {
+        val whitePawns = bitboard.getWhitePieceBitboards()[0]
+        val blackPawns = bitboard.getBlackPieceBitboards()[0]
+
+        val whitePawnCount = java.lang.Long.bitCount(whitePawns)
+        val blackPawnCount = java.lang.Long.bitCount(blackPawns)
+
+        return whitePawnCount + blackPawnCount
+    }
+
+    private fun areQueensAbsent(): Boolean {
+        val whiteQueen = bitboard.getWhitePieceBitboards()[4]
+        val blackQueen = bitboard.getBlackPieceBitboards()[4]
+
+        return whiteQueen == 0L && blackQueen == 0L
+    }
+
     private fun convertPieceTypeToBitPiece(piece: PieceType, color: PieceColor): BitPiece {
         return when (piece to color) {
             PieceType.QUEEN to PieceColor.WHITE -> BitPiece.WHITE_QUEEN
@@ -161,7 +249,7 @@ class BitboardManager(private var listener: BitboardListener) {
         return trackedMoves.filter { !it.isMoveMadeByWhite }.maxByOrNull { it.turnNumber } ?: throw NoSuchElementException("No move made by black found")
     }
 
-    fun getBitPiece(position: Long): BitSquare {
+    fun getBitSquare(position: Long): BitSquare {
         return bitboard.getPiece(position)
     }
 

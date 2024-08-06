@@ -139,7 +139,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
                 }
                 val squareLayout = uiMapper.getSquareView(position)
                 squareLayout.setOnClickListener {
-                    handleSquareClick(gameManager.getBitPiece(position))
+                    handleSquareClick(gameManager.getBitSquare(position))
                 }
             }
         }
