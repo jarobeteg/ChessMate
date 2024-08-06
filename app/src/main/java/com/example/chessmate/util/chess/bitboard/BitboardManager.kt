@@ -162,7 +162,15 @@ class BitboardManager(private var listener: BitboardListener) {
     }
 
     private fun isKingCastled(color: PieceColor): Boolean {
-        return if (color == PieceColor.WHITE) bitboard.hasWhiteCastled() else bitboard.hasBlackCastled()
+        val (hasKingCastled, kingside, queenside) = if (color == PieceColor.WHITE) {
+            Triple(bitboard.hasWhiteCastled(), Bitboard.WHITE_KINGSIDE, Bitboard.WHITE_QUEENSIDE)
+        } else {
+            Triple(bitboard.hasBlackCastled(), Bitboard.BLACK_KINGSIDE, Bitboard.BLACK_QUEENSIDE)
+        }
+
+        val hasCastlingRights = bitboard.hasCastlingRights(kingside) || bitboard.hasCastlingRights(queenside)
+
+        return hasKingCastled || !hasCastlingRights
     }
 
     private fun centralPawnsMoved(): Boolean {
@@ -173,10 +181,10 @@ class BitboardManager(private var listener: BitboardListener) {
             Pair(BitCell.E7.bit, BitPiece.BLACK_PAWN)
         )
 
-        return initialPositions.any { (pos, piece) ->
+        return initialPositions.count { (pos, piece) ->
             val currentPiece = bitboard.getBitPiece(pos)
             currentPiece != piece
-        }
+        } == 4
     }
 
     private fun isEndGame(): Boolean {
