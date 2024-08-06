@@ -12,7 +12,7 @@ class ChessBot(val color: PieceColor){
     }
 
     private fun alphaBeta(board: Bitboard, depth: Int, alpha: Float, beta: Float, maximizingPlayer: Boolean, currentColor: PieceColor): Pair<Float, BitMove?> {
-        if (depth == 0) {
+        if (depth == 0 || board.isGameEnded()) {
             val evaluator = BitboardEvaluator(board)
             return Pair(evaluator.evaluate(), null)
         }
