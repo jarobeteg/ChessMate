@@ -18,6 +18,8 @@ class BitboardManager(private var listener: BitboardListener) {
     private var availablePlayerMoves = mutableListOf<BitMove>()
     private var isMoveMadeByWhite = true
     private var trackedMoves: MutableList<BitMoveTracker> = mutableListOf()
+    private var currentIndex = -1
+    var isNavigating = false
     var turnNumber = 1
 
     fun initializeUIAndSquareListener(isPlayerStarted: Boolean) {
@@ -68,6 +70,7 @@ class BitboardManager(private var listener: BitboardListener) {
         updateGamePhase()
         GameContext.isPlayerTurn = !GameContext.isPlayerTurn
         GameContext.isBotTurn = !GameContext.isBotTurn
+        currentIndex = bitboard.stateTracker.size - 1
 
         if (bitboard.isGameEnded()) {
             endGame()
@@ -211,6 +214,41 @@ class BitboardManager(private var listener: BitboardListener) {
         val queenAbsent = areQueensAbsent()
 
         return totalPieces <= 12 || fewPawns || queenAbsent
+    }
+
+    fun boardStateBackwards() {
+        if (currentIndex > 0) {
+            currentIndex--
+            isNavigating = true
+            displayBoardState(bitboard.stateTracker[currentIndex])
+        }
+    }
+
+    fun boardStateForwards() {
+        if (currentIndex == -1 && bitboard.stateTracker.size == 1) return
+        if (currentIndex < bitboard.stateTracker.size - 1) {
+            currentIndex++
+            isNavigating = true
+            displayBoardState(bitboard.stateTracker[currentIndex])
+        }
+    }
+
+    fun boardStateContinue() {
+        if (currentIndex == -1 && bitboard.stateTracker.size == 1) return
+        currentIndex = bitboard.stateTracker.size - 1
+        displayBoardState(bitboard.stateTracker[bitboard.stateTracker.size - 1])
+    }
+
+    private fun displayBoardState(state: BoardStateTracker) {
+        bitboard.updateBoardState(state)
+        if (currentIndex == bitboard.stateTracker.size - 1) {
+            isNavigating = false
+            val lastMove = bitboard.getLastMove()
+            val decodedMove = BitboardMoveGenerator.decodeMove(lastMove)
+            listener.showPreviousBoardState(bitboard, decodedMove)
+        } else {
+            listener.showPreviousBoardState(bitboard, null)
+        }
     }
 
     private fun countTotalPieces(): Int {

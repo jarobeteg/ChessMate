@@ -31,6 +31,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFragment.PromotionDialogListener, EndGameDialogFragment.OnHomeButtonClickListener {
     private lateinit var chessboardLayout: GridLayout
+    private lateinit var transparentOverlay: View
     private lateinit var gameManager: BitboardManager
     private lateinit var uiMapper: BitboardUIMapper
     private lateinit var uiSquares: Array<Array<FrameLayout>>
@@ -65,6 +66,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
 
         gameManager = BitboardManager(this)
         chessboardLayout = findViewById(R.id.bitboard)
+        transparentOverlay = findViewById(R.id.transparent_overlay)
 
         uiMapper = BitboardUIMapper()
 
@@ -161,6 +163,21 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
                 }
             }
         }
+    }
+
+    override fun showPreviousBoardState(bitboard: Bitboard, move: BitMove?) {
+        removeHighlightMoves()
+        removeHighlightsFromSquares()
+        if (move != null) {
+            addHighlightMove(move.to)
+            addHighlightMove(move.from)
+        }
+        updateBitboardStateUI(bitboard)
+        updateOverlayVisibility()
+    }
+
+    private fun updateOverlayVisibility() {
+        transparentOverlay.visibility = if (gameManager.isNavigating) View.VISIBLE else View.GONE
     }
 
     private fun updateSquareUI(square: BitSquare, frameLayout: FrameLayout) {
@@ -597,14 +614,17 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
             }
 
             R.id.nav_back -> {
+                gameManager.boardStateBackwards()
                 return true
             }
 
             R.id.nav_forward -> {
+                gameManager.boardStateForwards()
                 return true
             }
 
             R.id.nav_continue -> {
+                gameManager.boardStateContinue()
                 return true
             }
 

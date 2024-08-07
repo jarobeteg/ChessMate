@@ -418,6 +418,14 @@
 
     </GridLayout>
 
+    <View
+        android:id="@+id/transparent_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/greyFortyTransparent"
+        android:clickable="true"
+        android:visibility="gone" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bitboard_bottom_navigation"
         android:layout_width="match_parent"

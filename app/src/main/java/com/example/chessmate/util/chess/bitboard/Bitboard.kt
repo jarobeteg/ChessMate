@@ -5,7 +5,7 @@ import com.example.chessmate.util.chess.PieceColor
 
 class Bitboard {
     var bitboards = LongArray(12)
-    private var stateTracker = ArrayDeque<BoardStateTracker>()
+    var stateTracker = ArrayDeque<BoardStateTracker>()
     private var castlingRights: Int = 0xF
     private var fiftyMoveRule: Int = 0
     private var lastMove: Long = 0
@@ -58,6 +58,14 @@ class Bitboard {
         setPiece(BitPiece.BLACK_BISHOP, RANK_8 and (FILE_C or FILE_F))
         setPiece(BitPiece.BLACK_QUEEN, RANK_8 and FILE_D)
         setPiece(BitPiece.BLACK_KING, RANK_8 and FILE_E)
+
+        this.stateTracker.add(BoardStateTracker(bitboards.clone(), PieceColor.WHITE))
+    }
+
+    fun updateBoardState(state: BoardStateTracker) {
+        for (i in 0 until 12) {
+            bitboards[i] = state.bitboards[i]
+        }
     }
 
     private fun setPiece(piece: BitPiece, square: Long) {

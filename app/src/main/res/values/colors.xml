@@ -4,6 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#808080</color>
     <color name="greyTransparent">#20808080</color>
+    <color name="greyFortyTransparent">#40808080</color>
 
     <!--Board colors-->
     <color name="default_light_square_color">#FFFCE9</color>
