@@ -78,7 +78,6 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         bottomNavigationView.setOnItemSelectedListener { item ->
             return@setOnItemSelectedListener bottomNavItemClicked(item)
         }
-        showEndGameDialog("draw")
     }
 
     override fun onStart() {
