@@ -592,6 +592,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     private fun bottomNavItemClicked(item: MenuItem): Boolean{
         when (item.itemId) {
             R.id.nav_resign -> {
+                gameManager.resign()
                 return true
             }
 

@@ -52,6 +52,12 @@ class BitboardManager(private var listener: BitboardListener) {
         }
     }
 
+    fun resign() {
+        GameContext.isPlayerTurn = false
+        GameContext.isBotTurn = false
+        listener.showEndGameDialog("player_checkmated")
+    }
+
     private fun endGame() {
         GameContext.isPlayerTurn = false
         GameContext.isBotTurn = false
