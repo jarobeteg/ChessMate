@@ -203,6 +203,15 @@ class Bitboard {
         return (getAllPieces() and square) == 0L
     }
 
+    fun endGameResult(): String {
+        return when {
+            isPlayerCheckmated() -> "player_checkmated"
+            isBotCheckmated() -> "bot_checkmated"
+            else -> "draw"
+        }
+    }
+
+
     fun isGameEnded(): Boolean {
         return isPlayerCheckmated() || isBotCheckmated() || isGameADraw()
     }

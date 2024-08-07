@@ -171,4 +171,9 @@
     <string name="move_tracker">Move Tracker</string>
     <string name="one" translatable="false">1.</string>
     <string name="empty_move" translatable="false">---</string>
+    <string name="to_homepage">To Homepage</string>
+    <string name="game_over">Game Over</string>
+    <string name="game_won">You Won</string>
+    <string name="game_lost">You Lost</string>
+    <string name="game_tie">Tie</string>
 </resources>

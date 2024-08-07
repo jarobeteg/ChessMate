@@ -1,6 +1,7 @@
 package com.example.chessmate.ui.activity
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.TypedValue
@@ -13,6 +14,7 @@ import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.chessmate.R
+import com.example.chessmate.util.chess.EndGameDialogFragment
 import com.example.chessmate.util.chess.Position
 import com.example.chessmate.util.chess.PromotionDialogFragment
 import com.example.chessmate.util.chess.bitboard.BitCell
@@ -27,7 +29,7 @@ import com.example.chessmate.util.chess.GameContext
 import com.example.chessmate.util.chess.PieceType
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFragment.PromotionDialogListener {
+class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFragment.PromotionDialogListener, EndGameDialogFragment.OnHomeButtonClickListener {
     private lateinit var chessboardLayout: GridLayout
     private lateinit var gameManager: BitboardManager
     private lateinit var uiMapper: BitboardUIMapper
@@ -76,11 +78,28 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         bottomNavigationView.setOnItemSelectedListener { item ->
             return@setOnItemSelectedListener bottomNavItemClicked(item)
         }
+        showEndGameDialog("draw")
     }
 
     override fun onStart() {
         super.onStart()
         gameManager.startGame()
+    }
+
+    override fun onHomeButtonClicked() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        finish()
+    }
+
+    override fun onBackPressed() {
+        val dialog = supportFragmentManager.findFragmentByTag("EndGameDialog")
+        if (dialog != null && dialog.isVisible) {
+
+        } else {
+            super.onBackPressed()
+        }
     }
 
     private fun initializeBitboardUI() {
@@ -323,6 +342,11 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         updateBitboardStateUI(bitboard)
         updateMoveTrackerToolbar(isPlayerInCheck())
         gameManager.switchTurns()
+    }
+
+    override fun showEndGameDialog(endGameResult: String) {
+        val endGameDialog = EndGameDialogFragment(endGameResult)
+        endGameDialog.show(supportFragmentManager, "EndGameDialog")
     }
 
     private fun updateMoveTrackerToolbar(wasCheckGiven: Boolean) {

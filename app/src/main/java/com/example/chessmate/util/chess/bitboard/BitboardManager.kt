@@ -52,10 +52,22 @@ class BitboardManager(private var listener: BitboardListener) {
         }
     }
 
+    private fun endGame() {
+        GameContext.isPlayerTurn = false
+        GameContext.isBotTurn = false
+        listener.showEndGameDialog(bitboard.endGameResult())
+    }
+
     fun switchTurns() {
         updateGamePhase()
         GameContext.isPlayerTurn = !GameContext.isPlayerTurn
         GameContext.isBotTurn = !GameContext.isBotTurn
+
+        if (bitboard.isGameEnded()) {
+            endGame()
+            return
+        }
+
         isMoveMadeByWhite = !isMoveMadeByWhite
         if (isMoveMadeByWhite) {
             turnNumber++

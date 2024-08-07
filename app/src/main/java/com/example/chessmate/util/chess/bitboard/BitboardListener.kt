@@ -7,4 +7,5 @@ interface BitboardListener {
     fun onPlayerMoveCalculated(moves: MutableList<BitMove>, square: BitSquare)
     fun onPlayerMoveMade(bitboard: Bitboard, move: BitMove)
     fun onBotMoveMade(bitboard: Bitboard, move: BitMove)
+    fun showEndGameDialog(endGameResult: String)
 }

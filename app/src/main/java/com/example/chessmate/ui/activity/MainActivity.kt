@@ -7,9 +7,10 @@ import androidx.preference.PreferenceManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.chessmate.R
 import com.example.chessmate.adapter.MainViewPagerAdapter
+import com.example.chessmate.util.chess.EndGameDialogFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AbsThemeActivity() {
+class MainActivity : AbsThemeActivity(), EndGameDialogFragment.OnHomeButtonClickListener {
     private lateinit var bottomNavigationView : BottomNavigationView
     private lateinit var mainToolbar : Toolbar
     private lateinit var viewPager2: ViewPager2
@@ -46,6 +47,10 @@ class MainActivity : AbsThemeActivity() {
             }
             true
         }
+    }
+
+    override fun onHomeButtonClicked() {
+        bottomNavigationView.selectedItemId = R.id.nav_fragment_home
     }
 
     override fun onBackPressed() {

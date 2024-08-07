@@ -8,6 +8,11 @@ android {
     namespace = "com.example.chessmate"
     compileSdk = 34
 
+
+    viewBinding {
+        enable = true
+    }
+
     defaultConfig {
         applicationId = "com.example.chessmate"
         minSdk = 26

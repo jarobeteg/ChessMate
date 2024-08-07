@@ -154,4 +154,9 @@
     <string name="forward">Előre</string>
     <string name="continue_chess">Folytatás</string>
     <string name="move_tracker">Lépéskövető</string>
+    <string name="to_homepage">Kezdőlapra</string>
+    <string name="game_over">Játék Vége</string>
+    <string name="game_won">Nyertél</string>
+    <string name="game_lost">Vesztettél</string>
+    <string name="game_tie">Döntetlen</string>
 </resources>
