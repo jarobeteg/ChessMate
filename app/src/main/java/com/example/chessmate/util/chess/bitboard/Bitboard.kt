@@ -187,6 +187,10 @@ class Bitboard {
         castlingRights = castlingRights and rights.inv()
     }
 
+    fun grantCastlingRights(rights: Int) {
+        castlingRights = castlingRights or rights
+    }
+
     fun hasCastlingRights(rights: Int): Boolean {
         return (castlingRights and rights) != 0
     }

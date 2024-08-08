@@ -184,7 +184,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/FEN"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:maxLength="100"/>
 
     </LinearLayout>
 
