@@ -36,11 +36,13 @@ class BitboardManager(private var listener: BitboardListener) {
             GameContext.playerColor = PieceColor.WHITE
             GameContext.botColor = PieceColor.BLACK
             GameContext.isPlayerTurn = true
+            GameContext.isBotTurn = false
             this.player = Player(PieceColor.WHITE)
             this.bot = ChessBot(PieceColor.BLACK)
         } else {
             GameContext.playerColor = PieceColor.BLACK
             GameContext.botColor = PieceColor.WHITE
+            GameContext.isPlayerTurn = false
             GameContext.isBotTurn = true
             this.player = Player(PieceColor.BLACK)
             this.bot = ChessBot(PieceColor.WHITE)
