@@ -176,4 +176,7 @@
     <string name="game_won">You Won</string>
     <string name="game_lost">You Lost</string>
     <string name="game_tie">Tie</string>
+    <string name="start_from_a_position">Start from a position (optional)</string>
+    <string name="load_FEN">Load FEN:</string>
+    <string name="FEN" translatable="false">FEN</string>
 </resources>
