@@ -6,7 +6,6 @@ object GameContext {
     var botColor: PieceColor = PieceColor.NONE
     var isPlayerTurn: Boolean = false
     var isBotTurn: Boolean = false
-    var fenString: String = ""
     var topMoveSearch: Int = 3
     var depth: Int = 4
 }
