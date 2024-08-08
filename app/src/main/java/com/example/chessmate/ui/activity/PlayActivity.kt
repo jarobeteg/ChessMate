@@ -4,13 +4,19 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.chessmate.R
+import com.example.chessmate.util.chess.GameContext
 
 class PlayActivity : AbsThemeActivity() {
+    private lateinit var fenEditText: EditText
+    private var fenString: String = ""
     private var depth = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play)
@@ -25,6 +31,7 @@ class PlayActivity : AbsThemeActivity() {
         val randomTextView = findViewById<TextView>(R.id.random_textview)
         val whiteTextView = findViewById<TextView>(R.id.white_textview)
         val blackTextView = findViewById<TextView>(R.id.black_textview)
+        fenEditText = findViewById<EditText>(R.id.fen_edit_text)
         val startGameButton = findViewById<Button>(R.id.startGameChess)
 
         val sharedPreferences = getSharedPreferences("chess_game", Context.MODE_PRIVATE)
@@ -79,9 +86,21 @@ class PlayActivity : AbsThemeActivity() {
                 }
                 .start()
 
-            editor.apply()
-            val playIntent = Intent(this, BitboardActivity::class.java)
-            startActivity(playIntent)
+            if (isValidFEN()) {
+                editor.apply()
+                GameContext.fenString = this.fenString
+                val playIntent = Intent(this, BitboardActivity::class.java)
+                startActivity(playIntent)
+            } else {
+                Toast.makeText(this, getString(R.string.invalid_FEN_string), Toast.LENGTH_SHORT).show()
+            }
         }
+    }
+
+    private fun isValidFEN(): Boolean {
+        fenString = fenEditText.text.toString()
+        if (fenString.isEmpty() || fenString.isBlank()) return true
+        val fenPattern = Regex("^(?:[pnbrqkPNBRQK1-8]{1,8}/){7}[pnbrqkPNBRQK1-8]{1,8} [wb] (?:[KQkq]{1,4}|-) (?:[a-h][36]|-) \\d+ \\d+$")
+        return fenString.matches(fenPattern)
     }
 }

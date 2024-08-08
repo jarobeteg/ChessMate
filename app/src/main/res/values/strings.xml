@@ -179,4 +179,5 @@
     <string name="start_from_a_position">Start from a position (optional)</string>
     <string name="load_FEN">Load FEN:</string>
     <string name="FEN" translatable="false">FEN</string>
+    <string name="invalid_FEN_string">Invalid FEN string</string>
 </resources>
