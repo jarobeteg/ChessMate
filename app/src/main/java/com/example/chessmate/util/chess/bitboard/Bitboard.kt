@@ -1,5 +1,6 @@
 package com.example.chessmate.util.chess.bitboard
 
+import com.example.chessmate.util.chess.FEN
 import com.example.chessmate.util.chess.GameContext
 import com.example.chessmate.util.chess.PieceColor
 
@@ -60,6 +61,52 @@ class Bitboard {
         setPiece(BitPiece.BLACK_KING, RANK_8 and FILE_E)
 
         this.stateTracker.add(BoardStateTracker(bitboards.clone(), PieceColor.WHITE))
+    }
+
+    fun setupFENPosition(fen: FEN) {
+        bitboards = LongArray(12) { 0L }
+
+        val pieceMap = mapOf(
+            'P' to BitPiece.WHITE_PAWN,
+            'N' to BitPiece.WHITE_KNIGHT,
+            'B' to BitPiece.WHITE_BISHOP,
+            'R' to BitPiece.WHITE_ROOK,
+            'Q' to BitPiece.WHITE_QUEEN,
+            'K' to BitPiece.WHITE_KING,
+            'p' to BitPiece.BLACK_PAWN,
+            'n' to BitPiece.BLACK_KNIGHT,
+            'b' to BitPiece.BLACK_BISHOP,
+            'r' to BitPiece.BLACK_ROOK,
+            'q' to BitPiece.BLACK_QUEEN,
+            'k' to BitPiece.BLACK_KING
+        )
+
+        val rows = fen.piecePlacement.split("/")
+        for (row in 0 until 8) {
+            var col = 0
+            for (char in rows[row]) {
+                if (char.isDigit()) {
+                    col += char.digitToInt()
+                } else {
+                    val piece = pieceMap[char] ?: continue
+                    val square = 1L shl ((7 - row) * 8 + col)
+                    setPiece(piece, square)
+                    col++
+                }
+            }
+        }
+
+        val currentTurn = if (fen.activeColor == 'w') PieceColor.WHITE else PieceColor.BLACK
+
+        castlingRights = 0
+        if ('K' in fen.castlingRights) grantCastlingRights(WHITE_KINGSIDE)
+        if ('Q' in fen.castlingRights) grantCastlingRights(WHITE_QUEENSIDE)
+        if ('k' in fen.castlingRights) grantCastlingRights(BLACK_KINGSIDE)
+        if ('q' in fen.castlingRights) grantCastlingRights(BLACK_QUEENSIDE)
+
+        fiftyMoveRule = fen.halfMoveClock
+
+        this.stateTracker.add(BoardStateTracker(bitboards.clone(), currentTurn))
     }
 
     fun updateBoardState(state: BoardStateTracker) {

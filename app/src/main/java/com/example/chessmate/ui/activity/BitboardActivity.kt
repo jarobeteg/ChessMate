@@ -53,14 +53,9 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bitboard_bottom_navigation)
 
         val sharedPreferences = getSharedPreferences("chess_game", Context.MODE_PRIVATE)
-        var startingSide = sharedPreferences.getString("starting_side", "random")
+        val startingSide = sharedPreferences.getString("starting_side", "white")
         GameContext.depth = 4 + sharedPreferences.getInt("depth", 0)
         GameContext.topMoveSearch = GameContext.depth - 1
-        if (startingSide == "random") {
-            val random = java.util.Random()
-            val isWhite = random.nextBoolean()
-            startingSide = if (isWhite) "white" else "black"
-        }
 
         isPlayerStarted = startingSide == "white"
 

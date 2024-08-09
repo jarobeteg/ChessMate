@@ -10,11 +10,15 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.chessmate.R
+import com.example.chessmate.util.chess.FEN
+import com.example.chessmate.util.chess.FENHolder
 import com.example.chessmate.util.chess.GameContext
+import com.example.chessmate.util.chess.PieceColor
 
 class PlayActivity : AbsThemeActivity() {
     private lateinit var fenEditText: EditText
-    private var fenString: String = ""
+    private var playerColor: PieceColor = PieceColor.WHITE
+    private var selectedSide: String = "random"
     private var depth = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,44 +35,41 @@ class PlayActivity : AbsThemeActivity() {
         val randomTextView = findViewById<TextView>(R.id.random_textview)
         val whiteTextView = findViewById<TextView>(R.id.white_textview)
         val blackTextView = findViewById<TextView>(R.id.black_textview)
-        fenEditText = findViewById<EditText>(R.id.fen_edit_text)
+        fenEditText = findViewById(R.id.fen_edit_text)
         val startGameButton = findViewById<Button>(R.id.startGameChess)
 
         val sharedPreferences = getSharedPreferences("chess_game", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.putString("starting_side", "random")
+        playerColor = randomStartingSide()
+        editor.putString("starting_side", if (playerColor == PieceColor.WHITE) "white" else "black")
 
         levelSlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 depth = progress
                 editor.putInt("depth", depth)
             }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
 
         randomTextView.setOnClickListener {
-            randomTextView.setBackgroundResource(R.drawable.custom_rounded_textview)
-            whiteTextView.setBackgroundResource(R.drawable.custom_rounded_unselected_textview)
-            blackTextView.setBackgroundResource(R.drawable.custom_rounded_unselected_textview)
-            editor.putString("starting_side", "random")
+            playerColor = randomStartingSide()
+            selectedSide = "random"
+            updateTextViewBackgrounds(randomTextView, whiteTextView, blackTextView, selectedSide)
+            editor.putString("starting_side", if (playerColor == PieceColor.WHITE) "white" else "black")
         }
 
         whiteTextView.setOnClickListener {
-            randomTextView.setBackgroundResource(R.drawable.custom_rounded_unselected_textview)
-            whiteTextView.setBackgroundResource(R.drawable.custom_rounded_textview)
-            blackTextView.setBackgroundResource(R.drawable.custom_rounded_unselected_textview)
+            playerColor = PieceColor.WHITE
+            selectedSide = "white"
+            updateTextViewBackgrounds(randomTextView, whiteTextView, blackTextView, selectedSide)
             editor.putString("starting_side", "white")
         }
 
         blackTextView.setOnClickListener {
-            randomTextView.setBackgroundResource(R.drawable.custom_rounded_unselected_textview)
-            whiteTextView.setBackgroundResource(R.drawable.custom_rounded_unselected_textview)
-            blackTextView.setBackgroundResource(R.drawable.custom_rounded_textview)
+            playerColor = PieceColor.BLACK
+            selectedSide = "black"
+            updateTextViewBackgrounds(randomTextView, whiteTextView, blackTextView, selectedSide)
             editor.putString("starting_side", "black")
         }
 
@@ -86,21 +87,52 @@ class PlayActivity : AbsThemeActivity() {
                 }
                 .start()
 
-            if (isValidFEN()) {
+            val fenString = fenEditText.text.toString()
+            if (fenString.isEmpty() || fenString.isBlank()) {
                 editor.apply()
-                GameContext.fenString = this.fenString
+                val playIntent = Intent(this, BitboardActivity::class.java)
+                startActivity(playIntent)
+                return@setOnClickListener
+            }
+
+            GameContext.playerColor = playerColor
+            GameContext.botColor = playerColor.opposite()
+            val fen = FEN(fenString)
+
+            if (fen.isValid) {
+                editor.apply()
+                FENHolder.setFEN(fen)
                 val playIntent = Intent(this, BitboardActivity::class.java)
                 startActivity(playIntent)
             } else {
-                Toast.makeText(this, getString(R.string.invalid_FEN_string), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(fen.validationMessage), Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun isValidFEN(): Boolean {
-        fenString = fenEditText.text.toString()
-        if (fenString.isEmpty() || fenString.isBlank()) return true
-        val fenPattern = Regex("^(?:[pnbrqkPNBRQK1-8]{1,8}/){7}[pnbrqkPNBRQK1-8]{1,8} [wb] (?:[KQkq]{1,4}|-) (?:[a-h][36]|-) \\d+ \\d+$")
-        return fenString.matches(fenPattern)
+    override fun onResume() {
+        super.onResume()
+        FENHolder.setFEN(null)
+        if (selectedSide == "random") {
+            val sharedPreferences = getSharedPreferences("chess_game", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            playerColor = randomStartingSide()
+            editor.putString("starting_side", if (playerColor == PieceColor.WHITE) "white" else "black")
+            editor.apply()
+        }
+    }
+
+    private fun randomStartingSide(): PieceColor {
+        return if (java.util.Random().nextBoolean()) {
+            PieceColor.WHITE
+        } else {
+            PieceColor.BLACK
+        }
+    }
+
+    private fun updateTextViewBackgrounds(randomTextView: TextView, whiteTextView: TextView, blackTextView: TextView, selectedSide: String) {
+        randomTextView.setBackgroundResource(if (selectedSide == "random") R.drawable.custom_rounded_textview else R.drawable.custom_rounded_unselected_textview)
+        whiteTextView.setBackgroundResource(if (selectedSide == "white") R.drawable.custom_rounded_textview else R.drawable.custom_rounded_unselected_textview)
+        blackTextView.setBackgroundResource(if (selectedSide == "black") R.drawable.custom_rounded_textview else R.drawable.custom_rounded_unselected_textview)
     }
 }

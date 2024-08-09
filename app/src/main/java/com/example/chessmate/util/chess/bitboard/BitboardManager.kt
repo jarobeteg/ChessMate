@@ -1,6 +1,7 @@
 package com.example.chessmate.util.chess.bitboard
 
 import com.example.chessmate.util.chess.ChessBot
+import com.example.chessmate.util.chess.FENHolder
 import com.example.chessmate.util.chess.GameContext
 import com.example.chessmate.util.chess.GamePhase
 import com.example.chessmate.util.chess.Player
@@ -23,15 +24,39 @@ class BitboardManager(private var listener: BitboardListener) {
     var turnNumber = 1
 
     fun initializeUIAndSquareListener(isPlayerStarted: Boolean) {
-        initPlayerColors(isPlayerStarted)
-        bitboard.setupInitialBoard()
+        val fen = FENHolder.getFEN()
+        if (fen != null) {
+            initPlayerColorsFEN(isPlayerStarted)
+            bitboard.setupFENPosition(fen)
+            turnNumber = fen.fullMove
+        } else {
+            initPlayerColors(isPlayerStarted)
+            bitboard.setupInitialBoard()
+        }
         moveGenerator = BitboardMoveGenerator(bitboard)
         evaluator = BitboardEvaluator(bitboard)
         listener.setupInitialBoardUI(bitboard)
         listener.setupSquareListener(bitboard)
     }
 
+    private fun initPlayerColorsFEN(isPlayerStarted: Boolean) {
+        GameContext.gamePhase = GamePhase.OPENING
+        updateGamePhase()
+        if (isPlayerStarted) {
+            GameContext.playerColor = PieceColor.WHITE
+            GameContext.botColor = PieceColor.BLACK
+            this.player = Player(PieceColor.WHITE)
+            this.bot = ChessBot(PieceColor.BLACK)
+        } else {
+            GameContext.playerColor = PieceColor.BLACK
+            GameContext.botColor = PieceColor.WHITE
+            this.player = Player(PieceColor.BLACK)
+            this.bot = ChessBot(PieceColor.WHITE)
+        }
+    }
+
     private fun initPlayerColors(isPlayerStarted: Boolean) {
+        GameContext.gamePhase = GamePhase.OPENING
         if (isPlayerStarted) {
             GameContext.playerColor = PieceColor.WHITE
             GameContext.botColor = PieceColor.BLACK
@@ -50,7 +75,6 @@ class BitboardManager(private var listener: BitboardListener) {
     }
 
     fun startGame() {
-        GameContext.gamePhase = GamePhase.OPENING
         if (GameContext.isBotTurn) {
             makeBotMove()
         }

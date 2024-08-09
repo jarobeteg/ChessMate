@@ -161,5 +161,6 @@
     <string name="game_tie">Döntetlen</string>
     <string name="start_from_a_position">Kezdj egy pozícióból (opcionális)</string>
     <string name="load_FEN">FEN betöltése:</string>
-    <string name="invalid_FEN_string">Érvénytelen FEN karakterlánc</string>
+    <string name="invalid_FEN_string">FEN karakterlánc formátuma érvénytelen</string>
+    <string name="valid_FEN_string_illegal_position">FEN karakterlánc formátuma érvényes, de illegális pozíciót képvisel.</string>
 </resources>
