@@ -43,15 +43,6 @@ class PlayActivity : AbsThemeActivity() {
         playerColor = randomStartingSide()
         editor.putString("starting_side", if (playerColor == PieceColor.WHITE) "white" else "black")
 
-        levelSlider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                depth = progress
-                editor.putInt("depth", depth)
-            }
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
-
         randomTextView.setOnClickListener {
             playerColor = randomStartingSide()
             selectedSide = "random"
@@ -86,7 +77,8 @@ class PlayActivity : AbsThemeActivity() {
                         .start()
                 }
                 .start()
-
+            depth = levelSlider.progress
+            editor.putInt("depth", depth)
             val fenString = fenEditText.text.toString()
             if (fenString.isEmpty() || fenString.isBlank()) {
                 editor.apply()
