@@ -28,6 +28,7 @@ class BitboardManager(private var listener: BitboardListener) {
         if (fen != null) {
             initPlayerColorsFEN(isPlayerStarted)
             bitboard.setupFENPosition(fen)
+            isMoveMadeByWhite = fen.activeColor == 'w'
             turnNumber = fen.fullMove
         } else {
             initPlayerColors(isPlayerStarted)
