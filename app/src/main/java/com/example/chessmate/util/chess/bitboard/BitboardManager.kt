@@ -176,11 +176,11 @@ class BitboardManager(private var listener: BitboardListener) {
     }
 
     private fun isMidGame(): Boolean {
-        val developedMinorPieces = countDevelopedMinorPieces()
+        val developedMinorPieces = countDevelopedMinorPieces() >= 4
         val kingsCastled = isKingCastled(PieceColor.WHITE) || isKingCastled(PieceColor.BLACK)
         val centralPawnsMoved = centralPawnsMoved()
 
-        return developedMinorPieces >= 4 && kingsCastled && centralPawnsMoved
+        return developedMinorPieces && kingsCastled && centralPawnsMoved
     }
 
     private fun countDevelopedMinorPieces(): Int {
@@ -228,15 +228,15 @@ class BitboardManager(private var listener: BitboardListener) {
         return initialPositions.count { (pos, piece) ->
             val currentPiece = bitboard.getBitPiece(pos)
             currentPiece != piece
-        } == 4
+        } >= 2
     }
 
     private fun isEndGame(): Boolean {
-        val totalPieces = countTotalPieces()
-        val fewPawns = countPawns() <= 9
-        val queenAbsent = areQueensAbsent()
+        val totalPieces = countTotalPieces() <= 6
+        val fewPawns = countPawns()
+        val fewRooksAndQueens = countRooksAndQueens() <= 4
 
-        return totalPieces <= 12 || fewPawns || queenAbsent
+        return totalPieces && fewPawns && fewRooksAndQueens
     }
 
     fun boardStateBackwards() {
@@ -275,25 +275,60 @@ class BitboardManager(private var listener: BitboardListener) {
     }
 
     private fun countTotalPieces(): Int {
-        val allPieces = bitboard.getAllPieces()
-        return java.lang.Long.bitCount(allPieces)
+        val whitePieceBoards = bitboard.getWhitePieceBitboards()
+        val blackPieceBoards = bitboard.getBlackPieceBitboards()
+        val whiteKnight = whitePieceBoards[1]
+        val whiteBishop = whitePieceBoards[2]
+        val whiteRook = whitePieceBoards[3]
+        val whiteQueen = whitePieceBoards[4]
+        val blackKnight = blackPieceBoards[1]
+        val blackBishop = blackPieceBoards[2]
+        val blackRook = blackPieceBoards[3]
+        val blackQueen = blackPieceBoards[4]
+
+        val whiteKnightCount = countPieces(whiteKnight)
+        val whiteBishopCount = countPieces(whiteBishop)
+        val whiteRookCount = countPieces(whiteRook)
+        val whiteQueenCount = countPieces(whiteQueen)
+        val blackKnightCount = countPieces(blackKnight)
+        val blackBishopCount = countPieces(blackBishop)
+        val blackRookCount = countPieces(blackRook)
+        val blackQueenCount = countPieces(blackQueen)
+
+        val result = whiteKnightCount + whiteBishopCount + whiteRookCount + whiteQueenCount +
+                blackKnightCount + blackBishopCount + blackRookCount + blackQueenCount
+
+        return result
     }
 
-    private fun countPawns(): Int {
+    private fun countPawns(): Boolean {
         val whitePawns = bitboard.getWhitePieceBitboards()[0]
         val blackPawns = bitboard.getBlackPieceBitboards()[0]
 
         val whitePawnCount = java.lang.Long.bitCount(whitePawns)
         val blackPawnCount = java.lang.Long.bitCount(blackPawns)
 
-        return whitePawnCount + blackPawnCount
+        return whitePawnCount <= 6 && blackPawnCount <= 6
     }
 
-    private fun areQueensAbsent(): Boolean {
-        val whiteQueen = bitboard.getWhitePieceBitboards()[4]
-        val blackQueen = bitboard.getBlackPieceBitboards()[4]
+    private fun countRooksAndQueens(): Int {
+        val whitePieceBoards = bitboard.getWhitePieceBitboards()
+        val blackPieceBoards = bitboard.getBlackPieceBitboards()
+        val whiteRook = whitePieceBoards[3]
+        val whiteQueen = whitePieceBoards[4]
+        val blackRook = blackPieceBoards[3]
+        val blackQueen = blackPieceBoards[4]
 
-        return whiteQueen == 0L && blackQueen == 0L
+        val whiteRookCount = countPieces(whiteRook)
+        val whiteQueenCount = countPieces(whiteQueen)
+        val blackRookCount = countPieces(blackRook)
+        val blackQueenCount = countPieces(blackQueen)
+
+        return whiteRookCount + whiteQueenCount + blackRookCount + blackQueenCount
+    }
+
+    private fun countPieces(pieces: Long): Int {
+        return java.lang.Long.bitCount(pieces)
     }
 
     private fun convertPieceTypeToBitPiece(piece: PieceType, color: PieceColor): BitPiece {

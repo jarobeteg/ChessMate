@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorTransparentCustom"
     tools:context=".ui.activity.BitboardActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -422,7 +423,7 @@
         android:id="@+id/transparent_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/greyFortyTransparent"
+        android:background="@color/greyFiftyTransparent"
         android:clickable="true"
         android:visibility="gone" />
 
