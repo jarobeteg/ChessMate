@@ -22,6 +22,8 @@ class BitboardManager(private var listener: BitboardListener) {
     private var currentIndex = -1
     var isNavigating = false
     var turnNumber = 1
+    private var queuedBotMove: BitMove? = null
+    private var isBotCalculating = false
 
     fun initializeUIAndSquareListener(isPlayerStarted: Boolean) {
         val fen = FENHolder.getFEN()
@@ -114,17 +116,26 @@ class BitboardManager(private var listener: BitboardListener) {
     }
 
     private fun makeBotMove() {
+        isBotCalculating = true
         CoroutineScope(Dispatchers.Main).launch {
             val move: BitMove? = withContext(Dispatchers.Default) {
                 bot.findBestMove(bitboard, GameContext.depth, GameContext.botColor == PieceColor.WHITE)
             }
 
             if (move != null) {
-                bitboard.movePiece(move)
-                trackedMoves.add(BitMoveTracker(move, turnNumber, GameContext.playerColor, GameContext.botColor, isMoveMadeByWhite))
-                listener.onBotMoveMade(bitboard, move)
+                if (isNavigating) {
+                    queuedBotMove = move
+                } else {
+                    executeBotMove(move)
+                }
             }
         }
+    }
+
+    private fun executeBotMove(move: BitMove) {
+        bitboard.movePiece(move)
+        trackedMoves.add(BitMoveTracker(move, turnNumber, GameContext.playerColor, GameContext.botColor, isMoveMadeByWhite))
+        listener.onBotMoveMade(bitboard, move)
     }
 
     fun processFirstClick(square: BitSquare) {
@@ -269,6 +280,11 @@ class BitboardManager(private var listener: BitboardListener) {
             val lastMove = bitboard.getLastMove()
             val decodedMove = BitboardMoveGenerator.decodeMove(lastMove)
             listener.showPreviousBoardState(bitboard, decodedMove)
+
+            queuedBotMove?.let {
+                executeBotMove(it)
+                queuedBotMove = null
+            }
         } else {
             listener.showPreviousBoardState(bitboard, null)
         }
