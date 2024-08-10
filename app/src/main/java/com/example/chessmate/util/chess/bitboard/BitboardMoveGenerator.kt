@@ -469,11 +469,17 @@ class BitboardMoveGenerator (private val bitboard: Bitboard) {
 
         while (pawnsCopy != 0L) {
             val position = pawnsCopy.takeLowestOneBit()
-            if (color == PieceColor.BLACK) {
-                attacks = attacks or (position shl 7) or (position shl 9)
-            } else {
-                attacks = attacks or (position shr 7) or (position shr 9)
-            }
+            val fromIndex = position.countTrailingZeroBits()
+
+            val captureLeft = if (color == PieceColor.BLACK) position shl 7 else position shr 7
+            val captureRight = if (color == PieceColor.BLACK) position shl 9 else position shr 9
+            val captureLeftIndex = captureLeft.countTrailingZeroBits()
+            val captureRightIndex = captureRight.countTrailingZeroBits()
+
+            if (isLegalPosition(captureLeft) && isSameRankOrFile(fromIndex, captureLeftIndex, 7)) attacks = attacks or (1L shl captureLeftIndex)
+
+            if (isLegalPosition(captureRight) && isSameRankOrFile(fromIndex, captureRightIndex, 9)) attacks = attacks or (1L shl captureRightIndex)
+
             pawnsCopy = pawnsCopy xor position
         }
 
