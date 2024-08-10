@@ -400,14 +400,14 @@ class Bitboard {
         }
     }
 
-    private fun isPlayerInCheck(): Boolean {
+    fun isPlayerInCheck(): Boolean {
         val moveGenerator = BitboardMoveGenerator(this)
         val kingPosition = if (GameContext.playerColor == PieceColor.WHITE) getWhiteKing() else getBlackKing()
 
         return moveGenerator.isSquareUnderAttack(kingPosition, false, GameContext.playerColor)
     }
 
-    private fun isBotInCheck(): Boolean {
+    fun isBotInCheck(): Boolean {
         val moveGenerator = BitboardMoveGenerator(this)
         val kingPosition = if (GameContext.botColor == PieceColor.WHITE) getWhiteKing() else getBlackKing()
 

@@ -331,8 +331,16 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         return gameManager.isKingInCheck(false)
     }
 
+    private fun isPlayerCheckMated(): Boolean {
+        return gameManager.isKingCheckMated(false)
+    }
+
     private fun isBotInCheck(): Boolean {
         return gameManager.isKingInCheck(true)
+    }
+
+    private fun isBotCheckMated(): Boolean {
+        return gameManager.isKingCheckMated(true)
     }
 
     override fun onPlayerMoveMade(bitboard: Bitboard, move: BitMove) {
@@ -342,7 +350,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         addHighlightMove(move.from)
         addHighlightMove(move.to)
         updateBitboardStateUI(bitboard)
-        updateMoveTrackerToolbar(isBotInCheck())
+        updateMoveTrackerToolbar(isBotInCheck(), isBotCheckMated())
         gameManager.switchTurns()
     }
 
@@ -351,7 +359,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         addHighlightMove(move.from)
         addHighlightMove(move.to)
         updateBitboardStateUI(bitboard)
-        updateMoveTrackerToolbar(isPlayerInCheck())
+        updateMoveTrackerToolbar(isPlayerInCheck(), isPlayerCheckMated())
         gameManager.switchTurns()
     }
 
@@ -360,23 +368,27 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         endGameDialog.show(supportFragmentManager, "EndGameDialog")
     }
 
-    private fun updateMoveTrackerToolbar(wasCheckGiven: Boolean) {
+    private fun updateMoveTrackerToolbar(wasCheckGiven: Boolean, isCheckMated: Boolean) {
         turnNumber.visibility = View.VISIBLE
         val text = "${gameManager.turnNumber}."
         turnNumber.text = text
         val lastTrackedMove = gameManager.getLastTrackedMove()
         if (lastTrackedMove.isMoveMadeByWhite) {
-            updateWhiteLastMove(wasCheckGiven)
+            updateWhiteLastMove(wasCheckGiven, isCheckMated)
         } else {
-            updateBlackLastMove(wasCheckGiven)
+            updateBlackLastMove(wasCheckGiven, isCheckMated)
         }
     }
 
-    private fun updateWhiteLastMove(wasCheckGiven: Boolean) {
+    private fun updateWhiteLastMove(wasCheckGiven: Boolean, isCheckMated: Boolean) {
         whiteLastMove.visibility = View.VISIBLE
         val lastTrackedMove = gameManager.getLastTrackedWhiteMove()
         var moveNotation = getWhiteMoveNotation(lastTrackedMove.bitMove)
-        if (wasCheckGiven) moveNotation += "+"
+        if (isCheckMated) {
+            moveNotation += "#"
+        } else if (wasCheckGiven) {
+            moveNotation += "+"
+        }
         whiteLastMove.text = moveNotation
     }
 
@@ -389,11 +401,15 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         }
     }
 
-    private fun updateBlackLastMove(wasCheckGiven: Boolean) {
+    private fun updateBlackLastMove(wasCheckGiven: Boolean, isCheckMated: Boolean) {
         blackLastMove.visibility = View.VISIBLE
         val lastTrackedMove = gameManager.getLastTrackedBlackMove()
         var moveNotation = getBlackMoveNotation(lastTrackedMove.bitMove)
-        if (wasCheckGiven) moveNotation += "+"
+        if (isCheckMated) {
+            moveNotation += "#"
+        } else if (wasCheckGiven) {
+            moveNotation += "+"
+        }
         blackLastMove.text = moveNotation
     }
 

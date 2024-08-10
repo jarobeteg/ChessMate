@@ -123,10 +123,6 @@ class BitboardManager(private var listener: BitboardListener) {
                 bitboard.movePiece(move)
                 trackedMoves.add(BitMoveTracker(move, turnNumber, GameContext.playerColor, GameContext.botColor, isMoveMadeByWhite))
                 listener.onBotMoveMade(bitboard, move)
-            } else {
-                println("checkmate or stalemate")
-                println("switching turns...")
-                switchTurns()
             }
         }
     }
@@ -315,13 +311,11 @@ class BitboardManager(private var listener: BitboardListener) {
     }
 
     fun isKingInCheck(isForBot: Boolean): Boolean {
-        if (!isForBot) {
-            val kingPosition = if (GameContext.playerColor == PieceColor.WHITE) bitboard.getWhiteKing() else bitboard.getBlackKing()
-            return moveGenerator.isSquareUnderAttack(kingPosition, isForBot, GameContext.playerColor)
-        } else {
-            val kingPosition = if (GameContext.botColor == PieceColor.WHITE) bitboard.getWhiteKing() else bitboard.getBlackKing()
-            return moveGenerator.isSquareUnderAttack(kingPosition, isForBot, GameContext.botColor)
-        }
+        return if (isForBot) bitboard.isBotInCheck() else bitboard.isPlayerInCheck()
+    }
+
+    fun isKingCheckMated(isForBot: Boolean): Boolean {
+        return if (isForBot) bitboard.isBotCheckmated() else bitboard.isPlayerCheckmated()
     }
 
     fun getPlayerKingPosition(): Long {
