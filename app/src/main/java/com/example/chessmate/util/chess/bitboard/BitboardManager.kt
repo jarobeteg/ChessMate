@@ -413,8 +413,4 @@ class BitboardManager(private var listener: BitboardListener) {
         val col = bitIndex % 8
         return Position(row, col)
     }
-
-    fun rowColToPosition(position: Position): Long {
-        return if (GameContext.playerColor == PieceColor.WHITE) 1L shl ((7 - position.row) * 8 + position.col) else 1L shl (position.row * 8 + (7 - position.col))
-    }
 }
