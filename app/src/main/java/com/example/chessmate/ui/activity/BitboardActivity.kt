@@ -55,7 +55,6 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         val sharedPreferences = getSharedPreferences("chess_game", Context.MODE_PRIVATE)
         val startingSide = sharedPreferences.getString("starting_side", "white")
         GameContext.depth = 4 + sharedPreferences.getInt("depth", 0)
-        GameContext.topMoveSearch = GameContext.depth - 1
 
         isPlayerStarted = startingSide == "white"
 

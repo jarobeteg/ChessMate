@@ -41,7 +41,7 @@ class ChessBot(val color: PieceColor){
         var bestMove: BitMove? = null
 
         if (maximizingPlayer) {
-            val topMoves = sortedMoves.take(GameContext.topMoveSearch)
+            val topMoves = sortedMoves.take(3)
             var bestValue = Float.NEGATIVE_INFINITY
             for (move in topMoves) {
                 val newBoard = board.copy().apply { movePiece(move) }
@@ -57,7 +57,7 @@ class ChessBot(val color: PieceColor){
             }
             return Pair(bestValue, bestMove)
         } else {
-            val topMoves = sortedMoves.reversed().take(GameContext.topMoveSearch)
+            val topMoves = sortedMoves.reversed().take(3)
             var bestValue = Float.POSITIVE_INFINITY
             for (move in topMoves) {
                 val newBoard = board.copy().apply { movePiece(move) }
