@@ -6,15 +6,24 @@ import com.example.chessmate.util.chess.bitboard.BitboardEvaluator
 import com.example.chessmate.util.chess.bitboard.BitboardMoveGenerator
 
 class ChessBot(val color: PieceColor){
+    private val cache = mutableMapOf<String, Pair<Float, BitMove?>>()
 
     fun findBestMove(bitboard: Bitboard, depth: Int, maximizingPlayer: Boolean): BitMove? {
         return alphaBeta(bitboard, depth, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, maximizingPlayer, color).second
     }
 
     private fun alphaBeta(board: Bitboard, depth: Int, alpha: Float, beta: Float, maximizingPlayer: Boolean, currentColor: PieceColor): Pair<Float, BitMove?> {
+        val cacheKey = board.toString()
+
+        if (cache.containsKey(cacheKey)) {
+            return cache[cacheKey]!!
+        }
+
         if (depth == 0 || board.isGameEnded()) {
             val evaluator = BitboardEvaluator(board)
-            return Pair(evaluator.evaluate(), null)
+            val evaluation = Pair(evaluator.evaluate(), null)
+            cache[cacheKey] = evaluation
+            return evaluation
         }
 
         val moveGenerator = BitboardMoveGenerator(board)
@@ -24,7 +33,9 @@ class ChessBot(val color: PieceColor){
         //stalemate if the king is not in check and has no legal moves
         if (legalMoves.isEmpty()) {
             val evaluator = BitboardEvaluator(board)
-            return Pair(evaluator.evaluate(), null)
+            val evaluation = Pair(evaluator.evaluate(), null)
+            cache[cacheKey] = evaluation
+            return evaluation
         }
 
         val evaluatedMoves = legalMoves.map { move ->
@@ -45,7 +56,16 @@ class ChessBot(val color: PieceColor){
             var bestValue = Float.NEGATIVE_INFINITY
             for (move in topMoves) {
                 val newBoard = board.copy().apply { movePiece(move) }
-                val (value, _) = alphaBeta(newBoard, depth - 1, localAlpha, localBeta, false, currentColor.opposite())
+                val newCacheKey = newBoard.toString()
+
+                val (value, _) = if (cache.containsKey(newCacheKey)) {
+                    cache[newCacheKey]!!
+                } else {
+                    val result = alphaBeta(newBoard, depth - 1, localAlpha, localBeta, false, currentColor.opposite())
+                    cache[newCacheKey] = result
+                    result
+                }
+
                 if (value > bestValue) {
                     bestValue = value
                     if (currentColor == color) {
@@ -55,13 +75,24 @@ class ChessBot(val color: PieceColor){
                 localAlpha = maxOf(localAlpha, bestValue)
                 if (localBeta <= localAlpha) break
             }
-            return Pair(bestValue, bestMove)
+            val result = Pair(bestValue, bestMove)
+            cache[cacheKey] = result
+            return result
         } else {
             val topMoves = sortedMoves.reversed().take(3)
             var bestValue = Float.POSITIVE_INFINITY
             for (move in topMoves) {
                 val newBoard = board.copy().apply { movePiece(move) }
-                val (value, _) = alphaBeta(newBoard, depth - 1, localAlpha, localBeta, true, currentColor.opposite())
+                val newCacheKey = newBoard.toString()
+
+                val (value, _) = if (cache.containsKey(newCacheKey)) {
+                    cache[newCacheKey]!!
+                } else {
+                    val result = alphaBeta(newBoard, depth - 1, localAlpha, localBeta, true, currentColor.opposite())
+                    cache[newCacheKey] = result
+                    result
+                }
+
                 if (value < bestValue) {
                     bestValue = value
                     if (currentColor == color) {
@@ -71,7 +102,9 @@ class ChessBot(val color: PieceColor){
                 localBeta = minOf(localBeta, bestValue)
                 if (localBeta <= localAlpha) break
             }
-            return Pair(bestValue, bestMove)
+            val result = Pair(bestValue, bestMove)
+            cache[cacheKey] = result
+            return result
         }
     }
 }

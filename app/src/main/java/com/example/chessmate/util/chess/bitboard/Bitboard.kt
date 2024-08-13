@@ -508,4 +508,15 @@ class Bitboard {
         copy.lastMove = this.lastMove
         return copy
     }
+
+    override fun toString(): String {
+        val whitePieces = getAllWhitePieces()
+        val blackPieces = getAllBlackPieces()
+
+        val bitboardsString = bitboards.joinToString(separator = "|") { bitboard ->
+            bitboard.toString(2).padStart(64, '0')
+        }
+
+        return "W:$whitePieces|B:$blackPieces|$bitboardsString"
+    }
 }

@@ -18,6 +18,8 @@ class BitboardEvaluator(private val bitboard: Bitboard) {
         const val KING_VALUE = 0.0F
     }
 
+    private val mateScore = 999.0F
+
     private val pesto = PestoEvalTables()
     private val pieceValues = mapOf(
         BitPiece.WHITE_PAWN to PAWN_VALUE,
@@ -37,8 +39,13 @@ class BitboardEvaluator(private val bitboard: Bitboard) {
     fun evaluate(): Float {
         var score = 0.0F
 
+        val isPlayerMated = bitboard.isPlayerCheckmated()
+        val isBotMated = bitboard.isBotCheckmated()
+
         score += evaluateMaterial()
         score += evaluatePesto()
+        score += addMateScore(false, isPlayerMated)
+        score += addMateScore(true, isBotMated)
 
         return score
     }
@@ -55,6 +62,15 @@ class BitboardEvaluator(private val bitboard: Bitboard) {
 
     private fun countBits(bitboard: Long): Int {
         return java.lang.Long.bitCount(bitboard)
+    }
+
+    private fun addMateScore(isForBot: Boolean, isKingMated: Boolean): Float {
+        if (!isKingMated) return 0.0F
+        return if (isForBot) {
+            mateScore
+        } else {
+            -mateScore
+        }
     }
 
     private fun evaluatePesto(): Float {
