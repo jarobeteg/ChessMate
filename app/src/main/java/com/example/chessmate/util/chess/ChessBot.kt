@@ -6,7 +6,12 @@ import com.example.chessmate.util.chess.bitboard.BitboardEvaluator
 import com.example.chessmate.util.chess.bitboard.BitboardMoveGenerator
 
 class ChessBot(val color: PieceColor){
-    private val cache = mutableMapOf<String, Pair<Float, BitMove?>>()
+    private val cacheLimit = 1000
+    private val cache = object : LinkedHashMap<String, Pair<Float, BitMove?>>(cacheLimit, 0.75f, true) {
+        override fun removeEldestEntry(eldest: Map.Entry<String, Pair<Float, BitMove?>>?): Boolean {
+            return size > cacheLimit
+        }
+    }
 
     fun findBestMove(bitboard: Bitboard, depth: Int, maximizingPlayer: Boolean): BitMove? {
         return alphaBeta(bitboard, depth, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, maximizingPlayer, color).second
