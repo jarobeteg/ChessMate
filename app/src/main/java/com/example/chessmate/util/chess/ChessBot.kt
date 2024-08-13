@@ -20,8 +20,10 @@ class ChessBot(val color: PieceColor){
     private fun alphaBeta(board: Bitboard, depth: Int, alpha: Float, beta: Float, maximizingPlayer: Boolean, currentColor: PieceColor): Pair<Float, BitMove?> {
         val cacheKey = board.toString()
 
-        if (cache.containsKey(cacheKey)) {
-            return cache[cacheKey]!!
+        cache[cacheKey]?.let {
+            if (it.second != null || depth == 0 || board.isGameEnded()) {
+                return it
+            }
         }
 
         if (depth == 0 || board.isGameEnded()) {
