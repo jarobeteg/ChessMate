@@ -483,7 +483,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     }
 
     private fun addHighlightSelectedSquare(position: Long) {
-        val pos = gameManager.positionToRowCol(position)
+        val pos = BitboardManager.positionToRowCol(position)
         val squareFrameLayout = uiSquares[pos.row][pos.col]
         val squareImageView = squareFrameLayout.findViewWithTag<ImageView>("pieceImageView")
         val imageView = ImageView(this)
@@ -495,7 +495,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     }
 
     private fun addHighlightSquare(position: Long) {
-        val pos = gameManager.positionToRowCol(position)
+        val pos = BitboardManager.positionToRowCol(position)
         val frameLayout = uiSquares[pos.row][pos.col]
         val squareSize = chessboardLayout.width / 8
         val circleSize = squareSize / 3
@@ -513,7 +513,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     }
 
     private fun addHighlightOpponent(position: Long, opponentPiece: BitPiece) {
-        val pos = gameManager.positionToRowCol(position)
+        val pos = BitboardManager.positionToRowCol(position)
         if (opponentPiece.name.contains("KING")) return
         val squareFrameLayout = uiSquares[pos.row][pos.col]
         val squareImageView = squareFrameLayout.findViewWithTag<ImageView>("pieceImageView")
@@ -526,7 +526,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     }
 
     private fun addHighlightMove(position: Long) {
-        val pos = gameManager.positionToRowCol(position)
+        val pos = BitboardManager.positionToRowCol(position)
         val squareFrameLayout = uiSquares[pos.row][pos.col]
         val imageView = ImageView(this)
         imageView.setImageResource(R.drawable.highlight_square_move)
@@ -536,7 +536,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     }
 
     private fun addHighlightCheck(position: Long){
-        val pos = gameManager.positionToRowCol(position)
+        val pos = BitboardManager.positionToRowCol(position)
         val squareFrameLayout = uiSquares[pos.row][pos.col]
         val squareImageView = squareFrameLayout.findViewWithTag<ImageView>("pieceImageView")
         val imageView = ImageView(this)

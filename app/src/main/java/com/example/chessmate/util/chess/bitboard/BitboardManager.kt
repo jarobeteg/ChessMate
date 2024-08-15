@@ -25,6 +25,15 @@ class BitboardManager(private var listener: BitboardListener) {
     private var queuedBotMove: BitMove? = null
     private var isBotCalculating = false
 
+    companion object {
+        fun positionToRowCol(position: Long): Position {
+            val bitIndex = 63 - java.lang.Long.numberOfLeadingZeros(position)
+            val row = 7 - bitIndex / 8
+            val col = bitIndex % 8
+            return Position(row, col)
+        }
+    }
+
     fun initializeUIAndSquareListener(isPlayerStarted: Boolean) {
         val fen = FENHolder.getFEN()
         if (fen != null) {
@@ -96,6 +105,7 @@ class BitboardManager(private var listener: BitboardListener) {
     }
 
     fun switchTurns() {
+        println("eval: ${evaluator.evaluate()}")
         updateGamePhase()
         GameContext.isPlayerTurn = !GameContext.isPlayerTurn
         GameContext.isBotTurn = !GameContext.isBotTurn
@@ -405,12 +415,5 @@ class BitboardManager(private var listener: BitboardListener) {
         val index = position.toULong().countTrailingZeroBits()
         val rank = rankNames[index / 8]
         return "$rank"
-    }
-
-    fun positionToRowCol(position: Long): Position {
-        val bitIndex = 63 - java.lang.Long.numberOfLeadingZeros(position)
-        val row = 7 - bitIndex / 8
-        val col = bitIndex % 8
-        return Position(row, col)
     }
 }
