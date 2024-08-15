@@ -8,11 +8,11 @@ import com.example.chessmate.util.chess.PieceColor
 class BitboardEvaluator(private val bitboard: Bitboard) {
 
     companion object {
-        const val PAWN_VALUE = 1
-        const val KNIGHT_VALUE = 3
-        const val BISHOP_VALUE = 3
-        const val ROOK_VALUE = 5
-        const val QUEEN_VALUE = 9
+        const val PAWN_VALUE = 100
+        const val KNIGHT_VALUE = 300
+        const val BISHOP_VALUE = 300
+        const val ROOK_VALUE = 500
+        const val QUEEN_VALUE = 900
         const val KING_VALUE = 0
         const val MATE_SCORE = 10000
     }
@@ -38,15 +38,18 @@ class BitboardEvaluator(private val bitboard: Bitboard) {
 
         val isPlayerMated = bitboard.isPlayerCheckmated()
         val isBotMated = bitboard.isBotCheckmated()
+        val currentMaterialScore = evaluateCurrentMaterial()
+        val previousMaterialScore = evaluatePreviousMaterial()
 
-        score += evaluateMaterial()
+        score += currentMaterialScore
+        score += penalizeUnjustifiedSacrifices(currentMaterialScore, previousMaterialScore)
         score += evaluatePesto()
         score += evaluateMateScore(isPlayerMated, isBotMated)
 
         return score
     }
 
-    private fun evaluateMaterial(): Int {
+    private fun evaluateCurrentMaterial(): Int {
         var materialScore = 0
 
         for ((piece, value) in pieceValues) {
@@ -56,8 +59,28 @@ class BitboardEvaluator(private val bitboard: Bitboard) {
         return materialScore
     }
 
+    private fun evaluatePreviousMaterial(): Int {
+        var previousMaterialScore = 0
+        val lastBoardState = bitboard.getLastBoardState()
+
+        for ((piece, value) in pieceValues) {
+            previousMaterialScore += countBits(lastBoardState.bitboards[piece.ordinal]) * value
+        }
+
+        return previousMaterialScore
+    }
+
     private fun countBits(bitboard: Long): Int {
         return java.lang.Long.bitCount(bitboard)
+    }
+
+    private fun penalizeUnjustifiedSacrifices(currentMaterialScore: Int, previousMaterialScore: Int): Int {
+        val materialDrop = currentMaterialScore - previousMaterialScore
+        return if (materialDrop >= 200) {
+            if (currentMaterialScore >= 0) materialDrop  else -materialDrop
+        } else {
+            0
+        }
     }
 
     private fun evaluateMateScore(isPlayerMated: Boolean, isBotMated: Boolean): Int {

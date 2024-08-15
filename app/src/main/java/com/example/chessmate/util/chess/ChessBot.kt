@@ -3,7 +3,6 @@ package com.example.chessmate.util.chess
 import com.example.chessmate.util.chess.bitboard.BitMove
 import com.example.chessmate.util.chess.bitboard.Bitboard
 import com.example.chessmate.util.chess.bitboard.BitboardEvaluator
-import com.example.chessmate.util.chess.bitboard.BitboardManager
 import com.example.chessmate.util.chess.bitboard.BitboardMoveGenerator
 import kotlin.system.measureTimeMillis
 
@@ -49,9 +48,7 @@ class ChessBot(val color: PieceColor){
             val newBoard = board.copy().apply { movePiece(decodedMove) }
             val evaluator = BitboardEvaluator(newBoard)
             Pair(decodedMove, evaluator.evaluate())
-        }
-
-        val sortedMoves = evaluatedMoves.sortedByDescending { it.second }.map { it.first }
+        }.sortedByDescending { it.second }.map { it.first }
 
         var localAlpha = alpha
         var localBeta = beta
@@ -59,9 +56,8 @@ class ChessBot(val color: PieceColor){
         var bestValue = if (maximizingPlayer) Int.MIN_VALUE else Int.MAX_VALUE
 
         if (maximizingPlayer) {
-            val topMoves = sortedMoves.take(3)
+            val topMoves = evaluatedMoves.take(3)
             for (move in topMoves) {
-                println("depth: $depth, from: ${BitboardManager.positionToRowCol(move.from)}, to: ${BitboardManager.positionToRowCol(move.to)}, piece: ${move.piece}, captured piece: ${move.capturedPiece}")
                 val newBoard = board.copy().apply { movePiece(move) }
                 val newCacheKey = newBoard.toString()
 
@@ -86,9 +82,8 @@ class ChessBot(val color: PieceColor){
             cache[cacheKey] = result
             return result
         } else {
-            val topMoves = sortedMoves.reversed().take(3)
+            val topMoves = evaluatedMoves.reversed().take(3)
             for (move in topMoves) {
-                println("depth: $depth, from: ${BitboardManager.positionToRowCol(move.from)}, to: ${BitboardManager.positionToRowCol(move.to)}, piece: ${move.piece}, captured piece: ${move.capturedPiece}")
                 val newBoard = board.copy().apply { movePiece(move) }
                 val newCacheKey = newBoard.toString()
 

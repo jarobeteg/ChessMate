@@ -115,6 +115,10 @@ class Bitboard {
         }
     }
 
+    fun getLastBoardState(): BoardStateTracker {
+        return stateTracker.last()
+    }
+
     private fun setPiece(piece: BitPiece, square: Long) {
         val index = piece.ordinal
         bitboards[index] = bitboards[index] or square

@@ -105,7 +105,6 @@ class BitboardManager(private var listener: BitboardListener) {
     }
 
     fun switchTurns() {
-        println("eval: ${evaluator.evaluate()}")
         updateGamePhase()
         GameContext.isPlayerTurn = !GameContext.isPlayerTurn
         GameContext.isBotTurn = !GameContext.isBotTurn
