@@ -3,21 +3,29 @@ package com.example.chessmate.util.chess
 import com.example.chessmate.util.chess.bitboard.BitMove
 import com.example.chessmate.util.chess.bitboard.Bitboard
 import com.example.chessmate.util.chess.bitboard.BitboardEvaluator
+import com.example.chessmate.util.chess.bitboard.BitboardManager
 import com.example.chessmate.util.chess.bitboard.BitboardMoveGenerator
+import kotlin.system.measureTimeMillis
 
 class ChessBot(val color: PieceColor){
     private val cacheLimit = 1000
-    private val cache = object : LinkedHashMap<String, Pair<Float, BitMove?>>(cacheLimit, 0.75f, true) {
-        override fun removeEldestEntry(eldest: Map.Entry<String, Pair<Float, BitMove?>>?): Boolean {
+    private val cache = object : LinkedHashMap<String, Pair<Int, BitMove?>>(cacheLimit, 0.75f, true) {
+        override fun removeEldestEntry(eldest: Map.Entry<String, Pair<Int, BitMove?>>?): Boolean {
             return size > cacheLimit
         }
     }
 
+    //the println's and the speed benchmark to be removed later
     fun findBestMove(bitboard: Bitboard, depth: Int, maximizingPlayer: Boolean): BitMove? {
-        return alphaBeta(bitboard, depth, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY, maximizingPlayer, color).second
+        var move: BitMove?
+        val time = measureTimeMillis {
+            move = alphaBeta(bitboard, depth, Int.MIN_VALUE, Int.MAX_VALUE, maximizingPlayer, color).second
+        }
+        println("time: ${time / 1000.0} s") 
+        return move
     }
 
-    private fun alphaBeta(board: Bitboard, depth: Int, alpha: Float, beta: Float, maximizingPlayer: Boolean, currentColor: PieceColor): Pair<Float, BitMove?> {
+    private fun alphaBeta(board: Bitboard, depth: Int, alpha: Int, beta: Int, maximizingPlayer: Boolean, currentColor: PieceColor): Pair<Int, BitMove?> {
         val cacheKey = board.toString()
 
         cache[cacheKey]?.let {
@@ -48,11 +56,12 @@ class ChessBot(val color: PieceColor){
         var localAlpha = alpha
         var localBeta = beta
         var bestMove: BitMove? = null
+        var bestValue = if (maximizingPlayer) Int.MIN_VALUE else Int.MAX_VALUE
 
         if (maximizingPlayer) {
             val topMoves = sortedMoves.take(3)
-            var bestValue = Float.NEGATIVE_INFINITY
             for (move in topMoves) {
+                println("depth: $depth, from: ${BitboardManager.positionToRowCol(move.from)}, to: ${BitboardManager.positionToRowCol(move.to)}, piece: ${move.piece}, captured piece: ${move.capturedPiece}")
                 val newBoard = board.copy().apply { movePiece(move) }
                 val newCacheKey = newBoard.toString()
 
@@ -78,8 +87,8 @@ class ChessBot(val color: PieceColor){
             return result
         } else {
             val topMoves = sortedMoves.reversed().take(3)
-            var bestValue = Float.POSITIVE_INFINITY
             for (move in topMoves) {
+                println("depth: $depth, from: ${BitboardManager.positionToRowCol(move.from)}, to: ${BitboardManager.positionToRowCol(move.to)}, piece: ${move.piece}, captured piece: ${move.capturedPiece}")
                 val newBoard = board.copy().apply { movePiece(move) }
                 val newCacheKey = newBoard.toString()
 

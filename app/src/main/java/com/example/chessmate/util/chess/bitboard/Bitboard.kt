@@ -138,6 +138,13 @@ class Bitboard {
         return BitSquare(square, getSquareNotation(square), BitPiece.NONE, PieceColor.NONE)
     }
 
+    //remove if it there is no need for this method
+    fun undoMovePiece() {
+        if (stateTracker.isEmpty()) return
+        stateTracker.removeLast()
+        updateBoardState(stateTracker.last())
+    }
+
     fun movePiece(move: BitMove) {
         castlingRightsMap[move.piece].let { rights ->
             when (rights) {

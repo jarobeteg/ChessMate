@@ -4,19 +4,17 @@ import com.example.chessmate.util.chess.GameContext
 import com.example.chessmate.util.chess.GamePhase
 import com.example.chessmate.util.chess.PestoEvalTables
 import com.example.chessmate.util.chess.PieceColor
-import java.math.BigDecimal
-import java.math.RoundingMode
 
 class BitboardEvaluator(private val bitboard: Bitboard) {
 
     companion object {
-        const val PAWN_VALUE = 1.0F
-        const val KNIGHT_VALUE = 3.0F
-        const val BISHOP_VALUE = 3.0F
-        const val ROOK_VALUE = 5.0F
-        const val QUEEN_VALUE = 9.0F
-        const val KING_VALUE = 0.0F
-        const val MATE_SCORE = 10000.0F
+        const val PAWN_VALUE = 1
+        const val KNIGHT_VALUE = 3
+        const val BISHOP_VALUE = 3
+        const val ROOK_VALUE = 5
+        const val QUEEN_VALUE = 9
+        const val KING_VALUE = 0
+        const val MATE_SCORE = 10000
     }
 
     private val pesto = PestoEvalTables()
@@ -35,8 +33,8 @@ class BitboardEvaluator(private val bitboard: Bitboard) {
         BitPiece.BLACK_KING to -KING_VALUE
     )
 
-    fun evaluate(): Float {
-        var score = 0.0F
+    fun evaluate(): Int {
+        var score = 0
 
         val isPlayerMated = bitboard.isPlayerCheckmated()
         val isBotMated = bitboard.isBotCheckmated()
@@ -48,8 +46,8 @@ class BitboardEvaluator(private val bitboard: Bitboard) {
         return score
     }
 
-    private fun evaluateMaterial(): Float {
-        var materialScore = 0.0F
+    private fun evaluateMaterial(): Int {
+        var materialScore = 0
 
         for ((piece, value) in pieceValues) {
             materialScore += countBits(bitboard.bitboards[piece.ordinal]) * value
@@ -62,23 +60,23 @@ class BitboardEvaluator(private val bitboard: Bitboard) {
         return java.lang.Long.bitCount(bitboard)
     }
 
-    private fun evaluateMateScore(isPlayerMated: Boolean, isBotMated: Boolean): Float {
+    private fun evaluateMateScore(isPlayerMated: Boolean, isBotMated: Boolean): Int {
         return when {
             isPlayerMated -> -MATE_SCORE
             isBotMated -> MATE_SCORE
-            else -> 0.0F
+            else -> 0
         }
     }
 
-    private fun evaluatePesto(): Float {
-        var pestoScore = BigDecimal.ZERO
+    private fun evaluatePesto(): Int {
+        var pestoScore = 0
 
         val playerOffset = if (GameContext.playerColor == PieceColor.WHITE) 0 else 6
         val botOffset = if (GameContext.botColor == PieceColor.WHITE) 0 else 6
 
         val isMidGame = GameContext.gamePhase == GamePhase.OPENING || GameContext.gamePhase == GamePhase.MIDGAME
 
-        fun evaluatePieces(bitboard: Long, getValue: (Int, Boolean) -> Float, isForBot: Boolean) {
+        fun evaluatePieces(bitboard: Long, getValue: (Int, Boolean) -> Int, isForBot: Boolean) {
             var pieces = bitboard
             while (pieces != 0L) {
                 val position = pieces.takeLowestOneBit()
@@ -86,10 +84,9 @@ class BitboardEvaluator(private val bitboard: Bitboard) {
                 val isBlack = if (isForBot) GameContext.botColor == PieceColor.BLACK else GameContext.playerColor == PieceColor.BLACK
                 var score = getValue(index, isBlack)
                 if (isBlack) {
-                    score *= -1.0F
+                    score *= -1
                 }
-                val roundedScore = BigDecimal(score.toString()).setScale(2, RoundingMode.DOWN)
-                pestoScore = pestoScore.add(roundedScore)
+                pestoScore += score
                 pieces = pieces xor position
             }
         }
@@ -115,6 +112,6 @@ class BitboardEvaluator(private val bitboard: Bitboard) {
         evaluatePlayerPieces()
         evaluateBotPieces()
 
-        return pestoScore.toFloat()
+        return pestoScore
     }
 }
