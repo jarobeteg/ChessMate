@@ -7,5 +7,6 @@ data class BitMove(
     val capturedPiece: BitPiece = BitPiece.NONE,
     val promotion: BitPiece = BitPiece.NONE,
     val isCastling: Boolean = false,
-    val isEnPassant: Boolean = false
+    val isEnPassant: Boolean = false,
+    var isCheck: Boolean = false
 )

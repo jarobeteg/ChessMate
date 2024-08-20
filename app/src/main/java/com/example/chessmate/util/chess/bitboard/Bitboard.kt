@@ -481,6 +481,10 @@ class Bitboard {
         return getAllWhitePieces() or getAllBlackPieces()
     }
 
+    fun getKing(color: PieceColor): Long {
+        return if (color == PieceColor.WHITE) getWhiteKing() else getBlackKing()
+    }
+
     fun getWhiteKing(): Long {
         return bitboards[BitPiece.WHITE_KING.ordinal]
     }

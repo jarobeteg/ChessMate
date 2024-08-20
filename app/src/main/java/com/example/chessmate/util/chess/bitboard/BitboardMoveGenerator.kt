@@ -14,7 +14,8 @@ class BitboardMoveGenerator (private val bitboard: Bitboard) {
             capturedPiece: Int = 12,
             promotion: Int = 12,
             isCastling: Boolean = false,
-            isEnPassant: Boolean = false
+            isEnPassant: Boolean = false,
+            isCheck: Boolean = false
         ): Long {
             var encodedMove: Long = 0
             encodedMove = encodedMove or (from.toLong() and 0x3FL)
@@ -24,6 +25,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard) {
             encodedMove = encodedMove or ((promotion.toLong() and 0xFL) shl 20)
             if (isCastling) encodedMove = encodedMove or (1L shl 24)
             if (isEnPassant) encodedMove = encodedMove or (1L shl 25)
+            if (isCheck) encodedMove = encodedMove or (1L shl 26)
             return encodedMove
         }
 
@@ -35,6 +37,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard) {
             val promotion = move.promotion.ordinal
             val isCastling = if (move.isCastling) 1L else 0L
             val isEnPassant = if (move.isEnPassant) 1L else 0L
+            val isCheck = if (move.isCheck) 1L else 0L
 
             var encodedMove: Long = 0
             encodedMove = encodedMove or (from.toLong() and 0x3FL)
@@ -44,6 +47,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard) {
             encodedMove = encodedMove or ((promotion.toLong() and 0xFL) shl 20)
             encodedMove = encodedMove or (isCastling shl 24)
             encodedMove = encodedMove or (isEnPassant shl 25)
+            encodedMove = encodedMove or (isCheck shl 26)
 
             return encodedMove
         }
@@ -56,6 +60,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard) {
             val promotion = ((encodedMove shr 20) and 0xFL).toInt()
             val isCastling = (encodedMove shr 24) and 1L == 1L
             val isEnPassant = (encodedMove shr 25) and 1L == 1L
+            val isCheck = (encodedMove shr 26) and 1L == 1L
 
             return BitMove(
                 from = 1L shl from,
@@ -64,7 +69,8 @@ class BitboardMoveGenerator (private val bitboard: Bitboard) {
                 capturedPiece = if (capturedPiece != 12) BitPiece.fromOrdinal(capturedPiece) else BitPiece.NONE,
                 promotion = if (promotion != 12) BitPiece.fromOrdinal(promotion) else BitPiece.NONE,
                 isCastling = isCastling,
-                isEnPassant = isEnPassant
+                isEnPassant = isEnPassant,
+                isCheck = isCheck
             )
         }
     }
@@ -435,7 +441,12 @@ class BitboardMoveGenerator (private val bitboard: Bitboard) {
             }
 
             if (!isSquareUnderAttack(kingPosition, isForBot, color)) {
-                legalMoves.add(move)
+                val opponentKingInCheck = isSquareUnderAttack(bitboard.getKing(color.opposite()), isForBot = !isForBot, color.opposite())
+
+                if (opponentKingInCheck) {
+                    decodedMove.isCheck = true
+                }
+                legalMoves.add(encodeMove(decodedMove))
             }
             bitboard.restore(originalBitboard)
         }

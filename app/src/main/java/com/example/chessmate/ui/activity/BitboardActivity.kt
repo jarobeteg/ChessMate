@@ -316,6 +316,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         }
         removeHighlightsFromSquares()
         for (move in moves) {
+            println("move: $move")
             if (move.capturedPiece != BitPiece.NONE) {
                 addHighlightOpponent(move.to, move.capturedPiece)
             } else {
