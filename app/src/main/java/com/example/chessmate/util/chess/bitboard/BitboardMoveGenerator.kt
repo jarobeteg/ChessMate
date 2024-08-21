@@ -444,9 +444,11 @@ class BitboardMoveGenerator (private val bitboard: Bitboard) {
                 val opponentKingInCheck = isSquareUnderAttack(bitboard.getKing(color.opposite()), isForBot = !isForBot, color.opposite())
 
                 if (opponentKingInCheck) {
-                    decodedMove.isCheck = true
+                    val checkMove = move or (1L shl 26)
+                    legalMoves.add(checkMove)
+                } else {
+                    legalMoves.add(move)
                 }
-                legalMoves.add(encodeMove(decodedMove))
             }
             bitboard.restore(originalBitboard)
         }
