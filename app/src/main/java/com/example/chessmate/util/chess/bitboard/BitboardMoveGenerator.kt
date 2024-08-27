@@ -509,7 +509,7 @@ class BitboardMoveGenerator (private val bitboard: Bitboard) {
 
             for (offset in knightOffsets) {
                 val targetIndex = positionIndex + offset
-                if (isWithinBounds(targetIndex)) {
+                if (isLegalKnightMove(positionIndex, targetIndex)) {
                     attacks = attacks or (1L shl targetIndex)
                 }
             }
