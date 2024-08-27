@@ -59,11 +59,13 @@ class BitboardManager(private var listener: BitboardListener) {
             GameContext.botColor = PieceColor.BLACK
             this.player = Player(PieceColor.WHITE)
             this.bot = ChessBot(PieceColor.BLACK)
+            bitboard.setTurn(true)
         } else {
             GameContext.playerColor = PieceColor.BLACK
             GameContext.botColor = PieceColor.WHITE
             this.player = Player(PieceColor.BLACK)
             this.bot = ChessBot(PieceColor.WHITE)
+            bitboard.setTurn(false)
         }
     }
 
@@ -76,6 +78,7 @@ class BitboardManager(private var listener: BitboardListener) {
             GameContext.isBotTurn = false
             this.player = Player(PieceColor.WHITE)
             this.bot = ChessBot(PieceColor.BLACK)
+            bitboard.setTurn(true)
         } else {
             GameContext.playerColor = PieceColor.BLACK
             GameContext.botColor = PieceColor.WHITE
@@ -83,6 +86,7 @@ class BitboardManager(private var listener: BitboardListener) {
             GameContext.isBotTurn = true
             this.player = Player(PieceColor.BLACK)
             this.bot = ChessBot(PieceColor.WHITE)
+            bitboard.setTurn(false)
         }
     }
 
