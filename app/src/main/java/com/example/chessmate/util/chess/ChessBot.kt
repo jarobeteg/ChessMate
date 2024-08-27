@@ -1,6 +1,7 @@
 package com.example.chessmate.util.chess
 
 import com.example.chessmate.util.chess.bitboard.BitMove
+import com.example.chessmate.util.chess.bitboard.BitPiece
 import com.example.chessmate.util.chess.bitboard.Bitboard
 import com.example.chessmate.util.chess.bitboard.BitboardEvaluator
 import com.example.chessmate.util.chess.bitboard.BitboardMoveGenerator
@@ -20,12 +21,12 @@ class ChessBot(val color: PieceColor){
         val time = measureTimeMillis {
             move = alphaBeta(bitboard, depth, Int.MIN_VALUE, Int.MAX_VALUE, maximizingPlayer, color).second
         }
-        println("time: ${time / 1000.0} s") 
+        println("time: ${time / 1000.0} s")
         return move
     }
 
     private fun alphaBeta(board: Bitboard, depth: Int, alpha: Int, beta: Int, maximizingPlayer: Boolean, currentColor: PieceColor): Pair<Int, BitMove?> {
-        val cacheKey = board.toString()
+        val cacheKey = board.toString() + "_${currentColor}"
 
         cache[cacheKey]?.let {
             if (it.second != null || depth == 0 || board.isGameEnded()) {
@@ -43,70 +44,73 @@ class ChessBot(val color: PieceColor){
         val moveGenerator = BitboardMoveGenerator(board)
         val legalMoves = moveGenerator.generateLegalMovesForAlphaBeta(maximizingPlayer)
 
-        val evaluatedMoves = legalMoves.map { move ->
+        val prioritizedMoves = legalMoves.map { move ->
             val decodedMove = BitboardMoveGenerator.decodeMove(move)
             val newBoard = board.copy().apply { movePiece(decodedMove) }
             val evaluator = BitboardEvaluator(newBoard)
-            Pair(decodedMove, evaluator.evaluate())
-        }.sortedByDescending { it.second }.map { it.first }
+            val isCapture = decodedMove.capturedPiece != BitPiece.NONE
+            val isCheck = decodedMove.isCheck
+            val isPromotion = decodedMove.promotion != BitPiece.NONE
+            val priority = when {
+                isCheck -> 3
+                isCapture -> 2
+                isPromotion -> 1
+                else -> 0
+            }
+            Triple(decodedMove, priority, evaluator.evaluate())
+        }.sortedWith(
+            if (maximizingPlayer) {
+                compareByDescending<Triple<BitMove, Int, Int>> { it.second }
+                    .thenByDescending { it.third } //max player wants high scores
+            } else {
+                compareByDescending<Triple<BitMove, Int, Int>> { it.second }
+                    .thenBy { it.third } //min player wants low scores
+            }
+        ).map { it.first }
+
 
         var localAlpha = alpha
         var localBeta = beta
         var bestMove: BitMove? = null
         var bestValue = if (maximizingPlayer) Int.MIN_VALUE else Int.MAX_VALUE
 
-        if (maximizingPlayer) {
-            val topMoves = evaluatedMoves.take(3)
-            for (move in topMoves) {
-                val newBoard = board.copy().apply { movePiece(move) }
-                val newCacheKey = newBoard.toString()
+        for (move in prioritizedMoves.take(3)) {
+            val newBoard = board.copy().apply { movePiece(move) }
+            val newCacheKey = newBoard.toString() + "_${currentColor.opposite()}"
 
-                val (value, _) = if (cache.containsKey(newCacheKey)) {
-                    cache[newCacheKey]!!
-                } else {
-                    val result = alphaBeta(newBoard, depth - 1, localAlpha, localBeta, false, currentColor.opposite())
-                    cache[newCacheKey] = result
-                    result
-                }
+            val (value, _) = if (cache.containsKey(newCacheKey)) {
+                cache[newCacheKey]!!
+            } else {
+                val result = alphaBeta(
+                    newBoard,
+                    depth - 1,
+                    localAlpha,
+                    localBeta,
+                    !maximizingPlayer,
+                    currentColor.opposite()
+                )
+                cache[newCacheKey] = result
+                result
+            }
 
+            if (maximizingPlayer) {
                 if (value > bestValue) {
                     bestValue = value
-                    if (currentColor == color) {
-                        bestMove = move
-                    }
+                    bestMove = move
                 }
                 localAlpha = maxOf(localAlpha, bestValue)
-                if (localBeta <= localAlpha) break
-            }
-            val result = Pair(bestValue, bestMove)
-            cache[cacheKey] = result
-            return result
-        } else {
-            val topMoves = evaluatedMoves.reversed().take(3)
-            for (move in topMoves) {
-                val newBoard = board.copy().apply { movePiece(move) }
-                val newCacheKey = newBoard.toString()
-
-                val (value, _) = if (cache.containsKey(newCacheKey)) {
-                    cache[newCacheKey]!!
-                } else {
-                    val result = alphaBeta(newBoard, depth - 1, localAlpha, localBeta, true, currentColor.opposite())
-                    cache[newCacheKey] = result
-                    result
-                }
-
+            } else {
                 if (value < bestValue) {
                     bestValue = value
-                    if (currentColor == color) {
-                        bestMove = move
-                    }
+                    bestMove = move
                 }
                 localBeta = minOf(localBeta, bestValue)
-                if (localBeta <= localAlpha) break
             }
-            val result = Pair(bestValue, bestMove)
-            cache[cacheKey] = result
-            return result
+
+            if (localBeta <= localAlpha) break
         }
+        val result = Pair(bestValue, bestMove)
+        cache[cacheKey] = result
+        return result
     }
 }

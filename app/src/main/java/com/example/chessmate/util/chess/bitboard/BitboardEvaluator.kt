@@ -4,6 +4,7 @@ import com.example.chessmate.util.chess.GameContext
 import com.example.chessmate.util.chess.GamePhase
 import com.example.chessmate.util.chess.PestoEvalTables
 import com.example.chessmate.util.chess.PieceColor
+import kotlin.math.abs
 
 class BitboardEvaluator(private val bitboard: Bitboard) {
 
@@ -75,18 +76,24 @@ class BitboardEvaluator(private val bitboard: Bitboard) {
     }
 
     private fun penalizeUnjustifiedSacrifices(currentMaterialScore: Int, previousMaterialScore: Int): Int {
-        val materialDrop = currentMaterialScore - previousMaterialScore
-        return if (materialDrop >= 200) {
-            if (currentMaterialScore >= 0) materialDrop  else -materialDrop
+        val materialDrop = abs(currentMaterialScore - previousMaterialScore)
+        if (materialDrop <= PAWN_VALUE) return 0
+
+        val penaltyMultiplier = if (bitboard.isPlayerTurn()) {
+            if (GameContext.playerColor == PieceColor.WHITE) -10 else 10
         } else {
-            0
+            if (GameContext.botColor == PieceColor.WHITE) -10 else 10
         }
+
+        return materialDrop * penaltyMultiplier
     }
 
     private fun evaluateMateScore(isPlayerMated: Boolean, isBotMated: Boolean): Int {
         return when {
-            isPlayerMated -> -MATE_SCORE
-            isBotMated -> MATE_SCORE
+            isPlayerMated && GameContext.playerColor == PieceColor.WHITE -> -MATE_SCORE
+            isPlayerMated && GameContext.playerColor == PieceColor.BLACK -> MATE_SCORE
+            isBotMated && GameContext.botColor == PieceColor.WHITE -> -MATE_SCORE
+            isBotMated && GameContext.botColor == PieceColor.BLACK -> MATE_SCORE
             else -> 0
         }
     }
