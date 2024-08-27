@@ -10,6 +10,7 @@ class Bitboard {
     private var castlingRights: Int = 0xF
     private var fiftyMoveRule: Int = 0
     private var lastMove: Long = 0
+    private var turnBit: Int = 0
 
     private val castlingRightsMap = mapOf(
         BitPiece.WHITE_KING to listOf(WHITE_KINGSIDE, WHITE_QUEENSIDE),
@@ -116,7 +117,7 @@ class Bitboard {
     }
 
     fun getLastBoardState(): BoardStateTracker {
-        return stateTracker.last()
+        return stateTracker[stateTracker.size - 2]
     }
 
     private fun setPiece(piece: BitPiece, square: Long) {
@@ -181,6 +182,7 @@ class Bitboard {
         }
 
         this.stateTracker.add(BoardStateTracker(bitboards.clone(), move.piece.color()))
+        toggleTurn()
     }
 
     private fun revokeRookCastleRight(move: BitMove) {
@@ -322,9 +324,9 @@ class Bitboard {
 
     private fun isStalemate(): Boolean {
         val moveGenerator = BitboardMoveGenerator(this)
-        if (GameContext.isPlayerTurn) {
+        if (isPlayerTurn()) {
             return moveGenerator.generateLegalMovesForPlayer().isEmpty() && !isPlayerInCheck()
-        } else if (GameContext.isBotTurn) {
+        } else if (isBotTurn()) {
             return moveGenerator.generateLegalMovesForBot().isEmpty() && !isBotInCheck()
         }
 
@@ -437,6 +439,38 @@ class Bitboard {
         return "$file$rank"
     }
 
+    fun isPlayerTurn(): Boolean {
+        return turnBit and 1 == 1
+    }
+
+    fun isBotTurn(): Boolean {
+        return turnBit and 1 == 0
+    }
+
+    private fun toggleTurn() {
+        turnBit = turnBit xor 1
+    }
+
+   fun grantPlayerTurn() {
+        turnBit = turnBit or 1
+    }
+
+    fun grantBotTurn() {
+        turnBit = turnBit and 1.inv()
+    }
+
+    fun revokePlayerTurn() {
+        turnBit = turnBit and 1.inv()
+    }
+
+    fun revokeBotTurn() {
+        turnBit = turnBit or 1
+    }
+
+    fun setTurn(isPlayerTurn: Boolean) {
+        turnBit = if (isPlayerTurn) 1 else 0
+    }
+
     fun getWhitePieceBitboards(): LongArray {
         return longArrayOf(
             bitboards[BitPiece.WHITE_PAWN.ordinal],
@@ -512,6 +546,7 @@ class Bitboard {
         this.castlingRights = bitboard.castlingRights
         this.fiftyMoveRule = bitboard.fiftyMoveRule
         this.lastMove = bitboard.lastMove
+        this.turnBit = bitboard.turnBit
     }
 
     fun copy(): Bitboard {
@@ -521,6 +556,7 @@ class Bitboard {
         copy.castlingRights = this.castlingRights
         copy.fiftyMoveRule = this.fiftyMoveRule
         copy.lastMove = this.lastMove
+        copy.turnBit = this.turnBit
         return copy
     }
 
