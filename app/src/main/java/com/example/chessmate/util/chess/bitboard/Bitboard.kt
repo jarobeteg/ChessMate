@@ -61,7 +61,7 @@ class Bitboard {
         setPiece(BitPiece.BLACK_QUEEN, RANK_8 and FILE_D)
         setPiece(BitPiece.BLACK_KING, RANK_8 and FILE_E)
 
-        this.stateTracker.add(BoardStateTracker(bitboards.clone(), PieceColor.WHITE))
+        this.stateTracker.add(BoardStateTracker(bitboards.clone(), PieceColor.WHITE, 0L))
     }
 
     fun setupFENPosition(fen: FEN) {
@@ -107,7 +107,7 @@ class Bitboard {
 
         fiftyMoveRule = fen.halfMoveClock
 
-        this.stateTracker.add(BoardStateTracker(bitboards.clone(), currentTurn))
+        this.stateTracker.add(BoardStateTracker(bitboards.clone(), currentTurn, 0L))
     }
 
     fun updateBoardState(state: BoardStateTracker) {
@@ -117,6 +117,10 @@ class Bitboard {
     }
 
     fun getLastBoardState(): BoardStateTracker {
+        return stateTracker.last()
+    }
+
+    fun getSecondLastBoardState(): BoardStateTracker {
         return stateTracker[stateTracker.size - 2]
     }
 
@@ -165,7 +169,8 @@ class Bitboard {
 
         updateFiftyMoveRule(move)
 
-        lastMove = BitboardMoveGenerator.encodeMove(move)
+        val encodedMove = BitboardMoveGenerator.encodeMove(move)
+        lastMove = encodedMove
 
         if (move.capturedPiece == BitPiece.WHITE_ROOK || move.capturedPiece == BitPiece.BLACK_ROOK) revokeRookCastleRight(move)
 
@@ -181,7 +186,7 @@ class Bitboard {
             removePiece(move.piece, move.from)
         }
 
-        this.stateTracker.add(BoardStateTracker(bitboards.clone(), move.piece.color()))
+        this.stateTracker.add(BoardStateTracker(bitboards.clone(), move.piece.color(), encodedMove))
         toggleTurn()
     }
 

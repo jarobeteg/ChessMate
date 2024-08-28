@@ -4,7 +4,8 @@ import com.example.chessmate.util.chess.PieceColor
 
 data class BoardStateTracker(
     val bitboards: LongArray,
-    val currentTurn: PieceColor
+    val currentTurn: PieceColor,
+    val move: Long
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -25,6 +26,6 @@ data class BoardStateTracker(
     }
 
     fun copy(): BoardStateTracker {
-        return BoardStateTracker(bitboards.clone(), currentTurn)
+        return BoardStateTracker(bitboards.clone(), currentTurn, move)
     }
 }
