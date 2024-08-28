@@ -155,61 +155,61 @@ class PestoEvalTables {
 
     fun getMidGamePawnValue(idx: Int, isMirrored: Boolean): Int {
         val score = getValue(if (isMirrored) mirrorArray(midGamePawnTable) else midGamePawnTable, idx) + midGameValue[0]
-        return score
+        return if (isMirrored) -score else score
     }
 
     fun getEndGamePawnValue(idx: Int, isMirrored: Boolean): Int {
         val score = getValue(if (isMirrored) mirrorArray(endGamePawnTable) else endGamePawnTable, idx) + endGameValue[0]
-        return score
+        return if (isMirrored) -score else score
     }
 
     fun getMidGameKnightValue(idx: Int, isMirrored: Boolean): Int {
         val score = getValue(if (isMirrored) mirrorArray(midGameKnightTable) else midGameKnightTable, idx) + midGameValue[1]
-        return score
+        return if (isMirrored) -score else score
     }
 
     fun getEndGameKnightValue(idx: Int, isMirrored: Boolean): Int {
         val score = getValue(if (isMirrored) mirrorArray(endGameKnightTable) else endGameKnightTable, idx) + endGameValue[1]
-        return score
+        return if (isMirrored) -score else score
     }
 
     fun getMidGameBishopValue(idx: Int, isMirrored: Boolean): Int {
         val score = getValue(if (isMirrored) mirrorArray(midGameBishopTable) else midGameBishopTable, idx) + midGameValue[2]
-        return score
+        return if (isMirrored) -score else score
     }
 
     fun getEndGameBishopValue(idx: Int, isMirrored: Boolean): Int {
         val score = getValue(if (isMirrored) mirrorArray(endGameBishopTable) else endGameBishopTable, idx) + endGameValue[2]
-        return score
+        return if (isMirrored) -score else score
     }
 
     fun getMidGameRookValue(idx: Int, isMirrored: Boolean): Int {
         val score = getValue(if (isMirrored) mirrorArray(midGameRookTable) else midGameRookTable, idx) + midGameValue[3]
-        return score
+        return if (isMirrored) -score else score
     }
 
     fun getEndGameRookValue(idx: Int, isMirrored: Boolean): Int {
         val score = getValue(if (isMirrored) mirrorArray(endGameRookTable) else endGameRookTable, idx) + endGameValue[3]
-        return score
+        return if (isMirrored) -score else score
     }
 
     fun getMidGameQueenValue(idx: Int, isMirrored: Boolean): Int {
         val score = getValue(if (isMirrored) mirrorArray(midGameQueenTable) else midGameQueenTable, idx) + midGameValue[4]
-        return score
+        return if (isMirrored) -score else score
     }
 
     fun getEndGameQueenValue(idx: Int, isMirrored: Boolean): Int {
         val score = getValue(if (isMirrored) mirrorArray(endGameQueenTable) else endGameQueenTable, idx) + endGameValue[4]
-        return score
+        return if (isMirrored) -score else score
     }
 
     fun getMidGameKingValue(idx: Int, isMirrored: Boolean): Int {
         val score = getValue(if (isMirrored) mirrorArray(midGameKingTable) else midGameKingTable, idx) + midGameValue[5]
-        return score
+        return if (isMirrored) -score else score
     }
 
     fun getEndGameKingValue(idx: Int, isMirrored: Boolean): Int {
         val score = getValue(if (isMirrored) mirrorArray(endGameKingTable) else endGameKingTable, idx) + endGameValue[5]
-        return score
+        return if (isMirrored) -score else score
     }
 }

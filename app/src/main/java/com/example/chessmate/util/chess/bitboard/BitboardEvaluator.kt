@@ -112,10 +112,7 @@ class BitboardEvaluator(private val bitboard: Bitboard) {
                 val position = pieces.takeLowestOneBit()
                 val index = position.countTrailingZeroBits()
                 val isBlack = if (isForBot) GameContext.botColor == PieceColor.BLACK else GameContext.playerColor == PieceColor.BLACK
-                var score = getValue(index, isBlack)
-                if (isBlack) {
-                    score *= -1
-                }
+                val score = getValue(index, isBlack)
                 pestoScore += score
                 pieces = pieces xor position
             }
