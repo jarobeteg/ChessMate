@@ -48,15 +48,20 @@ class ChessBot(val color: PieceColor){
             val decodedMove = BitboardMoveGenerator.decodeMove(move)
             val newBoard = board.copy().apply { movePiece(decodedMove) }
             val evaluator = BitboardEvaluator(newBoard)
+
             val isCapture = decodedMove.capturedPiece != BitPiece.NONE
             val isCheck = decodedMove.isCheck
             val isPromotion = decodedMove.promotion != BitPiece.NONE
+
+            val materialImpact = evaluateStaticExchange(newBoard, decodedMove)
+
             val priority = when {
-                isCheck -> 3
-                isCapture -> 2
+                isCheck && materialImpact >= 0 -> 3
+                isCapture && materialImpact >= 0 -> 2
                 isPromotion -> 1
                 else -> 0
             }
+
             Triple(decodedMove, priority, evaluator.evaluate())
         }.sortedWith(
             if (maximizingPlayer) {
@@ -112,5 +117,38 @@ class ChessBot(val color: PieceColor){
         val result = Pair(bestValue, bestMove)
         cache[cacheKey] = result
         return result
+    }
+
+    private fun evaluateStaticExchange(board: Bitboard, move: BitMove): Int {
+        val gain = move.capturedPiece.value()
+        val square = move.to
+
+        val newBoard = board.copy().apply { movePiece(move) }
+        val attackers = mutableListOf<Pair<BitMove, Int>>()
+        var attackerColor = move.piece.color().opposite()
+
+        while (true) {
+            val attackingMoves = BitboardMoveGenerator(newBoard)
+                .generateLegalMovesForAlphaBeta(attackerColor == PieceColor.WHITE)
+                .map { BitboardMoveGenerator.decodeMove(it) }
+                .filter { it.to == square }
+                .sortedBy { it.piece.value() }
+
+            if (attackingMoves.isEmpty()) break
+
+            val bestAttackingMove = attackingMoves.first()
+            attackers.add(Pair(bestAttackingMove, bestAttackingMove.piece.value()))
+            newBoard.movePiece(bestAttackingMove)
+            attackerColor = attackerColor.opposite()
+        }
+
+        var netGain = gain
+        var sign = -1
+        for ((_, attackerValue) in attackers) {
+            netGain += sign * attackerValue
+            sign *= -1
+        }
+
+        return netGain
     }
 }

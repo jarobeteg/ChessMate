@@ -29,4 +29,15 @@ enum class BitPiece {
             NONE -> PieceColor.NONE
         }
     }
+
+    fun value(): Int {
+        return when (this) {
+            WHITE_PAWN, BLACK_PAWN -> 100
+            WHITE_KNIGHT, BLACK_KNIGHT -> 300
+            WHITE_BISHOP, BLACK_BISHOP -> 300
+            WHITE_ROOK, BLACK_ROOK -> 500
+            WHITE_QUEEN, BLACK_QUEEN -> 900
+            else -> 0
+        }
+    }
 }
