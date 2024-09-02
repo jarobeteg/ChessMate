@@ -37,6 +37,7 @@ enum class BitPiece {
             WHITE_BISHOP, BLACK_BISHOP -> 300
             WHITE_ROOK, BLACK_ROOK -> 500
             WHITE_QUEEN, BLACK_QUEEN -> 900
+            WHITE_KING, BLACK_KING -> Int.MAX_VALUE
             else -> 0
         }
     }

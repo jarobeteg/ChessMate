@@ -49,20 +49,23 @@ class ChessBot(val color: PieceColor){
             val newBoard = board.copy().apply { movePiece(decodedMove) }
             val evaluator = BitboardEvaluator(newBoard)
 
+            val seeValue = evaluateStaticExchange(board, decodedMove)
+
             val isCapture = decodedMove.capturedPiece != BitPiece.NONE
             val isCheck = decodedMove.isCheck
             val isPromotion = decodedMove.promotion != BitPiece.NONE
 
-            val materialImpact = evaluateStaticExchange(newBoard, decodedMove)
-
             val priority = when {
-                isCheck && materialImpact >= 0 -> 3
-                isCapture && materialImpact >= 0 -> 2
+                isCheck && seeValue >= 0 -> 3
+                isCapture && seeValue >= 0 -> 2
                 isPromotion -> 1
+                seeValue < 0 -> -1
                 else -> 0
             }
 
             Triple(decodedMove, priority, evaluator.evaluate())
+        }.filter { (_, priority, _) ->
+            priority >= 0
         }.sortedWith(
             if (maximizingPlayer) {
                 compareByDescending<Triple<BitMove, Int, Int>> { it.second }
@@ -120,12 +123,14 @@ class ChessBot(val color: PieceColor){
     }
 
     private fun evaluateStaticExchange(board: Bitboard, move: BitMove): Int {
-        val gain = move.capturedPiece.value()
+        var gain = move.capturedPiece.value()
         val square = move.to
-
         val newBoard = board.copy().apply { movePiece(move) }
-        val attackers = mutableListOf<Pair<BitMove, Int>>()
         var attackerColor = move.piece.color().opposite()
+        var sign = -1
+
+        val gainSequence = mutableListOf<Int>()
+        gainSequence.add(gain)
 
         while (true) {
             val attackingMoves = BitboardMoveGenerator(newBoard)
@@ -137,18 +142,21 @@ class ChessBot(val color: PieceColor){
             if (attackingMoves.isEmpty()) break
 
             val bestAttackingMove = attackingMoves.first()
-            attackers.add(Pair(bestAttackingMove, bestAttackingMove.piece.value()))
+            val attackerValue = bestAttackingMove.piece.value()
+
+            gain += sign * attackerValue
+            gainSequence.add(gain)
+
             newBoard.movePiece(bestAttackingMove)
             attackerColor = attackerColor.opposite()
-        }
-
-        var netGain = gain
-        var sign = -1
-        for ((_, attackerValue) in attackers) {
-            netGain += sign * attackerValue
             sign *= -1
         }
 
-        return netGain
+        var bestOutcome = gainSequence.last()
+        for (i in gainSequence.size - 2 downTo 0) {
+            bestOutcome = -maxOf(gainSequence[i], bestOutcome)
+        }
+
+        return bestOutcome
     }
 }
