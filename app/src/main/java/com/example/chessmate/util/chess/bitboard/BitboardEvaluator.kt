@@ -4,7 +4,6 @@ import com.example.chessmate.util.chess.GameContext
 import com.example.chessmate.util.chess.GamePhase
 import com.example.chessmate.util.chess.PestoEvalTables
 import com.example.chessmate.util.chess.PieceColor
-import kotlin.math.abs
 
 class BitboardEvaluator(private val bitboard: Bitboard) {
 
@@ -40,10 +39,8 @@ class BitboardEvaluator(private val bitboard: Bitboard) {
         val isPlayerMated = bitboard.isPlayerCheckmated()
         val isBotMated = bitboard.isBotCheckmated()
         val currentMaterialScore = evaluateCurrentMaterial()
-        val previousMaterialScore = evaluatePreviousMaterial()
 
         score += currentMaterialScore
-        score += penalizeUnjustifiedSacrifices(currentMaterialScore, previousMaterialScore)
         score += evaluatePesto()
         score += evaluateMateScore(isPlayerMated, isBotMated)
 
@@ -60,32 +57,8 @@ class BitboardEvaluator(private val bitboard: Bitboard) {
         return materialScore
     }
 
-    private fun evaluatePreviousMaterial(): Int {
-        var previousMaterialScore = 0
-        val lastBoardState = bitboard.getLastBoardState()
-
-        for ((piece, value) in pieceValues) {
-            previousMaterialScore += countBits(lastBoardState.bitboards[piece.ordinal]) * value
-        }
-
-        return previousMaterialScore
-    }
-
     private fun countBits(bitboard: Long): Int {
         return java.lang.Long.bitCount(bitboard)
-    }
-
-    private fun penalizeUnjustifiedSacrifices(currentMaterialScore: Int, previousMaterialScore: Int): Int {
-        val materialDrop = abs(currentMaterialScore - previousMaterialScore)
-        if (materialDrop <= PAWN_VALUE) return 0
-
-        val penaltyMultiplier = if (bitboard.isPlayerTurn()) {
-            if (GameContext.playerColor == PieceColor.WHITE) -10 else 10
-        } else {
-            if (GameContext.botColor == PieceColor.WHITE) -10 else 10
-        }
-
-        return materialDrop * penaltyMultiplier
     }
 
     private fun evaluateMateScore(isPlayerMated: Boolean, isBotMated: Boolean): Int {
