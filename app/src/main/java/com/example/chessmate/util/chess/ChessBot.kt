@@ -142,7 +142,7 @@ class ChessBot(val color: PieceColor){
             if (attackingMoves.isEmpty()) break
 
             val bestAttackingMove = attackingMoves.first()
-            val attackerValue = bestAttackingMove.piece.value()
+            val attackerValue = bestAttackingMove.capturedPiece.value()
 
             gain += sign * attackerValue
             gainSequence.add(gain)
@@ -152,9 +152,9 @@ class ChessBot(val color: PieceColor){
             sign *= -1
         }
 
-        var bestOutcome = gainSequence.last()
-        for (i in gainSequence.size - 2 downTo 0) {
-            bestOutcome = -maxOf(gainSequence[i], bestOutcome)
+        var bestOutcome = gainSequence.first()
+        for (i in 1 until gainSequence.size) {
+            bestOutcome = minOf(bestOutcome, gainSequence[i])
         }
 
         return bestOutcome
