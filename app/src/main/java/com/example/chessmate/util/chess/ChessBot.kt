@@ -44,6 +44,9 @@ class ChessBot(val color: PieceColor){
         val moveGenerator = BitboardMoveGenerator(board)
         val legalMoves = moveGenerator.generateLegalMovesForAlphaBeta(maximizingPlayer)
 
+        val opponentColor = currentColor.opposite()
+        val threatenedMoves = getThreatenedPieces(board, opponentColor)
+
         val prioritizedMoves = legalMoves.map { move ->
             val decodedMove = BitboardMoveGenerator.decodeMove(move)
             val newBoard = board.copy().apply { movePiece(decodedMove) }
@@ -51,12 +54,14 @@ class ChessBot(val color: PieceColor){
 
             val seeValue = evaluateStaticExchange(board, decodedMove)
 
+            val isThreatened = threatenedMoves.any { it.to == decodedMove.from }
             val isCapture = decodedMove.capturedPiece != BitPiece.NONE
             val isCheck = decodedMove.isCheck
             val isPromotion = decodedMove.promotion != BitPiece.NONE
 
             val priority = when {
-                isCheck && seeValue >= 0 -> 3
+                isCheck && seeValue >= 0 -> 4
+                isThreatened && seeValue >= 0 -> 3
                 isCapture && seeValue >= 0 -> 2
                 isPromotion -> 1
                 seeValue < 0 -> -1
@@ -122,15 +127,22 @@ class ChessBot(val color: PieceColor){
         return result
     }
 
+    private fun getThreatenedPieces(board: Bitboard, opponentColor: PieceColor): List<BitMove> {
+        val moveGenerator = BitboardMoveGenerator(board)
+        val opponentMoves = moveGenerator.generateLegalMovesForAlphaBeta(opponentColor == PieceColor.WHITE)
+            .map { BitboardMoveGenerator.decodeMove(it) }
+
+        return opponentMoves.filter { move ->
+            board.getBitPiece(move.to).color() == color
+        }
+    }
+
     private fun evaluateStaticExchange(board: Bitboard, move: BitMove): Int {
         var gain = move.capturedPiece.value()
         val square = move.to
         val newBoard = board.copy().apply { movePiece(move) }
         var attackerColor = move.piece.color().opposite()
         var sign = -1
-
-        val gainSequence = mutableListOf<Int>()
-        gainSequence.add(gain)
 
         while (true) {
             val attackingMoves = BitboardMoveGenerator(newBoard)
@@ -142,21 +154,15 @@ class ChessBot(val color: PieceColor){
             if (attackingMoves.isEmpty()) break
 
             val bestAttackingMove = attackingMoves.first()
-            val attackerValue = bestAttackingMove.capturedPiece.value()
+            val captureValue = bestAttackingMove.capturedPiece.value()
 
-            gain += sign * attackerValue
-            gainSequence.add(gain)
+            gain += sign * captureValue
 
             newBoard.movePiece(bestAttackingMove)
             attackerColor = attackerColor.opposite()
             sign *= -1
         }
 
-        var bestOutcome = gainSequence.first()
-        for (i in 1 until gainSequence.size) {
-            bestOutcome = minOf(bestOutcome, gainSequence[i])
-        }
-
-        return bestOutcome
+        return gain
     }
 }
