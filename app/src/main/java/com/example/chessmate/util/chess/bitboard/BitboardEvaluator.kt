@@ -36,13 +36,8 @@ class BitboardEvaluator(private val bitboard: Bitboard) {
     fun evaluate(): Int {
         var score = 0
 
-        val isPlayerMated = bitboard.isPlayerCheckmated()
-        val isBotMated = bitboard.isBotCheckmated()
-        val currentMaterialScore = evaluateCurrentMaterial()
-
-        score += currentMaterialScore
+        score += evaluateCurrentMaterial()
         score += evaluatePesto()
-        score += evaluateMateScore(isPlayerMated, isBotMated)
 
         return score
     }
@@ -59,16 +54,6 @@ class BitboardEvaluator(private val bitboard: Bitboard) {
 
     private fun countBits(bitboard: Long): Int {
         return java.lang.Long.bitCount(bitboard)
-    }
-
-    private fun evaluateMateScore(isPlayerMated: Boolean, isBotMated: Boolean): Int {
-        return when {
-            isPlayerMated && GameContext.playerColor == PieceColor.WHITE -> -MATE_SCORE
-            isPlayerMated && GameContext.playerColor == PieceColor.BLACK -> MATE_SCORE
-            isBotMated && GameContext.botColor == PieceColor.WHITE -> -MATE_SCORE
-            isBotMated && GameContext.botColor == PieceColor.BLACK -> MATE_SCORE
-            else -> 0
-        }
     }
 
     private fun evaluatePesto(): Int {

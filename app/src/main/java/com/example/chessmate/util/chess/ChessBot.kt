@@ -35,6 +35,20 @@ class ChessBot(val color: PieceColor){
         }
 
         if (depth == 0 || board.isGameEnded()) {
+            if (board.isPlayerCheckmated()) {
+                return if (color == PieceColor.WHITE) {
+                    Pair(BitboardEvaluator.MATE_SCORE - depth * 100, null) //bot is white and checkmated the player
+                } else {
+                    Pair(-BitboardEvaluator.MATE_SCORE + depth * 100, null) //bot is black and checkmated the player
+                }
+            }
+            if (board.isBotCheckmated()) {
+                return if (color == PieceColor.WHITE) {
+                    Pair(-BitboardEvaluator.MATE_SCORE + depth * 100, null) //bot is white and got checkmated
+                } else {
+                    Pair(BitboardEvaluator.MATE_SCORE - depth * 100, null) //bot is black and got checkmated
+                }
+            }
             val evaluator = BitboardEvaluator(board)
             val evaluation = Pair(evaluator.evaluate(), null)
             cache[cacheKey] = evaluation
@@ -58,6 +72,25 @@ class ChessBot(val color: PieceColor){
             val isCapture = decodedMove.capturedPiece != BitPiece.NONE
             val isCheck = decodedMove.isCheck
             val isPromotion = decodedMove.promotion != BitPiece.NONE
+
+            var isCheckmate = false
+
+            if (isCheck) {
+                isCheckmate = if (currentColor == color) {
+                    newBoard.isPlayerCheckmated()
+                } else {
+                    newBoard.isBotCheckmated()
+                }
+            }
+
+            if (isCheckmate) {
+                val mateScore = if (maximizingPlayer) {
+                    BitboardEvaluator.MATE_SCORE - depth * 100
+                } else {
+                    -BitboardEvaluator.MATE_SCORE + depth * 100
+                }
+                return Pair(mateScore, decodedMove)
+            }
 
             val priority = when {
                 isCheck && seeValue >= 0 -> 4
@@ -91,12 +124,14 @@ class ChessBot(val color: PieceColor){
             val newBoard = board.copy().apply { movePiece(move) }
             val newCacheKey = newBoard.toString() + "_${currentColor.opposite()}"
 
+            val newDepth = if (move.isCheck) depth + 1 else depth
+
             val (value, _) = if (cache.containsKey(newCacheKey)) {
                 cache[newCacheKey]!!
             } else {
                 val result = alphaBeta(
                     newBoard,
-                    depth - 1,
+                    newDepth - 1,
                     localAlpha,
                     localBeta,
                     !maximizingPlayer,
