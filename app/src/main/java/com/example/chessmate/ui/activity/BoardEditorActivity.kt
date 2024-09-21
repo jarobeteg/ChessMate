@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.FrameLayout
 import android.widget.GridLayout
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import com.example.chessmate.R
@@ -35,6 +37,11 @@ class BoardEditorActivity : AbsThemeActivity() {
     private lateinit var blackRook: ImageButton
     private lateinit var blackQueen: ImageButton
     private lateinit var blackKing: ImageButton
+    private lateinit var whiteKingSideCastles: CheckBox
+    private lateinit var whiteQueenSideCastles: CheckBox
+    private lateinit var blackKingSideCastles: CheckBox
+    private lateinit var blackQueenSideCastles: CheckBox
+    private lateinit var whoToPlay: RadioGroup
     private var editor = 0
     private var squareSize: Int = 0
 
@@ -78,6 +85,12 @@ class BoardEditorActivity : AbsThemeActivity() {
         blackRook.setOnClickListener { handleEditorClick(BitPiece.BLACK_ROOK) }
         blackQueen.setOnClickListener { handleEditorClick(BitPiece.BLACK_QUEEN) }
         blackKing.setOnClickListener { handleEditorClick(BitPiece.BLACK_KING) }
+
+        whiteKingSideCastles = findViewById(R.id.white_king_side_castle)
+        whiteQueenSideCastles = findViewById(R.id.white_queen_side_castle)
+        blackKingSideCastles = findViewById(R.id.black_king_side_castle)
+        blackQueenSideCastles = findViewById(R.id.black_queen_side_castle)
+        whoToPlay = findViewById(R.id.who_to_play)
 
         chessboardLayout = findViewById(R.id.bitboard)
         board = Bitboard()

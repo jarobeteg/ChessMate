@@ -111,5 +111,12 @@
     <string name="invalid_FEN_string">FEN string format is invalid.</string>
     <string name="valid_FEN_string_illegal_position">FEN string format is valid but represents an illegal position or a checkmated player.</string>
 
+    <!--Board Editor strings-->
     <string name="board_editor_title">Board Editor</string>
+    <string name="white_king_side_castle">White O-O</string>
+    <string name="white_queen_side_castle">White O-O-O</string>
+    <string name="black_king_side_castle">Black O-O</string>
+    <string name="black_queen_side_castle">Black O-O-O</string>
+    <string name="white_to_play">White to play</string>
+    <string name="black_to_play">Black to play</string>
 </resources>

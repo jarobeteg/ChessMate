@@ -103,5 +103,12 @@
     <string name="invalid_FEN_string">FEN karakterlánc formátuma érvénytelen</string>
     <string name="valid_FEN_string_illegal_position">FEN karakterlánc formátuma érvényes, de illegális pozíciót képvisel vagy egy sakkmattban lévő játékost.</string>
 
+    <!--Board Editor strings-->
     <string name="board_editor_title">Sakktábla Szerkesztő</string>
+    <string name="white_king_side_castle">Fehér O-O</string>
+    <string name="white_queen_side_castle">Fehér O-O-O</string>
+    <string name="black_king_side_castle">Fekete O-O</string>
+    <string name="black_queen_side_castle">Fekete O-O-O</string>
+    <string name="white_to_play">Fehér lép</string>
+    <string name="black_to_play">Fekete lép</string>
 </resources>
