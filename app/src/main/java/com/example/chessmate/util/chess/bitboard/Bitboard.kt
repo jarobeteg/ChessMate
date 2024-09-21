@@ -127,12 +127,12 @@ class Bitboard {
         return stateTracker[stateTracker.size - 2]
     }
 
-    private fun setPiece(piece: BitPiece, square: Long) {
+    fun setPiece(piece: BitPiece, square: Long) {
         val index = piece.ordinal
         bitboards[index] = bitboards[index] or square
     }
 
-    private fun removePiece(piece: BitPiece, square: Long) {
+    fun removePiece(piece: BitPiece, square: Long) {
         if (piece != BitPiece.NONE) {
             val index = piece.ordinal
             bitboards[index] = bitboards[index] and square.inv()

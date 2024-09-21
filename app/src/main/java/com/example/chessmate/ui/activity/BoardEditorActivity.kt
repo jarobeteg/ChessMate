@@ -92,24 +92,87 @@ class BoardEditorActivity : AbsThemeActivity() {
     private fun handleEditorClick(piece: BitPiece) {
         unselectEditors()
         when (piece) {
-            BitPiece.NONE -> remove.setBackgroundResource(R.drawable.custom_board_editor_button)
-            BitPiece.WHITE_PAWN -> whitePawn.setBackgroundResource(R.drawable.custom_board_editor_button)
-            BitPiece.WHITE_KNIGHT -> whiteKnight.setBackgroundResource(R.drawable.custom_board_editor_button)
-            BitPiece.WHITE_BISHOP -> whiteBishop.setBackgroundResource(R.drawable.custom_board_editor_button)
-            BitPiece.WHITE_ROOK -> whiteRook.setBackgroundResource(R.drawable.custom_board_editor_button)
-            BitPiece.WHITE_QUEEN -> whiteQueen.setBackgroundResource(R.drawable.custom_board_editor_button)
-            BitPiece.WHITE_KING -> whiteKing.setBackgroundResource(R.drawable.custom_board_editor_button)
-            BitPiece.BLACK_PAWN -> blackPawn.setBackgroundResource(R.drawable.custom_board_editor_button)
-            BitPiece.BLACK_KNIGHT -> blackKnight.setBackgroundResource(R.drawable.custom_board_editor_button)
-            BitPiece.BLACK_BISHOP -> blackBishop.setBackgroundResource(R.drawable.custom_board_editor_button)
-            BitPiece.BLACK_ROOK -> blackRook.setBackgroundResource(R.drawable.custom_board_editor_button)
-            BitPiece.BLACK_QUEEN -> blackQueen.setBackgroundResource(R.drawable.custom_board_editor_button)
-            BitPiece.BLACK_KING -> blackKing.setBackgroundResource(R.drawable.custom_board_editor_button)
+            BitPiece.NONE -> {
+                remove.setBackgroundResource(R.drawable.custom_board_editor_button)
+                editor = 0
+            }
+            BitPiece.WHITE_PAWN -> {
+                whitePawn.setBackgroundResource(R.drawable.custom_board_editor_button)
+                editor = 1
+            }
+            BitPiece.WHITE_KNIGHT -> {
+                whiteKnight.setBackgroundResource(R.drawable.custom_board_editor_button)
+                editor = 2
+            }
+            BitPiece.WHITE_BISHOP -> {
+                whiteBishop.setBackgroundResource(R.drawable.custom_board_editor_button)
+                editor = 3
+            }
+            BitPiece.WHITE_ROOK -> {
+                whiteRook.setBackgroundResource(R.drawable.custom_board_editor_button)
+                editor = 4
+            }
+            BitPiece.WHITE_QUEEN -> {
+                whiteQueen.setBackgroundResource(R.drawable.custom_board_editor_button)
+                editor = 5
+            }
+            BitPiece.WHITE_KING -> {
+                whiteKing.setBackgroundResource(R.drawable.custom_board_editor_button)
+                editor = 6
+            }
+            BitPiece.BLACK_PAWN -> {
+                blackPawn.setBackgroundResource(R.drawable.custom_board_editor_button)
+                editor = 7
+            }
+            BitPiece.BLACK_KNIGHT -> {
+                blackKnight.setBackgroundResource(R.drawable.custom_board_editor_button)
+                editor = 8
+            }
+            BitPiece.BLACK_BISHOP -> {
+                blackBishop.setBackgroundResource(R.drawable.custom_board_editor_button)
+                editor = 9
+            }
+            BitPiece.BLACK_ROOK -> {
+                blackRook.setBackgroundResource(R.drawable.custom_board_editor_button)
+                editor = 10
+            }
+            BitPiece.BLACK_QUEEN -> {
+                blackQueen.setBackgroundResource(R.drawable.custom_board_editor_button)
+                editor = 11
+            }
+            BitPiece.BLACK_KING -> {
+                blackKing.setBackgroundResource(R.drawable.custom_board_editor_button)
+                editor = 12
+            }
         }
     }
 
     private fun handleSquareClick(square: BitSquare) {
-        println("square: $square")
+        when (editor) {
+            0 -> removePiece(square.piece, square.position)
+            1 -> addPiece(square.piece, BitPiece.WHITE_PAWN, square.position)
+            2 -> addPiece(square.piece, BitPiece.WHITE_KNIGHT, square.position)
+            3 -> addPiece(square.piece, BitPiece.WHITE_BISHOP, square.position)
+            4 -> addPiece(square.piece, BitPiece.WHITE_ROOK, square.position)
+            5 -> addPiece(square.piece, BitPiece.WHITE_QUEEN, square.position)
+            6 -> addPiece(square.piece, BitPiece.WHITE_KING, square.position)
+            7 -> addPiece(square.piece, BitPiece.BLACK_PAWN, square.position)
+            8 -> addPiece(square.piece, BitPiece.BLACK_KNIGHT, square.position)
+            9 -> addPiece(square.piece, BitPiece.BLACK_BISHOP, square.position)
+            10 -> addPiece(square.piece, BitPiece.BLACK_ROOK, square.position)
+            11 -> addPiece(square.piece, BitPiece.BLACK_QUEEN, square.position)
+            12 -> addPiece(square.piece, BitPiece.BLACK_KING, square.position)
+        }
+        updateBitboardStateUI()
+    }
+
+    private fun removePiece(piece: BitPiece, position: Long) {
+        board.removePiece(piece, position)
+    }
+
+    private fun addPiece(removePiece: BitPiece, addPiece: BitPiece, position: Long) {
+        board.removePiece(removePiece, position)
+        board.setPiece(addPiece, position)
     }
 
     private fun copyFEN() {
@@ -170,6 +233,17 @@ class BoardEditorActivity : AbsThemeActivity() {
                 squareLayout.setOnClickListener {
                     handleSquareClick(board.getPiece(position))
                 }
+            }
+        }
+    }
+
+    private fun updateBitboardStateUI() {
+        for (row in 7 downTo 0) {
+            for (col in 0..7) {
+                val position = 1L shl ((7 - row) * 8 + col)
+                val square = board.getPiece(position)
+                val squareLayout = uiMapper.getSquareView(position)
+                updateSquareUI(square, squareLayout)
             }
         }
     }
