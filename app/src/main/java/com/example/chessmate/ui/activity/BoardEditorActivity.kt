@@ -1,5 +1,8 @@
 package com.example.chessmate.ui.activity
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
@@ -189,7 +192,68 @@ class BoardEditorActivity : AbsThemeActivity() {
     }
 
     private fun copyFEN() {
-        println("copyFEN() called")
+        val fenString = makeFEN()
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("FEN", fenString)
+        clipboard.setPrimaryClip(clip)
+    }
+
+    private fun makeFEN(): String {
+        val builder = StringBuilder()
+
+        for (rank in 7 downTo 0) {
+            var emptySquares = 0
+            for (file in 0 until 8) {
+                val squareIndex = rank * 8 + file
+                val square = 1L shl squareIndex
+                val piece = board.getPiece(square)
+
+                if (piece.piece == BitPiece.NONE) {
+                    emptySquares++
+                } else {
+                    if (emptySquares > 0) {
+                        builder.append(emptySquares)
+                        emptySquares = 0
+                    }
+                    val pieceChar = when (piece.piece) {
+                        BitPiece.WHITE_PAWN -> 'P'
+                        BitPiece.WHITE_KNIGHT -> 'N'
+                        BitPiece.WHITE_BISHOP -> 'B'
+                        BitPiece.WHITE_ROOK -> 'R'
+                        BitPiece.WHITE_QUEEN -> 'Q'
+                        BitPiece.WHITE_KING -> 'K'
+                        BitPiece.BLACK_PAWN -> 'p'
+                        BitPiece.BLACK_KNIGHT -> 'n'
+                        BitPiece.BLACK_BISHOP -> 'b'
+                        BitPiece.BLACK_ROOK -> 'r'
+                        BitPiece.BLACK_QUEEN -> 'q'
+                        BitPiece.BLACK_KING -> 'k'
+                        else -> throw IllegalStateException("Invalid piece")
+                    }
+                    builder.append(pieceChar)
+                }
+            }
+            if (emptySquares > 0) builder.append(emptySquares)
+            if (rank > 0) builder.append('/')
+        }
+
+        builder.append(" ").append(if (whoToPlay.checkedRadioButtonId == R.id.white_to_play) 'w' else 'b')
+
+        builder.append(" ")
+        var castling = ""
+        if (whiteKingSideCastles.isChecked) castling += "K"
+        if (whiteQueenSideCastles.isChecked) castling += "Q"
+        if (blackKingSideCastles.isChecked) castling += "k"
+        if (blackQueenSideCastles.isChecked) castling += "q"
+        if (castling.isEmpty()) castling = "-"
+        builder.append(castling)
+
+        builder.append(" ")
+        builder.append("-")
+        builder.append(" ").append(0)
+        builder.append(" ").append(1)
+
+        return builder.toString()
     }
 
     private fun unselectEditors() {
