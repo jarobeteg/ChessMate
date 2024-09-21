@@ -140,10 +140,7 @@
     <!--Play string-->
     <string name="new_game">Új Játék</string>
     <string name="start_game">Játék Indítása</string>
-    <string name="bot_difficulty">Bot Nehézsége</string>
-    <string name="bot_difficulty_easy">Könnyű</string>
-    <string name="bot_difficulty_medium">Közepes</string>
-    <string name="bot_difficulty_hard">Nehéz</string>
+    <string name="bot_search_depth">Bot Keresési Mélység</string>
     <string name="start_as_random">Véletlenszerű kezdőoldal</string>
     <string name="start_as_white">Kezd fehérként</string>
     <string name="start_as_black">Kezd feketeként</string>

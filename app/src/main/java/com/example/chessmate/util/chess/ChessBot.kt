@@ -5,7 +5,6 @@ import com.example.chessmate.util.chess.bitboard.BitPiece
 import com.example.chessmate.util.chess.bitboard.Bitboard
 import com.example.chessmate.util.chess.bitboard.BitboardEvaluator
 import com.example.chessmate.util.chess.bitboard.BitboardMoveGenerator
-import kotlin.system.measureTimeMillis
 
 class ChessBot(val color: PieceColor){
     private val cacheLimit = 1000
@@ -17,12 +16,7 @@ class ChessBot(val color: PieceColor){
 
     //the println's and the speed benchmark to be removed later
     fun findBestMove(bitboard: Bitboard, depth: Int, maximizingPlayer: Boolean): BitMove? {
-        var move: BitMove?
-        val time = measureTimeMillis {
-            move = alphaBeta(bitboard, depth, Int.MIN_VALUE, Int.MAX_VALUE, maximizingPlayer, color).second
-        }
-        println("time: ${time / 1000.0} s")
-        return move
+        return alphaBeta(bitboard, depth, Int.MIN_VALUE, Int.MAX_VALUE, maximizingPlayer, color).second
     }
 
     private fun alphaBeta(board: Bitboard, depth: Int, alpha: Int, beta: Int, maximizingPlayer: Boolean, currentColor: PieceColor): Pair<Int, BitMove?> {
