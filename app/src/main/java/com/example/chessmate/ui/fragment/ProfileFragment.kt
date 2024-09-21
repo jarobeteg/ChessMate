@@ -1,6 +1,5 @@
 package com.example.chessmate.ui.fragment
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
@@ -82,7 +81,7 @@ class ProfileFragment : Fragment() {
             }
             val userProfile = result.userProfile
             if (userProfile != null) {
-                val levelText = getString(R.string.level) + userProfile.level
+                val levelText = getLevelText(userProfile.level)
                 username.text = userProfile.username
                 level.text = levelText
                 openingRating.text = userProfile.openingRating.toString()
@@ -188,6 +187,15 @@ class ProfileFragment : Fragment() {
             }
         }
         return deferred.await()
+    }
+
+    private fun getLevelText(level: Int): String {
+        return when (level) {
+            1 -> getString(R.string.beginner_level)
+            2 -> getString(R.string.intermediate_level)
+            3 -> getString(R.string.advanced_level)
+            else -> getString(R.string.beginner_level)
+        }
     }
 
     //tells the user that no active profiles were found
