@@ -59,7 +59,7 @@ class ChessBot(val color: PieceColor){
         val legalMoves = moveGenerator.generateLegalMovesForAlphaBeta(maximizingPlayer)
 
         val opponentColor = currentColor.opposite()
-        val threatenedMoves = getThreatenedPieces(board, opponentColor)
+        val threatenedMoves = getThreatenedPieces(board, currentColor, opponentColor)
 
         val prioritizedMoves = legalMoves.map { move ->
             val decodedMove = BitboardMoveGenerator.decodeMove(move)
@@ -162,13 +162,13 @@ class ChessBot(val color: PieceColor){
         return result
     }
 
-    private fun getThreatenedPieces(board: Bitboard, opponentColor: PieceColor): List<BitMove> {
+    private fun getThreatenedPieces(board: Bitboard, currentColor: PieceColor, opponentColor: PieceColor): List<BitMove> {
         val moveGenerator = BitboardMoveGenerator(board)
         val opponentMoves = moveGenerator.generateLegalMovesForAlphaBeta(opponentColor == PieceColor.WHITE)
             .map { BitboardMoveGenerator.decodeMove(it) }
 
         return opponentMoves.filter { move ->
-            board.getBitPiece(move.to).color() == color
+            board.getBitPiece(move.to).color() == currentColor
         }
     }
 
