@@ -13,13 +13,17 @@
         android:theme="@style/SplashTheme"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activity.BitboardActivity"
+            android:name=".ui.activity.BoardEditorActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".ui.activity.BitboardActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.activity.PlayActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.ChooseProfile"
             android:exported="false" />

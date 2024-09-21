@@ -102,4 +102,6 @@
     <string name="load_FEN">FEN betöltése:</string>
     <string name="invalid_FEN_string">FEN karakterlánc formátuma érvénytelen</string>
     <string name="valid_FEN_string_illegal_position">FEN karakterlánc formátuma érvényes, de illegális pozíciót képvisel vagy egy sakkmattban lévő játékost.</string>
+
+    <string name="board_editor_title">Sakktábla Szerkesztő</string>
 </resources>

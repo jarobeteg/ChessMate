@@ -46,7 +46,7 @@ class Bitboard {
         const val BLACK_CASTLED = 0x20
     }
 
-    fun setupInitialBoard() {
+    fun startingPosition() {
         setPiece(BitPiece.WHITE_PAWN, RANK_2)
         setPiece(BitPiece.WHITE_ROOK, RANK_1 and (FILE_A or FILE_H))
         setPiece(BitPiece.WHITE_KNIGHT, RANK_1 and (FILE_B or FILE_G))
@@ -60,7 +60,10 @@ class Bitboard {
         setPiece(BitPiece.BLACK_BISHOP, RANK_8 and (FILE_C or FILE_F))
         setPiece(BitPiece.BLACK_QUEEN, RANK_8 and FILE_D)
         setPiece(BitPiece.BLACK_KING, RANK_8 and FILE_E)
+    }
 
+    fun setupInitialBoard() {
+        startingPosition()
         this.stateTracker.add(BoardStateTracker(bitboards.clone(), PieceColor.WHITE, 0L))
     }
 

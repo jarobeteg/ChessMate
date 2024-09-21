@@ -31,6 +31,7 @@
         <item name="colorPrimaryDark">@color/tealPrimaryDark</item>
         <item name="colorAccent">@color/tealAccent</item>
         <item name="colorTransparentCustom">@color/tealTransparent</item>
+        <item name="editorTransparentCustom">@color/tealEditorTransparent</item>
     </style>
 
     <style name="Theme.ChessMate.Light.Indigo" parent="Theme.ChessMate">
@@ -38,6 +39,7 @@
         <item name="colorPrimaryDark">@color/indigoPrimaryDark</item>
         <item name="colorAccent">@color/indigoAccent</item>
         <item name="colorTransparentCustom">@color/indigoTransparent</item>
+        <item name="editorTransparentCustom">@color/indigoEditorTransparent</item>
     </style>
 
     <style name="Theme.ChessMate.Light.DarkPurple" parent="Theme.ChessMate">
@@ -45,6 +47,7 @@
         <item name="colorPrimaryDark">@color/darkPurplePrimaryDark</item>
         <item name="colorAccent">@color/darkPurpleAccent</item>
         <item name="colorTransparentCustom">@color/darkPurpleTransparent</item>
+        <item name="editorTransparentCustom">@color/darkPurpleEditorTransparent</item>
     </style>
 
     <style name="Theme.ChessMate.Light.Blue" parent="Theme.ChessMate">
@@ -52,6 +55,7 @@
         <item name="colorPrimaryDark">@color/bluePrimaryDark</item>
         <item name="colorAccent">@color/blueAccent</item>
         <item name="colorTransparentCustom">@color/blueTransparent</item>
+        <item name="editorTransparentCustom">@color/blueEditorTransparent</item>
     </style>
 
     <style name="Theme.ChessMate.Light.Green" parent="Theme.ChessMate">
@@ -59,6 +63,7 @@
         <item name="colorPrimaryDark">@color/greenPrimaryDark</item>
         <item name="colorAccent">@color/greenAccent</item>
         <item name="colorTransparentCustom">@color/greenTransparent</item>
+        <item name="editorTransparentCustom">@color/greenEditorTransparent</item>
     </style>
 
     <style name="Theme.ChessMate.Light.Amber" parent="Theme.ChessMate">
@@ -66,6 +71,7 @@
         <item name="colorPrimaryDark">@color/amberPrimaryDark</item>
         <item name="colorAccent">@color/amberAccent</item>
         <item name="colorTransparentCustom">@color/amberTransparent</item>
+        <item name="editorTransparentCustom">@color/amberEditorTransparent</item>
     </style>
 
     <style name="Theme.ChessMate.Light.Red" parent="Theme.ChessMate">
@@ -73,6 +79,7 @@
         <item name="colorPrimaryDark">@color/redPrimaryDark</item>
         <item name="colorAccent">@color/redAccent</item>
         <item name="colorTransparentCustom">@color/redTransparent</item>
+        <item name="editorTransparentCustom">@color/redEditorTransparent</item>
     </style>
 
     <style name="Theme.ChessMate.Light.Pink" parent="Theme.ChessMate">
@@ -80,6 +87,7 @@
         <item name="colorPrimaryDark">@color/pinkPrimaryDark</item>
         <item name="colorAccent">@color/pinkAccent</item>
         <item name="colorTransparentCustom">@color/pinkTransparent</item>
+        <item name="editorTransparentCustom">@color/pinkEditorTransparent</item>
     </style>
 
     <!--Dark themes-->
@@ -88,6 +96,7 @@
         <item name="colorPrimaryDark">@color/tealPrimaryDark</item>
         <item name="colorAccent">@color/tealAccent</item>
         <item name="colorTransparentCustom">@color/tealTransparent</item>
+        <item name="editorTransparentCustom">@color/tealEditorTransparent</item>
     </style>
 
     <style name="Theme.ChessMate.Dark.Indigo" parent="Theme.ChessMate.Dark">
@@ -95,6 +104,7 @@
         <item name="colorPrimaryDark">@color/indigoPrimaryDark</item>
         <item name="colorAccent">@color/indigoAccent</item>
         <item name="colorTransparentCustom">@color/indigoTransparent</item>
+        <item name="editorTransparentCustom">@color/indigoEditorTransparent</item>
         <item name="alertDialogTheme">@style/Theme.ChessMate.Dark.Indigo.Dialog</item>
     </style>
 
@@ -103,6 +113,7 @@
         <item name="colorPrimaryDark">@color/darkPurplePrimaryDark</item>
         <item name="colorAccent">@color/darkPurpleAccent</item>
         <item name="colorTransparentCustom">@color/darkPurpleTransparent</item>
+        <item name="editorTransparentCustom">@color/darkPurpleEditorTransparent</item>
         <item name="alertDialogTheme">@style/Theme.ChessMate.Dark.DarkPurple.Dialog</item>
     </style>
 
@@ -111,6 +122,7 @@
         <item name="colorPrimaryDark">@color/bluePrimaryDark</item>
         <item name="colorAccent">@color/blueAccent</item>
         <item name="colorTransparentCustom">@color/blueTransparent</item>
+        <item name="editorTransparentCustom">@color/blueEditorTransparent</item>
     </style>
 
     <style name="Theme.ChessMate.Dark.Green" parent="Theme.ChessMate.Dark">
@@ -118,6 +130,7 @@
         <item name="colorPrimaryDark">@color/greenPrimaryDark</item>
         <item name="colorAccent">@color/greenAccent</item>
         <item name="colorTransparentCustom">@color/greenTransparent</item>
+        <item name="editorTransparentCustom">@color/greenEditorTransparent</item>
     </style>
 
     <style name="Theme.ChessMate.Dark.Amber" parent="Theme.ChessMate.Dark">
@@ -125,6 +138,7 @@
         <item name="colorPrimaryDark">@color/amberPrimaryDark</item>
         <item name="colorAccent">@color/amberAccent</item>
         <item name="colorTransparentCustom">@color/amberTransparent</item>
+        <item name="editorTransparentCustom">@color/amberEditorTransparent</item>
     </style>
 
     <style name="Theme.ChessMate.Dark.Red" parent="Theme.ChessMate.Dark">
@@ -132,6 +146,7 @@
         <item name="colorPrimaryDark">@color/redPrimaryDark</item>
         <item name="colorAccent">@color/redAccent</item>
         <item name="colorTransparentCustom">@color/redTransparent</item>
+        <item name="editorTransparentCustom">@color/redEditorTransparent</item>
     </style>
 
     <style name="Theme.ChessMate.Dark.Pink" parent="Theme.ChessMate.Dark">
@@ -139,5 +154,6 @@
         <item name="colorPrimaryDark">@color/pinkPrimaryDark</item>
         <item name="colorAccent">@color/pinkAccent</item>
         <item name="colorTransparentCustom">@color/pinkTransparent</item>
+        <item name="editorTransparentCustom">@color/pinkEditorTransparent</item>
     </style>
 </resources>

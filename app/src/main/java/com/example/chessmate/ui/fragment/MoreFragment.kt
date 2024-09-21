@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.chessmate.R
 import com.example.chessmate.adapter.Item
 import com.example.chessmate.adapter.MoreAdapter
+import com.example.chessmate.ui.activity.BoardEditorActivity
 import com.example.chessmate.ui.viewmodel.MoreViewModel
 import com.example.chessmate.ui.activity.SettingsActivity
 
@@ -35,7 +36,8 @@ class MoreFragment : Fragment() {
 
         val recyclerView: RecyclerView = view.findViewById(R.id.moreFragment_recyclerView)
         val items = listOf(
-            Item(getString(R.string.title_settings_menu)) { startActivity(SettingsActivity::class.java) }
+            Item(getString(R.string.title_settings_menu)) { startActivity(SettingsActivity::class.java) },
+            Item(getString(R.string.board_editor_title)) { startActivity(BoardEditorActivity::class.java) }
         )
         val adapter = MoreAdapter(items)
         recyclerView.layoutManager = LinearLayoutManager(context)

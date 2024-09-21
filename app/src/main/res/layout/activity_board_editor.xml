@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorTransparentCustom"
+    tools:context=".ui.activity.BoardEditorActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/board_editor_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorAccent"
+        app:navigationIcon="@drawable/ic_arrow_back_24"
+        app:navigationIconTint="@color/white">
+
+        <TextView
+            android:id="@+id/board_editor_toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/board_editor_title"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            android:layout_gravity="center" />
+
+        <ImageButton
+            android:id="@+id/copy_fen_string"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_copy_24"
+            android:background="@drawable/ripple_circle"
+            android:layout_gravity="end"
+            android:layout_margin="8dp"
+            android:padding="8dp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/editor_black_pieces"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="6"
+        android:layout_below="@id/board_editor_toolbar">
+
+        <ImageButton
+            android:id="@+id/editor_black_pawn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:src="@drawable/piece_default_pawn_black"
+            android:background="@drawable/custom_board_editor_unselected_button"/>
+
+        <ImageButton
+            android:id="@+id/editor_black_knight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:src="@drawable/piece_default_knight_black"
+            android:background="@drawable/custom_board_editor_unselected_button"/>
+
+        <ImageButton
+            android:id="@+id/editor_black_bishop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:src="@drawable/piece_default_bishop_black"
+            android:background="@drawable/custom_board_editor_unselected_button"/>
+
+        <ImageButton
+            android:id="@+id/editor_black_rook"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:src="@drawable/piece_default_rook_black"
+            android:background="@drawable/custom_board_editor_unselected_button"/>
+
+        <ImageButton
+            android:id="@+id/editor_black_queen"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:src="@drawable/piece_default_queen_black"
+            android:background="@drawable/custom_board_editor_unselected_button"/>
+
+        <ImageButton
+            android:id="@+id/editor_black_king"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:src="@drawable/piece_default_king_black"
+            android:background="@drawable/custom_board_editor_unselected_button"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/bitboard_layout"/>
+
+    <ImageButton
+        android:id="@+id/editor_remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_delete_32"
+        android:layout_above="@id/editor_white_pieces"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/custom_board_editor_button"/>
+
+    <LinearLayout
+        android:id="@+id/editor_white_pieces"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="6"
+        android:layout_above="@id/board_editor_bottom_navigation">
+
+        <ImageButton
+            android:id="@+id/editor_white_pawn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:src="@drawable/piece_default_pawn_white"
+            android:background="@drawable/custom_board_editor_unselected_button"/>
+
+        <ImageButton
+            android:id="@+id/editor_white_knight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:src="@drawable/piece_default_knight_white"
+            android:background="@drawable/custom_board_editor_unselected_button"/>
+
+        <ImageButton
+            android:id="@+id/editor_white_bishop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:src="@drawable/piece_default_bishop_white"
+            android:background="@drawable/custom_board_editor_unselected_button"/>
+
+        <ImageButton
+            android:id="@+id/editor_white_rook"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:src="@drawable/piece_default_rook_white"
+            android:background="@drawable/custom_board_editor_unselected_button"/>
+
+        <ImageButton
+            android:id="@+id/editor_white_queen"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:src="@drawable/piece_default_queen_white"
+            android:background="@drawable/custom_board_editor_unselected_button"/>
+
+        <ImageButton
+            android:id="@+id/editor_white_king"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            android:src="@drawable/piece_default_king_white"
+            android:background="@drawable/custom_board_editor_unselected_button"/>
+
+    </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/board_editor_bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        app:labelVisibilityMode="labeled"
+        app:itemIconTint="@color/bottom_game_chess_selected_icon_color"
+        app:itemTextColor="@color/bottom_game_chess_selected_title_color"
+        android:background="?attr/colorAccent"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
+        app:menu="@menu/bottom_board_editor_menu"/>
+
+</RelativeLayout>

@@ -5,6 +5,7 @@
     <color name="grey">#808080</color>
     <color name="greyTransparent">#20808080</color>
     <color name="greyFiftyTransparent">#50808080</color>
+    <color name="greyEightyTransparent">#80808080</color>
 
     <!--Board colors-->
     <color name="default_light_square_color">#FFFCE9</color>
@@ -17,39 +18,47 @@
     <color name="tealPrimaryDark">#0D5C63</color>
     <color name="tealAccent">#44A1A0</color>
     <color name="tealTransparent">#4044A1A0</color>
+    <color name="tealEditorTransparent">#80247B7B</color>
     <!--Indigo-->
     <color name="indigoPrimary">#820899</color>
     <color name="indigoPrimaryDark">#700692</color>
     <color name="indigoAccent">#B358B7</color>
     <color name="indigoTransparent">#40B358B7</color>
+    <color name="indigoEditorTransparent">#80820899</color>
     <!--Dark Purple-->
     <color name="darkPurplePrimary">#3F3244</color>
     <color name="darkPurplePrimaryDark">#2F2235</color>
     <color name="darkPurpleAccent">#60495A</color>
     <color name="darkPurpleTransparent">#4060495A</color>
+    <color name="darkPurpleEditorTransparent">#803F3244</color>
     <!--Blue-->
     <color name="bluePrimary">#489FB5</color>
     <color name="bluePrimaryDark">#16697A</color>
     <color name="blueAccent">#82C0CC</color>
     <color name="blueTransparent">#4082C0CC</color>
+    <color name="blueEditorTransparent">#80489FB5</color>
     <!--Green-->
     <color name="greenPrimary">#608437</color>
     <color name="greenPrimaryDark">#31572C</color>
     <color name="greenAccent">#709041</color>
     <color name="greenTransparent">#40709041</color>
+    <color name="greenEditorTransparent">#80608437</color>
     <!--Amber-->
     <color name="amberPrimary">#FFB700</color>
     <color name="amberPrimaryDark">#FF9500</color>
     <color name="amberAccent">#FFD000</color>
     <color name="amberTransparent">#40FFD000</color>
+    <color name="amberEditorTransparent">#80FFB700</color>
     <!--Red-->
     <color name="redPrimary">#C1121F</color>
     <color name="redPrimaryDark">#9D0910</color>
     <color name="redAccent">#C92E36</color>
     <color name="redTransparent">#40C92E36</color>
+    <color name="redEditorTransparent">#80C1121F</color>
     <!--Pink-->
     <color name="pinkPrimary">#FF4D6D</color>
     <color name="pinkPrimaryDark">#C9184A</color>
     <color name="pinkAccent">#FF8FA3</color>
     <color name="pinkTransparent">#60FF8FA3</color>
+    <color name="pinkEditorTransparent">#80FF4D6D</color>
 </resources>
