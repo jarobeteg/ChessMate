@@ -2,7 +2,7 @@ package com.example.chessmate.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.chessmate.util.ThemeUtil
+import com.example.chessmate.util.AppThemeUtil
 
 abstract class AbsThemeActivity: AppCompatActivity() {
     private var themeStyle: Int = -1
@@ -14,7 +14,7 @@ abstract class AbsThemeActivity: AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val newThemeStyle: Int = ThemeUtil(this).setThemeType()
+        val newThemeStyle: Int = AppThemeUtil(this).setThemeType()
 
         if (themeStyle != newThemeStyle) {
             themeStyle = newThemeStyle
@@ -24,7 +24,7 @@ abstract class AbsThemeActivity: AppCompatActivity() {
     }
 
     fun updateTheme(){
-        themeStyle = ThemeUtil(this).setThemeType()
+        themeStyle = AppThemeUtil(this).setThemeType()
         setTheme(themeStyle)
     }
 }

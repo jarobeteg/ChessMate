@@ -6,7 +6,7 @@ import android.content.res.Configuration
 import androidx.preference.PreferenceManager
 import com.example.chessmate.R
 
-class ThemeUtil (context: Context){
+class AppThemeUtil (context: Context){
     private var context: Context
 
     private lateinit var sharedPref: SharedPreferences

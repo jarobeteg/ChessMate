@@ -20,7 +20,7 @@
     <string name="general_header">General</string>
 
     <!--ListPreference Theme-->
-    <string name="theme_title">App Theme Selection</string>
+    <string name="theme_title">App theme selection</string>
     <string name="theme_summary">Personalize your app\'s look and feel by choosing between different themes.</string>
     <string name="theme_day">Day</string>
     <string name="theme_night">Night</string>
@@ -119,4 +119,21 @@
     <string name="black_queen_side_castle">Black O-O-O</string>
     <string name="white_to_play">White to play</string>
     <string name="black_to_play">Black to play</string>
+
+    <!--Chessboard and piece theme strings-->
+    <string name="plain">Plain</string>
+    <string name="wood">Wood</string>
+    <string name="marble">Marble</string>
+    <string name="modern" translatable="false">Modern</string>
+    <string name="fresca" translatable="false">Fresca</string>
+    <string name="governor" translatable="false">Governor</string>
+    <string name="pixel" translatable="false">Pixel</string>
+    <string name="pref_chessboard_theme_key" translatable="false">chessboard_theme</string>
+    <string name="default_chessboard_theme_value" translatable="false">plain</string>
+    <string name="pref_piece_theme_key" translatable="false">piece_theme</string>
+    <string name="default_piece_theme_value" translatable="false">plain</string>
+    <string name="chessboard_title">Chessboard theme selection</string>
+    <string name="chessboard_summary">Customize your chessboard\'s appearance by selecting from various themes.</string>
+    <string name="piece_title">Piece theme selection</string>
+    <string name="piece_summary">Customize your pieces appearance by selecting from various themes.</string>
 </resources>

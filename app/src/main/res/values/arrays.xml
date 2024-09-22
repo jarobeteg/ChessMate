@@ -33,5 +33,33 @@
         <item>red</item>
         <item>pink</item>
     </string-array>
-    
+
+    <string-array name="pref_chessboard_theme_entries">
+        <item>@string/plain</item>
+        <item>@string/wood</item>
+        <item>@string/marble</item>
+        <item>@string/modern</item>
+    </string-array>
+
+    <string-array name="pref_chessboard_theme_values">
+        <item>plain</item>
+        <item>wood</item>
+        <item>marble</item>
+        <item>modern</item>
+    </string-array>
+
+    <string-array name="pref_piece_theme_entries">
+        <item>@string/plain</item>
+        <item>@string/fresca</item>
+        <item>@string/governor</item>
+        <item>@string/pixel</item>
+    </string-array>
+
+    <string-array name="pref_piece_theme_values">
+        <item>plain</item>
+        <item>fresca</item>
+        <item>governor</item>
+        <item>pixel</item>
+    </string-array>
+
 </resources>

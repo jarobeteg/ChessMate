@@ -19,8 +19,8 @@
     <string name="general_header">Általános</string>
 
     <!--ListPreference Theme-->
-    <string name="theme_title">App Témaválasztás</string>
-    <string name="theme_summary">Személyre szabhatja az alkalmazás megjelenését a különböző témák közötti választással.</string>
+    <string name="theme_title">App témaválasztás</string>
+    <string name="theme_summary">Személyre szabhatja az alkalmazás megjelenését különböző témák közül választva.</string>
     <string name="theme_day">Világos</string>
     <string name="theme_night">Sötét</string>
     <string name="theme_day_night">Rendszer-alapú</string>
@@ -111,4 +111,13 @@
     <string name="black_queen_side_castle">Fekete O-O-O</string>
     <string name="white_to_play">Fehér lép</string>
     <string name="black_to_play">Fekete lép</string>
+
+    <!--Chessboard and piece theme strings-->
+    <string name="plain">Egyszerű</string>
+    <string name="wood">Fa</string>
+    <string name="marble">Márvány</string>
+    <string name="chessboard_title">Sakktábla témaválasztás</string>
+    <string name="chessboard_summary">Személyre szabhatja a sakktábla megjelenését különböző témák közül választva.</string>
+    <string name="piece_title">Sakkfigura témaválasztás</string>
+    <string name="piece_summary">Személyre szabhatja a figurák megjelenését különböző témák közül választva.</string>
 </resources>

@@ -31,6 +31,8 @@ class SettingsActivity : AbsThemeActivity() {
 
             setThemePreference()
             setThemeColorPreference()
+            setChessboardThemePreference()
+            setPieceThemePreference()
         }
 
         private fun setThemePreference(){
@@ -52,7 +54,7 @@ class SettingsActivity : AbsThemeActivity() {
 
         private fun setThemeColorPreference(){
             val clickListener = Preference.OnPreferenceClickListener { true }
-            val changeListener = Preference.OnPreferenceChangeListener {preference, newValue ->
+            val changeListener = Preference.OnPreferenceChangeListener { preference, newValue ->
                 val listPreference = preference as ListPreference
                 val entries = listPreference.entries
                 listPreference.summary = entries[listPreference.findIndexOfValue(newValue.toString())]
@@ -65,6 +67,40 @@ class SettingsActivity : AbsThemeActivity() {
             colorPreference?.onPreferenceChangeListener = changeListener
             colorPreference?.onPreferenceClickListener = clickListener
             colorPreference?.summary = colorPreference?.entry
+        }
+
+        private fun setChessboardThemePreference() {
+            val clickListener = Preference.OnPreferenceClickListener { true }
+            val changeListener = Preference.OnPreferenceChangeListener { preference, newValue ->
+                val listPreference = preference as ListPreference
+                val entries = listPreference.entries
+                listPreference.summary = entries[listPreference.findIndexOfValue(newValue.toString())]
+
+                requireActivity().recreate()
+                true
+            }
+
+            val chessboardPreference = findPreference<ListPreference>(getString(R.string.pref_chessboard_theme_key))
+            chessboardPreference?.onPreferenceChangeListener = changeListener
+            chessboardPreference?.onPreferenceClickListener = clickListener
+            chessboardPreference?.summary = chessboardPreference?.entry
+        }
+
+        private fun setPieceThemePreference() {
+            val clickListener = Preference.OnPreferenceClickListener { true }
+            val changeListener = Preference.OnPreferenceChangeListener { preference, newValue ->
+                val listPreference = preference as ListPreference
+                val entries = listPreference.entries
+                listPreference.summary = entries[listPreference.findIndexOfValue(newValue.toString())]
+
+                requireActivity().recreate()
+                true
+            }
+
+            val piecePreference = findPreference<ListPreference>(getString(R.string.pref_piece_theme_key))
+            piecePreference?.onPreferenceChangeListener = changeListener
+            piecePreference?.onPreferenceClickListener = clickListener
+            piecePreference?.summary = piecePreference?.entry
         }
     }
 }

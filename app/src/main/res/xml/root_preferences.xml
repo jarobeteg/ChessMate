@@ -25,6 +25,26 @@
             app:iconSpaceReserved="false"
             />
 
+        <ListPreference
+            android:defaultValue="@string/default_chessboard_theme_value"
+            android:entries="@array/pref_chessboard_theme_entries"
+            android:entryValues="@array/pref_chessboard_theme_values"
+            android:key="@string/pref_chessboard_theme_key"
+            android:title="@string/chessboard_title"
+            android:summary="@string/chessboard_summary"
+            app:iconSpaceReserved="false"
+            />
+
+        <ListPreference
+            android:defaultValue="@string/default_piece_theme_value"
+            android:entries="@array/pref_piece_theme_entries"
+            android:entryValues="@array/pref_piece_theme_values"
+            android:key="@string/pref_piece_theme_key"
+            android:title="@string/piece_title"
+            android:summary="@string/piece_summary"
+            app:iconSpaceReserved="false"
+            />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
