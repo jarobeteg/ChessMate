@@ -14,6 +14,7 @@ import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.chessmate.R
+import com.example.chessmate.util.ChessThemeUtil
 import com.example.chessmate.util.chess.EndGameDialogFragment
 import com.example.chessmate.util.chess.Position
 import com.example.chessmate.util.chess.PromotionDialogFragment
@@ -38,6 +39,9 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     private lateinit var turnNumber: TextView
     private lateinit var whiteLastMove: TextView
     private lateinit var blackLastMove: TextView
+    private lateinit var chessThemeUtil: ChessThemeUtil
+    private var lightSquareColor = R.color.default_light_square_color
+    private var darkSquareColor = R.color.default_dark_square_color
     private var isPlayerStarted: Boolean = true
     private var squareSize: Int = 0
     private val highlightCircleTag = "highlight_circle"
@@ -55,6 +59,11 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         val sharedPreferences = getSharedPreferences("chess_game", Context.MODE_PRIVATE)
         val startingSide = sharedPreferences.getString("starting_side", "white")
         GameContext.depth = 4 + sharedPreferences.getInt("depth", 0)
+
+        chessThemeUtil = ChessThemeUtil(this)
+        val boardTheme = chessThemeUtil.getBoardTheme()
+        lightSquareColor = boardTheme.first
+        darkSquareColor = boardTheme.second
 
         isPlayerStarted = startingSide == "white"
 
@@ -188,8 +197,6 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     }
 
     private fun setupSquareColors(position: Position, frameLayout: FrameLayout) {
-        val lightSquareColor = R.color.default_light_square_color
-        val darkSquareColor = R.color.default_dark_square_color
         val row = position.row
         val col = position.col
         val colorResId = if ((row + col) % 2 == 0) lightSquareColor else darkSquareColor
@@ -234,13 +241,13 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     }
 
     private fun getNumberTextColor(row: Int): Int {
-        return if (row % 2 == 0) getColor(R.color.default_dark_square_color)
-        else getColor(R.color.default_light_square_color)
+        return if (row % 2 == 0) getColor(darkSquareColor)
+        else getColor(lightSquareColor)
     }
 
     private fun getLetterTextColor(col: Int): Int {
-        return if (col % 2 == 0) getColor(R.color.default_light_square_color)
-        else getColor(R.color.default_dark_square_color)
+        return if (col % 2 == 0) getColor(lightSquareColor)
+        else getColor(darkSquareColor)
     }
 
     private fun getPieceResourceId(piece: BitPiece): Int {

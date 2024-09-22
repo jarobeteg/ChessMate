@@ -2,4 +2,6 @@
 <resources>
     <attr name="colorTransparentCustom" format="color" />
     <attr name="editorTransparentCustom" format="color" />
+    <attr name="colorLightSquare" format="color" />
+    <attr name="colorDarkSquare" format="color" />
 </resources>

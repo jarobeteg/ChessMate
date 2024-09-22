@@ -27,13 +27,12 @@
 
     <!--ListPreference Color-->
     <string name="color_title">Válassza ki az alkalmazás témájának színét</string>
-    <string name="color_summary">Válasszon nyolc különböző szín közül, hogy az alkalmazás témáját a saját ízlése szerint alakítsa.</string>
+    <string name="color_summary">Válasszon hét különböző szín közül, hogy az alkalmazás témáját a saját ízlése szerint alakítsa.</string>
     <string name="colorTeal">Teal</string>
     <string name="colorIndigo">Indigó</string>
     <string name="colorDarkPurple">Sötét lila</string>
     <string name="colorBlue">Kék</string>
     <string name="colorGreen">Zöld</string>
-    <string name="colorAmber">Borostyán</string>
     <string name="colorRed">Piros</string>
     <string name="colorPink">Rózsaszín</string>
 

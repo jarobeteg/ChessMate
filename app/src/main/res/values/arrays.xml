@@ -18,7 +18,6 @@
         <item>@string/colorDarkPurple</item>
         <item>@string/colorBlue</item>
         <item>@string/colorGreen</item>
-        <item>@string/colorAmber</item>
         <item>@string/colorRed</item>
         <item>@string/colorPink</item>
     </string-array>
@@ -29,7 +28,6 @@
         <item>dark_purple</item>
         <item>blue</item>
         <item>green</item>
-        <item>amber</item>
         <item>red</item>
         <item>pink</item>
     </string-array>

@@ -16,6 +16,7 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import com.example.chessmate.R
+import com.example.chessmate.util.ChessThemeUtil
 import com.example.chessmate.util.chess.Position
 import com.example.chessmate.util.chess.bitboard.BitPiece
 import com.example.chessmate.util.chess.bitboard.BitSquare
@@ -45,6 +46,9 @@ class BoardEditorActivity : AbsThemeActivity() {
     private lateinit var blackKingSideCastles: CheckBox
     private lateinit var blackQueenSideCastles: CheckBox
     private lateinit var whoToPlay: RadioGroup
+    private lateinit var chessThemeUtil: ChessThemeUtil
+    private var lightSquareColor = R.color.default_light_square_color
+    private var darkSquareColor = R.color.default_dark_square_color
     private var editor = 0
     private var squareSize: Int = 0
 
@@ -60,6 +64,11 @@ class BoardEditorActivity : AbsThemeActivity() {
 
         val copyFEN = findViewById<ImageButton>(R.id.copy_fen_string)
         copyFEN.setOnClickListener { copyFEN() }
+
+        chessThemeUtil = ChessThemeUtil(this)
+        val boardTheme = chessThemeUtil.getBoardTheme()
+        lightSquareColor = boardTheme.first
+        darkSquareColor = boardTheme.second
 
         remove = findViewById(R.id.editor_remove)
         whitePawn = findViewById(R.id.editor_white_pawn)
@@ -339,8 +348,6 @@ class BoardEditorActivity : AbsThemeActivity() {
     }
 
     private fun setupSquareColors(position: Position, frameLayout: FrameLayout) {
-        val lightSquareColor = R.color.default_light_square_color
-        val darkSquareColor = R.color.default_dark_square_color
         val row = position.row
         val col = position.col
         val colorResId = if ((row + col) % 2 == 0) lightSquareColor else darkSquareColor
@@ -385,13 +392,13 @@ class BoardEditorActivity : AbsThemeActivity() {
     }
 
     private fun getNumberTextColor(row: Int): Int {
-        return if (row % 2 == 0) getColor(R.color.default_dark_square_color)
-        else getColor(R.color.default_light_square_color)
+        return if (row % 2 == 0) getColor(darkSquareColor)
+        else getColor(lightSquareColor)
     }
 
     private fun getLetterTextColor(col: Int): Int {
-        return if (col % 2 == 0) getColor(R.color.default_light_square_color)
-        else getColor(R.color.default_dark_square_color)
+        return if (col % 2 == 0) getColor(lightSquareColor)
+        else getColor(darkSquareColor)
     }
 
     private fun getPieceResourceId(piece: BitPiece): Int {

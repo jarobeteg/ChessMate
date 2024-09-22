@@ -10,53 +10,58 @@
     <!--Board colors-->
     <color name="default_light_square_color">#FFFCE9</color>
     <color name="default_dark_square_color">#A0522D</color>
+    <color name="wood_light_square_color">#D2B48C</color>
+    <color name="wood_dark_square_color">#4E2A1E</color>
+    <color name="marble_light_square_color">#F5F5F5</color>
+    <color name="marble_dark_square_color">#2C2C2C</color>
 
     <!--Theme colors-->
     <color name="splash_background">#0B1316</color>
     <!--Teal-->
     <color name="tealPrimary">#247B7B</color>
+    <color name="tealPrimaryLight">#72B9B8</color>
     <color name="tealPrimaryDark">#0D5C63</color>
     <color name="tealAccent">#44A1A0</color>
     <color name="tealTransparent">#4044A1A0</color>
     <color name="tealEditorTransparent">#80247B7B</color>
     <!--Indigo-->
     <color name="indigoPrimary">#820899</color>
+    <color name="indigoPrimaryLight">#C682C9</color>
     <color name="indigoPrimaryDark">#700692</color>
     <color name="indigoAccent">#B358B7</color>
     <color name="indigoTransparent">#40B358B7</color>
     <color name="indigoEditorTransparent">#80820899</color>
     <!--Dark Purple-->
     <color name="darkPurplePrimary">#3F3244</color>
+    <color name="darkPurplePrimaryLight">#877783</color>
     <color name="darkPurplePrimaryDark">#2F2235</color>
     <color name="darkPurpleAccent">#60495A</color>
     <color name="darkPurpleTransparent">#4060495A</color>
     <color name="darkPurpleEditorTransparent">#803F3244</color>
     <!--Blue-->
     <color name="bluePrimary">#489FB5</color>
+    <color name="bluePrimaryLight">#A0D0D9</color>
     <color name="bluePrimaryDark">#16697A</color>
     <color name="blueAccent">#82C0CC</color>
     <color name="blueTransparent">#4082C0CC</color>
     <color name="blueEditorTransparent">#80489FB5</color>
     <!--Green-->
     <color name="greenPrimary">#608437</color>
+    <color name="greenPrimaryLight">#94AB70</color>
     <color name="greenPrimaryDark">#31572C</color>
     <color name="greenAccent">#709041</color>
     <color name="greenTransparent">#40709041</color>
     <color name="greenEditorTransparent">#80608437</color>
-    <!--Amber-->
-    <color name="amberPrimary">#FFB700</color>
-    <color name="amberPrimaryDark">#FF9500</color>
-    <color name="amberAccent">#FFD000</color>
-    <color name="amberTransparent">#40FFD000</color>
-    <color name="amberEditorTransparent">#80FFB700</color>
     <!--Red-->
     <color name="redPrimary">#C1121F</color>
+    <color name="redPrimaryLight">#D66268</color>
     <color name="redPrimaryDark">#9D0910</color>
     <color name="redAccent">#C92E36</color>
     <color name="redTransparent">#40C92E36</color>
     <color name="redEditorTransparent">#80C1121F</color>
     <!--Pink-->
     <color name="pinkPrimary">#FF4D6D</color>
+    <color name="pinkPrimaryLight">#FFAABA</color>
     <color name="pinkPrimaryDark">#C9184A</color>
     <color name="pinkAccent">#FF8FA3</color>
     <color name="pinkTransparent">#60FF8FA3</color>
