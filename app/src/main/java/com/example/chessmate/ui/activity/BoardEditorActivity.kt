@@ -49,6 +49,7 @@ class BoardEditorActivity : AbsThemeActivity() {
     private lateinit var chessThemeUtil: ChessThemeUtil
     private var lightSquareColor = R.color.default_light_square_color
     private var darkSquareColor = R.color.default_dark_square_color
+    private var pieceThemeArray = IntArray(12)
     private var editor = 0
     private var squareSize: Int = 0
 
@@ -66,9 +67,12 @@ class BoardEditorActivity : AbsThemeActivity() {
         copyFEN.setOnClickListener { copyFEN() }
 
         chessThemeUtil = ChessThemeUtil(this)
+
         val boardTheme = chessThemeUtil.getBoardTheme()
         lightSquareColor = boardTheme.first
         darkSquareColor = boardTheme.second
+
+        pieceThemeArray = chessThemeUtil.getPieceTheme()
 
         remove = findViewById(R.id.editor_remove)
         whitePawn = findViewById(R.id.editor_white_pawn)
@@ -403,18 +407,18 @@ class BoardEditorActivity : AbsThemeActivity() {
 
     private fun getPieceResourceId(piece: BitPiece): Int {
         return when (piece) {
-            BitPiece.WHITE_PAWN -> R.drawable.piece_default_pawn_white
-            BitPiece.WHITE_KNIGHT -> R.drawable.piece_default_knight_white
-            BitPiece.WHITE_BISHOP -> R.drawable.piece_default_bishop_white
-            BitPiece.WHITE_ROOK -> R.drawable.piece_default_rook_white
-            BitPiece.WHITE_QUEEN -> R.drawable.piece_default_queen_white
-            BitPiece.WHITE_KING -> R.drawable.piece_default_king_white
-            BitPiece.BLACK_PAWN -> R.drawable.piece_default_pawn_black
-            BitPiece.BLACK_KNIGHT -> R.drawable.piece_default_knight_black
-            BitPiece.BLACK_BISHOP -> R.drawable.piece_default_bishop_black
-            BitPiece.BLACK_ROOK -> R.drawable.piece_default_rook_black
-            BitPiece.BLACK_QUEEN -> R.drawable.piece_default_queen_black
-            BitPiece.BLACK_KING -> R.drawable.piece_default_king_black
+            BitPiece.WHITE_PAWN -> pieceThemeArray[0]
+            BitPiece.WHITE_KNIGHT -> pieceThemeArray[1]
+            BitPiece.WHITE_BISHOP -> pieceThemeArray[2]
+            BitPiece.WHITE_ROOK -> pieceThemeArray[3]
+            BitPiece.WHITE_QUEEN -> pieceThemeArray[4]
+            BitPiece.WHITE_KING -> pieceThemeArray[5]
+            BitPiece.BLACK_PAWN -> pieceThemeArray[6]
+            BitPiece.BLACK_KNIGHT -> pieceThemeArray[7]
+            BitPiece.BLACK_BISHOP -> pieceThemeArray[8]
+            BitPiece.BLACK_ROOK -> pieceThemeArray[9]
+            BitPiece.BLACK_QUEEN -> pieceThemeArray[10]
+            BitPiece.BLACK_KING -> pieceThemeArray[11]
             BitPiece.NONE -> 0
         }
     }

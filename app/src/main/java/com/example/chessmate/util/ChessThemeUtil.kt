@@ -62,10 +62,85 @@ class ChessThemeUtil (private var context: Context) {
         return typedValue.resourceId
     }
 
-    fun getPieceTheme() {
+    fun getPieceTheme(): IntArray {
         val newPieceThemeKey = context.getString(R.string.pref_piece_theme_key)
         val defaultPieceThemeValue = context.getString(R.string.default_piece_theme_value)
         val newPieceTheme = sharedPref.getString(newPieceThemeKey, defaultPieceThemeValue) ?: defaultPieceThemeValue
-        println("new piece value: $newPieceTheme")
+
+        val pieceTheme: IntArray = when (newPieceTheme) {
+            pieceThemeFresca -> getPieceThemeFresca()
+            pieceThemeGovernor -> getPieceThemeGovernor()
+            pieceThemePixel -> getPieceThemePixel()
+            else -> getPieceThemePlain()
+        }
+        return pieceTheme
+    }
+
+    private fun getPieceThemePlain(): IntArray {
+        return intArrayOf(
+            R.drawable.piece_default_pawn_white,
+            R.drawable.piece_default_knight_white,
+            R.drawable.piece_default_bishop_white,
+            R.drawable.piece_default_rook_white,
+            R.drawable.piece_default_queen_white,
+            R.drawable.piece_default_king_white,
+            R.drawable.piece_default_pawn_black,
+            R.drawable.piece_default_knight_black,
+            R.drawable.piece_default_bishop_black,
+            R.drawable.piece_default_rook_black,
+            R.drawable.piece_default_queen_black,
+            R.drawable.piece_default_king_black
+        )
+    }
+
+    private fun getPieceThemeFresca(): IntArray {
+        return intArrayOf(
+            R.drawable.piece_fresca_pawn_white,
+            R.drawable.piece_fresca_knight_white,
+            R.drawable.piece_fresca_bishop_white,
+            R.drawable.piece_fresca_rook_white,
+            R.drawable.piece_fresca_queen_white,
+            R.drawable.piece_fresca_king_white,
+            R.drawable.piece_fresca_pawn_black,
+            R.drawable.piece_fresca_knight_black,
+            R.drawable.piece_fresca_bishop_black,
+            R.drawable.piece_fresca_rook_black,
+            R.drawable.piece_fresca_queen_black,
+            R.drawable.piece_fresca_king_black
+        )
+    }
+
+    private fun getPieceThemeGovernor(): IntArray {
+        return intArrayOf(
+            R.drawable.piece_governor_pawn_white,
+            R.drawable.piece_governor_knight_white,
+            R.drawable.piece_governor_bishop_white,
+            R.drawable.piece_governor_rook_white,
+            R.drawable.piece_governor_queen_white,
+            R.drawable.piece_governor_king_white,
+            R.drawable.piece_governor_pawn_black,
+            R.drawable.piece_governor_knight_black,
+            R.drawable.piece_governor_bishop_black,
+            R.drawable.piece_governor_rook_black,
+            R.drawable.piece_governor_queen_black,
+            R.drawable.piece_governor_king_black
+        )
+    }
+
+    private fun getPieceThemePixel(): IntArray {
+        return intArrayOf(
+            R.drawable.piece_pixel_pawn_white,
+            R.drawable.piece_pixel_knight_white,
+            R.drawable.piece_pixel_bishop_white,
+            R.drawable.piece_pixel_rook_white,
+            R.drawable.piece_pixel_queen_white,
+            R.drawable.piece_pixel_king_white,
+            R.drawable.piece_pixel_pawn_black,
+            R.drawable.piece_pixel_knight_black,
+            R.drawable.piece_pixel_bishop_black,
+            R.drawable.piece_pixel_rook_black,
+            R.drawable.piece_pixel_queen_black,
+            R.drawable.piece_pixel_king_black
+        )
     }
 }
