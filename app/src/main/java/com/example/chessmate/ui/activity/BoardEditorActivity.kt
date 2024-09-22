@@ -88,6 +88,8 @@ class BoardEditorActivity : AbsThemeActivity() {
         blackQueen = findViewById(R.id.editor_black_queen)
         blackKing = findViewById(R.id.editor_black_king)
 
+        setEditorResourceId()
+
         remove.setOnClickListener { handleEditorClick(BitPiece.NONE) }
         whitePawn.setOnClickListener { handleEditorClick(BitPiece.WHITE_PAWN) }
         whiteKnight.setOnClickListener { handleEditorClick(BitPiece.WHITE_KNIGHT) }
@@ -403,6 +405,21 @@ class BoardEditorActivity : AbsThemeActivity() {
     private fun getLetterTextColor(col: Int): Int {
         return if (col % 2 == 0) getColor(lightSquareColor)
         else getColor(darkSquareColor)
+    }
+
+    private fun setEditorResourceId() {
+        whitePawn.setImageResource(pieceThemeArray[0])
+        whiteKnight.setImageResource(pieceThemeArray[1])
+        whiteBishop.setImageResource(pieceThemeArray[2])
+        whiteRook.setImageResource(pieceThemeArray[3])
+        whiteQueen.setImageResource(pieceThemeArray[4])
+        whiteKing.setImageResource(pieceThemeArray[5])
+        blackPawn.setImageResource(pieceThemeArray[6])
+        blackKnight.setImageResource(pieceThemeArray[7])
+        blackBishop.setImageResource(pieceThemeArray[8])
+        blackRook.setImageResource(pieceThemeArray[9])
+        blackQueen.setImageResource(pieceThemeArray[10])
+        blackKing.setImageResource(pieceThemeArray[11])
     }
 
     private fun getPieceResourceId(piece: BitPiece): Int {
