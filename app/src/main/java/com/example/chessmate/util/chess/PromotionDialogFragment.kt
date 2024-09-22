@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.fragment.app.DialogFragment
 import com.example.chessmate.R
+import com.example.chessmate.util.ChessThemeUtil
 import com.example.chessmate.util.chess.bitboard.BitSquare
 
 class PromotionDialogFragment(private val isPlayerWhite: Boolean, private val listener: PromotionDialogListener,
@@ -25,21 +26,25 @@ class PromotionDialogFragment(private val isPlayerWhite: Boolean, private val li
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val chessThemeUtil = ChessThemeUtil(requireContext())
+        val pieceThemeArray = chessThemeUtil.getPieceTheme()
+
         val promoteToQueen = view.findViewById<ImageButton>(R.id.buttonPromoteToQueen)
         val promoteToRook = view.findViewById<ImageButton>(R.id.buttonPromoteToRook)
         val promoteToBishop = view.findViewById<ImageButton>(R.id.buttonPromoteToBishop)
         val promoteToKnight = view.findViewById<ImageButton>(R.id.buttonPromoteToKnight)
 
         if (isPlayerWhite) {
-            promoteToQueen.setImageResource(R.drawable.piece_default_queen_white)
-            promoteToRook.setImageResource(R.drawable.piece_default_rook_white)
-            promoteToBishop.setImageResource(R.drawable.piece_default_bishop_white)
-            promoteToKnight.setImageResource(R.drawable.piece_default_knight_white)
+            promoteToQueen.setImageResource(pieceThemeArray[4])
+            promoteToRook.setImageResource(pieceThemeArray[3])
+            promoteToBishop.setImageResource(pieceThemeArray[2])
+            promoteToKnight.setImageResource(pieceThemeArray[1])
         } else {
-            promoteToQueen.setImageResource(R.drawable.piece_default_queen_black)
-            promoteToRook.setImageResource(R.drawable.piece_default_rook_black)
-            promoteToBishop.setImageResource(R.drawable.piece_default_bishop_black)
-            promoteToKnight.setImageResource(R.drawable.piece_default_knight_black)
+            promoteToQueen.setImageResource(pieceThemeArray[10])
+            promoteToRook.setImageResource(pieceThemeArray[9])
+            promoteToBishop.setImageResource(pieceThemeArray[8])
+            promoteToKnight.setImageResource(pieceThemeArray[7])
         }
 
         promoteToQueen.setOnClickListener {
