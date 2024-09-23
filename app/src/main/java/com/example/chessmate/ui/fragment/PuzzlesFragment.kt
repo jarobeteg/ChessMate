@@ -37,8 +37,6 @@ class PuzzlesFragment : Fragment() {
         intermediatePuzzlesButton.setOnClickListener { animateButton(intermediatePuzzlesButton, 1) }
         advancedPuzzlesButton.setOnClickListener { animateButton(advancedPuzzlesButton, 2) }
 
-        println("user data: ${UserProfileManager.getInstance().getUserProfileLiveData().value?.username}")
-
         return view
     }
 
