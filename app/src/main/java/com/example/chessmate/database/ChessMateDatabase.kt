@@ -4,12 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.chessmate.database.dao.PuzzleCompletionDAO
 import com.example.chessmate.database.dao.UserProfileDAO
+import com.example.chessmate.database.entity.PuzzleCompletion
 import com.example.chessmate.database.entity.UserProfile
 
-@Database(entities = [UserProfile::class], version = 2, exportSchema = false)
+@Database(entities = [UserProfile::class, PuzzleCompletion::class], version = 3, exportSchema = false)
 abstract class ChessMateDatabase: RoomDatabase() {
     abstract fun userProfileDAO(): UserProfileDAO
+    abstract fun puzzleCompletionDAO(): PuzzleCompletionDAO
 
     companion object{
         @Volatile

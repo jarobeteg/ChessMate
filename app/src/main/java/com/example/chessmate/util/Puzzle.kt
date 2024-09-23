@@ -4,5 +4,5 @@ data class Puzzle(
     val puzzleId: Int,
     val fen: String,
     val solution: String,
-    val difficulty: String
+    val difficulty: Int
 )

@@ -13,6 +13,7 @@ import com.example.chessmate.ui.activity.AdvancedPuzzlesActivity
 import com.example.chessmate.ui.activity.BeginnerPuzzlesActivity
 import com.example.chessmate.ui.activity.IntermediatePuzzlesActivity
 import com.example.chessmate.ui.viewmodel.PuzzlesViewModel
+import com.example.chessmate.util.UserProfileManager
 
 class PuzzlesFragment : Fragment() {
 
@@ -35,6 +36,8 @@ class PuzzlesFragment : Fragment() {
         beginnerPuzzlesButton.setOnClickListener { animateButton(beginnerPuzzlesButton, 0) }
         intermediatePuzzlesButton.setOnClickListener { animateButton(intermediatePuzzlesButton, 1) }
         advancedPuzzlesButton.setOnClickListener { animateButton(advancedPuzzlesButton, 2) }
+
+        println("user data: ${UserProfileManager.getInstance().getUserProfileLiveData().value?.username}")
 
         return view
     }

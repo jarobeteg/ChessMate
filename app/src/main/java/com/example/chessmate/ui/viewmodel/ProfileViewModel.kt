@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.chessmate.database.ProfileResult
 import com.example.chessmate.database.UserProfileRepository
-import com.example.chessmate.database.entity.UserProfile
 
 class ProfileViewModel(repository: UserProfileRepository): ViewModel() {
     //This is for retrieving the profile from the database with the help of ProfileResult data class which holds the necessary result of the query
