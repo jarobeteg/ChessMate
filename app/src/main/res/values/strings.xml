@@ -135,4 +135,9 @@
     <string name="chessboard_summary">Customize your chessboard\'s appearance by selecting from various themes.</string>
     <string name="piece_title">Piece theme selection</string>
     <string name="piece_summary">Customize your pieces appearance by selecting from various themes.</string>
+
+    <!--Puzzle fragment strings-->
+    <string name="beginner_puzzles">Beginner puzzles</string>
+    <string name="intermediate_puzzles">Intermediate puzzles</string>
+    <string name="advanced_puzzles">Advanced puzzles</string>
 </resources>

@@ -5,10 +5,63 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.PuzzlesFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Puzzle fragment" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <Button
+            android:id="@+id/beginner_puzzles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/beginner_puzzles"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:includeFontPadding="false"
+            android:padding="16dp"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/custom_create_new_profile_button"/>
+
+        <Button
+            android:id="@+id/intermediate_puzzles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/intermediate_puzzles"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:includeFontPadding="false"
+            android:padding="16dp"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/custom_create_new_profile_button"/>
+
+        <Button
+            android:id="@+id/advanced_puzzles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/advanced_puzzles"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:includeFontPadding="false"
+            android:padding="16dp"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/custom_create_new_profile_button"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/colorAccent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"/>
+
+    </LinearLayout>
 </FrameLayout>

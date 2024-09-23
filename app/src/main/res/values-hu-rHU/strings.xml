@@ -119,4 +119,9 @@
     <string name="chessboard_summary">Személyre szabhatja a sakktábla megjelenését különböző témák közül választva.</string>
     <string name="piece_title">Sakkfigura témaválasztás</string>
     <string name="piece_summary">Személyre szabhatja a figurák megjelenését különböző témák közül választva.</string>
+
+    <!--Puzzle fragment strings-->
+    <string name="beginner_puzzles">Kezdő rejtvények</string>
+    <string name="intermediate_puzzles">Középhaladó rejtvények</string>
+    <string name="advanced_puzzles">Haladó rejtvények</string>
 </resources>
