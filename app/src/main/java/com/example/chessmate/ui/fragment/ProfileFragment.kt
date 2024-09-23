@@ -45,6 +45,8 @@ class ProfileFragment : Fragment() {
         userProfileRepository = UserProfileRepository(requireContext())
         viewModel = ViewModelProvider(this, ViewModelFactory(userProfileRepository))[ProfileViewModel::class.java]
 
+        val userProfile = userProfileManager.getUserProfileLiveData().value
+
         val username = view.findViewById<TextView>(R.id.username)
         val changeProfile = view.findViewById<ImageButton>(R.id.changeProfileButton)
         val deleteProfile = view.findViewById<ImageButton>(R.id.deleteProfileButton)
@@ -72,27 +74,16 @@ class ProfileFragment : Fragment() {
             viewModel.onDeleteProfileInitiated()
         }
 
-        //this observes the user profile data and displays it for the user
-        //if no profile was found an error message is shown and a guest profile is loaded
-        //because it's LiveData the UI should update automatically when a change occurs to the profile
-        viewModel.profileResultLiveData.observe(viewLifecycleOwner, Observer { result ->
-            if (result.hasError){
-                result.errorMessage?.let { showErrorToUser(it) }
-            }
-            val userProfile = result.userProfile
-            if (userProfile != null) {
-                val levelText = getLevelText(userProfile.level)
-                username.text = userProfile.username
-                level.text = levelText
-                openingRating.text = userProfile.openingRating.toString()
-                midgameRating.text = userProfile.midgameRating.toString()
-                endgameRating.text = userProfile.endgameRating.toString()
-                gamesPlayed.text = userProfile.gamesPlayed.toString()
-                puzzlesPlayed.text = userProfile.puzzlesPlayed.toString()
-                lessonsTaken.text = userProfile.lessonsTaken.toString()
-                userProfileManager.setUserProfile(userProfile)
-            }
-        })
+        userProfile?.let {
+            username.text = it.username
+            level.text = getLevelText(it.level)
+            openingRating.text = it.openingRating.toString()
+            midgameRating.text = it.midgameRating.toString()
+            endgameRating.text = it.endgameRating.toString()
+            gamesPlayed.text = it.gamesPlayed.toString()
+            puzzlesPlayed.text = it.puzzlesPlayed.toString()
+            lessonsTaken.text = it.lessonsTaken.toString()
+        }
 
         //this is called when the user clicks the createUserProfile button
         viewModel.initiateProfileCreation.observe(viewLifecycleOwner, Observer { initiate ->
@@ -196,11 +187,6 @@ class ProfileFragment : Fragment() {
             3 -> getString(R.string.advanced_level)
             else -> getString(R.string.beginner_level)
         }
-    }
-
-    //tells the user that no active profiles were found
-    private fun showErrorToUser(errorMessage: String){
-        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
     }
 
     private fun showProfileDeletionErrorMessage(errorMessage: String){
