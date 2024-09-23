@@ -1,0 +1,701 @@
+[
+  {
+    "puzzleId": 1,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e1",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 2,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e2",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 3,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e3",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 4,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e4",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 5,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e5",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 6,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e6",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 7,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e7",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 8,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e8",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 9,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e9",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 10,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e10",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 11,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e11",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 12,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e12",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 13,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e13",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 14,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e14",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 15,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e15",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 16,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e16",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 17,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e17",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 18,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e18",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 19,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e19",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 20,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e20",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 21,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e21",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 22,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e22",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 23,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e23",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 24,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e24",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 25,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e25",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 26,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e26",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 27,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e27",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 28,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e28",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 29,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e29",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 30,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e30",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 31,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e31",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 32,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e32",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 33,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e33",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 34,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e34",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 35,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e35",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 36,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e36",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 37,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e37",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 38,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e38",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 39,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e39",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 40,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e40",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 41,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e41",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 42,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e42",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 43,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e43",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 44,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e44",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 45,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e45",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 46,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e46",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 47,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e47",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 48,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e48",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 49,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e49",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 50,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e50",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 51,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e51",
+    "description": "Beginner puzzle"
+  },
+
+  {
+    "puzzleId": 52,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e52",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 53,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e53",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 54,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e54",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 55,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e55",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 56,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e56",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 57,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e57",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 58,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e58",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 59,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e59",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 60,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e60",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 61,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e61",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 62,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e62",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 63,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e63",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 64,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e64",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 65,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e65",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 66,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e66",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 67,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e67",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 68,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e68",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 69,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e69",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 70,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e70",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 71,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e71",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 72,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e72",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 73,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e73",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 74,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e74",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 75,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e75",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 76,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e76",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 77,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e77",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 78,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e78",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 79,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e79",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 80,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e80",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 81,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e81",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 82,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e82",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 83,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e83",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 84,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e84",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 85,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e85",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 86,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e86",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 87,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e87",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 88,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e88",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 89,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e89",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 90,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e90",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 91,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e91",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 92,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e92",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 93,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e93",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 94,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e94",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 95,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e95",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 96,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e96",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 97,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e97",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 98,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e98",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 99,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e99",
+    "description": "Beginner-Intermediate puzzle"
+  },
+
+  {
+    "puzzleId": 100,
+    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
+    "solution": "e100",
+    "description": "Beginner-Intermediate puzzle"
+  }
+]
