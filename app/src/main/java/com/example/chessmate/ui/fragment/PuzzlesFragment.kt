@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.chessmate.R
 import com.example.chessmate.database.entity.UserProfile
 import com.example.chessmate.ui.activity.AdvancedPuzzlesActivity
@@ -35,7 +36,6 @@ class PuzzlesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_puzzles, container, false)
-        userProfile = userProfileManager.getUserProfileLiveData().value
 
         beginnerPuzzlesButton = view.findViewById(R.id.beginner_puzzles)
         intermediatePuzzlesButton = view.findViewById(R.id.intermediate_puzzles)
@@ -45,9 +45,13 @@ class PuzzlesFragment : Fragment() {
         intermediatePuzzlesButton.setOnClickListener { checkPuzzleButtonLock(intermediatePuzzlesButton, 2) }
         advancedPuzzlesButton.setOnClickListener { checkPuzzleButtonLock(advancedPuzzlesButton, 3) }
 
-        updateLocks()
-
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        userProfile = userProfileManager.getUserProfileLiveData().value
+        updateLocks()
     }
 
     private fun checkPuzzleButtonLock(button: Button, id: Int) {
@@ -100,6 +104,7 @@ class PuzzlesFragment : Fragment() {
     }
 
     private fun updateLocks() {
+        addPuzzleButtonLocks()
         when (userProfile?.level) {
             1 -> updatePuzzleButtonLock(beginnerPuzzlesButton)
             2 -> {
@@ -120,6 +125,28 @@ class PuzzlesFragment : Fragment() {
             null,
             null,
             null,
+            null
+        )
+    }
+
+    private fun addPuzzleButtonLocks() {
+        val lockDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_lock_24)
+        beginnerPuzzlesButton.setCompoundDrawablesWithIntrinsicBounds(
+            null,
+            null,
+            lockDrawable,
+            null
+        )
+        intermediatePuzzlesButton.setCompoundDrawablesWithIntrinsicBounds(
+            null,
+            null,
+            lockDrawable,
+            null
+        )
+        advancedPuzzlesButton.setCompoundDrawablesWithIntrinsicBounds(
+            null,
+            null,
+            lockDrawable,
             null
         )
     }

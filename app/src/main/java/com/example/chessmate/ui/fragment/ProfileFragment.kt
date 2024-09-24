@@ -17,6 +17,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.example.chessmate.R
 import com.example.chessmate.database.UserProfileRepository
+import com.example.chessmate.database.entity.UserProfile
 import com.example.chessmate.ui.activity.ChooseProfile
 import com.example.chessmate.ui.activity.CreateProfile
 import com.example.chessmate.ui.viewmodel.ProfileViewModel
@@ -28,14 +29,26 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
+    private lateinit var username: TextView
+    private lateinit var changeProfile: ImageButton
+    private lateinit var deleteProfile: ImageButton
+    private lateinit var level: TextView
+    private lateinit var openingRating:TextView
+    private lateinit var midgameRating:TextView
+    private lateinit var endgameRating:TextView
+    private lateinit var gamesPlayed: TextView
+    private lateinit var puzzlesPlayed: TextView
+    private lateinit var lessonsTaken: TextView
+    private lateinit var createUserProfile: Button
+
+    private lateinit var viewModel: ProfileViewModel
+    private lateinit var userProfileRepository: UserProfileRepository
+    private var userProfileManager = UserProfileManager.getInstance()
+    private var userProfile: UserProfile? = null
 
     companion object {
         fun newInstance() = ProfileFragment()
     }
-
-    private lateinit var viewModel: ProfileViewModel
-    private lateinit var userProfileRepository: UserProfileRepository
-    private val userProfileManager = UserProfileManager.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,44 +58,34 @@ class ProfileFragment : Fragment() {
         userProfileRepository = UserProfileRepository(requireContext())
         viewModel = ViewModelProvider(this, ViewModelFactory(userProfileRepository))[ProfileViewModel::class.java]
 
-        val userProfile = userProfileManager.getUserProfileLiveData().value
-
-        val username = view.findViewById<TextView>(R.id.username)
-        val changeProfile = view.findViewById<ImageButton>(R.id.changeProfileButton)
-        val deleteProfile = view.findViewById<ImageButton>(R.id.deleteProfileButton)
-        val level = view.findViewById<TextView>(R.id.level)
-        val openingRating = view.findViewById<TextView>(R.id.openingRatingPoint)
-        val midgameRating = view.findViewById<TextView>(R.id.midgameRatingPoint)
-        val endgameRating = view.findViewById<TextView>(R.id.endgameRatingPoint)
-        val gamesPlayed = view.findViewById<TextView>(R.id.gamesPlayedValue)
-        val puzzlesPlayed = view.findViewById<TextView>(R.id.puzzlesPlayedValue)
-        val lessonsTaken = view.findViewById<TextView>(R.id.lessonsTakenValue)
-        val createUserProfile = view.findViewById<Button>(R.id.createUserProfile)
+        username = view.findViewById(R.id.username)
+        changeProfile = view.findViewById(R.id.changeProfileButton)
+        deleteProfile = view.findViewById(R.id.deleteProfileButton)
+        level = view.findViewById(R.id.level)
+        openingRating = view.findViewById(R.id.openingRatingPoint)
+        midgameRating = view.findViewById(R.id.midgameRatingPoint)
+        endgameRating = view.findViewById(R.id.endgameRatingPoint)
+        gamesPlayed = view.findViewById(R.id.gamesPlayedValue)
+        puzzlesPlayed = view.findViewById(R.id.puzzlesPlayedValue)
+        lessonsTaken = view.findViewById(R.id.lessonsTakenValue)
+        createUserProfile = view.findViewById(R.id.createUserProfile)
 
         //this waits for the CreateProfile activity's result. if the returned value is true it means that a profile has been created
         val profileCreationLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
             viewModel.onProfileCreationInitiated()
+            loadUser()
         }
 
         //this waits for the ChooseProfile activity's result. if the returned value is true it means that the user has changed to a different profile
         val chooseProfileLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
             viewModel.onChooseProfileInitiated()
+            loadUser()
         }
 
         //this waits for the ChooseProfile activity's result after a profile has been deleted. if the returned value is true it means that the user has changed to a different profile
         val deleteProfileLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
             viewModel.onDeleteProfileInitiated()
-        }
-
-        userProfile?.let {
-            username.text = it.username
-            level.text = getLevelText(it.level)
-            openingRating.text = it.openingRating.toString()
-            midgameRating.text = it.midgameRating.toString()
-            endgameRating.text = it.endgameRating.toString()
-            gamesPlayed.text = it.gamesPlayed.toString()
-            puzzlesPlayed.text = it.puzzlesPlayed.toString()
-            lessonsTaken.text = it.lessonsTaken.toString()
+            loadUser()
         }
 
         //this is called when the user clicks the createUserProfile button
@@ -151,6 +154,35 @@ class ProfileFragment : Fragment() {
         }
 
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadUser()
+    }
+
+    private fun loadUserDataUI() {
+        userProfile = userProfileManager.getUserProfileLiveData().value
+        userProfile?.let {
+            username.text = it.username
+            level.text = getLevelText(it.level)
+            openingRating.text = it.openingRating.toString()
+            midgameRating.text = it.midgameRating.toString()
+            endgameRating.text = it.endgameRating.toString()
+            gamesPlayed.text = it.gamesPlayed.toString()
+            puzzlesPlayed.text = it.puzzlesPlayed.toString()
+            lessonsTaken.text = it.lessonsTaken.toString()
+        }
+    }
+
+    private fun loadUser() {
+        viewModel.profileResultLiveData.observe(viewLifecycleOwner, Observer { result ->
+            val newUserProfile = result.userProfile
+            if (newUserProfile != null) {
+                userProfileManager.setUserProfile(newUserProfile)
+                loadUserDataUI()
+            }
+        })
     }
 
     private suspend fun deleteProfile(): Boolean{

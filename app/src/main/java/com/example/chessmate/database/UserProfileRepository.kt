@@ -65,7 +65,6 @@ class UserProfileRepository(private val context: Context) {
     //if there is no active profiles a guest profile is loaded
     fun findActiveProfile(): LiveData<ProfileResult> {
         val activeProfileLiveData = userProfileDAO.getActiveProfile()
-
         val resultLiveData = MediatorLiveData<ProfileResult>()
 
         resultLiveData.addSource(activeProfileLiveData) { activeProfile ->
@@ -85,7 +84,7 @@ class UserProfileRepository(private val context: Context) {
                     lessonsTaken = 0,
                     isActive = true
                 )
-                resultLiveData.value = ProfileResult(defaultProfile, true, context.getString(R.string.no_active_profile))
+                resultLiveData.value = ProfileResult(defaultProfile, true, null)
             }
         }
 
