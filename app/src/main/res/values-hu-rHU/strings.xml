@@ -124,18 +124,10 @@
     <string name="beginner_puzzles">Kezdő rejtvények</string>
     <string name="intermediate_puzzles">Középhaladó rejtvények</string>
     <string name="advanced_puzzles">Haladó rejtvények</string>
+    <string name="puzzle_text">Rejtvény</string>
     <string name="login_to_access_solve_puzzles_message">A rejtvények eléréséhez és megoldásához kérem, jelentkezzen be!</string>
     <string name="puzzle_lock_message">A szinted túl alacsony ahhoz, hogy hozzáférj ehhez a rejtvényhez. Fejezz be leckéket, hogy növeld a szinted és több rejtvényt oldj fel.</string>
     <string name="previous_page">Előző oldal</string>
     <string name="next_page">Következő oldal</string>
-    <string name="page_one">Oldal 1 / 10</string>
-    <string name="page_two">Oldal 2 / 10</string>
-    <string name="page_three">Oldal 3 / 10</string>
-    <string name="page_four">Oldal 4 / 10</string>
-    <string name="page_five">Oldal 5 / 10</string>
-    <string name="page_six">Oldal 6 / 10</string>
-    <string name="page_seven">Oldal 7 / 10</string>
-    <string name="page_eight">Oldal 8 / 10</string>
-    <string name="page_nine">Oldal 9 / 10</string>
-    <string name="page_ten">Oldal 10 / 10</string>
+    <string name="page_indicator_text">Oldal %1$d / %2$d</string>
 </resources>

@@ -34,7 +34,7 @@
                 android:id="@+id/intermediate_puzzles_page_indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/page_one"
+                android:text=""
                 android:textSize="16sp"
                 android:textColor="@color/white"
                 android:layout_gravity="center" />
