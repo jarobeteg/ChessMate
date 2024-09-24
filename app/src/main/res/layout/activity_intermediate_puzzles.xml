@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.activity.IntermediatePuzzlesActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -25,4 +26,22 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-</RelativeLayout>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/intermediate_puzzles_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/intermediate_puzzle_bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:labelVisibilityMode="labeled"
+        app:itemIconTint="@color/bottom_game_chess_selected_icon_color"
+        app:itemTextColor="@color/bottom_game_chess_selected_title_color"
+        android:background="?attr/colorAccent"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface"
+        app:menu="@menu/bottom_puzzles_nav_menu"/>
+
+</LinearLayout>
