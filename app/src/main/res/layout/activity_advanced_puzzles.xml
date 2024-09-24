@@ -15,14 +15,31 @@
         app:navigationIcon="@drawable/ic_arrow_back_24"
         app:navigationIconTint="@color/white">
 
-        <TextView
-            android:id="@+id/advanced_puzzles_toolbar_title"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/advanced_puzzles"
-            android:textSize="24sp"
-            android:textColor="@color/white"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/advanced_puzzles_toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/advanced_puzzles"
+                android:textSize="24sp"
+                android:textColor="@color/white"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/advanced_puzzles_page_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/page_one"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
