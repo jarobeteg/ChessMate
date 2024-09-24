@@ -23,6 +23,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
+            android:drawableEnd="@drawable/ic_lock_24"
             android:background="@drawable/custom_create_new_profile_button"/>
 
         <Button
@@ -38,6 +39,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
+            android:drawableEnd="@drawable/ic_lock_24"
             android:background="@drawable/custom_create_new_profile_button"/>
 
         <Button
@@ -53,6 +55,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
+            android:drawableEnd="@drawable/ic_lock_24"
             android:background="@drawable/custom_create_new_profile_button"/>
 
         <View

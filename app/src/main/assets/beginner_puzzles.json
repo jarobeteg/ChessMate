@@ -3,699 +3,699 @@
     "puzzleId": 1,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e1",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 2,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e2",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 3,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e3",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 4,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e4",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 5,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e5",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 6,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e6",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 7,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e7",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 8,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e8",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 9,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e9",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 10,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e10",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 11,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e11",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 12,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e12",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 13,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e13",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 14,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e14",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 15,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e15",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 16,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e16",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 17,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e17",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 18,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e18",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 19,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e19",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 20,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e20",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 21,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e21",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 22,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e22",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 23,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e23",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 24,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e24",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 25,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e25",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 26,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e26",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 27,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e27",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 28,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e28",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 29,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e29",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 30,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e30",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 31,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e31",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 32,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e32",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 33,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e33",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 34,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e34",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 35,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e35",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 36,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e36",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 37,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e37",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 38,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e38",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 39,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e39",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 40,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e40",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 41,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e41",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 42,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e42",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 43,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e43",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 44,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e44",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 45,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e45",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 46,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e46",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 47,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e47",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 48,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e48",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 49,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e49",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 50,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e50",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 51,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e51",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 52,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e52",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 53,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e53",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 54,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e54",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 55,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e55",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 56,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e56",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 57,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e57",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 58,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e58",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 59,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e59",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 60,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e60",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 61,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e61",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 62,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e62",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 63,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e63",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 64,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e64",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 65,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e65",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 66,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e66",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 67,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e67",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 68,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e68",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 69,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e69",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 70,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e70",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 71,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e71",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 72,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e72",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 73,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e73",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 74,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e74",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 75,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e75",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 76,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e76",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 77,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e77",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 78,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e78",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 79,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e79",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 80,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e80",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 81,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e81",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 82,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e82",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 83,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e83",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 84,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e84",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 85,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e85",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 86,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e86",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 87,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e87",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 88,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e88",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 89,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e89",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 90,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e90",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 91,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e91",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 92,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e92",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 93,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e93",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 94,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e94",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 95,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e95",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 96,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e96",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 97,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e97",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 98,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e98",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 99,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e99",
-    "difficulty": 0
+    "difficulty": 1
   },
 
   {
     "puzzleId": 100,
     "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
     "solution": "e100",
-    "difficulty": 0
+    "difficulty": 1
   }
 ]

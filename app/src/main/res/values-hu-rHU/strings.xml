@@ -124,4 +124,6 @@
     <string name="beginner_puzzles">Kezdő rejtvények</string>
     <string name="intermediate_puzzles">Középhaladó rejtvények</string>
     <string name="advanced_puzzles">Haladó rejtvények</string>
+    <string name="login_to_access_solve_puzzles_message">A rejtvények eléréséhez és megoldásához kérem, jelentkezzen be!</string>
+    <string name="puzzle_lock_message">A szinted túl alacsony ahhoz, hogy hozzáférj ehhez a rejtvényhez. Fejezz be leckéket, hogy növeld a szinted és több rejtvényt oldj fel.</string>
 </resources>
