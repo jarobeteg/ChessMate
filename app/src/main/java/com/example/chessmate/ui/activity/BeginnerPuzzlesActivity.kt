@@ -32,7 +32,7 @@ class BeginnerPuzzlesActivity : AbsThemeActivity() {
 
         val paginatedPuzzles = dividePuzzlesIntoPages(puzzles)
 
-        adapter = PuzzlesPagerAdapter(paginatedPuzzles, this)
+        adapter = PuzzlesPagerAdapter(paginatedPuzzles, puzzles, this)
         viewPager2.adapter = adapter
 
         viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

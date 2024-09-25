@@ -12,11 +12,11 @@ import com.example.chessmate.R
 import com.example.chessmate.ui.activity.PuzzleLoaderActivity
 import com.example.chessmate.util.Puzzle
 
-class PuzzlesPagerAdapter(private val paginatedPuzzles: List<List<Puzzle>>, private val context: Context) : RecyclerView.Adapter<PuzzlesPagerAdapter.PuzzleViewHolder>() {
+class PuzzlesPagerAdapter(private val paginatedPuzzles: List<List<Puzzle>>, private val allPuzzles: List<Puzzle>, private val context: Context) : RecyclerView.Adapter<PuzzlesPagerAdapter.PuzzleViewHolder>() {
     class PuzzleViewHolder(itemView: View, private val context: Context) : RecyclerView.ViewHolder(itemView) {
         private val puzzleContainer: LinearLayout = itemView.findViewById(R.id.puzzle_container)
 
-        fun bind(puzzles: List<Puzzle>) {
+        fun bind(puzzles: List<Puzzle>, allPuzzles: List<Puzzle>) {
             puzzleContainer.removeAllViews()
 
             puzzles.forEach { puzzle ->
@@ -28,17 +28,18 @@ class PuzzlesPagerAdapter(private val paginatedPuzzles: List<List<Puzzle>>, priv
 
                 puzzleDescription.setTag(R.id.puzzle_description, puzzle)
                 puzzleDescription.setOnClickListener {
-                    val clickedPuzzle = it.getTag(R.id.puzzle_description) as Puzzle
-                    handlePuzzleClick(clickedPuzzle)
+                    val index = puzzle.puzzleId - 1
+                    handlePuzzleClick(index, allPuzzles)
                 }
 
                 puzzleContainer.addView(puzzleView)
             }
         }
 
-        private fun handlePuzzleClick(puzzle: Puzzle) {
+        private fun handlePuzzleClick(position: Int, puzzles: List<Puzzle>) {
             val intent = Intent(context, PuzzleLoaderActivity::class.java)
-            intent.putExtra("selectedPuzzle", puzzle)
+            intent.putExtra("puzzleList", ArrayList(puzzles))
+            intent.putExtra("currentIndex", position)
             context.startActivity(intent)
         }
     }
@@ -50,7 +51,7 @@ class PuzzlesPagerAdapter(private val paginatedPuzzles: List<List<Puzzle>>, priv
 
     override fun onBindViewHolder(holder: PuzzleViewHolder, position: Int) {
         val puzzlesForThisPage = paginatedPuzzles[position]
-        holder.bind(puzzlesForThisPage)
+        holder.bind(puzzlesForThisPage, allPuzzles)
     }
 
     override fun getItemCount(): Int {
