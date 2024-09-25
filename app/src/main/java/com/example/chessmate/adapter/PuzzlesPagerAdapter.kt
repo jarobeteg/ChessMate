@@ -1,6 +1,7 @@
 package com.example.chessmate.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chessmate.R
+import com.example.chessmate.ui.activity.PuzzleLoaderActivity
 import com.example.chessmate.util.Puzzle
 
 class PuzzlesPagerAdapter(private val paginatedPuzzles: List<List<Puzzle>>, private val context: Context) : RecyclerView.Adapter<PuzzlesPagerAdapter.PuzzleViewHolder>() {
@@ -35,7 +37,9 @@ class PuzzlesPagerAdapter(private val paginatedPuzzles: List<List<Puzzle>>, priv
         }
 
         private fun handlePuzzleClick(puzzle: Puzzle) {
-            println("clicked puzzle: $puzzle")
+            val intent = Intent(context, PuzzleLoaderActivity::class.java)
+            intent.putExtra("selectedPuzzle", puzzle)
+            context.startActivity(intent)
         }
     }
 

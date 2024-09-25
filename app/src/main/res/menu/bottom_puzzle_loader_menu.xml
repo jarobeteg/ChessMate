@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/previous_puzzle"
+        android:icon="@drawable/ic_back_24"
+        android:title="@string/previous_puzzle" />
+
+    <item
+        android:id="@+id/puzzle_hint"
+        android:icon="@drawable/ic_hint_24"
+        android:title="@string/puzzle_hint" />
+
+    <item
+        android:id="@+id/next_puzzle"
+        android:icon="@drawable/ic_forward_24"
+        android:title="@string/next_puzzle" />
+</menu>
