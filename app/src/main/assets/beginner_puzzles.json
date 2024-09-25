@@ -421,8 +421,8 @@
 
   {
     "puzzleId": 61,
-    "fen": "",
-    "solution": "",
+    "fen": "rn1k1b1r/pQ2pBpp/2p5/8/3qN1b1/8/PP3PPP/R1B1K1NR b KQ - 0 10",
+    "solution": "D4 D1 BLACK_QUEEN NONE",
     "difficulty": 1
   },
 
