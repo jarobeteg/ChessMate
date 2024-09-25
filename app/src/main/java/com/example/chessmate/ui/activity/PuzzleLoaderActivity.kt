@@ -30,6 +30,7 @@ class PuzzleLoaderActivity : AbsThemeActivity() {
     private var lightSquareColor = R.color.default_light_square_color
     private var darkSquareColor = R.color.default_dark_square_color
     private var pieceThemeArray = IntArray(12)
+    private var isPlayerWhite: Boolean = true
     private lateinit var bottomNavigationView : BottomNavigationView
     private lateinit var toolbar : Toolbar
     private lateinit var puzzles: ArrayList<Puzzle>
@@ -84,9 +85,21 @@ class PuzzleLoaderActivity : AbsThemeActivity() {
                     layoutParams = ViewGroup.LayoutParams(squareSize, squareSize)
                 }
                 chessboardLayout.addView(squareLayout)
-                val position = 1L shl ((7 - row) * 8 + col)
+                val position = if (isPlayerWhite) {
+                    1L shl ((7 - row) * 8 + col)
+                } else {
+                    1L shl (row * 8 + (7 - col))
+                }
                 uiMapper.addSquare(position, squareLayout)
                 squareLayout
+            }
+        }
+
+        if (!isPlayerWhite) {
+            uiSquares = Array(8) { row ->
+                Array(8) { col ->
+                    uiSquares[7 - row][7 - col]
+                }
             }
         }
     }
@@ -94,7 +107,11 @@ class PuzzleLoaderActivity : AbsThemeActivity() {
     private fun setupInitialBoardUI() {
         for (row in 7 downTo 0) {
             for (col in 0..7) {
-                val position = 1L shl ((7 - row) * 8 + col)
+                val position = if (isPlayerWhite) {
+                    1L shl ((7 - row) * 8 + col)
+                } else {
+                    1L shl (row * 8 + (7 - col))
+                }
                 val square = board.getPiece(position)
                 val squareLayout = uiMapper.getSquareView(position)
                 updateSquareUI(square, squareLayout)
@@ -107,7 +124,11 @@ class PuzzleLoaderActivity : AbsThemeActivity() {
     private fun setupSquareListener() {
         for (row in 7 downTo 0) {
             for (col in 0..7) {
-                val position = 1L shl ((7 - row) * 8 + col)
+                val position = if (isPlayerWhite) {
+                    1L shl ((7 - row) * 8 + col)
+                } else {
+                    1L shl (row * 8 + (7 - col))
+                }
                 val squareLayout = uiMapper.getSquareView(position)
                 squareLayout.setOnClickListener {
                     handleSquareClick(board.getPiece(position))
@@ -119,7 +140,11 @@ class PuzzleLoaderActivity : AbsThemeActivity() {
     private fun updateBitboardStateUI() {
         for (row in 7 downTo 0) {
             for (col in 0..7) {
-                val position = 1L shl ((7 - row) * 8 + col)
+                val position = if (isPlayerWhite) {
+                    1L shl ((7 - row) * 8 + col)
+                } else {
+                    1L shl (row * 8 + (7 - col))
+                }
                 val square = board.getPiece(position)
                 val squareLayout = uiMapper.getSquareView(position)
                 updateSquareUI(square, squareLayout)
@@ -153,7 +178,7 @@ class PuzzleLoaderActivity : AbsThemeActivity() {
 
         if (col == 0) {
             val numberTextView = TextView(this)
-            val number = (8 - row).toString()
+            val number = if (isPlayerWhite) (8 - row).toString() else (row + 1).toString()
             numberTextView.text = number
             val textSizeInSp = 10
             numberTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSizeInSp.toFloat())
@@ -169,7 +194,7 @@ class PuzzleLoaderActivity : AbsThemeActivity() {
 
         if (row == 7) {
             val letterTextView = TextView(this)
-            val letter = ('a' + col).toString()
+            val letter = if (isPlayerWhite) ('a' + col).toString() else ('h' - col).toString()
             letterTextView.text = letter
             val textSizeInSp = 10
             letterTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSizeInSp.toFloat())
@@ -216,6 +241,7 @@ class PuzzleLoaderActivity : AbsThemeActivity() {
         setupTextViews()
         val puzzle = puzzles[currentIndex]
         val fen = FEN(puzzle.fen)
+        isPlayerWhite = fen.activeColor == 'w'
 
         chessboardLayout.removeAllViews()
         board.setupFENPosition(fen)
