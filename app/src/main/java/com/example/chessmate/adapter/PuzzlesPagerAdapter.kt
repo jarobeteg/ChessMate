@@ -20,10 +20,22 @@ class PuzzlesPagerAdapter(private val paginatedPuzzles: List<List<Puzzle>>, priv
             puzzles.forEach { puzzle ->
                 val puzzleView = LayoutInflater.from(context).inflate(R.layout.item_puzzle, puzzleContainer, false)
                 val puzzleDescription = puzzleView.findViewById<TextView>(R.id.puzzle_description)
+
                 val result = context.getString(R.string.puzzle_text) + " " + puzzle.puzzleId.toString()
                 puzzleDescription.text = result
+
+                puzzleDescription.setTag(R.id.puzzle_description, puzzle)
+                puzzleDescription.setOnClickListener {
+                    val clickedPuzzle = it.getTag(R.id.puzzle_description) as Puzzle
+                    handlePuzzleClick(clickedPuzzle)
+                }
+
                 puzzleContainer.addView(puzzleView)
             }
+        }
+
+        private fun handlePuzzleClick(puzzle: Puzzle) {
+            println("clicked puzzle: $puzzle")
         }
     }
 

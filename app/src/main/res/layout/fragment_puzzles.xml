@@ -66,5 +66,32 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"/>
 
+        <TextView
+            android:id="@+id/solved_beginner_puzzles_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"/>
+
+        <TextView
+            android:id="@+id/solved_intermediate_puzzles_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"/>
+
+        <TextView
+            android:id="@+id/solved_advanced_puzzles_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"/>
+
     </LinearLayout>
 </FrameLayout>
