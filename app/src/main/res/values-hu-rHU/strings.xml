@@ -126,7 +126,6 @@
     <string name="advanced_puzzles">Haladó rejtvények</string>
     <string name="puzzle_text">Rejtvény</string>
     <string name="login_to_access_solve_puzzles_message">A rejtvények eléréséhez és megoldásához kérem, jelentkezzen be!</string>
-    <string name="puzzle_lock_message">A szinted túl alacsony ahhoz, hogy hozzáférj ehhez a rejtvényhez. Fejezz be leckéket, hogy növeld a szinted és több rejtvényt oldj fel.</string>
     <string name="previous_page">Előző oldal</string>
     <string name="next_page">Következő oldal</string>
     <string name="page_indicator_text">Oldal %1$d / %2$d</string>
@@ -137,6 +136,6 @@
     <string name="for_white">fehérnek</string>
     <string name="for_black">feketének</string>
     <string name="previous_puzzle">Előző rejtvény</string>
-    <string name="puzzle_hint">Súgó</string>
+    <string name="puzzle_hint">Tipp</string>
     <string name="next_puzzle">Következő rejtvény</string>
 </resources>

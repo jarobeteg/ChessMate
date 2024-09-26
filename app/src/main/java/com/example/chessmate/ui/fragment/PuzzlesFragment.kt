@@ -64,8 +64,6 @@ class PuzzlesFragment : Fragment() {
             loginToSolvePuzzles()
         } else if (id <= userProfile!!.level) {
             animateButton(button, id)
-        } else {
-            showLockMessage()
         }
     }
 
@@ -153,10 +151,6 @@ class PuzzlesFragment : Fragment() {
 
     private fun loginToSolvePuzzles() {
         Toast.makeText(requireContext(), getString(R.string.login_to_access_solve_puzzles_message), Toast.LENGTH_LONG).show()
-    }
-
-    private fun showLockMessage() {
-        Toast.makeText(requireContext(), getString(R.string.puzzle_lock_message), Toast.LENGTH_LONG).show()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -142,7 +142,6 @@
     <string name="advanced_puzzles">Advanced puzzles</string>
     <string name="puzzle_text">Puzzle</string>
     <string name="login_to_access_solve_puzzles_message">Please log in to access and solve puzzles!</string>
-    <string name="puzzle_lock_message">Your rating is too low to access this puzzle. Complete lessons to improve your rating and unlock more puzzles.</string>
     <string name="previous_page">Previous page</string>
     <string name="next_page">Next page</string>
     <string name="page_indicator_text">Page %1$d / %2$d</string>

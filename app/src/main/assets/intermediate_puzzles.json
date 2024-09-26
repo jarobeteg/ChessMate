@@ -1,701 +1,701 @@
 [
   {
     "puzzleId": 1,
-    "fen": "rnbqkbnr/pppppppp/8/8/P7/8/1PPPPPPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e1",
+    "fen": "5r2/8/R5K1/6p1/7p/1R3r1P/4k3/8 w - - 0 51",
+    "solution": "A6 A2 3 12 | E2 D1 11 12 | B3 B1 3 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 2,
-    "fen": "rnbqkbnr/pppppppp/8/8/1P6/8/P1PPPPPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e2",
+    "fen": "1r3r1k/p3bppp/n2pb3/qp1P4/3p4/1QN1BBRP/PP1K1P2/6R1 w - - 0 21",
+    "solution": "E3 D4 2 6 | E7 F6 8 12 | D4 F6 2 8",
     "difficulty": 2
   },
 
   {
     "puzzleId": 3,
-    "fen": "rnbqkbnr/pppppppp/8/8/2P5/8/PP1PPPPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e3",
+    "fen": "4rrk1/p5bp/2pRb1p1/4p2P/2B5/1K3P2/PP3NP1/7R b - - 0 24",
+    "solution": "E8 B8 9 12 | B3 C2 5 12 | E6 C4 8 2",
     "difficulty": 2
   },
 
   {
     "puzzleId": 4,
-    "fen": "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e4",
+    "fen": "7k/3n2q1/7p/5Q2/8/8/r4PPP/4R1K1 w - - 0 29",
+    "solution": "E1 E8 3 12 | G7 G8 10 12 | E8 G8 3 10",
     "difficulty": 2
   },
 
   {
     "puzzleId": 5,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e5",
+    "fen": "5k2/5p1p/1p4p1/2pp1b2/5B2/r1P2P2/P1P2P1P/4R1K1 w - - 0 25",
+    "solution": "F4 H6 2 12 | F8 G8 11 12 | E1 E8 3 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 6,
-    "fen": "rnbqkbnr/pppppppp/8/8/5P2/8/PPPPP1PP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e6",
+    "fen": "8/pp2r2p/2p5/8/2PKPk2/PP2R2P/8/8 b - - 4 34",
+    "solution": "E7 D7 9 12 | D4 C5 5 12 | F4 E3 11 3",
     "difficulty": 2
   },
 
   {
     "puzzleId": 7,
-    "fen": "rnbqkbnr/pppppppp/8/8/6P1/8/PPPPPP1P/RNBQKBNR w KQkq - 0 1",
-    "solution": "e7",
+    "fen": "8/6R1/5P1p/8/3B3k/P3P3/1P1n1rPK/8 b - - 0 41",
+    "solution": "D2 F3 7 12 | H2 H1 5 12 | F2 F1 9 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 8,
-    "fen": "rnbqkbnr/pppppppp/8/8/7P/8/PPPPPPP1/RNBQKBNR w KQkq - 0 1",
-    "solution": "e8",
+    "fen": "6k1/2qr1pp1/7p/ppp5/2p1n1b1/P3PNP1/BPQ2PP1/3R2K1 w - - 1 29",
+    "solution": "D1 D7 3 9 | C7 D7 10 3 | C2 E4 4 7",
     "difficulty": 2
   },
 
   {
     "puzzleId": 9,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
-    "solution": "e9",
+    "fen": "6k1/1ppb3p/3p1r2/3P4/1PPbBp1q/5P2/Q5PP/1RB2R1K b - - 0 23",
+    "solution": "H4 H2 10 0 | H1 H2 5 10 | F6 H6 9 12" ,
     "difficulty": 2
   },
 
   {
     "puzzleId": 10,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
-    "solution": "e10",
+    "fen": "r4rk1/p2p2pp/8/3bpp2/1pq5/4Q3/PPB2PPP/2R1K2R w K - 0 21",
+    "solution": "C2 B3 2 12 | C4 C1 10 3 | E3 C1 4 10",
     "difficulty": 2
   },
 
   {
     "puzzleId": 11,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e11",
+    "fen": "rnbqk2r/ppp2ppp/5n2/3Pp3/1bP5/2N5/PP3PPP/R1BQKBNR w KQkq - 3 7",
+    "solution": "D1 A4 4 12 | C7 C6 6 12 | A4 B4 4 8",
     "difficulty": 2
   },
 
   {
     "puzzleId": 12,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e12",
+    "fen": "3Q1bk1/5p2/4q1p1/ppB5/8/P1P2P2/1P6/1K6 b - - 5 34",
+    "solution": "E6 F5 10 12 | B1 A1 5 12 | F5 C5 10 2",
     "difficulty": 2
   },
 
   {
     "puzzleId": 13,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e13",
+    "fen": "6k1/p1p2pp1/1pn2q1p/8/3P1P1r/P1PBP1rP/5QP1/3R1RK1 b - - 2 24",
+    "solution": "H4 H3 9 0 | F2 G3 10 3 | H3 G3 9 4",
     "difficulty": 2
   },
 
   {
     "puzzleId": 14,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e14",
+    "fen": "8/r7/6p1/k2p1p1p/p1PP1P1P/R2K2P1/8/8 b - - 0 55",
+    "solution": "A5 B4 11 12 | A3 A1 3 12 | D5 C4 6 0",
     "difficulty": 2
   },
 
   {
     "puzzleId": 15,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e15",
+    "fen": "5k2/4Npp1/1p5p/p1p5/PnrBRP2/7P/7K/8 w - - 0 40",
+    "solution": "D4 G7 2 6 | F8 G7 11 2 | E4 C4 3 9",
     "difficulty": 2
   },
 
   {
     "puzzleId": 16,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e16",
+    "fen": "7k/p4p1p/bpq2r2/3pQ3/1P2p3/6P1/P6P/5RK1 w - - 0 34",
+    "solution": "F1 F6 3 9 | C6 F6 10 3 | E5 F6 4 10",
     "difficulty": 2
   },
 
   {
     "puzzleId": 17,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e17",
+    "fen": "2r3k1/p1P4p/3Q2p1/5q2/PP6/2P2p2/5P2/2R3K1 b - - 1 31",
+    "solution": "F5 G5 10 12 | D6 G3 4 12 | G5 C1 10 3",
     "difficulty": 2
   },
 
   {
     "puzzleId": 18,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e18",
+    "fen": "6k1/p4pp1/7p/2Q1q3/8/PP2P2P/3r1PP1/2R3K1 b - - 0 26",
+    "solution": "D2 D1 9 12 | C1 D1 3 9 | E5 C5 10 4",
     "difficulty": 2
   },
 
   {
     "puzzleId": 19,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e19",
+    "fen": "8/2p5/1ppk2rp/5pr1/5R1K/2P5/PP2R2P/8 w - - 12 37",
+    "solution": "F4 D4 3 12 | D6 C5 11 12 | E2 E5 3 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 20,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e20",
+    "fen": "r6k/ppp2pp1/3p1b1p/3P3B/P4P2/1q6/7P/2B1R1QK b - - 1 28",
+    "solution": "B3 D5 10 0 | G1 G2 4 12 | D5 H5 10 2",
     "difficulty": 2
   },
 
   {
     "puzzleId": 21,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e21",
+    "fen": "r2qkb1r/3b1ppp/p2p1n2/3Pp3/2Q1P3/5N2/1PP1NPPP/R1B2RK1 b kq - 0 14",
+    "solution": "D7 B5 8 12 | C4 B3 4 12 | B5 E2 8 1",
     "difficulty": 2
   },
 
   {
     "puzzleId": 22,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e22",
+    "fen": "4Rr1k/5Pp1/1p3q1p/p1b5/PpB1Q3/1P4P1/5P1P/6K1 b - - 5 37",
+    "solution": "F6 F2 10 0 | G1 H1 5 12 | F2 G1 10 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 23,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e23",
+    "fen": "4rr1k/pp4p1/7p/7Q/4N3/P4n1R/2q4P/6RK w - - 0 33",
+    "solution": "H5 H6 4 6 | G7 H6 6 4 | H3 H6 3 6",
     "difficulty": 2
   },
 
   {
     "puzzleId": 24,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e24",
+    "fen": "8/6k1/4pnp1/7p/5K1P/2B3P1/8/8 w - - 0 54",
+    "solution": "F4 G5 5 12 | G7 F7 11 12 | C3 F6 2 7",
     "difficulty": 2
   },
 
   {
     "puzzleId": 25,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e25",
+    "fen": "1Qb3k1/3q3p/1R6/3P1p2/4p3/4P3/5rP1/1K6 w - - 0 33",
+    "solution": "B8 G3 4 12 | G8 F7 11 12 | G3 F2 4 9",
     "difficulty": 2
   },
 
   {
     "puzzleId": 26,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e26",
+    "fen": "2Nq1rk1/p2b1ppp/4pn2/1p2n3/3P4/PP3B2/5PPP/2RQ1RK1 b - - 0 17  ",
+    "solution": "E5 F3 7 2 | D1 F3 4 7 | D7 C8 8 1",
     "difficulty": 2
   },
 
   {
     "puzzleId": 27,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e27",
+    "fen": "1r4k1/p5p1/8/3PpPp1/8/P3KP2/1r4P1/R6R b - - 0 23",
+    "solution": "B8 B3 9 12 | E3 E4 5 12 | B2 E2 9 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 28,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e28",
+    "fen": "3r3k/4Q1p1/6Pb/5p2/8/1Pp5/K6R/2qB3R b - - 2 41",
+    "solution": "D8 A8 9 12 | E7 A7 4 12 | A8 A7 9 4",
     "difficulty": 2
   },
 
   {
     "puzzleId": 29,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e29",
+    "fen": "r3k2r/ppp2p2/2n4p/2q3p1/4B1b1/4PNP1/PPP2PP1/R2QK2R b KQkq - 1 14",
+    "solution": "C5 B4 10 12 | D1 D2 4 12 | B4 E4 10 2",
     "difficulty": 2
   },
 
   {
     "puzzleId": 30,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e30",
+    "fen": "r2qk2r/pbp2pb1/1pn1p1p1/4P2p/3PB3/2N1QN2/PPP3PP/2KR3R b kq - 1 13",
+    "solution": "G7 H6 8 12 | E3 H6 4 8 | H8 H6 9 4",
     "difficulty": 2
   },
 
   {
     "puzzleId": 31,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e31",
+    "fen": "1r5r/4R1p1/5pk1/p3p2p/2BbP3/8/PP1B2PP/1K1R4 b - - 3 27",
+    "solution": "B8 B2 9 0 | B1 C1 5 12 | H8 C8 9 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 32,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e32",
+    "fen": "8/1RK1k3/2R5/8/7p/8/8/6q1 w - - 0 55",
+    "solution": "C7 B8 5 12 | E7 F8 11 12 | C6 C8 3 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 33,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e33",
+    "fen": "2k4r/p4p2/2p4p/6p1/8/NPP2bPK/P6R/R1B4r b - - 2 29",
+    "solution": "G5 G4 6 12 | H3 H4 5 12 | H1 H2 9 3",
     "difficulty": 2
   },
 
   {
     "puzzleId": 34,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e34",
+    "fen": "8/6k1/p1p2R2/3bKPP1/5n2/Pr6/8/2R5 b - - 2 40",
+    "solution": "F4 D3 7 12 | E5 D6 5 12 | D3 C1 7 3",
     "difficulty": 2
   },
 
   {
     "puzzleId": 35,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e35",
+    "fen": "4qrk1/rbpn2pp/1p1ppn2/pP3p2/PbPP4/2N1PNQ1/1B2BPPP/R4RK1 b - - 0 13",
+    "solution": "B4 C3 8 1 | B2 C3 2 8 | F6 E4 7 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 36,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e36",
+    "fen": "3b4/1p1k3p/3r2pN/PPQb2P1/7r/8/8/3R2K1 b - - 2 38",
+    "solution": "H4 H1 9 12 | G1 F2 5 12 | H1 D1 9 3",
     "difficulty": 2
   },
 
   {
     "puzzleId": 37,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e37",
+    "fen": "7R/1k3p2/1q2p3/p3Pp2/P2QnPb1/2p3P1/7K/8 w - - 4 42",
+    "solution": "H8 B8 3 12 | B7 B8 11 3 | D4 B6 4 10",
     "difficulty": 2
   },
 
   {
     "puzzleId": 38,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e38",
+    "fen": "r3k2r/1pp3p1/p1n2n1p/2b1p3/3p4/1PN2Q1P/PBqP1PP1/1R2KB1R w Kkq - 0 16",
+    "solution": "F1 D3 2 12 | D4 C3 6 1 | D3 C2 2 10",
     "difficulty": 2
   },
 
   {
     "puzzleId": 39,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e39",
+    "fen": "6k1/pp2p1b1/6p1/3P4/6B1/r7/3K1PPP/2R5 b - - 1 31",
+    "solution": "G7 H6 8 12 | D2 C2 5 12 | H6 C1 8 3",
     "difficulty": 2
   },
 
   {
     "puzzleId": 40,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e40",
+    "fen": "rnbq3r/ppp1k2p/4pp1Q/4N3/4P3/8/PPPP3p/RNB4K w - - 1 14",
+    "solution": "H6 G7 4 12 | E7 D6 11 12 | E5 F7 1 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 41,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e41",
+    "fen": "8/6p1/8/1p1k4/1P1p2P1/3K3P/8/8 b - - 0 44",
+    "solution": "G7 G5 6 12 | H3 H4 0 12 | G5 H4 6 0",
     "difficulty": 2
   },
 
   {
     "puzzleId": 42,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e42",
+    "fen": "6k1/Bp4pp/5p2/8/1b6/1P3R2/P3KPPP/r7 b - - 0 27",
+    "solution": "A1 A2 9 0 | E2 D3 5 12 | A2 A7 9 2",
     "difficulty": 2
   },
 
   {
     "puzzleId": 43,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e43",
+    "fen": "2r2rk1/3nqpb1/6p1/p5Np/3p1p2/P5Q1/6PP/1B2RRK1 w - - 0 32",
+    "solution": "E1 E7 3 10 | F4 G3 6 4 | E7 D7 3 7",
     "difficulty": 2
   },
 
   {
     "puzzleId": 44,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e44",
+    "fen": "r1k4r/1p3ppp/2n5/2b1PP2/p1B5/P3N3/bPP2PPP/2KR2NR b - - 2 16",
+    "solution": "C5 E3 8 1 | F2 E3 0 8 | A2 C4 8 2",
     "difficulty": 2
   },
 
   {
     "puzzleId": 45,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e45",
+    "fen": "r2r4/1b2b2k/pq2P3/1p6/2p3P1/2Q1n3/PP3R1P/3R2K1 w - - 0 32",
+    "solution": "F2 F7 3 12 | H7 G6 11 12 | C3 D7 4 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 46,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e46",
+    "fen": "r2qkb1r/1Qp2ppp/p1n1pn2/3p1b2/2PP4/P3PN2/1P3PPP/RNB1KB1R b KQkq - 0 7",
+    "solution": "C6 A5 7 12 | B7 A8 4 9 | D8 A8 10 4",
     "difficulty": 2
   },
 
   {
     "puzzleId": 47,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e47",
+    "fen": "r2qkb1r/p1p2p1p/2p3p1/3pPbn1/6P1/3B1Q2/PPP2P1P/RNB1K2R w KQkq - 1 12",
+    "solution": "C1 G5 2 7 | D8 G5 10 2 | G4 F5 0 8",
     "difficulty": 2
   },
 
   {
     "puzzleId": 48,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e48",
+    "fen": "5rrk/pb2Q1pp/np6/1B6/3p1N2/P3p3/3q1PPP/5RK1 w - - 6 24",
+    "solution": "F4 G6 1 12 | H7 G6 6 1 | E7 H4 4 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 49,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e49",
+    "fen": "2r2rk1/2Q2pp1/7p/p7/1p6/1P5P/PqR2PP1/5RK1 w - - 4 24",
+    "solution": "C7 C8 4 9 | F8 C8 9 4 | C2 B2 3 10",
     "difficulty": 2
   },
 
   {
     "puzzleId": 50,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e50",
+    "fen": "3r4/5pk1/p1Q2p1p/1p6/1P6/P3PqP1/5P1P/2R3K1 b - - 3 29",
+    "solution": "D8 D1 9 12 | C1 D1 3 9 | F3 C6 4 10",
     "difficulty": 2
   },
 
   {
     "puzzleId": 51,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e51",
+    "fen": "1k2r3/ppp3p1/7p/3RB3/2n1B3/2P4P/PPP5/3K4 b - - 0 29",
+    "solution": "C4 E3 7 12 | D1 D2 5 12 | E3 D5 7 3 | E4 D5 2 7 | E8 E5 9 2",
     "difficulty": 2
   },
 
   {
     "puzzleId": 52,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e52",
+    "fen": "3qk2r/1p2ppb1/3pb1p1/Q6p/2r1P2P/1N2BP2/PPP3P1/2KR3R b k - 0 17",
+    "solution": "C4 C2 9 0 | C1 C2 5 9 | E6 B3 8 1 | A2 B3 0 8 | D8 A5 10 4",
     "difficulty": 2
   },
 
   {
     "puzzleId": 53,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e53",
+    "fen": "8/pp1R2pk/2p1N1pp/8/6Q1/P6P/1P4PK/1q2r3 b - - 5 31",
+    "solution": "E1 H1 9 12 | H2 G3 5 12 | B1 E1 10 12 | G3 F4 5 12 | H1 F1 9 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 54,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e54",
+    "fen": "2r4r/pp1b2pp/4k3/3R4/1b6/2N5/PPPK1PPP/R7 w - - 7 19",
+    "solution": "A1 E1 3 12 | E6 F6 11 12 | D5 D7 3 8 | B4 C3 8 1 | B2 C3 0 8",
     "difficulty": 2
   },
 
   {
     "puzzleId": 55,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e55",
+    "fen": "r5k1/2p2r1n/p4p1B/1p1Pp1p1/n1p1P1N1/2P1Q3/q4P2/2R1K1R1 w - - 0 25",
+    "solution": "G4 F6 1 6 | F7 F6 9 1 | G1 G5 3 6 | G8 F7 11 12 | G5 G7 3 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 56,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e56",
+    "fen": "r3kbnQ/p1p1q2p/2ppb1p1/8/4P3/2PP4/PP3PPP/RNB1K2R b KQq - 0 10",
+    "solution": "F8 G7 8 12 | H8 H7 4 6 | G7 C3 8 0 | B1 C3 1 8 | E7 H7 10 4",
     "difficulty": 2
   },
 
   {
     "puzzleId": 57,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e57",
+    "fen": "r2q4/1b1p2kp/p3p3/1p4b1/5rQ1/1BN5/PP3PPP/2RR2K1 w - - 2 22",
+    "solution": "D1 D7 3 6 | D8 D7 10 3 | G4 G5 4 8 | G7 H8 11 12 | G5 F4 4 9",
     "difficulty": 2
   },
 
   {
     "puzzleId": 58,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e58",
+    "fen": "4r2r/pk1Qqp1p/1b6/4Np2/1P2n3/6BP/P4PP1/2R2RK1 b - - 1 22",
+    "solution": "E7 D7 10 4 | E5 D7 1 10 | E4 G3 7 2 | D7 C5 1 12 | B6 C5 8 1",
     "difficulty": 2
   },
 
   {
     "puzzleId": 59,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e59",
+    "fen": "r2qr3/p1p2k1B/1pb1p3/3nP3/3P2P1/2P5/P1Q2P2/R1b2RK1 w - - 0 22",
+    "solution": "C2 G6 4 12 | F7 F8 11 12 | G6 G8 4 12 | F8 E7 11 12 | G8 G7 4 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 60,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e60",
+    "fen": "2R5/5Qbk/6pp/3p4/4n2B/r3P3/r2NKPPP/8 b - - 0 26",
+    "solution": "A2 D2 9 1 | E2 F3 5 12 | D2 F2 9 0 | H4 F2 2 9 | E4 G5 7 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 61,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e61",
+    "fen": "r4r1k/b4qp1/p3p2p/8/1ppnR2Q/5P2/PP1B2PP/1B2RN1K b - - 1 27",
+    "solution": "D4 F3 7 0 | E4 F4 3 12 | F3 H4 7 4 | F4 F7 3 10 | F8 F7 9 3",
     "difficulty": 2
   },
 
   {
     "puzzleId": 62,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e62",
+    "fen": "r1bqk1nr/p3b1p1/1pn4p/2p1N3/7P/2PPp3/PP1N1PP1/R2QKB1R w KQkq - 0 12",
+    "solution": "D1 H5 4 12 | G7 G6 6 12 | H5 G6 4 6 | E8 F8 11 12 | G6 F7 4 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 63,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e63",
+    "fen": "r5r1/2p1kpR1/q1bp1n2/4pPQB/2P1P3/1PN4P/P6K/R7 b - - 4 29",
+    "solution": "G8 G7 9 3 | G5 G7 4 9 | F6 H5 7 2 | F5 F6 0 12 | H5 F6 7 0",
     "difficulty": 2
   },
 
   {
     "puzzleId": 64,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e64",
+    "fen": "r1q1rk2/pp4bp/3p2p1/1N4B1/5Pn1/1Q6/PPP3PP/3R1RK1 b - - 1 18",
+    "solution": "C8 C5 10 12 | G1 H1 5 12 | G4 F2 7 12 | F1 F2 3 7 | C5 F2 10 3",
     "difficulty": 2
   },
 
   {
     "puzzleId": 65,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e65",
+    "fen": "5r2/pp3p1k/4pq1p/1Q6/8/5bP1/PPr1NP1P/R3R1K1 w - - 5 24",
+    "solution": "B5 D3 4 12 | F6 F5 10 12 | D3 F5 4 10 | E6 F5 6 4 | E2 D4 1 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 66,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e66",
+    "fen": "2kr4/pp5p/6p1/2pP1p2/P1Pbn3/1B2B2P/1P3PP1/R4K2 b - - 2 24",
+    "solution": "D4 E3 8 2 | F2 E3 0 7 | E4 D2 7 12 | F1 E2 5 12 | D2 B3 7 2",
     "difficulty": 2
   },
 
   {
     "puzzleId": 67,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e67",
+    "fen": "8/p7/3rBk1p/2p2Pp1/1P1p2P1/P2K3P/8/8 w - - 2 50",
+    "solution": "B4 C5 0 6 | D6 A6 9 12 | D3 D4 5 6 | A6 A4 9 12 | D4 D5 5 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 68,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e68",
+    "fen": "4r1k1/1pp3pp/1p1p1p2/2bPrP1Q/P1Pq4/7P/6P1/4RR1K w - - 5 27",
+    "solution": "H5 E8 4 9 | E5 E8 9 4 | E1 E8 3 9 | G8 F7 11 12 | F1 E1 3 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 69,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e69",
+    "fen": "1r4k1/4p3/3p2p1/1P1P4/1qP1p1P1/p1b1P1P1/K1Q1RP2/1R6 b - - 0 34",
+    "solution": "B4 C4 10 0 | B1 B3 3 12 | B8 B5 9 0 | C2 C3 4 8 | C4 E2 10 3",
     "difficulty": 2
   },
 
   {
     "puzzleId": 70,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e70",
+    "fen": "r5k1/p1p2ppp/1pP5/5q2/4r1b1/2P1PN2/PBQ2PPP/R2R2K1 b - - 1 17",
+    "solution": "G4 F3 8 1 | G2 F3 0 8 | E4 G4 9 12 | F3 G4 0 9 | F5 C2 10 4",
     "difficulty": 2
   },
 
   {
     "puzzleId": 71,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e71",
+    "fen": "r5k1/4q1p1/2p1pn1p/1p1pN3/1PbP4/r1N1P1QP/5PP1/1RR3K1 b - - 5 27",
+    "solution": "A3 C3 9 1 | C1 C3 3 9 | F6 E4 7 12 | G3 G6 4 12 | E4 C3 7 3",
     "difficulty": 2
   },
 
   {
     "puzzleId": 72,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e72",
+    "fen": "2r1r1k1/5pb1/1p1N2pp/p1n5/P2p4/1P1q2P1/2Q2PBP/R3R1K1 w - - 0 23",
+    "solution": "E1 E8 3 9 | C8 E8 9 3 | C2 D3 4 10 | C5 C3 7 4 | D6 E8 1 9",
     "difficulty": 2
   },
 
   {
     "puzzleId": 73,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e73",
+    "fen": "8/2k5/p7/1p1P1p2/1P1K4/P7/8/8 w - - 0 54",
+    "solution": "D4 E5 5 12 | F5 F4 6 12 | E5 F4 5 6 | C7 D6 11 12 | F4 E4 5 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 74,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e74",
+    "fen": "5rk1/2p2r2/p2p2p1/1n1P4/1P2QP2/q7/2P2P1P/6RK w - - 0 39",
+    "solution": "E4 G6 4 6 | G8 H8 11 12 | G6 H6 4 12 | F7 H7 9 12 | H6 F8 4 9",
     "difficulty": 2
   },
 
   {
     "puzzleId": 75,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e75",
+    "fen": "rn2k2r/ppq2pp1/2p1pn2/3p3p/2PP2bP/1P2PNP1/P2NB3/R1BQK2R b KQkq - 0 10",
+    "solution": "C7 G3 11 0 | E1 F1 5 12 | G4 H3 8 12 | H1 H3 3 8 | G3 H3 11 3",
     "difficulty": 2
   },
 
   {
     "puzzleId": 76,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e76",
+    "fen": "2r2k2/p4pp1/qp2p2p/4P3/5P2/1Pn2Q1P/P5P1/R1R3K1 b - - 1 28",
+    "solution": "C3 E2 7 12 | F3 E2 4 7 | C8 C1 9 3 | A1 C1 3 9 | A6 E2 10 4",
     "difficulty": 2
   },
 
   {
     "puzzleId": 77,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e77",
+    "fen": "1r3rk1/2p2ppp/3p4/5P2/4b3/2Q2BqP/2P3P1/RR5K w - - 0 26",
+    "solution": "B1 B8 3 9 | F8 B8 9 3 | C3 C7 4 6 | B8 F8 9 12 | F3 E4 2 8",
     "difficulty": 2
   },
 
   {
     "puzzleId": 78,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e78",
+    "fen": "8/5nk1/p3p3/1p2N3/1P3p2/P4P1K/6P1/8 w - - 0 43",
+    "solution": "E5 F7 1 7 | G7 F7 11 1 | H3 G4 5 12 | F7 E7 11 12 | G4 F4 5 6",
     "difficulty": 2
   },
 
   {
     "puzzleId": 79,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e79",
+    "fen": "8/r4p1p/3k1b2/1p1P1q1B/1P6/P6P/5P2/2R1R1K1 w - - 0 33",
+    "solution": "C1 C6 3 12 | D6 D7 11 12 | H5 G4 2 12 | F5 G4 10 2 | H3 G4 0 10",
     "difficulty": 2
   },
 
   {
     "puzzleId": 80,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e80",
+    "fen": "r6k/8/4P1p1/3R3p/3P4/pp4K1/P1n5/2B5 w - - 0 39",
+    "solution": "E6 E7 0 12 | A8 E8 9 12 | D5 D8 3 12 | H8 G7 11 12 | D8 E8 3 9",
     "difficulty": 2
   },
 
   {
     "puzzleId": 81,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e81",
+    "fen": "8/pp1b1k2/3pppp1/2p5/4P1n1/3P1BP1/PPP1N2r/R4KN1 b - - 3 23",
+    "solution": "G4 E3 7 12 | F1 E1 5 12 | E3 C2 7 0 | E1 D2 5 12 | C2 A1 7 3",
     "difficulty": 2
   },
 
   {
     "puzzleId": 82,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e82",
+    "fen": "q5k1/2R3p1/1Q1Npn1p/3b4/1P6/6P1/4PP1P/r4BK1 b - - 2 27",
+    "solution": "A1 F1 9 2 | G1 F1 5 9 | A8 A1 10 12 | C7 C1 3 12 | A1 C1 10 3",
     "difficulty": 2
   },
 
   {
     "puzzleId": 83,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e83",
+    "fen": "q1r3k1/5p1p/p3p1p1/3rP3/1p2Q3/P7/1P3PPP/3R1RK1 b - - 1 25",
+    "solution": "D5 D1 9 3 | E4 A8 4 10 | D1 F1 9 3 | G1 F1 5 9 | C8 A8 9 4",
     "difficulty": 2
   },
 
   {
     "puzzleId": 84,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e84",
+    "fen": "2kr4/ppp1q3/2n2p2/b3p3/2BpP1p1/P7/1PP2PPr/R2QNRK1 w - - 0 19",
+    "solution": "D1 G4 4 6 | F6 F5 6 12 | G4 F5 4 6 | C8 B8 11 12 | G1 H2 5 9",
     "difficulty": 2
   },
 
   {
     "puzzleId": 85,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e85",
+    "fen": "r6r/4k1p1/p1n1bb1B/1p1p1B2/3P2qP/2P5/PP4P1/2K1RR2 w - - 0 27",
+    "solution": "E1 E6 3 8 | E7 F7 11 12 | F5 G4 2 10 | H8 H6 9 2 | E6 C6 3 7",
     "difficulty": 2
   },
 
   {
     "puzzleId": 86,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e86",
+    "fen": "1rr3k1/1Q3pbp/1p1q2p1/p2N1p2/3P4/4P1P1/5PBP/1R4K1 w - - 13 32",
+    "solution": "D5 E7 1 12 | G8 F8 11 12 | E7 C8 1 9 | B8 B7 9 4 | C8 D6 1 10",
     "difficulty": 2
   },
 
   {
     "puzzleId": 87,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e87",
+    "fen": "2r3k1/5ppp/8/4pPP1/p6P/P1R1Q3/1K1BN3/5q2 b - - 1 41",
+    "solution": "C8 B8 9 12 | C3 B3 3 12 | B8 B3 9 3 | E3 B3 4 9 | A4 B3 6 4",
     "difficulty": 2
   },
 
   {
     "puzzleId": 88,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e88",
+    "fen": "3r1b1k/1p4pp/5p2/p3pP2/2Bp2QP/1P1P2R1/q5P1/7K w - - 0 30",
+    "solution": "G4 H5 4 12 | B7 B5 6 12 | C4 E6 2 12 | A2 B1 10 12 | H1 H2 5 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 89,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e89",
+    "fen": "2r3k1/5pbp/6p1/p7/2q5/P7/2QB1PPP/1R4K1 w - - 0 29",
+    "solution": "C2 C4 4 10 | C8 C4 9 4 | B1 B8 3 12 | G7 F8 8 12 | D2 H6 2 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 90,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e90",
+    "fen": "3rr1k1/5pbp/5qp1/p1P5/Pp2n3/1P3N1P/2Q1RPP1/B2R2K1 b - - 0 26",
+    "solution": "D8 D1 9 3 | C2 D1 4 9 | F6 A1 10 2 | D1 A1 4 10 | G7 A1 8 4",
     "difficulty": 2
   },
 
   {
     "puzzleId": 91,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e91",
+    "fen": "5k2/5pp1/7p/3n4/2p5/7P/4KPP1/3R4 b - - 3 46",
+    "solution": "D5 C3 7 12 | E2 D2 5 12 | C3 D1 7 3 | D2 D1 5 7 | F8 E7 11 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 92,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e92",
+    "fen": "r4rk1/2p1P2p/b2p2pP/3R1p2/8/1pP1QNB1/1P4P1/K6R b - - 0 29",
+    "solution": "A6 D3 8 12 | E3 A7 4 12 | A8 A7 9 4 | D5 A5 3 12 | A7 A5 9 3",
     "difficulty": 2
   },
 
   {
     "puzzleId": 93,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e93",
+    "fen": "8/2R5/4Nbk1/5p2/5P2/1P1K2P1/r1B5/7q w - - 0 49",
+    "solution": "E6 F8 1 12 | G6 H5 11 12 | C7 H7 3 12 | H5 G4 11 12 | H7 H1 3 10",
     "difficulty": 2
   },
 
   {
     "puzzleId": 94,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e94",
+    "fen": "r4rk1/pp2n1pp/1q3n1b/1P2N3/2P3bP/1Q6/P1B5/1K1RR3 w - - 0 26",
+    "solution": "C4 C5 0 12 | G4 E6 8 12 | C5 B6 0 10 | E6 B3 8 4 | C2 B3 2 8",
     "difficulty": 2
   },
 
   {
     "puzzleId": 95,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e95",
+    "fen": "1rr1k3/4pp1p/p2p2pP/1p4P1/3KPP2/PPRP4/8/7R b - - 1 28",
+    "solution": "E7 E5 6 12 | F4 E5 0 6 | D6 E5 6 0 | D4 E5 5 12 | C8 C3 9 3",
     "difficulty": 2
   },
 
   {
     "puzzleId": 96,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e96",
+    "fen": "Bn2k2r/p1p2p1p/8/1p2P3/1b1P1p2/2Pq1NPP/PP4P1/R1B1K2R b KQk - 0 18",
+    "solution": "B4 C3 8 0 | B2 C3 0 8 | D3 C3 10 0 | E1 E2 5 12 | C3 A1 10 3",
     "difficulty": 2
   },
 
   {
     "puzzleId": 97,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e97",
+    "fen": "2b5/r2N3R/2ppR1p1/p2p1k2/5r1P/8/PP4P1/6K1 w - - 1 30",
+    "solution": "E6 F6 3 12 | F5 E4 11 12 | H7 E7 3 12 | E4 D3 11 12 | F6 F4 3 9",
     "difficulty": 2
   },
 
   {
     "puzzleId": 98,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e98",
+    "fen": "8/pQ6/Ppp3p1/8/1Pq2p2/4pk2/6R1/6K1 b - - 3 44",
+    "solution": "C4 C1 10 12 | G1 H2 5 12 | E3 E2 6 12 | G2 E2 3 6 | F3 E2 11 3",
     "difficulty": 2
   },
 
   {
     "puzzleId": 99,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e99",
+    "fen": "3r3k/p1p4B/1p3p1Q/4q3/8/2P5/PP5P/1K6 w - - 3 33",
+    "solution": "H7 G6 2 12 | H8 G8 11 12 | H6 H7 4 12 | G8 F8 11 12 | H7 F7 4 12",
     "difficulty": 2
   },
 
   {
     "puzzleId": 100,
-    "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1",
-    "solution": "e100",
+    "fen": "6k1/b7/6pp/3N4/1P2R3/1r4P1/6K1/8 w - - 6 42",
+    "solution": "E4 E8 3 12 | G8 F7 11 12 | E8 E7 3 12 | F7 F8 11 12 | E7 A7 3 8",
     "difficulty": 2
   }
 ]

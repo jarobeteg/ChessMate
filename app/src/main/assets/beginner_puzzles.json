@@ -2,700 +2,700 @@
   {
     "puzzleId": 1,
     "fen": "3r4/pb2b3/1p3n1p/1Pp1kPpP/P3P3/2N5/2P2B2/3R2K1 w - - 3 31",
-    "solution": "F2 G3 WHITE_BISHOP NONE",
+    "solution": "F2 G3 2 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 2,
     "fen": "5r1k/pp1R2pb/1q2B2p/8/1P3PnP/P5PK/1Br1R3/8 w - - 0 35",
-    "solution": "B2 G7 WHITE_BISHOP BLACK_PAWN",
+    "solution": "B2 G7 2 6",
     "difficulty": 1
   },
 
   {
     "puzzleId": 3,
     "fen": "1r6/4k3/2p1P2p/p1Pp3R/6n1/P6B/2P3P1/7K b - - 0 37",
-    "solution": "B8 B1 BLACK_ROOK NONE",
+    "solution": "B8 B1 9 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 4,
     "fen": "r1bq1rk1/pppp1ppp/2nb4/3Np3/PPB1n3/2P2Q2/3P1PPP/R1B1K1NR w KQ - 2 9",
-    "solution": "F3 E4 WHITE_QUEEN BLACK_KNIGHT",
+    "solution": "F3 E4 4 7",
     "difficulty": 1
   },
 
   {
     "puzzleId": 5,
     "fen": "k5nB/1b3Q1p/pp1P1p2/6q1/2P5/1PN5/P5PP/6K1 b - - 0 25",
-    "solution": "G5 G2 BLACK_QUEEN WHITE_PAWN",
+    "solution": "G5 G2 10 0",
     "difficulty": 1
   },
 
   {
     "puzzleId": 6,
     "fen": "6k1/2b4p/5R2/6B1/2NP2p1/2P2PP1/6KP/r3r3 b - - 0 37",
-    "solution": "E1 E2 BLACK_ROOK NONE",
+    "solution": "E1 E2 9 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 7,
     "fen": "6rk/1p4p1/1p5R/q3Q3/4P3/7P/1P4PK/8 b - - 0 29",
-    "solution": "E6 H6 WHITE_ROOK BLACK_PAWN",
+    "solution": "E6 H6 3 6",
     "difficulty": 1
   },
 
   {
     "puzzleId": 8,
     "fen": "rnbqkb1r/5ppp/p4n2/1N1p4/Q2Pp3/4P3/PP1N1PPP/R1B1KB1R b KQkq - 0 9",
-    "solution": "C8 D7 BLACK_BISHOP NONE",
+    "solution": "C8 D7 8 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 9,
     "fen": "r2q4/1pp3kp/p5B1/3P4/5b2/P1N1r3/1PQ5/2K3RR b - - 0 23",
-    "solution": "E3 E1 BLACK_ROOK NONE",
+    "solution": "E3 E1 9 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 10,
     "fen": "r4r2/2q1bp2/p2p4/2pN3R/2p1k3/4B3/PPPn1K2/R7 w - - 4 25",
-    "solution": "C3 D5 WHITE_KNIGHT NONE",
+    "solution": "C3 D5 1 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 11,
     "fen": "r5nr/pp2kppp/2B1bq2/8/4P3/2Q5/PPP2PPP/2KR3R w - - 2 15",
-    "solution": "C3 C5 WHITE_QUEEN NONE",
+    "solution": "C3 C5 4 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 12,
     "fen": "5r1k/ppp4r/3p4/3P1N2/P3P1p1/3B3q/1P3P1R/5QK1 b - - 0 33",
-    "solution": "H3 H2 BLACK_QUEEN WHITE_ROOK",
+    "solution": "H3 H2 10 3",
     "difficulty": 1
   },
 
   {
     "puzzleId": 13,
     "fen": "r2qr3/pp4pp/2p2bk1/3pR3/3P4/2P2Q2/PP1N2PP/R5K1 w - - 0 18",
-    "solution": "F3 H5 WHITE_QUEEN NONE",
+    "solution": "F3 H5 4 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 14,
     "fen": "r1b1kb1r/pp2nppp/1q2p3/3pP3/3n4/P2B1N2/1P3PPP/RNBQK2R w KQkq - 0 9",
-    "solution": "F3 D4 WHITE_KNIGHT BLACK_KNIGHT",
+    "solution": "F3 D4 1 7",
     "difficulty": 1
   },
 
   {
     "puzzleId": 15,
     "fen": "r3k2r/pp3p2/2p5/3p2pq/8/2NB2K1/PP2NP2/1R1Q1R2 b kq - 2 22",
-    "solution": "H5 H3 BLACK_QUEEN NONE",
+    "solution": "H5 H3 10 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 16,
     "fen": "Q6R/2p4R/p2p1k2/1p2p3/1K6/2P5/P7/3q4 b - - 4 37",
-    "solution": "D1 A4 BLACK_QUEEN NONE",
+    "solution": "D1 A4 10 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 17,
     "fen": "r4rk1/1pp2ppp/2Bp4/2n2PPP/1n2P3/2N1Q3/1Pp5/2KR3R b - - 1 25",
-    "solution": "C5 B3 BLACK_KNIGHT NONE",
+    "solution": "C5 B3 7 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 18,
     "fen": "r1b2rk1/pp2qpp1/4p2p/4N3/3Pp1Q1/4P1P1/P4PP1/3R1K1R w - - 12 25",
-    "solution": "H1 H6 WHITE_ROOK BLACK_PAWN",
+    "solution": "H1 H6 3 6",
     "difficulty": 1
   },
 
   {
     "puzzleId": 19,
     "fen": "8/6pk/8/5p2/4q2P/Q5PK/8/8 b - - 0 44",
-    "solution": "E4 H1 BLACK_QUEEN NONE",
+    "solution": "E4 H1 10 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 20,
     "fen": "4rN1R/pppr2k1/3p1p2/2q5/P4n2/1P1Q4/1KP2P2/8 w - - 0 32",
-    "solution": "D3 H7 WHITE_QUEEN NONE",
+    "solution": "D3 H7 4 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 21,
     "fen": "3kb3/ppp1b2p/4p3/3p1p2/3N4/3B1n2/PP1Q1PrP/3R1R1K b - - 0 25",
-    "solution": "G2 H2 BLACK_ROOK WHITE_PAWN",
+    "solution": "G2 H2 9 0",
     "difficulty": 1
   },
 
   {
     "puzzleId": 22,
     "fen": "3rnbk1/5p1p/p2p2pP/1p4P1/1P2qB2/PK5B/1P5Q/3R3R b - - 0 27",
-    "solution": "E4 C4 BLACK_QUEEN NONE",
+    "solution": "E4 C4 10 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 23,
     "fen": "8/6pk/4Np2/3b1q2/8/6QP/6PK/8 w - - 0 45",
-    "solution": "G3 G7 WHITE_QUEEN BLACK_PAWN",
+    "solution": "G3 G7 4 6",
     "difficulty": 1
   },
 
   {
     "puzzleId": 24,
     "fen": "2R5/3n1p1p/p2N3k/1b2p1pP/4P1P1/1r3P2/5K2/q7 w - - 0 38",
-    "solution": "D6 F5 WHITE_KNIGHT NONE",
+    "solution": "D6 F5 1 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 25,
     "fen": "1r5k/p4p1p/b1p3pN/3pP3/3P4/2P2QR1/3qr1PP/2R3K1 w - - 2 27",
-    "solution": "F3 F6 WHITE_QUEEN NONE",
+    "solution": "F3 F6 4 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 26,
     "fen": "8/p3p3/5b2/4kP2/2B4Q/6P1/2q3r1/5R1K w - - 3 36",
-    "solution": "H4 F4 WHITE_QUEEN NONE",
+    "solution": "H4 F4 4 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 27,
     "fen": "r4b1r/ppp2kpp/8/3p3q/4p3/3PBnP1/PPP1NP1P/R2Q1K1R b - - 1 14",
-    "solution": "H5 H3 BLACK_QUEEN NONE",
+    "solution": "H5 H3 10 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 28,
     "fen": "r4rk1/pp3pp1/2pp1n1p/2b1pN2/4P2q/P1NP1K2/BPP1QR2/R1B5 b - - 2 17",
-    "solution": "H4 G4 BLACK_QUEEN NONE",
+    "solution": "H4 G4 10 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 29,
     "fen": "R6Q/5p1p/6pk/4pq2/7K/2Pr2P1/7P/8 w - - 5 38",
-    "solution": "H8 F8 WHITE_QUEEN NONE",
+    "solution": "H8 F8 4 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 30,
     "fen": "6k1/6pp/p7/3q4/P1pB4/1PQn4/4r1PP/R4K1R b - - 0 25",
-    "solution": "D5 G2 BLACK_QUEEN WHITE_PAWN",
+    "solution": "D5 G2 10 0",
     "difficulty": 1
   },
 
   {
     "puzzleId": 31,
     "fen": "r1r3k1/1b2pp1p/6PB/4P3/P2R4/2N1Q2P/1q4P1/6K1 b - - 0 30",
-    "solution": "B2 G2 BLACK_QUEEN WHITE_PAWN",
+    "solution": "B2 G2 10 0",
     "difficulty": 1
   },
 
   {
     "puzzleId": 32,
     "fen": "6rk/4brp1/2ppb2p/5p2/p3P2R/P1B3R1/1PP3PP/6K1 w - - 0 26",
-    "solution": "H4 H6 WHITE_ROOK BLACK_PAWN",
+    "solution": "H4 H6 3 6",
     "difficulty": 1
   },
 
   {
     "puzzleId": 33,
     "fen": "8/7p/R5p1/4k1P1/4P1P1/1p2K3/p4P2/1r6 w - - 8 42",
-    "solution": "F2 F4 WHITE_PAWN NONE",
+    "solution": "F2 F4 0 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 34,
     "fen": "2k1rb1r/pppb1ppp/8/3Pq3/3p3P/P2P1P2/1P1BN1P1/R2QKB1R b KQ - 0 13",
-    "solution": "E5 G3 BLACK_QUEEN NONE",
+    "solution": "E5 G3 10 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 35,
     "fen": "2b2k1r/2N2pbp/p2pp1p1/3P3n/Q1P1P2q/5n2/PP2N1PP/RBB2K1R b - - 1 16",
-    "solution": "H4 E1 BLACK_QUEEN NONE",
+    "solution": "H4 E1 10 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 36,
     "fen": "r6r/pb4pp/1nk5/1Nq5/2P1n3/6Q1/PP3PPP/R2R2K1 w - - 7 21",
-    "solution": "G3 C7 WHITE_QUEEN NONE",
+    "solution": "G3 C7 4 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 37,
     "fen": "8/1Q6/p1pp2pk/7p/2PbNP1q/P2P1K2/1P1B4/8 b - - 2 35",
-    "solution": "H4 G4 BLACK_QUEEN NONE",
+    "solution": "H4 G4 10 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 38,
     "fen": "r3k2r/ppp2pp1/2np4/4p2p/2P3bN/1PBP2P1/P2Qq2P/RN3R1K b kq - 7 16",
-    "solution": "E2 F1 BLACK_QUEEN WHITE_ROOK",
+    "solution": "E2 F1 10 3",
     "difficulty": 1
   },
 
   {
     "puzzleId": 39,
     "fen": "5r2/p1p3Q1/1p6/3pB3/3Pp1Pk/2P1P3/PP5K/5q2 w - - 1 41",
-    "solution": "E5 G3 WHITE_BISHOP NONE",
+    "solution": "E5 G3 2 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 40,
     "fen": "1Q6/3rk3/6p1/2pPn2p/2P5/6P1/P3q1PP/5R1K w - - 3 31",
-    "solution": "B8 F8 WHITE_QUEEN NONE",
+    "solution": "B8 F8 4 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 41,
     "fen": "2b2rk1/1pp2ppn/1p3q1p/r3p3/3P4/1P1Q1N1P/P4PP1/RB3RK1 w - - 0 19",
-    "solution": "D3 H7 WHITE_QUEEN BLACK_KNIGHT",
+    "solution": "D3 H7 4 7",
     "difficulty": 1
   },
 
   {
     "puzzleId": 42,
     "fen": "r4k2/2p1qp2/p2b1Q1p/2pP4/1p4R1/7P/PPP2PP1/6K1 w - - 4 23",
-    "solution": "F6 H8 WHITE_QUEEN NONE",
+    "solution": "F6 H8 4 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 43,
     "fen": "4r1k1/R6p/1p2qQp1/1Pp1P3/8/P5B1/r5PP/5nK1 w - - 0 50",
-    "solution": "F6 G7 WHITE_QUEEN NONE",
+    "solution": "F6 G7 4 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 44,
     "fen": "1N4k1/2R2ppp/4p3/3bP1P1/1r3P2/KPnB4/7P/8 b - - 0 35",
-    "solution": "B4 B3 BLACK_ROOK WHITE_PAWN",
+    "solution": "B4 B3 9 0",
     "difficulty": 1
   },
 
   {
     "puzzleId": 45,
     "fen": "5R2/2P5/8/8/1P4k1/P3pp2/r7/4K3 b - - 0 49",
-    "solution": "A2 A1 BLACK_ROOK NONE",
+    "solution": "A2 A1 9 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 46,
     "fen": "3q2Q1/2rk4/p2p1bPB/1p1P4/3p3P/P3n3/1PP5/2K4R w - - 4 36",
-    "solution": "G8 E6 WHITE_QUEEN NONE",
+    "solution": "G8 E6 4 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 47,
     "fen": "r4nk1/1p5p/p1p1q1p1/4Q3/2P5/1P4P1/PB5P/6K1 w - - 0 28",
-    "solution": "E5 G7 WHITE_QUEEN NONE",
+    "solution": "E5 G7 4 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 48,
     "fen": "8/6bp/k1N1B1p1/pn1P4/8/4B1P1/1q3P1P/4R1K1 w - - 2 33",
-    "solution": "E6 C8 WHITE_BISHOP NONE",
+    "solution": "E6 C8 2 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 49,
     "fen": "Q4nk1/p1p2pp1/7p/3P4/2BN1Rb1/2N1P1n1/PP3KP1/q7 b - - 0 21",
-    "solution": "G3 H1 BLACK_KNIGHT NONE",
+    "solution": "G3 H1 7 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 50,
     "fen": "6r1/p1pk1r2/1p1pR2B/3P1n1p/2P3q1/1Q6/P5PP/4R2K b - - 7 25",
-    "solution": "G4 G2 BLACK_QUEEN WHITE_PAWN",
+    "solution": "G4 G2 10 0",
     "difficulty": 1
   },
 
   {
     "puzzleId": 51,
     "fen": "8/3P1p2/6k1/2p2p1p/q7/2QK3P/1P1Q4/8 b - - 2 58",
-    "solution": "A4 E4 BLACK_QUEEN NONE",
+    "solution": "A4 E4 10 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 52,
     "fen": "1rN3k1/1p6/p2p3b/P2Pp3/4P1n1/3BRpN1/1P4pP/R5K1 b - - 0 31",
-    "solution": "H6 E3 BLACK_BISHOP WHITE_ROOK",
+    "solution": "H6 E3 8 3",
     "difficulty": 1
   },
 
   {
     "puzzleId": 53,
     "fen": "3rr3/p1R4p/1p1kPp2/3P1Pp1/4B2n/7P/P4B2/6K1 w - - 2 34",
-    "solution": "F2 G3 WHITE_BISHOP NONE",
+    "solution": "F2 G3 2 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 54,
     "fen": "r1bq4/ppp5/2n4Q/3pk3/1b3R2/2p5/PPP2PP1/R5K1 w - - 2 22",
-    "solution": "A1 E1 WHITE_ROOK NONE",
+    "solution": "A1 E1 3 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 55,
     "fen": "r4rk1/pp3p2/1bppb2p/4p1pQ/1P2Pq2/P1NP3P/1P1N1PP1/R4RK1 b - - 1 19",
-    "solution": "F4 D2 BLACK_QUEEN WHITE_KNIGHT",
+    "solution": "F4 D2 10 1",
     "difficulty": 1
   },
 
   {
     "puzzleId": 56,
     "fen": "3rk2r/1p3ppp/p7/4p1B1/8/Q4P2/PPn1q2P/R4R1K w k - 3 23",
-    "solution": "A3 E7 WHITE_QUEEN NONE",
+    "solution": "A3 E7 4 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 57,
     "fen": "8/5p2/8/3Pn3/R6N/p2k4/r5PP/2K5 b - - 3 48",
-    "solution": "A2 A1 BLACK_ROOK NONE",
+    "solution": "A2 A1 9 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 58,
     "fen": "r2qkb1r/pp1bnp2/2n3p1/1B1N2p1/2pP1P2/8/PPP3PP/R1B1QRK1 w kq - 0 13",
-    "solution": "D5 F6 WHITE_KNIGHT NONE",
+    "solution": "D5 F6 1 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 59,
     "fen": "r3b1r1/2p1q2k/p1p5/2PpPN1p/1P3PQ1/P3P3/7P/6RK w - - 0 30",
-    "solution": "G4 G8 WHITE_QUEEN BLACK_ROOK",
+    "solution": "G4 G8 4 9",
     "difficulty": 1
   },
 
   {
     "puzzleId": 60,
     "fen": "r7/ppp2k2/6bp/4RN2/8/2P5/P1P3PP/2K5 b - - 2 24",
-    "solution": "F7 F6 BLACK_KING NONE",
+    "solution": "F7 F6 11 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 61,
     "fen": "rn1k1b1r/pQ2pBpp/2p5/8/3qN1b1/8/PP3PPP/R1B1K1NR b KQ - 0 10",
-    "solution": "D4 D1 BLACK_QUEEN NONE",
+    "solution": "D4 D1 10 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 62,
     "fen": "2k1r3/R5R1/bp6/7p/2p5/KPr1n2P/P7/8 w - - 0 29",
-    "solution": "A7 A8 WHITE_ROOK NONE",
+    "solution": "A7 A8 3 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 63,
     "fen": "rnb2bnr/ppk5/2p3Q1/1q4B1/4p3/2P5/PP3PPP/2KR3R w - - 2 17",
-    "solution": "G5 D8 WHITE_BISHOP NONE",
+    "solution": "G5 D8 2 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 64,
     "fen": "r4r1k/bbp2ppp/3p2n1/1p2p1NQ/4P3/1BPP3P/1P3qP1/1RB1RN1K b - - 1 18",
-    "solution": "F2 G1 BLACK_QUEEN NONE",
+    "solution": "F2 G1 10 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 65,
     "fen": "8/8/8/1NRp4/1P6/2Pbk3/1r6/2K5 b - - 6 51",
-    "solution": "B2 B1 BLACK_ROOK NONE",
+    "solution": "B2 B1 9 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 66,
     "fen": "1rbq1rk1/2N2pp1/2n1pb1p/3P4/p4B2/P4P2/1PPQ2PP/2KR1B1R b - - 0 15",
-    "solution": "F6 B2 BLACK_BISHOP WHITE_PAWN",
+    "solution": "F6 B2 8 0",
     "difficulty": 1
   },
 
   {
     "puzzleId": 67,
     "fen": "8/1P1Q1p2/6k1/3Pp3/4K3/8/8/5q2 b - - 22 53",
-    "solution": "F1 E2 BLACK_QUEEN NONE",
+    "solution": "F1 E2 10 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 68,
     "fen": "6k1/4p2p/6p1/3pP3/3P2KP/1N1Q2P1/8/2b4q b - - 4 39",
-    "solution": "H7 H5 BLACK_PAWN NONE",
+    "solution": "H7 H5 6 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 69,
     "fen": "r2q2k1/p2p1p1p/1p3Rp1/2p2nB1/7N/2Pb1Q2/PP3KPP/RN2r3 b - - 7 18",
-    "solution": "E1 F1 BLACK_ROOK NONE",
+    "solution": "E1 F1 9 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 70,
     "fen": "1r1q2rk/p3pp1p/3pb3/6N1/1p2P3/2P5/1P3PP1/R1B1KB1R w KQ - 0 21",
-    "solution": "H1 H7 WHITE_ROOK BLACK_PAWN",
+    "solution": "H1 H7 3 6",
     "difficulty": 1
   },
 
   {
     "puzzleId": 71,
     "fen": "r7/1pp4k/p4rp1/8/P1B1pP1p/1P4bR/2PPK1P1/7R w - - 0 31",
-    "solution": "H3 G3 WHITE_ROOK BLACK_BISHOP",
+    "solution": "H3 G3 3 8",
     "difficulty": 1
   },
 
   {
     "puzzleId": 72,
     "fen": "r6r/pb2q1p1/2p1pk2/2Pn3Q/5P2/3B4/PP4PP/R4RK1 w - - 1 21",
-    "solution": "H5 G6 WHITE_QUEEN NONE",
+    "solution": "H5 G6 4 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 73,
     "fen": "8/2k4p/4p3/1B2K1p1/PbN1Pn2/5PPP/8/8 b - - 0 41",
-    "solution": "B4 C3 BLACK_BISHOP NONE",
+    "solution": "B4 C3 8 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 74,
     "fen": "1r3k2/1b2r1bQ/p2p2PB/1pp2q2/8/5Bn1/P1P5/5RKR w - - 3 31",
-    "solution": "H7 H8 WHITE_QUEEN NONE",
+    "solution": "H7 H8 4 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 75,
     "fen": "r1b2nk1/pp4pp/2p1r3/3p1p2/3PN3/1PNBP3/PBQ2qPK/R3R3 b - - 0 17",
-    "solution": "E6 H6 BLACK_ROOK NONE",
+    "solution": "E6 H6 9 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 76,
     "fen": "8/2pNp2p/r1P5/1pR2p1k/pP3P1r/P5K1/8/8 w - - 2 37",
-    "solution": "C5 F5 WHITE_ROOK BLACK_PAWN | H5 G6 BLACK_KING NONE | F5 G5 WHITE_ROOK NONE",
+    "solution": "C5 F5 3 6 | H5 G6 11 12 | F5 G5 3 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 77,
     "fen": "8/5ppk/4p2p/p7/3PQ2B/2P2P2/Pb3KPq/8 b - - 3 31",
-    "solution": "F7 F5 BLACK_PAWN NONE | E4 E6 WHITE_QUEEN BLACK_PAWN | H2 H4 BLACK_QUEEN WHITE_BISHOP",
+    "solution": "F7 F5 6 12 | E4 E6 4 6 | H2 H4 10 2",
     "difficulty": 1
   },
 
   {
     "puzzleId": 78,
     "fen": "7k/p6q/1p2p1N1/1P4Qr/3P4/P2KP1P1/8/8 b - - 4 43",
-    "solution": "H8 G7 BLACK_KING NONE | G5 E7 WHITE_QUEEN NONE | G7 G6 BLACK_KING WHITE_KNIGHT",
+    "solution": "H8 G7 11 12 | G5 E7 4 12 | G7 G6 11 1",
     "difficulty": 1
   },
 
   {
     "puzzleId": 79,
     "fen": "8/7K/r3p2P/4P1k1/2pP4/p1P5/R7/8 b - - 0 48",
-    "solution": "A6 A7 BLACK_ROOK NONE | H7 G8 WHITE_KING NONE | G5 H6 BLACK_KING WHITE_PAWN",
+    "solution": "A6 A7 9 12 | H7 G8 5 12 | G5 H6 11 0",
     "difficulty": 1
   },
 
   {
     "puzzleId": 80,
     "fen": "r2r3k/6pp/2Q5/p3P3/5P2/6P1/2qp3P/R5K1 w - - 0 30",
-    "solution": "C6 C2 WHITE_QUEEN BLACK_QUEEN | A8 C8 BLACK_ROOK NONE | C2 D1 WHITE_QUEEN NONE",
+    "solution": "C6 C2 4 10 | A8 C8 9 12 | C2 D1 4 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 81,
     "fen": "r2q2k1/1p1n2bp/p2p2p1/2pP1pN1/P1P1rP2/3QB3/1P4PP/R4RK1 b - - 3 17",
-    "solution": "E4 E3 BLACK_ROOK WHITE_BISHOP | D3 E3 WHITE_QUEEN BLACK_ROOK | G7 D4 BLACK_BISHOP NONE",
+    "solution": "E4 E3 9 2 | D3 E3 4 9 | G7 D4 8 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 82,
     "fen": "r3r1k1/1pRn3p/p2B1pp1/1q1P1P2/8/7P/PP1Q2P1/4R1K1 b - - 0 26",
-    "solution": "B5 B6 BLACK_QUEEN NONE | G1 H1 WHITE_KING NONE | B6 D6 BLACK_QUEEN WHITE_BISHOP",
+    "solution": "B5 B6 10 12 | G1 H1 5 12 | B6 D6 10 2",
     "difficulty": 1
   },
 
   {
     "puzzleId": 83,
     "fen": "r2bk2r/2p3pp/1p2p3/p4q1P/2QP1P2/2P3P1/PP6/2KR3R w kq - 1 22",
-    "solution": "C4 C6 WHITE_QUEEN NONE | E8 F7 BLACK_KING NONE | C6 A8 WHITE_QUEEN BLACK_ROOK",
+    "solution": "C4 C6 4 12 | E8 F7 11 12 | C6 A8 4 9",
     "difficulty": 1
   },
 
   {
     "puzzleId": 84,
     "fen": "r1b1k2r/5ppp/p1q1p3/4b3/1p6/1BN5/PPP3PP/R2Q1RK1 w kq - 0 16",
-    "solution": "B3 A4 WHITE_BISHOP NONE | C6 A4 BLACK_QUEEN WHITE_BISHOP | C3 A4 WHITE_KNIGHT BLACK_QUEEN",
+    "solution": "B3 A4 2 12 | C6 A4 10 2 | C3 A4 1 10",
     "difficulty": 1
   },
 
   {
     "puzzleId": 85,
     "fen": "2r1kb1r/pp1bnppp/1q6/3pPp2/3P4/P1N2N2/1P3PPP/1RBQ1RK1 b k - 3 13",
-    "solution": "C8 C3 BLACK_ROOK WHITE_KNIGHT | B2 C3 WHITE_PAWN BLACK_ROOK | B6 B1 BLACK_QUEEN WHITE_ROOK",
+    "solution": "C8 C3 9 1 | B2 C3 0 9 | B6 B1 10 3",
     "difficulty": 1
   },
 
   {
     "puzzleId": 86,
     "fen": "1n3b1r/2N1pk1p/3p1qp1/1pp4Q/4P3/3P4/r4PPP/1R3RK1 w - - 0 21",
-    "solution": "H5 D5 WHITE_QUEEN NONE | E7 E6 BLACK_PAWN NONE | D5 A2 WHITE_QUEEN BLACK_ROOK",
+    "solution": "H5 D5 4 12 | E7 E6 6 12 | D5 A2 4 9",
     "difficulty": 1
   },
 
   {
     "puzzleId": 87,
     "fen": "2r1b1k1/1p2Q1p1/q3p2p/p2pp3/3P4/4P2P/P4PP1/1R4K1 w - - 0 24",
-    "solution": "B1 B7 WHITE_ROOK BLACK_PAWN | A6 B7 BLACK_QUEEN WHITE_ROOK | E7 B7 WHITE_QUEEN BLACK_QUEEN",
+    "solution": "B1 B7 3 6 | A6 B7 10 3 | E7 B7 4 10",
     "difficulty": 1
   },
 
   {
     "puzzleId": 88,
     "fen": "4kr2/p4r2/1pppq3/n3p3/4P3/1P3NQP/P3RPP1/3R2K1 b - - 2 26",
-    "solution": "F7 F3 BLACK_ROOK WHITE_KNIGHT | G2 F3 WHITE_PAWN BLACK_ROOK | F8 G8 BLACK_ROOK NONE",
+    "solution": "F7 F3 9 1 | G2 F3 0 9 | F8 G8 9 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 89,
     "fen": "r5k1/1q3ppp/2b1pn2/1p6/2pP4/2B1PBQ1/1P3PPP/5RK1 w - - 8 20",
-    "solution": "D4 D5 WHITE_PAWN NONE | E6 D5 BLACK_PAWN WHITE_PAWN | C3 F6 WHITE_BISHOP BLACK_KNIGHT",
+    "solution": "D4 D5 0 12 | E6 D5 6 0 | C3 F6 2 7",
     "difficulty": 1
   },
 
   {
     "puzzleId": 90,
     "fen": "8/8/4p1p1/4P1K1/1p4P1/7P/Rk6/8 b - - 0 52",
-    "solution": "B2 A2 BLACK_KING WHITE_ROOK | G5 F6 WHITE_KING NONE | B4 B3 BLACK_PAWN NONE",
+    "solution": "B2 A2 11 3 | G5 F6 5 12 | B4 B3 6 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 91,
     "fen": "8/8/8/3b4/P7/1pK2k2/4B3/8 b - - 0 51",
-    "solution": "F3 E2 BLACK_KING WHITE_BISHOP | A4 A5 WHITE_PAWN NONE | E2 D1 BLACK_KING NONE",
+    "solution": "F3 E2 11 2 | A4 A5 0 12 | E2 D1 11 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 92,
     "fen": "r4rk1/pp2bp2/1qp5/4P2R/4p3/1B6/PPP1QnPP/R1B3K1 b - - 2 21",
-    "solution": "F2 H3 BLACK_KNIGHT NONE | G1 F1 WHITE_KING NONE | B6 G1 BLACK_QUEEN NONE",
+    "solution": "F2 H3 7 12 | G1 F1 5 12 | B6 G1 10 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 93,
     "fen": "8/R4Nbk/8/7p/1NP3b1/P7/3r2P1/6K1 b - - 0 36",
-    "solution": "G7 D4 BLACK_BISHOP NONE | G1 H2 WHITE_KING NONE | D4 A7 BLACK_BISHOP WHITE_ROOK",
+    "solution": "G7 D4 8 12 | G1 H2 5 12 | D4 A7 8 3",
     "difficulty": 1
   },
 
   {
     "puzzleId": 94,
     "fen": "4r1r1/1p6/p7/2p5/2P1PpR1/2PB1P1k/P4K2/8 w - - 4 36",
-    "solution": "D3 F1 WHITE_BISHOP NONE | H3 H2 BLACK_KING NONE | G4 H4 WHITE_ROOK NONE",
+    "solution": "D3 F1 2 12 | H3 H2 11 12 | G4 H4 3 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 95,
     "fen": "r4rk1/1p3ppp/pn2pb2/3q4/3PN3/1Q3N2/PP3PPP/R4RK1 w - - 2 17",
-    "solution": "E4 F6 WHITE_KNIGHT BLACK_BISHOP | G7 F6 BLACK_PAWN WHITE_KNIGHT | B3 B6 WHITE_QUEEN BLACK_KNIGHT",
+    "solution": "E4 F6 1 8 | G7 F6 6 1 | B3 B6 4 7",
     "difficulty": 1
   },
 
   {
     "puzzleId": 96,
     "fen": "8/8/p7/1p1p4/1P2k3/2P4K/P4P2/8 b - - 0 41",
-    "solution": "E4 F3 BLACK_KING NONE | H3 H4 WHITE_KING NONE | F3 F2 BLACK_KING WHITE_PAWN",
+    "solution": "E4 F3 11 12 | H3 H4 5 12 | F3 F2 11 0",
     "difficulty": 1
   },
 
   {
     "puzzleId": 97,
     "fen": "3R4/4Bpk1/2p1p1p1/4P3/1P3P2/7p/2r4r/6K1 w - - 0 36",
-    "solution": "E7 F6 WHITE_BISHOP NONE | G7 H7 BLACK_KING NONE | D8 H8 WHITE_ROOK NONE",
+    "solution": "E7 F6 2 12 | G7 H7 11 12 | D8 H8 3 12",
     "difficulty": 1
   },
 
   {
     "puzzleId": 98,
     "fen": "8/8/3k1p1p/1p6/1p1PK1P1/8/1P6/8 w - - 1 39",
-    "solution": "E4 F5 WHITE_KING NONE | D6 D5 BLACK_KING NONE | F5 F6 WHITE_KING BLACK_PAWN",
+    "solution": "E4 F5 5 12 | D6 D5 11 12 | F5 F6 5 6",
     "difficulty": 1
   },
 
   {
     "puzzleId": 99,
     "fen": "2r1k2r/1p3pp1/p2qp1p1/3pN3/3n1n2/P1P4P/1PQN1PP1/2R1R1K1 w k - 0 18",
-    "solution": "C2 A4 WHITE_QUEEN NONE | B7 B5 BLACK_PAWN NONE | A4 D4 WHITE_QUEEN BLACK_KNIGHT",
+    "solution": "C2 A4 4 12 | B7 B5 6 12 | A4 D4 4 7",
     "difficulty": 1
   },
 
   {
     "puzzleId": 100,
     "fen": "4kbnr/p2qpppp/B1p3b1/4B3/Q3P3/2N5/Pr3PPP/R3K1NR b KQk - 0 12",
-    "solution": "D7 D2 BLACK_QUEEN NONE | E1 F1 WHITE_KING NONE | D2 F2 BLACK_QUEEN WHITE_PAWN",
+    "solution": "D7 D2 10 12 | E1 F1 5 12 | D2 F2 10 0",
     "difficulty": 1
   }
 ]

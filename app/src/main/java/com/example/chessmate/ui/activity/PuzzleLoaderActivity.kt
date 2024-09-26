@@ -274,31 +274,42 @@ class PuzzleLoaderActivity : AbsThemeActivity() {
         puzzleIDTextView.text = result
     }
 
+    private fun previousPuzzle() {
+        if (currentIndex > 0) {
+            currentIndex--
+            displayPuzzle()
+        } else {
+            currentIndex = puzzles.size - 1
+            displayPuzzle()
+        }
+    }
+
+    private fun nextPuzzle() {
+        if (currentIndex < puzzles.size - 1) {
+            currentIndex++
+            displayPuzzle()
+        } else {
+            currentIndex = 0
+            displayPuzzle()
+        }
+    }
+
+    private fun puzzleHint() {}
+
     private fun bottomNavItemClicked(item: MenuItem): Boolean{
         when (item.itemId) {
             R.id.previous_puzzle -> {
-                if (currentIndex > 0) {
-                    currentIndex--
-                    displayPuzzle()
-                } else {
-                    currentIndex = puzzles.size - 1
-                    displayPuzzle()
-                }
+                previousPuzzle()
                 return true
             }
 
             R.id.puzzle_hint -> {
+                puzzleHint()
                 return true
             }
 
             R.id.next_puzzle -> {
-                if (currentIndex < puzzles.size - 1) {
-                    currentIndex++
-                    displayPuzzle()
-                } else {
-                    currentIndex = 0
-                    displayPuzzle()
-                }
+                nextPuzzle()
                 return true
             }
 
