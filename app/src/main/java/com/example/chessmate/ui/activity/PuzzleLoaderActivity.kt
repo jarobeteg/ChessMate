@@ -238,10 +238,10 @@ class PuzzleLoaderActivity : AbsThemeActivity() {
     }
 
     private fun displayPuzzle() {
-        setupTextViews()
         val puzzle = puzzles[currentIndex]
         val fen = FEN(puzzle.fen)
         isPlayerWhite = fen.activeColor == 'w'
+        setupTextViews()
 
         chessboardLayout.removeAllViews()
         board.setupFENPosition(fen)
@@ -251,8 +251,17 @@ class PuzzleLoaderActivity : AbsThemeActivity() {
     }
 
     private fun setupTextViews() {
+        val title = findViewById<TextView>(R.id.puzzle_loader_toolbar_title)
         val difficultyTextView = findViewById<TextView>(R.id.current_puzzle_difficulty)
         val puzzleIDTextView = findViewById<TextView>(R.id.current_puzzle_id)
+
+        if (isPlayerWhite) {
+            val white = getString(R.string.for_white)
+            title.text = getString(R.string.find_the_best_move, white)
+        } else {
+            val black = getString(R.string.for_black)
+            title.text = getString(R.string.find_the_best_move, black)
+        }
 
         difficultyTextView.text = when (puzzles[currentIndex].difficulty) {
             1 -> getString(R.string.beginner_level)

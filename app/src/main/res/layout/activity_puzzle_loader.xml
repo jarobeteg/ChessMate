@@ -24,8 +24,8 @@
                 android:id="@+id/puzzle_loader_toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/find_the_best_move"
-                android:textSize="24sp"
+                android:text=""
+                android:textSize="20sp"
                 android:textColor="@color/white"
                 android:layout_gravity="center" />
 

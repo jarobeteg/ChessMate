@@ -133,7 +133,9 @@
     <string name="solved_beginner_puzzles_count">Kezdő rejtvények: 100-ból %1$d megoldva</string>
     <string name="solved_intermediate_puzzles_count">Középhaladó rejtvények: 100-ból %1$d megoldva</string>
     <string name="solved_advanced_puzzles_count">Haladó rejtvények: 100-ból %1$d megoldva</string>
-    <string name="find_the_best_move">Találd meg a legjobb lépést</string>
+    <string name="find_the_best_move">Találd meg a legjobb lépést %1$s</string>
+    <string name="for_white">fehérnek</string>
+    <string name="for_black">feketének</string>
     <string name="previous_puzzle">Előző rejtvény</string>
     <string name="puzzle_hint">Súgó</string>
     <string name="next_puzzle">Következő rejtvény</string>

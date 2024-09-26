@@ -149,7 +149,9 @@
     <string name="solved_beginner_puzzles_count">Beginner puzzles: %1$d out of 100 solved</string>
     <string name="solved_intermediate_puzzles_count">Intermediate puzzles: %1$d out of 100 solved</string>
     <string name="solved_advanced_puzzles_count">Advanced puzzles: %1$d out of 100 solved</string>
-    <string name="find_the_best_move">Find the best move</string>
+    <string name="find_the_best_move">Find the best move for %1$s</string>
+    <string name="for_white">white</string>
+    <string name="for_black">black</string>
     <string name="previous_puzzle">Previous puzzle</string>
     <string name="puzzle_hint">Hint</string>
     <string name="next_puzzle">Next puzzle</string>
