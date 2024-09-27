@@ -13,8 +13,12 @@ import android.widget.FrameLayout
 import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.lifecycleScope
 import com.example.chessmate.R
+import com.example.chessmate.database.UserProfileRepository
+import com.example.chessmate.database.entity.UserProfile
 import com.example.chessmate.util.ChessThemeUtil
+import com.example.chessmate.util.UserProfileManager
 import com.example.chessmate.util.chess.EndGameDialogFragment
 import com.example.chessmate.util.chess.Position
 import com.example.chessmate.util.chess.PromotionDialogFragment
@@ -29,6 +33,7 @@ import com.example.chessmate.util.chess.bitboard.BitboardUIMapper
 import com.example.chessmate.util.chess.GameContext
 import com.example.chessmate.util.chess.PieceType
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.launch
 
 class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFragment.PromotionDialogListener, EndGameDialogFragment.OnHomeButtonClickListener {
     private lateinit var chessboardLayout: GridLayout
@@ -40,6 +45,9 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     private lateinit var whiteLastMove: TextView
     private lateinit var blackLastMove: TextView
     private lateinit var chessThemeUtil: ChessThemeUtil
+    private lateinit var userProfileRepository: UserProfileRepository
+    private var userProfile: UserProfile? = null
+    private val userProfileManager = UserProfileManager.getInstance()
     private var lightSquareColor = R.color.default_light_square_color
     private var darkSquareColor = R.color.default_dark_square_color
     private var pieceThemeArray = IntArray(12)
@@ -54,6 +62,9 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bitboard)
+
+        userProfileRepository = UserProfileRepository(this)
+        userProfile = userProfileManager.getUserProfileLiveData().value
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bitboard_bottom_navigation)
 
@@ -374,6 +385,9 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
     }
 
     override fun showEndGameDialog(endGameResult: String) {
+        lifecycleScope.launch {
+            updateDatabase()
+        }
         val endGameDialog = EndGameDialogFragment(endGameResult)
         endGameDialog.show(supportFragmentManager, "EndGameDialog")
     }
@@ -651,5 +665,11 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
 
             else -> return false
         }
+    }
+
+    private suspend fun updateDatabase() {
+        if (userProfile == null || userProfile?.level == 0) return
+
+        userProfileRepository.incrementGamesPlayed(userProfile!!.userID)
     }
 }

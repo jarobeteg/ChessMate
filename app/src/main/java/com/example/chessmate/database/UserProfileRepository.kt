@@ -150,4 +150,10 @@ class UserProfileRepository(private val context: Context) {
             userProfileDAO.incrementPuzzlesPlayed(userID)
         } catch (_: Exception) {}
     }
+
+    suspend fun incrementGamesPlayed(userID: Long) {
+        try {
+            userProfileDAO.incrementGamesPlayed(userID)
+        } catch (_: Exception) {}
+    }
 }

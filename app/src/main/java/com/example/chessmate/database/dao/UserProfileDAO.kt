@@ -41,4 +41,7 @@ interface UserProfileDAO {
 
     @Query("UPDATE userprofile SET puzzlesPlayed = puzzlesPlayed + 1 WHERE userID = :userID")
     suspend fun incrementPuzzlesPlayed(userID: Long)
+
+    @Query("UPDATE userprofile SET gamesPlayed = gamesPlayed + 1 WHERE userID = :userID")
+    suspend fun incrementGamesPlayed(userID: Long)
 }
