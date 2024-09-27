@@ -589,6 +589,38 @@ class PuzzleLoaderActivity : AbsThemeActivity(), PuzzleSolvedDialogFragment.OnNe
         countdownTimer.start()
     }
 
+    private fun addHighlightHint(position: Long, resId: Int){
+        val pos = BitboardManager.positionToRowCol(position)
+        val squareFrameLayout = uiSquares[pos.row][pos.col]
+        val squareImageView = squareFrameLayout.findViewWithTag<ImageView>("pieceImageView")
+        val imageView = ImageView(this)
+        imageView.setImageResource(resId)
+        imageView.tag = highlightOpponentTag
+
+        squareFrameLayout.removeView(squareImageView)
+        squareFrameLayout.addView(imageView)
+        squareFrameLayout.addView(squareImageView)
+
+        val countdownTimer = object : CountDownTimer(3000, 500) {
+            override fun onTick(millisUntilFinished: Long) {
+                when (millisUntilFinished){
+                    in 0..500 -> imageView.visibility = View.INVISIBLE
+                    in 501..1000 -> imageView.visibility = View.VISIBLE
+                    in 1001..1500 -> imageView.visibility = View.INVISIBLE
+                    in 1501..2000 -> imageView.visibility = View.VISIBLE
+                    in 2001..2500 -> imageView.visibility = View.INVISIBLE
+                    in 2501..3000 -> imageView.visibility = View.VISIBLE
+                }
+            }
+
+            override fun onFinish() {
+                squareFrameLayout.removeView(imageView)
+            }
+        }
+
+        countdownTimer.start()
+    }
+
     private fun showIncorrectMoveText() {
         Toast.makeText(this, getString(R.string.incorrect_solution), Toast.LENGTH_SHORT).show()
     }
@@ -604,7 +636,13 @@ class PuzzleLoaderActivity : AbsThemeActivity(), PuzzleSolvedDialogFragment.OnNe
     }
 
     private fun puzzleHint() {
-
+        val correctMove = getCorrectMove()
+        addHighlightHint(correctMove.from, R.drawable.highlight_selected_square)
+        if (correctMove.capturedPiece != BitPiece.NONE) {
+            addHighlightHint(correctMove.to, R.drawable.highlight_square_opponent)
+        } else {
+            addHighlightHint(correctMove.to, R.drawable.highlight_square_move)
+        }
     }
 
     private fun nextPuzzle() {
@@ -625,7 +663,9 @@ class PuzzleLoaderActivity : AbsThemeActivity(), PuzzleSolvedDialogFragment.OnNe
             }
 
             R.id.puzzle_hint -> {
-                puzzleHint()
+                if (isPlayerTurn) {
+                    puzzleHint()
+                }
                 return true
             }
 
