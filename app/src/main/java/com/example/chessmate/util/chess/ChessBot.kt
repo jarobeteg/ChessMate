@@ -14,7 +14,6 @@ class ChessBot(val color: PieceColor){
         }
     }
 
-    //the println's and the speed benchmark to be removed later
     fun findBestMove(bitboard: Bitboard, depth: Int, maximizingPlayer: Boolean): BitMove? {
         return alphaBeta(bitboard, depth, Int.MIN_VALUE, Int.MAX_VALUE, maximizingPlayer, color).second
     }
