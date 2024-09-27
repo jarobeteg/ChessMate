@@ -79,7 +79,7 @@ class PuzzlesFragment : Fragment() {
 
         if (userProfile!!.level == 0) {
             loginToSolvePuzzles()
-        } else if (id <= userProfile!!.level) {
+        } else {
             animateButton(button, id)
         }
     }
@@ -135,18 +135,10 @@ class PuzzlesFragment : Fragment() {
 
     private fun updateLocks() {
         addPuzzleButtonLocks()
-        when (userProfile?.level) {
-            1 -> updatePuzzleButtonLock(beginnerPuzzlesButton)
-            2 -> {
-                updatePuzzleButtonLock(beginnerPuzzlesButton)
-                updatePuzzleButtonLock(intermediatePuzzlesButton)
-            }
-            3 -> {
-                updatePuzzleButtonLock(beginnerPuzzlesButton)
-                updatePuzzleButtonLock(intermediatePuzzlesButton)
-                updatePuzzleButtonLock(advancedPuzzlesButton)
-
-            }
+        if (userProfile?.level != 0) {
+            updatePuzzleButtonLock(beginnerPuzzlesButton)
+            updatePuzzleButtonLock(intermediatePuzzlesButton)
+            updatePuzzleButtonLock(advancedPuzzlesButton)
         }
     }
 
