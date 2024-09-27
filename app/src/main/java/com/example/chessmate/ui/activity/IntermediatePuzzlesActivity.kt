@@ -3,25 +3,37 @@ package com.example.chessmate.ui.activity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.chessmate.R
 import com.example.chessmate.adapter.PuzzlesPagerAdapter
+import com.example.chessmate.database.PuzzleCompletionRepository
+import com.example.chessmate.database.entity.UserProfile
 import com.example.chessmate.util.JSONParser
 import com.example.chessmate.util.Puzzle
+import com.example.chessmate.util.UserProfileManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.launch
 
 class IntermediatePuzzlesActivity : AbsThemeActivity() {
     private lateinit var bottomNavigationView : BottomNavigationView
     private lateinit var toolbar : Toolbar
     private lateinit var viewPager2: ViewPager2
     private lateinit var adapter: PuzzlesPagerAdapter
+    private lateinit var puzzleCompletionRepository: PuzzleCompletionRepository
+    private var intermediateCompletedPuzzles: List<Int> = emptyList()
+    private val userProfileManager = UserProfileManager.getInstance()
+    private var userProfile: UserProfile? = null
     private val jsonParser = JSONParser()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intermediate_puzzles)
+
+        puzzleCompletionRepository = PuzzleCompletionRepository(this)
+        userProfile = userProfileManager.getUserProfileLiveData().value
 
         bottomNavigationView = findViewById(R.id.intermediate_puzzle_bottom_navigation)
         viewPager2 = findViewById(R.id.intermediate_puzzles_view_pager)
@@ -32,16 +44,22 @@ class IntermediatePuzzlesActivity : AbsThemeActivity() {
 
         val paginatedPuzzles = dividePuzzlesIntoPages(puzzles)
 
-        adapter = PuzzlesPagerAdapter(paginatedPuzzles, puzzles, this)
-        viewPager2.adapter = adapter
+        if (userProfile != null) {
+            lifecycleScope.launch {
+                intermediateCompletedPuzzles = preloadCompletedIntermediatePuzzles()
 
-        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                pageIndicator.text = getString(R.string.page_indicator_text, position + 1, adapter.itemCount)
-                updateBottomNavigationState(position)
+                adapter = PuzzlesPagerAdapter(paginatedPuzzles, puzzles, intermediateCompletedPuzzles, this@IntermediatePuzzlesActivity)
+                viewPager2.adapter = adapter
+
+                viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                    override fun onPageSelected(position: Int) {
+                        super.onPageSelected(position)
+                        pageIndicator.text = getString(R.string.page_indicator_text, position + 1, adapter.itemCount)
+                        updateBottomNavigationState(position)
+                    }
+                })
             }
-        })
+        }
 
         toolbar = findViewById(R.id.intermediate_puzzles_toolbar)
         setSupportActionBar(toolbar)
@@ -52,8 +70,21 @@ class IntermediatePuzzlesActivity : AbsThemeActivity() {
         setupBottomNavigation()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        lifecycleScope.launch {
+            intermediateCompletedPuzzles = preloadCompletedIntermediatePuzzles()
+            adapter.updateCompletedPuzzles(intermediateCompletedPuzzles)
+        }
+    }
+
     private fun dividePuzzlesIntoPages(puzzles: List<Puzzle>): List<List<Puzzle>> {
         return puzzles.chunked(10)
+    }
+
+    private suspend fun preloadCompletedIntermediatePuzzles(): List<Int> {
+        return puzzleCompletionRepository.getAllIntermediatePuzzlesId(userProfile!!.userID)
     }
 
     private fun setupBottomNavigation() {
