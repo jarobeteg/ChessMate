@@ -86,7 +86,7 @@
   {
     "puzzleId": 113,
     "fen": "6k1/p1p2pp1/1pn2q1p/8/3P1P1r/P1PBP1rP/5QP1/3R1RK1 b - - 2 24",
-    "solution": "H4 H3 9 0 | F2 G3 10 9 | H3 G3 9 4",
+    "solution": "H4 H3 9 0 | F2 G3 4 9 | H3 G3 9 4",
     "difficulty": 2
   },
 
