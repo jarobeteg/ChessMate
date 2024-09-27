@@ -43,7 +43,7 @@
 
   {
     "puzzleId": 7,
-    "fen": "6rk/1p4p1/1p5R/q3Q3/4P3/7P/1P4PK/8 b - - 0 29",
+    "fen": "6rk/1p4p1/1p2R2p/q3Q3/4P3/7P/1P4PK/8 w - - 0 29",
     "solution": "E6 H6 3 6",
     "difficulty": 1
   },
@@ -64,7 +64,7 @@
 
   {
     "puzzleId": 10,
-    "fen": "r4r2/2q1bp2/p2p4/2pN3R/2p1k3/4B3/PPPn1K2/R7 w - - 4 25",
+    "fen": "r4r2/2q1bp2/p2p4/2p4R/2p1k3/2N1B3/PPPn1K2/R7 w - - 4 25",
     "solution": "C3 D5 1 12",
     "difficulty": 1
   },
