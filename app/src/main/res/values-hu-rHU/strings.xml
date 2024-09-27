@@ -138,4 +138,6 @@
     <string name="previous_puzzle">Előző rejtvény</string>
     <string name="puzzle_hint">Tipp</string>
     <string name="next_puzzle">Következő rejtvény</string>
+    <string name="incorrect_solution">Hibás Lépés</string>
+    <string name="puzzle_solved_text">Rejtvény Megoldva</string>
 </resources>

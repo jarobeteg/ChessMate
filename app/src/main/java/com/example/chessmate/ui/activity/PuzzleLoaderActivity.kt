@@ -1,41 +1,61 @@
 package com.example.chessmate.ui.activity
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.chessmate.R
 import com.example.chessmate.util.ChessThemeUtil
 import com.example.chessmate.util.Puzzle
 import com.example.chessmate.util.chess.FEN
+import com.example.chessmate.util.chess.GameContext
+import com.example.chessmate.util.chess.PieceColor
 import com.example.chessmate.util.chess.Position
+import com.example.chessmate.util.chess.PuzzleSolvedDialogFragment
+import com.example.chessmate.util.chess.bitboard.BitCell
+import com.example.chessmate.util.chess.bitboard.BitMove
 import com.example.chessmate.util.chess.bitboard.BitPiece
 import com.example.chessmate.util.chess.bitboard.BitSquare
 import com.example.chessmate.util.chess.bitboard.Bitboard
+import com.example.chessmate.util.chess.bitboard.BitboardManager
+import com.example.chessmate.util.chess.bitboard.BitboardMoveGenerator
 import com.example.chessmate.util.chess.bitboard.BitboardUIMapper
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class PuzzleLoaderActivity : AbsThemeActivity() {
+class PuzzleLoaderActivity : AbsThemeActivity(), PuzzleSolvedDialogFragment.OnNextPuzzleButtonListener {
     private lateinit var chessboardLayout: GridLayout
     private lateinit var board: Bitboard
+    private lateinit var moveGenerator: BitboardMoveGenerator
     private lateinit var uiMapper: BitboardUIMapper
     private lateinit var uiSquares: Array<Array<FrameLayout>>
     private lateinit var chessThemeUtil: ChessThemeUtil
     private var lightSquareColor = R.color.default_light_square_color
     private var darkSquareColor = R.color.default_dark_square_color
     private var pieceThemeArray = IntArray(12)
-    private var isPlayerWhite: Boolean = true
     private lateinit var bottomNavigationView : BottomNavigationView
     private lateinit var toolbar : Toolbar
+    private lateinit var solution: MutableList<BitMove>
     private lateinit var puzzles: ArrayList<Puzzle>
+    private lateinit var currentPuzzle: Puzzle
     private var currentIndex: Int = 0
     private var squareSize: Int = 0
+    private var isPlayerWhite: Boolean = true
+    private var isPlayerTurn: Boolean = true
+    private var selectedSquare: BitSquare? = null
+    private var availablePlayerMoves = mutableListOf<BitMove>()
+    private val highlightCircleTag = "highlight_circle"
+    private val highlightOpponentTag = "highlight_opponent"
+    private val highlightMoveTag = "highlight_move"
+    private val highlightSelectedTag = "highlight_selected_square"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +63,8 @@ class PuzzleLoaderActivity : AbsThemeActivity() {
 
         puzzles = intent.getParcelableArrayListExtra("puzzleList") ?: ArrayList()
         currentIndex = intent.getIntExtra("currentIndex", 0)
+        currentPuzzle = puzzles[currentIndex]
+        solution = parseSolution(currentPuzzle.solution)
 
         bottomNavigationView = findViewById(R.id.puzzle_loader_bottom_navigation)
 
@@ -62,6 +84,7 @@ class PuzzleLoaderActivity : AbsThemeActivity() {
 
         chessboardLayout = findViewById(R.id.bitboard)
         board = Bitboard()
+        moveGenerator = BitboardMoveGenerator(board)
         uiMapper = BitboardUIMapper()
 
         displayPuzzle()
@@ -72,7 +95,170 @@ class PuzzleLoaderActivity : AbsThemeActivity() {
     }
 
     private fun handleSquareClick(square: BitSquare) {
-        println("square clicked: $square")
+        when {
+            isFirstSelection(square) -> handleFirstSelection(square)
+            isDeselecting(square) -> handleDeselect()
+            isNewSelection(square) -> handleNewSelection(square)
+            isSecondClick() -> handleSecondClick(square)
+            else -> {}
+        }
+    }
+
+    private fun isFirstSelection(square: BitSquare): Boolean {
+        return isPlayerTurn && square.color == GameContext.playerColor && selectedSquare == null
+    }
+
+    private fun handleFirstSelection(square: BitSquare) {
+        removeHighlightsFromSquares()
+        processFirstClick(square)
+    }
+
+    private fun isDeselecting(square: BitSquare): Boolean {
+        return isPlayerTurn && selectedSquare != null && selectedSquare == square
+    }
+
+    private fun handleDeselect() {
+        removeHighlightsFromSquares()
+        selectedSquare = null
+    }
+
+    private fun isNewSelection(square: BitSquare): Boolean {
+        return isPlayerTurn && square.color == GameContext.playerColor && selectedSquare != null
+    }
+
+    private fun handleNewSelection(square: BitSquare) {
+        removeHighlightsFromSquares()
+        processFirstClick(square)
+    }
+
+    private fun isSecondClick(): Boolean {
+        return isPlayerTurn && selectedSquare != null
+    }
+
+    private fun handleSecondClick(square: BitSquare) {
+        if (isCorrectMove(square)) {
+            processSecondClick(getCorrectMove())
+        } else {
+            showIncorrectMoveText()
+            removeHighlightMoves()
+            removeHighlightsFromSquares()
+            selectedSquare = null
+        }
+    }
+
+    private fun processSecondClick(move: BitMove){
+        board.movePiece(move)
+        removeMoveFromSolution()
+
+        removeHighlightMoves()
+        removeHighlightsFromSquares()
+        selectedSquare = null
+
+        addHighlightMove(move.from)
+        addHighlightMove(move.to)
+        updateBitboardStateUI()
+        if (isPuzzleSolved()){
+            showPuzzleSolvedDialog()
+            isPlayerTurn = false
+            return
+        }
+        isPlayerTurn = false
+        makeBotMove()
+    }
+
+    private fun processFirstClick(square: BitSquare) {
+        availablePlayerMoves.clear()
+        val legalMoves = moveGenerator.generateLegalMovesForAlphaBeta(isPlayerWhite)
+        for (move in legalMoves) {
+            val decodedMove = BitboardMoveGenerator.decodeMove(move)
+            if (square.position == decodedMove.from) {
+                availablePlayerMoves.add(decodedMove)
+            }
+        }
+        onPlayerMoveCalculated(square)
+    }
+
+    private fun makeBotMove() {
+        val botMove = getCorrectMove()
+        board.movePiece(botMove)
+        removeMoveFromSolution()
+
+        removeHighlightMoves()
+        addHighlightMove(botMove.from)
+        addHighlightMove(botMove.to)
+        updateBitboardStateUI()
+
+        isPlayerTurn = true
+    }
+
+    private fun onPlayerMoveCalculated(square: BitSquare) {
+        if (availablePlayerMoves.isEmpty()){
+            if (board.isPlayerInCheck()) {
+                addHighlightCheck(board.getKing(GameContext.playerColor))
+            }
+            selectedSquare = null
+            return
+        }
+        removeHighlightsFromSquares()
+        for (move in availablePlayerMoves) {
+            if (move.capturedPiece != BitPiece.NONE) {
+                addHighlightOpponent(move.to, move.capturedPiece)
+            } else {
+                addHighlightSquare(move.to)
+            }
+        }
+        selectedSquare = square
+        addHighlightSelectedSquare(square.position)
+    }
+
+    private fun isCorrectMove(square: BitSquare): Boolean {
+        val correctMove = getCorrectMove()
+        return correctMove.from == selectedSquare!!.position && correctMove.to == square.position &&
+                correctMove.piece == selectedSquare!!.piece && correctMove.capturedPiece == square.piece
+    }
+
+    private fun getCorrectMove(): BitMove {
+        return solution.first()
+    }
+
+    private fun removeMoveFromSolution() {
+        solution.removeFirst()
+    }
+
+    private fun isPuzzleSolved(): Boolean {
+        return solution.isEmpty()
+    }
+
+    private fun showPuzzleSolvedDialog() {
+        val dialog = PuzzleSolvedDialogFragment()
+        dialog.show(supportFragmentManager, "PuzzleSolvedDialog")
+    }
+
+    override fun onNextPuzzleButtonListener() {
+        nextPuzzle()
+    }
+
+    private fun parseSolution(solution: String): MutableList<BitMove> {
+        val moveSegments = solution.split("|").map { it.trim() }
+        val moves = mutableListOf<BitMove>()
+
+        moveSegments.forEach { segment ->
+            val parts = segment.split(" ")
+            if (parts.size == 4) {
+                val fromCell = getBitCell(parts[0])
+                val toCell = getBitCell(parts[1])
+                val piece = BitPiece.fromOrdinal(parts[2].toInt())
+                val capturedPiece = BitPiece.fromOrdinal(parts[3].toInt())
+
+                val move = BitMove(from = fromCell, to = toCell, piece = piece, capturedPiece = capturedPiece)
+                moves.add(move)
+            }
+        }
+        return moves
+    }
+
+    private fun getBitCell(cell: String): Long {
+        return BitCell.valueOf(cell).bit
     }
 
     private fun initializeBitboardUI() {
@@ -238,9 +424,13 @@ class PuzzleLoaderActivity : AbsThemeActivity() {
     }
 
     private fun displayPuzzle() {
-        val puzzle = puzzles[currentIndex]
-        val fen = FEN(puzzle.fen)
+        isPlayerTurn = true
+        currentPuzzle = puzzles[currentIndex]
+        solution = parseSolution(currentPuzzle.solution)
+        val fen = FEN(currentPuzzle.fen)
         isPlayerWhite = fen.activeColor == 'w'
+        GameContext.playerColor = if (isPlayerWhite) PieceColor.WHITE else PieceColor.BLACK
+        GameContext.botColor = if (isPlayerWhite) PieceColor.BLACK else PieceColor.WHITE
         setupTextViews()
 
         chessboardLayout.removeAllViews()
@@ -263,15 +453,144 @@ class PuzzleLoaderActivity : AbsThemeActivity() {
             title.text = getString(R.string.find_the_best_move, black)
         }
 
-        difficultyTextView.text = when (puzzles[currentIndex].difficulty) {
+        difficultyTextView.text = when (currentPuzzle.difficulty) {
             1 -> getString(R.string.beginner_level)
             2 -> getString(R.string.intermediate_level)
             3 -> getString(R.string.advanced_level)
             else -> ""
         }
 
-        val result = getString(R.string.puzzle_text) + " " + puzzles[currentIndex].puzzleId.toString()
+        val result = getString(R.string.puzzle_text) + " " + currentPuzzle.puzzleId.toString()
         puzzleIDTextView.text = result
+    }
+
+    private fun removeHighlightsFromSquares() {
+        for (row in 0..7) {
+            for (col in 0..7) {
+                val frameLayout = uiSquares[row][col]
+                val highlightToRemove = mutableListOf<View>()
+
+                for (i in 0 until frameLayout.childCount) {
+                    val view = frameLayout.getChildAt(i)
+                    if (view.tag == highlightCircleTag || view.tag == highlightOpponentTag || view.tag == highlightSelectedTag) {
+                        highlightToRemove.add(view)
+                    }
+                }
+
+                highlightToRemove.forEach { highlight ->
+                    frameLayout.removeView(highlight)
+                }
+            }
+        }
+    }
+
+    private fun removeHighlightMoves() {
+        for (row in 0..7) {
+            for (col in 0..7) {
+                val frameLayout = uiSquares[row][col]
+                val highlightToRemove = mutableListOf<View>()
+
+                for (i in 0 until frameLayout.childCount) {
+                    val view = frameLayout.getChildAt(i)
+                    if (view.tag == highlightMoveTag) {
+                        highlightToRemove.add(view)
+                    }
+                }
+
+                highlightToRemove.forEach { highlight ->
+                    frameLayout.removeView(highlight)
+                }
+            }
+        }
+    }
+
+    private fun addHighlightOpponent(position: Long, opponentPiece: BitPiece) {
+        val pos = BitboardManager.positionToRowCol(position)
+        if (opponentPiece.name.contains("KING")) return
+        val squareFrameLayout = uiSquares[pos.row][pos.col]
+        val squareImageView = squareFrameLayout.findViewWithTag<ImageView>("pieceImageView")
+        val imageView = ImageView(this)
+        imageView.setImageResource(R.drawable.highlight_square_opponent)
+        imageView.tag = highlightOpponentTag
+        squareFrameLayout.removeView(squareImageView)
+        squareFrameLayout.addView(imageView)
+        squareFrameLayout.addView(squareImageView)
+    }
+
+    private fun addHighlightSelectedSquare(position: Long) {
+        val pos = BitboardManager.positionToRowCol(position)
+        val squareFrameLayout = uiSquares[pos.row][pos.col]
+        val squareImageView = squareFrameLayout.findViewWithTag<ImageView>("pieceImageView")
+        val imageView = ImageView(this)
+        imageView.setImageResource(R.drawable.highlight_selected_square)
+        imageView.tag = highlightSelectedTag
+        squareFrameLayout.removeView(squareImageView)
+        squareFrameLayout.addView(imageView)
+        squareFrameLayout.addView(squareImageView)
+    }
+
+    private fun addHighlightSquare(position: Long) {
+        val pos = BitboardManager.positionToRowCol(position)
+        val frameLayout = uiSquares[pos.row][pos.col]
+        val squareSize = chessboardLayout.width / 8
+        val circleSize = squareSize / 3
+
+        val circleParams = FrameLayout.LayoutParams(circleSize, circleSize).apply {
+            gravity = Gravity.CENTER
+        }
+
+        val imageView = ImageView(this).apply {
+            setImageResource(R.drawable.highlight_square_circle)
+            tag = highlightCircleTag
+        }
+
+        frameLayout.addView(imageView, circleParams)
+    }
+
+    private fun addHighlightMove(position: Long) {
+        val pos = BitboardManager.positionToRowCol(position)
+        val squareFrameLayout = uiSquares[pos.row][pos.col]
+        val imageView = ImageView(this)
+        imageView.setImageResource(R.drawable.highlight_square_move)
+        imageView.tag = highlightMoveTag
+        squareFrameLayout.addView(imageView)
+
+    }
+
+    private fun addHighlightCheck(position: Long){
+        val pos = BitboardManager.positionToRowCol(position)
+        val squareFrameLayout = uiSquares[pos.row][pos.col]
+        val squareImageView = squareFrameLayout.findViewWithTag<ImageView>("pieceImageView")
+        val imageView = ImageView(this)
+        imageView.setImageResource(R.drawable.highlight_square_opponent)
+        imageView.tag = highlightOpponentTag
+
+        squareFrameLayout.removeView(squareImageView)
+        squareFrameLayout.addView(imageView)
+        squareFrameLayout.addView(squareImageView)
+
+        val countdownTimer = object : CountDownTimer(3000, 500) {
+            override fun onTick(millisUntilFinished: Long) {
+                when (millisUntilFinished){
+                    in 0..500 -> imageView.visibility = View.INVISIBLE
+                    in 501..1000 -> imageView.visibility = View.VISIBLE
+                    in 1001..1500 -> imageView.visibility = View.INVISIBLE
+                    in 1501..2000 -> imageView.visibility = View.VISIBLE
+                    in 2001..2500 -> imageView.visibility = View.INVISIBLE
+                    in 2501..3000 -> imageView.visibility = View.VISIBLE
+                }
+            }
+
+            override fun onFinish() {
+                squareFrameLayout.removeView(imageView)
+            }
+        }
+
+        countdownTimer.start()
+    }
+
+    private fun showIncorrectMoveText() {
+        Toast.makeText(this, getString(R.string.incorrect_solution), Toast.LENGTH_SHORT).show()
     }
 
     private fun previousPuzzle() {
@@ -284,6 +603,10 @@ class PuzzleLoaderActivity : AbsThemeActivity() {
         }
     }
 
+    private fun puzzleHint() {
+
+    }
+
     private fun nextPuzzle() {
         if (currentIndex < puzzles.size - 1) {
             currentIndex++
@@ -293,8 +616,6 @@ class PuzzleLoaderActivity : AbsThemeActivity() {
             displayPuzzle()
         }
     }
-
-    private fun puzzleHint() {}
 
     private fun bottomNavItemClicked(item: MenuItem): Boolean{
         when (item.itemId) {

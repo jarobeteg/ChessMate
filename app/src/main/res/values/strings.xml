@@ -154,4 +154,6 @@
     <string name="previous_puzzle">Previous puzzle</string>
     <string name="puzzle_hint">Hint</string>
     <string name="next_puzzle">Next puzzle</string>
+    <string name="incorrect_solution">Wrong Move</string>
+    <string name="puzzle_solved_text">Puzzle Solved</string>
 </resources>
