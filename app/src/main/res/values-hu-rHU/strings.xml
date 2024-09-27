@@ -129,6 +129,7 @@
     <string name="previous_page">Előző oldal</string>
     <string name="next_page">Következő oldal</string>
     <string name="page_indicator_text">Oldal %1$d / %2$d</string>
+    <string name="solved_all_puzzles_count">Az összes rejtvény: 300-ból %1$d megoldva</string>
     <string name="solved_beginner_puzzles_count">Kezdő rejtvények: 100-ból %1$d megoldva</string>
     <string name="solved_intermediate_puzzles_count">Középhaladó rejtvények: 100-ból %1$d megoldva</string>
     <string name="solved_advanced_puzzles_count">Haladó rejtvények: 100-ból %1$d megoldva</string>

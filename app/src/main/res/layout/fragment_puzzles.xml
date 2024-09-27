@@ -67,10 +67,21 @@
             android:layout_marginEnd="24dp"/>
 
         <TextView
+            android:id="@+id/solved_all_puzzles_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text=""
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"/>
+
+        <TextView
             android:id="@+id/solved_beginner_puzzles_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="16sp"
+            android:text=""
             android:layout_marginTop="16dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"/>
@@ -79,7 +90,8 @@
             android:id="@+id/solved_intermediate_puzzles_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="16sp"
+            android:text=""
             android:layout_marginTop="16dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"/>
@@ -88,7 +100,8 @@
             android:id="@+id/solved_advanced_puzzles_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="16sp"
+            android:text=""
             android:layout_marginTop="16dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"/>

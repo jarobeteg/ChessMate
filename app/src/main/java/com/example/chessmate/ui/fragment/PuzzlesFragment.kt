@@ -1,6 +1,8 @@
 package com.example.chessmate.ui.fragment
 
 import android.content.Intent
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,9 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.chessmate.R
+import com.example.chessmate.database.PuzzleCompletionRepository
 import com.example.chessmate.database.entity.UserProfile
 import com.example.chessmate.ui.activity.AdvancedPuzzlesActivity
 import com.example.chessmate.ui.activity.BeginnerPuzzlesActivity
@@ -22,6 +26,10 @@ class PuzzlesFragment : Fragment() {
     private lateinit var beginnerPuzzlesButton: Button
     private lateinit var intermediatePuzzlesButton: Button
     private lateinit var advancedPuzzlesButton: Button
+    private lateinit var solvedAllPuzzleCount: TextView
+    private lateinit var solvedBeginnerPuzzleCount: TextView
+    private lateinit var solvedIntermediatePuzzleCount: TextView
+    private lateinit var solvedAdvancedPuzzleCount: TextView
     private var userProfile: UserProfile? = null
     private val userProfileManager = UserProfileManager.getInstance()
 
@@ -41,6 +49,11 @@ class PuzzlesFragment : Fragment() {
         intermediatePuzzlesButton = view.findViewById(R.id.intermediate_puzzles)
         advancedPuzzlesButton = view.findViewById(R.id.advanced_puzzles)
 
+        solvedAllPuzzleCount = view.findViewById(R.id.solved_all_puzzles_count)
+        solvedBeginnerPuzzleCount = view.findViewById(R.id.solved_beginner_puzzles_count)
+        solvedIntermediatePuzzleCount = view.findViewById(R.id.solved_intermediate_puzzles_count)
+        solvedAdvancedPuzzleCount = view.findViewById(R.id.solved_advanced_puzzles_count)
+
         beginnerPuzzlesButton.setOnClickListener { checkPuzzleButtonLock(beginnerPuzzlesButton, 1) }
         intermediatePuzzlesButton.setOnClickListener { checkPuzzleButtonLock(intermediatePuzzlesButton, 2) }
         advancedPuzzlesButton.setOnClickListener { checkPuzzleButtonLock(advancedPuzzlesButton, 3) }
@@ -52,6 +65,10 @@ class PuzzlesFragment : Fragment() {
         super.onResume()
         userProfile = userProfileManager.getUserProfileLiveData().value
         updateLocks()
+
+        lifecycleScope.launch {
+            updatePuzzleCount()
+        }
     }
 
     private fun checkPuzzleButtonLock(button: Button, id: Int) {
@@ -99,6 +116,21 @@ class PuzzlesFragment : Fragment() {
     private fun openAdvancedPuzzles(){
         val openAdvancedPuzzlesIntent = Intent(requireContext(), AdvancedPuzzlesActivity::class.java)
         startActivity(openAdvancedPuzzlesIntent)
+    }
+
+    private suspend fun updatePuzzleCount() {
+        if (userProfile == null) return
+
+        val puzzleCompletionRepository = PuzzleCompletionRepository(requireContext())
+        val allPuzzleIds = puzzleCompletionRepository.getAllCompletedPuzzlesId(userProfile!!.userID)
+        val beginnerPuzzleIds = puzzleCompletionRepository.getAllBeginnerPuzzlesId(userProfile!!.userID)
+        val intermediatePuzzleIds = puzzleCompletionRepository.getAllIntermediatePuzzlesId(userProfile!!.userID)
+        val advancedPuzzleIds = puzzleCompletionRepository.getAllAdvancedPuzzlesId(userProfile!!.userID)
+
+        solvedAllPuzzleCount.text = getString(R.string.solved_all_puzzles_count, allPuzzleIds.size)
+        solvedBeginnerPuzzleCount.text = getString(R.string.solved_beginner_puzzles_count, beginnerPuzzleIds.size)
+        solvedIntermediatePuzzleCount.text = getString(R.string.solved_intermediate_puzzles_count, intermediatePuzzleIds.size)
+        solvedAdvancedPuzzleCount.text = getString(R.string.solved_advanced_puzzles_count, advancedPuzzleIds.size)
     }
 
     private fun updateLocks() {
