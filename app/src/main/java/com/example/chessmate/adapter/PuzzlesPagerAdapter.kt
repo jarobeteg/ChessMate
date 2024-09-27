@@ -39,7 +39,7 @@ class PuzzlesPagerAdapter(private val paginatedPuzzles: List<List<Puzzle>>, priv
 
                 puzzleDescription.setTag(R.id.puzzle_description, puzzle)
                 puzzleDescription.setOnClickListener {
-                    val index = puzzle.puzzleId - 1
+                    val index = allPuzzles.indexOf(puzzle)
                     handlePuzzleClick(index, allPuzzles)
                 }
 
