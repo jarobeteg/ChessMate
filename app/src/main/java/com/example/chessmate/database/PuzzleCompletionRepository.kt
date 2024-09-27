@@ -61,4 +61,14 @@ class PuzzleCompletionRepository(private val context: Context) {
             emptyList()
         }
     }
+
+    suspend fun isPuzzleSolved(userID: Long, puzzleID: Int): PuzzleCompletion? {
+        return try {
+            withContext(Dispatchers.IO) {
+                puzzleCompletionDAO.isPuzzleSolved(userID, puzzleID)
+            }
+        } catch (_: Exception) {
+            null
+        }
+    }
 }

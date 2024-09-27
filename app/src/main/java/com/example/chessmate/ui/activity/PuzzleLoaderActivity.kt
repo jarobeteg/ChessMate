@@ -13,9 +13,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import com.example.chessmate.R
+import com.example.chessmate.database.PuzzleCompletionRepository
+import com.example.chessmate.database.UserProfileRepository
+import com.example.chessmate.database.entity.PuzzleCompletion
+import com.example.chessmate.database.entity.UserProfile
 import com.example.chessmate.util.ChessThemeUtil
 import com.example.chessmate.util.Puzzle
+import com.example.chessmate.util.UserProfileManager
 import com.example.chessmate.util.chess.FEN
 import com.example.chessmate.util.chess.GameContext
 import com.example.chessmate.util.chess.PieceColor
@@ -32,6 +39,10 @@ import com.example.chessmate.util.chess.bitboard.BitboardUIMapper
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class PuzzleLoaderActivity : AbsThemeActivity(), PuzzleSolvedDialogFragment.OnNextPuzzleButtonListener {
+    private lateinit var puzzleCompletionRepository: PuzzleCompletionRepository
+    private lateinit var userProfileRepository: UserProfileRepository
+    private var userProfile: UserProfile? = null
+    private val userProfileManager = UserProfileManager.getInstance()
     private lateinit var chessboardLayout: GridLayout
     private lateinit var board: Bitboard
     private lateinit var moveGenerator: BitboardMoveGenerator
@@ -60,6 +71,10 @@ class PuzzleLoaderActivity : AbsThemeActivity(), PuzzleSolvedDialogFragment.OnNe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_puzzle_loader)
+
+        userProfileRepository = UserProfileRepository(this)
+        puzzleCompletionRepository = PuzzleCompletionRepository(this)
+        userProfile = userProfileManager.getUserProfileLiveData().value
 
         puzzles = intent.getParcelableArrayListExtra("puzzleList") ?: ArrayList()
         currentIndex = intent.getIntExtra("currentIndex", 0)
@@ -158,6 +173,9 @@ class PuzzleLoaderActivity : AbsThemeActivity(), PuzzleSolvedDialogFragment.OnNe
         addHighlightMove(move.to)
         updateBitboardStateUI()
         if (isPuzzleSolved()){
+            lifecycleScope.launch {
+                updateDatabase()
+            }
             showPuzzleSolvedDialog()
             isPlayerTurn = false
             return
@@ -676,5 +694,25 @@ class PuzzleLoaderActivity : AbsThemeActivity(), PuzzleSolvedDialogFragment.OnNe
 
             else -> return false
         }
+    }
+
+    private suspend fun updateDatabase() {
+        if (userProfile == null) return
+
+        val existingCompletion = puzzleCompletionRepository.isPuzzleSolved(userProfile!!.userID, currentPuzzle.puzzleId)
+        userProfileRepository.incrementPuzzlesPlayer(userProfile!!.userID)
+
+        if (existingCompletion != null) {
+            return
+        }
+
+        val puzzleCompletion = PuzzleCompletion(
+            userID = userProfile!!.userID,
+            puzzleID = currentPuzzle.puzzleId,
+            difficulty = currentPuzzle.difficulty,
+            isSolved = true
+        )
+
+        puzzleCompletionRepository.insertPuzzleCompletion(puzzleCompletion)
     }
 }

@@ -38,4 +38,7 @@ interface UserProfileDAO {
 
     @Query("DELETE FROM userprofile WHERE userID = :userID")
     suspend fun deleteProfileByID(userID: Long)
+
+    @Query("UPDATE userprofile SET puzzlesPlayed = puzzlesPlayed + 1 WHERE userID = :userID")
+    suspend fun incrementPuzzlesPlayed(userID: Long)
 }
