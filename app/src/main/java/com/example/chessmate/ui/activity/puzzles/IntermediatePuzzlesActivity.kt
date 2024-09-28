@@ -1,4 +1,4 @@
-package com.example.chessmate.ui.activity
+package com.example.chessmate.ui.activity.puzzles
 
 import android.os.Bundle
 import android.widget.TextView
@@ -9,6 +9,7 @@ import com.example.chessmate.R
 import com.example.chessmate.adapter.PuzzlesPagerAdapter
 import com.example.chessmate.database.PuzzleCompletionRepository
 import com.example.chessmate.database.entity.UserProfile
+import com.example.chessmate.ui.activity.AbsThemeActivity
 import com.example.chessmate.util.JSONParser
 import com.example.chessmate.util.Puzzle
 import com.example.chessmate.util.UserProfileManager

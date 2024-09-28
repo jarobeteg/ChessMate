@@ -13,19 +13,19 @@
         android:theme="@style/SplashTheme"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activity.PuzzleLoaderActivity"
+            android:name=".ui.activity.puzzles.PuzzleLoaderActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.IntermediatePuzzlesActivity"
+            android:name=".ui.activity.puzzles.IntermediatePuzzlesActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.AdvancedPuzzlesActivity"
+            android:name=".ui.activity.puzzles.AdvancedPuzzlesActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.BeginnerPuzzlesActivity"
+            android:name=".ui.activity.puzzles.BeginnerPuzzlesActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

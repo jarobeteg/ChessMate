@@ -1,4 +1,4 @@
-package com.example.chessmate.ui.activity
+package com.example.chessmate.ui.activity.puzzles
 
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -20,6 +20,7 @@ import com.example.chessmate.database.PuzzleCompletionRepository
 import com.example.chessmate.database.UserProfileRepository
 import com.example.chessmate.database.entity.PuzzleCompletion
 import com.example.chessmate.database.entity.UserProfile
+import com.example.chessmate.ui.activity.AbsThemeActivity
 import com.example.chessmate.util.ChessThemeUtil
 import com.example.chessmate.util.Puzzle
 import com.example.chessmate.util.UserProfileManager

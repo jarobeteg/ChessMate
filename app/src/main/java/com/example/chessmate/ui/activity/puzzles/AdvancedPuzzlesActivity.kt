@@ -1,4 +1,4 @@
-package com.example.chessmate.ui.activity
+package com.example.chessmate.ui.activity.puzzles
 
 import android.os.Bundle
 import android.widget.TextView
@@ -9,6 +9,7 @@ import com.example.chessmate.R
 import com.example.chessmate.adapter.PuzzlesPagerAdapter
 import com.example.chessmate.database.PuzzleCompletionRepository
 import com.example.chessmate.database.entity.UserProfile
+import com.example.chessmate.ui.activity.AbsThemeActivity
 import com.example.chessmate.util.JSONParser
 import com.example.chessmate.util.Puzzle
 import com.example.chessmate.util.UserProfileManager
@@ -17,38 +18,38 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.launch
 
-class BeginnerPuzzlesActivity : AbsThemeActivity() {
+class AdvancedPuzzlesActivity : AbsThemeActivity() {
     private lateinit var bottomNavigationView : BottomNavigationView
     private lateinit var toolbar : Toolbar
     private lateinit var viewPager2: ViewPager2
     private lateinit var adapter: PuzzlesPagerAdapter
     private lateinit var puzzleCompletionRepository: PuzzleCompletionRepository
-    private var beginnerCompletedPuzzles: List<Int> = emptyList()
+    private var advancedCompletedPuzzles: List<Int> = emptyList()
     private val userProfileManager = UserProfileManager.getInstance()
     private var userProfile: UserProfile? = null
     private val jsonParser = JSONParser()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_beginner_puzzles)
+        setContentView(R.layout.activity_advanced_puzzles)
 
         puzzleCompletionRepository = PuzzleCompletionRepository(this)
         userProfile = userProfileManager.getUserProfileLiveData().value
 
-        bottomNavigationView = findViewById(R.id.beginner_puzzle_bottom_navigation)
-        viewPager2 = findViewById(R.id.beginner_puzzles_view_pager)
-        val pageIndicator = findViewById<TextView>(R.id.beginner_puzzles_page_indicator)
+        bottomNavigationView = findViewById(R.id.advanced_puzzle_bottom_navigation)
+        viewPager2 = findViewById(R.id.advanced_puzzles_view_pager)
+        val pageIndicator = findViewById<TextView>(R.id.advanced_puzzles_page_indicator)
 
-        val jsonString = jsonParser.loadJSONFromAsset(this, "beginner_puzzles.json")
+        val jsonString = jsonParser.loadJSONFromAsset(this, "advanced_puzzles.json")
         val puzzles: List<Puzzle> = Gson().fromJson(jsonString, object : TypeToken<List<Puzzle>>() {}.type)
 
         val paginatedPuzzles = dividePuzzlesIntoPages(puzzles)
 
         if (userProfile != null) {
             lifecycleScope.launch {
-                beginnerCompletedPuzzles = preloadCompletedBeginnerPuzzles()
+                advancedCompletedPuzzles = preloadCompletedAdvancedPuzzles()
 
-                adapter = PuzzlesPagerAdapter(paginatedPuzzles, puzzles, beginnerCompletedPuzzles, this@BeginnerPuzzlesActivity)
+                adapter = PuzzlesPagerAdapter(paginatedPuzzles, puzzles, advancedCompletedPuzzles, this@AdvancedPuzzlesActivity)
                 viewPager2.adapter = adapter
 
                 viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -61,7 +62,7 @@ class BeginnerPuzzlesActivity : AbsThemeActivity() {
             }
         }
 
-        toolbar = findViewById(R.id.beginner_puzzles_toolbar)
+        toolbar = findViewById(R.id.advanced_puzzles_toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -74,8 +75,8 @@ class BeginnerPuzzlesActivity : AbsThemeActivity() {
         super.onResume()
 
         lifecycleScope.launch {
-            beginnerCompletedPuzzles = preloadCompletedBeginnerPuzzles()
-            adapter.updateCompletedPuzzles(beginnerCompletedPuzzles)
+            advancedCompletedPuzzles = preloadCompletedAdvancedPuzzles()
+            adapter.updateCompletedPuzzles(advancedCompletedPuzzles)
         }
     }
 
@@ -83,8 +84,8 @@ class BeginnerPuzzlesActivity : AbsThemeActivity() {
         return puzzles.chunked(10)
     }
 
-    private suspend fun preloadCompletedBeginnerPuzzles(): List<Int> {
-        return puzzleCompletionRepository.getAllBeginnerPuzzlesId(userProfile!!.userID)
+    private suspend fun preloadCompletedAdvancedPuzzles(): List<Int> {
+        return puzzleCompletionRepository.getAllAdvancedPuzzlesId(userProfile!!.userID)
     }
 
     private fun setupBottomNavigation() {

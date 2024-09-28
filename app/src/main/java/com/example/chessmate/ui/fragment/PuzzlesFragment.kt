@@ -16,9 +16,9 @@ import androidx.core.content.ContextCompat
 import com.example.chessmate.R
 import com.example.chessmate.database.PuzzleCompletionRepository
 import com.example.chessmate.database.entity.UserProfile
-import com.example.chessmate.ui.activity.AdvancedPuzzlesActivity
-import com.example.chessmate.ui.activity.BeginnerPuzzlesActivity
-import com.example.chessmate.ui.activity.IntermediatePuzzlesActivity
+import com.example.chessmate.ui.activity.puzzles.AdvancedPuzzlesActivity
+import com.example.chessmate.ui.activity.puzzles.BeginnerPuzzlesActivity
+import com.example.chessmate.ui.activity.puzzles.IntermediatePuzzlesActivity
 import com.example.chessmate.ui.viewmodel.PuzzlesViewModel
 import com.example.chessmate.util.UserProfileManager
 

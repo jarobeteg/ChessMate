@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chessmate.R
-import com.example.chessmate.ui.activity.PuzzleLoaderActivity
+import com.example.chessmate.ui.activity.puzzles.PuzzleLoaderActivity
 import com.example.chessmate.util.Puzzle
 
 class PuzzlesPagerAdapter(private val paginatedPuzzles: List<List<Puzzle>>, private val allPuzzles: List<Puzzle>, private var completedPuzzleIds: List<Int>, private val context: Context) : RecyclerView.Adapter<PuzzlesPagerAdapter.PuzzleViewHolder>() {
