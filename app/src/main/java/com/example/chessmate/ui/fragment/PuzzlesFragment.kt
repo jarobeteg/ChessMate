@@ -109,10 +109,12 @@ class PuzzlesFragment : Fragment() {
         val openBeginnerPuzzlesIntent = Intent(requireContext(), BeginnerPuzzlesActivity::class.java)
         startActivity(openBeginnerPuzzlesIntent)
     }
+
     private fun openIntermediatePuzzles(){
         val openIntermediatePuzzlesIntent = Intent(requireContext(), IntermediatePuzzlesActivity::class.java)
         startActivity(openIntermediatePuzzlesIntent)
     }
+
     private fun openAdvancedPuzzles(){
         val openAdvancedPuzzlesIntent = Intent(requireContext(), AdvancedPuzzlesActivity::class.java)
         startActivity(openAdvancedPuzzlesIntent)

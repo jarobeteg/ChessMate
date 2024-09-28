@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ui.activity.lessons.ChessBasicsLessonsActivity">
+
+   <LinearLayout
+       android:id="@+id/chess_basics_linear_layout"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
+
+       <androidx.appcompat.widget.Toolbar
+           android:id="@+id/chess_basics_lesson_toolbar"
+           android:layout_width="match_parent"
+           android:layout_height="?attr/actionBarSize"
+           android:background="?attr/colorAccent"
+           app:navigationIcon="@drawable/ic_arrow_back_24"
+           app:navigationIconTint="@color/white">
+
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:orientation="vertical">
+
+               <TextView
+                   android:id="@+id/chess_basics_lesson_toolbar_title"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/chess_basics_lessons"
+                   android:textSize="24sp"
+                   android:textColor="@color/white"
+                   android:layout_gravity="center" />
+
+           </LinearLayout>
+
+       </androidx.appcompat.widget.Toolbar>
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:textAlignment="center"
+           android:textStyle="bold"
+           android:textSize="20sp"
+           android:text="@string/chess_pieces_title"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <View
+           android:layout_width="match_parent"
+           android:layout_height="1dp"
+           android:background="?attr/colorAccent"
+           android:layout_marginTop="4dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:id="@+id/lesson_pawn"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/lesson_pawn_title"
+           android:textSize="16sp"
+           android:padding="16dp"
+           android:clickable="true"
+           android:focusable="true"
+           android:background="@drawable/custom_rounded_textview"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:id="@+id/lesson_knight"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/lesson_knight_title"
+           android:textSize="16sp"
+           android:padding="16dp"
+           android:clickable="true"
+           android:focusable="true"
+           android:background="@drawable/custom_rounded_textview"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:id="@+id/lesson_bishop"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/lesson_bishop_title"
+           android:textSize="16sp"
+           android:padding="16dp"
+           android:clickable="true"
+           android:focusable="true"
+           android:background="@drawable/custom_rounded_textview"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:id="@+id/lesson_rook"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/lesson_rook_title"
+           android:textSize="16sp"
+           android:padding="16dp"
+           android:clickable="true"
+           android:focusable="true"
+           android:background="@drawable/custom_rounded_textview"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:id="@+id/lesson_queen"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/lesson_queen_title"
+           android:textSize="16sp"
+           android:padding="16dp"
+           android:clickable="true"
+           android:focusable="true"
+           android:background="@drawable/custom_rounded_textview"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:id="@+id/lesson_king"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/lesson_king_title"
+           android:textSize="16sp"
+           android:padding="16dp"
+           android:clickable="true"
+           android:focusable="true"
+           android:background="@drawable/custom_rounded_textview"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:textAlignment="center"
+           android:textStyle="bold"
+           android:textSize="20sp"
+           android:text="@string/fundamentals_title"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <View
+           android:layout_width="match_parent"
+           android:layout_height="1dp"
+           android:background="?attr/colorAccent"
+           android:layout_marginTop="4dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:id="@+id/lesson_capture"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/lesson_capture_title"
+           android:textSize="16sp"
+           android:padding="16dp"
+           android:clickable="true"
+           android:focusable="true"
+           android:background="@drawable/custom_rounded_textview"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:id="@+id/lesson_protection"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/lesson_protection_title"
+           android:textSize="16sp"
+           android:padding="16dp"
+           android:clickable="true"
+           android:focusable="true"
+           android:background="@drawable/custom_rounded_textview"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:id="@+id/lesson_combat"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/lesson_combat_title"
+           android:textSize="16sp"
+           android:padding="16dp"
+           android:clickable="true"
+           android:focusable="true"
+           android:background="@drawable/custom_rounded_textview"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:id="@+id/lesson_check"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/lesson_check_title"
+           android:textSize="16sp"
+           android:padding="16dp"
+           android:clickable="true"
+           android:focusable="true"
+           android:background="@drawable/custom_rounded_textview"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:id="@+id/lesson_out_of_check"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/lesson_get_out_of_check_title"
+           android:textSize="16sp"
+           android:padding="16dp"
+           android:clickable="true"
+           android:focusable="true"
+           android:background="@drawable/custom_rounded_textview"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:id="@+id/lesson_checkmate"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/lesson_checkmate_title"
+           android:textSize="16sp"
+           android:padding="16dp"
+           android:clickable="true"
+           android:focusable="true"
+           android:background="@drawable/custom_rounded_textview"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:textAlignment="center"
+           android:textStyle="bold"
+           android:textSize="20sp"
+           android:text="@string/intermediate_puzzles"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+
+       <View
+           android:layout_width="match_parent"
+           android:layout_height="1dp"
+           android:background="?attr/colorAccent"
+           android:layout_marginTop="4dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:id="@+id/lesson_castling"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/lesson_castling_title"
+           android:textSize="16sp"
+           android:padding="16dp"
+           android:clickable="true"
+           android:focusable="true"
+           android:background="@drawable/custom_rounded_textview"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:id="@+id/lesson_en_passant"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/lesson_en_passant_title"
+           android:textSize="16sp"
+           android:padding="16dp"
+           android:clickable="true"
+           android:focusable="true"
+           android:background="@drawable/custom_rounded_textview"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:id="@+id/lesson_stalemate"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/lesson_stalemate_title"
+           android:textSize="16sp"
+           android:padding="16dp"
+           android:clickable="true"
+           android:focusable="true"
+           android:background="@drawable/custom_rounded_textview"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:textAlignment="center"
+           android:textStyle="bold"
+           android:textSize="20sp"
+           android:text="@string/advanced_puzzles"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <View
+           android:layout_width="match_parent"
+           android:layout_height="1dp"
+           android:background="?attr/colorAccent"
+           android:layout_marginTop="4dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:id="@+id/lesson_piece_value"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/lesson_piece_value_title"
+           android:textSize="16sp"
+           android:padding="16dp"
+           android:clickable="true"
+           android:focusable="true"
+           android:background="@drawable/custom_rounded_textview"
+           android:layout_marginTop="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+       <TextView
+           android:id="@+id/lesson_check_in_two"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/lesson_check_in_two_title"
+           android:textSize="16sp"
+           android:padding="16dp"
+           android:clickable="true"
+           android:focusable="true"
+           android:background="@drawable/custom_rounded_textview"
+           android:layout_marginTop="16dp"
+           android:layout_marginBottom="16dp"
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"/>
+
+   </LinearLayout>
+
+</ScrollView>

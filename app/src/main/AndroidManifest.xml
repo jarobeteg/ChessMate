@@ -13,6 +13,22 @@
         android:theme="@style/SplashTheme"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.lessons.OpeningsLessonsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lessons.PracticeLessonsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lessons.ChessBasicsLessonsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.lessons.CoordinatesLessonActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.activity.puzzles.PuzzleLoaderActivity"
             android:exported="false"
             android:screenOrientation="portrait" />

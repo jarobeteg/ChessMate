@@ -137,9 +137,9 @@
     <string name="piece_summary">Customize your pieces appearance by selecting from various themes.</string>
 
     <!--Puzzle fragment strings-->
-    <string name="beginner_puzzles">Beginner puzzles</string>
-    <string name="intermediate_puzzles">Intermediate puzzles</string>
-    <string name="advanced_puzzles">Advanced puzzles</string>
+    <string name="beginner_puzzles">Beginner</string>
+    <string name="intermediate_puzzles">Intermediate</string>
+    <string name="advanced_puzzles">Advanced</string>
     <string name="puzzle_text">Puzzle</string>
     <string name="login_to_access_solve_puzzles_message">Please log in to access and solve puzzles!</string>
     <string name="previous_page">Previous page</string>
@@ -157,4 +157,66 @@
     <string name="next_puzzle">Next puzzle</string>
     <string name="incorrect_solution">Wrong Move</string>
     <string name="puzzle_solved_text">Puzzle Solved</string>
+
+    <!--Learn fragment strings-->
+    <string name="chess_basics_lessons">Chess basics</string>
+    <string name="practice_lessons">Practice</string>
+    <string name="openings_lessons">Openings</string>
+    <string name="coordinates_lessons">Coordinates</string>
+    <string name="login_to_access_lessons_message">Please log in to access and take lessons!</string>
+    <string name="chess_pieces_title">Chess Pieces</string>
+    <string name="fundamentals_title">Fundamentals</string>
+    <string name="lesson_pawn_title">The pawn</string>
+    <string name="lesson_knight_title">The knight</string>
+    <string name="lesson_bishop_title">The bishop</string>
+    <string name="lesson_rook_title">The rook</string>
+    <string name="lesson_queen_title">The queen</string>
+    <string name="lesson_king_title">The king</string>
+    <string name="lesson_capture_title">Capture</string>
+    <string name="lesson_protection_title">Protection</string>
+    <string name="lesson_combat_title">Combat</string>
+    <string name="lesson_check_title">Check</string>
+    <string name="lesson_get_out_of_check_title">Get out of check</string>
+    <string name="lesson_checkmate_title">Check</string>
+    <string name="lesson_castling_title">Castles</string>
+    <string name="lesson_en_passant_title" translatable="false">En passant</string>
+    <string name="lesson_stalemate_title">Stalemate</string>
+    <string name="lesson_piece_value_title">Piece value</string>
+    <string name="lesson_check_in_two_title">Check in two</string>
+    <string name="basic_tactics_title">Basic Tactics</string>
+    <string name="intermediate_tactics_title">Intermediate Tactics</string>
+    <string name="pawn_endgames_title">Pawn Endgames</string>
+    <string name="rook_endgame_title">Rook Endgames</string>
+    <string name="checkmates_title">Checkmates</string>
+    <string name="lesson_the_pin_title">The pin</string>
+    <string name="lesson_the_skewer_title">The skewer</string>
+    <string name="lesson_the_fork_title">The fork</string>
+    <string name="lesson_discovered_attacks_title">Discovered attacks</string>
+    <string name="lesson_double_check_title">Double check</string>
+    <string name="lesson_overloaded_pieces_title">Overloaded pieces</string>
+    <string name="lesson_in_between_moves_title">In-between moves</string>
+    <string name="lesson_x_ray_title">X-ray</string>
+    <string name="lesson_zugzwang_title">Being forced to move</string>
+    <string name="lesson_interference_title">Interference</string>
+    <string name="lesson_greek_gift_sacrifice_title">Greek gift sacrifice</string>
+    <string name="lesson_deflection_title">Deflection</string>
+    <string name="lesson_attraction_title">Attraction</string>
+    <string name="lesson_underpromotion_title">Underpromotion</string>
+    <string name="lesson_desperado_title">Lost piece but still useful</string>
+    <string name="lesson_counter_check_title">Counter check</string>
+    <string name="lesson_undermining_title">Undermining</string>
+    <string name="lesson_clearance_title">Clearance</string>
+    <string name="lesson_key_squares_title">Key squares</string>
+    <string name="lesson_opposition_title">Opposition</string>
+    <string name="lesson_basic_rook_endgames_title">Basic rook endgames</string>
+    <string name="lesson_intermediate_rook_endgames_title">Intermediate rook endgames</string>
+    <string name="lesson_checkmate_patterns_i_title">Recognize checkmate patterns 1</string>
+    <string name="lesson_checkmate_patterns_ii_title">Recognize checkmate patterns 2</string>
+    <string name="lesson_checkmate_patterns_iii_title">Recognize checkmate patterns 3</string>
+    <string name="lesson_checkmate_patterns_iv_title">Recognize checkmate patterns 4</string>
+    <string name="openings_for_white">For White</string>
+    <string name="openings_for_black">For Black</string>
+    <string name="countdown_timer_text">Time left</string>
+    <string name="stop_coordinates">Stop</string>
+    <string name="play_coordinates">Play</string>
 </resources>

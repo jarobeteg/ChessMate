@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/stop_coordinates"
+        android:icon="@drawable/ic_stop_24"
+        android:title="@string/stop_coordinates" />
+
+    <item
+        android:id="@+id/play_coordinates"
+        android:icon="@drawable/ic_play_24"
+        android:title="@string/play_coordinates" />
+</menu>

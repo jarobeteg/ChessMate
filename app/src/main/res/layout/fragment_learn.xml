@@ -5,10 +5,133 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.LearnFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Learn fragment" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/chess_basics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/chess_basics_lessons"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:includeFontPadding="false"
+            android:padding="16dp"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:drawableEnd="@drawable/ic_lock_24"
+            android:background="@drawable/custom_create_new_profile_button"/>
+
+        <Button
+            android:id="@+id/practice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/practice_lessons"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:includeFontPadding="false"
+            android:padding="16dp"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:drawableEnd="@drawable/ic_lock_24"
+            android:background="@drawable/custom_create_new_profile_button"/>
+
+        <Button
+            android:id="@+id/openings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/openings_lessons"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:includeFontPadding="false"
+            android:padding="16dp"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:drawableEnd="@drawable/ic_lock_24"
+            android:background="@drawable/custom_create_new_profile_button"/>
+
+        <Button
+            android:id="@+id/coordinates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/coordinates_lessons"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:includeFontPadding="false"
+            android:padding="16dp"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:drawableEnd="@drawable/ic_lock_24"
+            android:background="@drawable/custom_create_new_profile_button"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/colorAccent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"/>
+
+        <TextView
+            android:id="@+id/all_taken_lessons_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text=""
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"/>
+
+        <TextView
+            android:id="@+id/chess_basics_lesson_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text=""
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"/>
+
+        <TextView
+            android:id="@+id/practice_lesson_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text=""
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"/>
+
+        <TextView
+            android:id="@+id/openings_lesson_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text=""
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"/>
+
+        <TextView
+            android:id="@+id/coordinate_lesson_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text=""
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"/>
+
+    </LinearLayout>
 
 </FrameLayout>
