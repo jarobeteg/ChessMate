@@ -62,6 +62,16 @@ class LessonCompletionRepository(private val context: Context) {
         }
     }
 
+    suspend fun countCoordinateLessons(userID: Long): Int {
+        return try {
+            withContext(Dispatchers.IO) {
+                lessonCompletionDAO.countCoordinatesLessonForProfile(userID)
+            }
+        } catch (_: Exception) {
+            0
+        }
+    }
+
     suspend fun isLessonSolved(userID: Long, lessonID: Int): LessonCompletion? {
         return try {
             withContext(Dispatchers.IO) {

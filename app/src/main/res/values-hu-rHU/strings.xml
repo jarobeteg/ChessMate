@@ -142,6 +142,7 @@
     <string name="incorrect_solution">Hibás Lépés</string>
     <string name="puzzle_solved_text">Rejtvény Megoldva</string>
 
+    <!--Learn fragment strings-->
     <string name="chess_basics_lessons">Sakk alapok</string>
     <string name="practice_lessons">Gyakorlás</string>
     <string name="openings_lessons">Nyitólépések</string>
@@ -201,4 +202,9 @@
     <string name="countdown_timer_text">Hátralévő idő</string>
     <string name="stop_coordinates">Leállítás</string>
     <string name="play_coordinates">Indítás</string>
+    <string name="all_lessons_taken_count">Összes: 300-ból %1$d befejezett lecke</string>
+    <string name="chess_basics_lessons_taken_count">Sakk alapjai: 300-ból %1$d befejezett lecke</string>
+    <string name="practice_lessons_taken_count">Gyakorló: 300-ból %1$d befejezett lecke</string>
+    <string name="openings_lessons_taken_count">Nyitólépés: 300-ból %1$d befejezett lecke</string>
+    <string name="coordinates_lessons_taken_count">Koordináta: %1$d befejezett lecke</string>
 </resources>

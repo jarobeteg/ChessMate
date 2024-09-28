@@ -219,4 +219,9 @@
     <string name="countdown_timer_text">Time left</string>
     <string name="stop_coordinates">Stop</string>
     <string name="play_coordinates">Play</string>
+    <string name="all_lessons_taken_count">All lessons: %1$d out of 300 taken</string>
+    <string name="chess_basics_lessons_taken_count">Chess basics lessons: %1$d out of 100 taken</string>
+    <string name="practice_lessons_taken_count">Practice lessons: %1$d out of 100 taken</string>
+    <string name="openings_lessons_taken_count">Opening lessons: %1$d out of 100 taken</string>
+    <string name="coordinates_lessons_taken_count">Coordinate lessons: %1$d taken</string>
 </resources>

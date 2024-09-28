@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.chessmate.R
+import com.example.chessmate.database.LessonCompletionRepository
 import com.example.chessmate.database.entity.UserProfile
 import com.example.chessmate.ui.activity.lessons.ChessBasicsLessonsActivity
 import com.example.chessmate.ui.activity.lessons.CoordinatesLessonActivity
@@ -133,7 +134,19 @@ class LearnFragment : Fragment() {
 
     private suspend fun updateLessonCount() {
         if (userProfile == null) return
-        //TODO no repo yet
+
+        val lessonCompletionRepository = LessonCompletionRepository(requireContext())
+        val allLessonIds = lessonCompletionRepository.getAllTakenLessonsId(userProfile!!.userID)
+        val chessBasicsLessonIds = lessonCompletionRepository.getAllChessBasicsLessonsId(userProfile!!.userID)
+        val practiceLessonIds = lessonCompletionRepository.getAllPracticeLessonsId(userProfile!!.userID)
+        val openingsLessonIds = lessonCompletionRepository.getAllOpeningsLessonsId(userProfile!!.userID)
+        val coordinatesCount = lessonCompletionRepository.countCoordinateLessons(userProfile!!.userID)
+
+        allTakenLessonsCount.text = getString(R.string.all_lessons_taken_count, allLessonIds.size)
+        chessBasicsLessonsCount.text = getString(R.string.chess_basics_lessons_taken_count, chessBasicsLessonIds.size)
+        practiceLessonsCount.text = getString(R.string.practice_lessons_taken_count, practiceLessonIds.size)
+        openingsLessonsCount.text = getString(R.string.openings_lessons_taken_count, openingsLessonIds.size)
+        coordinatesLessonsCount.text = getString(R.string.coordinates_lessons_taken_count, coordinatesCount)
     }
 
     private fun updateLocks() {
