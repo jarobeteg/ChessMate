@@ -29,35 +29,14 @@
                 android:textColor="@color/white"
                 android:layout_gravity="center" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/countdown_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/countdown_timer_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/countdown_timer_text"
-                    android:textSize="16sp"
-                    android:textColor="@color/white" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="?attr/colorPrimaryDark"
-                    android:layout_margin="4dp"/>
-
-                <TextView
-                    android:id="@+id/countdown_timer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="16sp"
-                    android:textColor="@color/white" />
-
-            </LinearLayout>
+                android:text=""
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:layout_gravity="center" />
 
         </LinearLayout>
 
@@ -72,6 +51,8 @@
             android:padding="8dp" />
 
     </androidx.appcompat.widget.Toolbar>
+
+    <include layout="@layout/bitboard_layout"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/coordinates_lesson_bottom_navigation"

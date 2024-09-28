@@ -224,4 +224,17 @@
     <string name="practice_lessons_taken_count">Practice lessons: %1$d out of 100 taken</string>
     <string name="openings_lessons_taken_count">Opening lessons: %1$d out of 100 taken</string>
     <string name="coordinates_lessons_taken_count">Coordinate lessons: %1$d taken</string>
+    <string name="coordinate_settings_title">Coordinate Settings</string>
+    <string name="save">Save</string>
+    <string name="show_coordinates">Show coordinates</string>
+    <string name="show_pieces">Show pieces</string>
+    <string name="play_as_white">Play as white</string>
+    <string name="play_as_black">Play as black</string>
+    <string name="enter_minutes">Minutes (0–5)</string>
+    <string name="enter_seconds">Seconds (0–59)</string>
+    <string name="adjust_timer">Adjust timer</string>
+    <string name="three_no_dot" translatable="false">3</string>
+    <string name="two_no_dot" translatable="false">2</string>
+    <string name="one_no_dot" translatable="false">1</string>
+    <string name="go">Go!</string>
 </resources>

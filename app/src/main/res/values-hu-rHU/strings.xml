@@ -207,4 +207,14 @@
     <string name="practice_lessons_taken_count">Gyakorló: 300-ból %1$d befejezett lecke</string>
     <string name="openings_lessons_taken_count">Nyitólépés: 300-ból %1$d befejezett lecke</string>
     <string name="coordinates_lessons_taken_count">Koordináta: %1$d befejezett lecke</string>
+    <string name="coordinate_settings_title">Koordináta Beállítások</string>
+    <string name="save">Mentés</string>
+    <string name="show_coordinates">Koordináták megjelenítése</string>
+    <string name="show_pieces">Figurák megjelenítése</string>
+    <string name="play_as_white">Játssz fehérként</string>
+    <string name="play_as_black">Játssz feketeként</string>
+    <string name="enter_minutes">Percek (0–5)</string>
+    <string name="enter_seconds">Másodpercek (0–59)</string>
+    <string name="adjust_timer">Időzítő beállítása</string>
+    <string name="go">Rajt!</string>
 </resources>

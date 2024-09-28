@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="?attr/colorTransparentCustom">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/coordinate_settings_title"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/adjust_timer"
+        android:textAlignment="center"
+        android:textSize="16sp"/>
+
+    <EditText
+        android:id="@+id/minutes_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:hint="@string/enter_minutes"
+        android:maxLines="1"/>
+
+    <EditText
+        android:id="@+id/seconds_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:hint="@string/enter_seconds"
+        android:maxLines="1"/>
+    
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/show_coordinates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:text="@string/show_coordinates"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/show_pieces"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:text="@string/show_pieces"/>
+
+    <RadioGroup
+        android:id="@+id/play_as"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/play_as_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/play_as_white"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:checked="true"
+            android:padding="4dp"/>
+
+        <RadioButton
+            android:id="@+id/play_as_black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/play_as_black"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:padding="4dp"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/save_coordinate_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:textColor="@color/white"
+        android:includeFontPadding="false"
+        android:background="@drawable/custom_to_homepage_button"/>
+
+</LinearLayout>
