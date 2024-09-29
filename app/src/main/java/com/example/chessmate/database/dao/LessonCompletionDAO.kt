@@ -23,7 +23,7 @@ interface LessonCompletionDAO {
     @Query("SELECT lessonID FROM lessoncompletions WHERE userID = :userID and type = 3")
     suspend fun getAllTakenOpeningsLessonIdsForProfile(userID: Long): List<Int>
 
-    @Query("SELECT COUNT(*) FROM lessoncompletions WHERE userID = :userID AND type = 4")
+    @Query("SELECT COUNT(*) FROM lessoncompletions WHERE userID = :userID AND type = 0")
     suspend fun countCoordinatesLessonForProfile(userID: Long): Int
 
 

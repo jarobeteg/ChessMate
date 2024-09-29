@@ -1,0 +1,332 @@
+[
+  {
+    "sectionId": 1,
+    "title": "chess_pieces_title",
+    "lessons": [
+      {
+        "lessonId": 1,
+        "title": "lesson_pawn_title",
+        "contentFile": "the_pawn_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 4,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 2,
+        "title": "lesson_knight_title",
+        "contentFile": "the_knight_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 3,
+        "title": "lesson_bishop_title",
+        "contentFile": "the_bishop_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 4,
+        "title": "lesson_rook_title",
+        "contentFile": "the_rook_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 5,
+        "title": "lesson_queen_title",
+        "contentFile": "the_queen_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 6,
+        "title": "lesson_king_title",
+        "contentFile": "the_king_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "sectionId": 2,
+    "title": "fundamentals_title",
+    "lessons": [
+      {
+        "lessonId": 1,
+        "title": "lesson_capture_title",
+        "contentFile": "capture_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 4,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 2,
+        "title": "lesson_protection_title",
+        "contentFile": "protection_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 3,
+        "title": "lesson_combat_title",
+        "contentFile": "combat_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 4,
+        "title": "lesson_check_title",
+        "contentFile": "check_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 5,
+        "title": "lesson_get_out_of_check_title",
+        "contentFile": "get_out_of_check_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 6,
+        "title": "lesson_checkmate_title",
+        "contentFile": "checkmate_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "sectionId": 3,
+    "title": "intermediate_puzzles",
+    "lessons": [
+      {
+        "lessonId": 1,
+        "title": "lesson_castling_title",
+        "contentFile": "castling_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 4,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 2,
+        "title": "lesson_en_passant_title",
+        "contentFile": "en_passant_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 3,
+        "title": "lesson_stalemate_title",
+        "contentFile": "stalemate_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          }
+        ]
+      }
+    ]
+  },
+
+  {
+    "sectionId": 4,
+    "title": "advanced_puzzles",
+    "lessons": [
+      {
+        "lessonId": 1,
+        "title": "lesson_piece_value_title",
+        "contentFile": "piece_value_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 4,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 2,
+        "title": "lesson_check_in_two_title",
+        "contentFile": "check_in_two_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
+            "title": "lesson_num"
+          }
+        ]
+      }
+    ]
+  }
+]

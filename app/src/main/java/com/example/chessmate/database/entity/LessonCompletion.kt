@@ -14,7 +14,9 @@ data class LessonCompletion (
     @PrimaryKey(autoGenerate = true)
     val completionID: Int = 0,
     val userID: Long,
+    val sectionID: Int,
     val lessonID: Int,
+    val subLessonID: Int,
     val type: Int,
     val isSolved: Boolean
 )

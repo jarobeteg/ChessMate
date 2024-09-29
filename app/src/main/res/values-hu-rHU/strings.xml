@@ -4,6 +4,7 @@
     <string name="yes">Igen</string>
     <string name="no">Nem</string>
     <string name="confirmation">Megerősítés</string>
+    <string name="string_not_found">Nem talált karakterlánc</string>
 
     <!--Bottom navigation menu strings-->
     <string name="bottom_nav_home">Főoldal</string>
@@ -218,4 +219,30 @@
     <string name="adjust_timer">Időzítő beállítása</string>
     <string name="go">Rajt!</string>
     <string name="correct_coordinates_found">Helyes koordináták: %1$d</string>
+    <string name="lesson_num">Lecke %1$d</string>
+
+    <!--The pawn lesson strings-->
+    <string name="description_1">Csak előre mozog.</string>
+    <string name="description_2">A gyalogok előre mozognak, de átlósan ütnek!</string>
+    <string name="description_3">A második sorban lévő gyalog egyszerre 2 mezőt léphet!</string>
+    <string name="description_4">Amikor a tábla másik oldalára érnek, erősebb figurává válnak!</string>
+
+    <!--The knight lesson strings-->
+    <string name="description_5">L alakban mozog.</string>
+    <string name="description_6">Ide-oda ugrálnak.</string>
+    <string name="description_7">Át tudnak ugrani a figurákon!</string>
+
+    <!--The bishop lesson strings-->
+    <string name="description_8">Átlósan mozog.</string>
+    <string name="description_9">Egy világos futó, egy sötét futó.</string>
+
+    <!--The rook lesson strings-->
+    <string name="description_10">Egyenes vonalban mozog.</string>
+
+    <!--The queen lesson strings-->
+    <string name="description_11">Átlósan és egyenes vonalban mozog.</string>
+
+    <!--The king lesson strings-->
+    <string name="description_12">A legfontosabb figura.</string>
+    <string name="description_13">A király egyszerre egy mezőt léphet!</string>
 </resources>

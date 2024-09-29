@@ -5,6 +5,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="confirmation">Confirmation</string>
+    <string name="string_not_found">String not found</string>
 
     <!--Bottom navigation menu strings-->
     <string name="bottom_nav_home">Home</string>
@@ -177,8 +178,8 @@
     <string name="lesson_combat_title">Combat</string>
     <string name="lesson_check_title">Check</string>
     <string name="lesson_get_out_of_check_title">Get out of check</string>
-    <string name="lesson_checkmate_title">Check</string>
-    <string name="lesson_castling_title">Castles</string>
+    <string name="lesson_checkmate_title">Checkmate</string>
+    <string name="lesson_castling_title">Castling</string>
     <string name="lesson_en_passant_title" translatable="false">En passant</string>
     <string name="lesson_stalemate_title">Stalemate</string>
     <string name="lesson_piece_value_title">Piece value</string>
@@ -238,4 +239,30 @@
     <string name="one_no_dot" translatable="false">1</string>
     <string name="go">Go!</string>
     <string name="correct_coordinates_found">Correct coordinates: %1$d</string>
+    <string name="lesson_num">Lesson %1$d</string>
+
+    <!--The pawn lesson strings-->
+    <string name="description_1">It moves forward only.</string>
+    <string name="description_2">Pawns move forward, but capture diagonally!</string>
+    <string name="description_3">A pawn on the second rank can move 2 squares at once!</string>
+    <string name="description_4">When they reach the other side of the board, they become a stronger piece!</string>
+
+    <!--The knight lesson strings-->
+    <string name="description_5">It moves in an L shape.</string>
+    <string name="description_6">They are jumping around.</string>
+    <string name="description_7">They can jump over pieces!</string>
+
+    <!--The bishop lesson strings-->
+    <string name="description_8">It moves diagonally.</string>
+    <string name="description_9">One light-squared bishop, one dark-squared bishop.</string>
+
+    <!--The rook lesson strings-->
+    <string name="description_10">It moves in straight lines.</string>
+
+    <!--The queen lesson strings-->
+    <string name="description_11">It moves diagonally and in straight lines.</string>
+
+    <!--The king lesson strings-->
+    <string name="description_12">The most important piece.</string>
+    <string name="description_13">The king can move one square at a time!</string>
 </resources>

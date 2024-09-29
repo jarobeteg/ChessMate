@@ -1,0 +1,17 @@
+[
+  {
+    "lessonId": 12,
+    "descriptionId": 11,
+    "fen": "1p6/8/8/4p3/8/8/4Q3/8 w - - 0 1",
+    "solution": "E2 E5 4 6 0 | E5 C7 4 6 0",
+    "type": 1
+  },
+
+  {
+    "lessonId": 13,
+    "descriptionId": 11,
+    "fen": "8/5p2/8/p6p/3Q4/8/5p2/8 w - - 0 1",
+    "solution": "D4 F2 4 6 0 | F2 F7 4 6 0 | F7 H5 4 6 0 | H5 A5 4 6 0",
+    "type": 1
+  }
+]

@@ -434,8 +434,10 @@ class CoordinatesLessonActivity : AbsThemeActivity(), CoordinateSettingsDialogFr
 
         val lessonCompletion = LessonCompletion(
             userID = userProfile!!.userID,
+            sectionID = 0,
             lessonID = 0,
-            type = 4,
+            subLessonID = 0,
+            type = 0,
             isSolved = true
         )
 
