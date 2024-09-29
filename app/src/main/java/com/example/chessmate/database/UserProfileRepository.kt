@@ -156,4 +156,10 @@ class UserProfileRepository(private val context: Context) {
             userProfileDAO.incrementGamesPlayed(userID)
         } catch (_: Exception) {}
     }
+
+    suspend fun incrementLessonTaken(userID: Long) {
+        try {
+            userProfileDAO.incrementLessonsTaken(userID)
+        } catch (_: Exception) {}
+    }
 }

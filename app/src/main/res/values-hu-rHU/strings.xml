@@ -217,4 +217,5 @@
     <string name="enter_seconds">Másodpercek (0–59)</string>
     <string name="adjust_timer">Időzítő beállítása</string>
     <string name="go">Rajt!</string>
+    <string name="correct_coordinates_found">Helyes koordináták: %1$d</string>
 </resources>
