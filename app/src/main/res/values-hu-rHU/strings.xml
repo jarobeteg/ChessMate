@@ -182,10 +182,8 @@
     <string name="lesson_attraction_title">Vonzás</string>
     <string name="lesson_counter_check_title">Ellen sakk</string>
     <string name="lesson_undermining_title">Aláásás</string>
-    <string name="lesson_key_squares_title">Kulcsmezők</string>
     <string name="lesson_opposition_title">Oppozíció</string>
     <string name="lesson_basic_rook_endgames_title">Alap bástya végjáték</string>
-    <string name="lesson_intermediate_rook_endgames_title">Középhaladó bástya végjáték</string>
     <string name="openings_for_white">Fehérnek</string>
     <string name="openings_for_black">Feketének</string>
     <string name="countdown_timer_text">Hátralévő idő</string>
@@ -327,4 +325,12 @@
     <string name="description_63">Fókuszálj a kulcsfontosságú mezőkre vagy figurák védőire, hogy egyensúlyhiányt hozz létre az ellenfél felállásában.</string>
     <string name="description_64">Az aláásás azt jelenti, hogy az ellenfél védő figuráit támadod, hogy gyengítsd a pozíciójukat.</string>
     <string name="description_65">Ne feledd, hogy egy hatékony aláásás taktikai előnyökhöz és anyagi nyereséghez vezethet.</string>
+
+    <!--Opposition lesson strings-->
+    <string name="description_66">Az oppozíció kulcsfontosságú a királyvégjátékokban a mezők irányításához. Mozgasd a királyodat úgy, hogy közvetlen vonalban maradj az ellenfél királyával, megtartva az oppozíciót.</string>
+    <string name="description_67">Aki birtokolja az oppozíciót, irányíthatja és korlátozhatja az ellenfél király mozgását. Az oppozíció elsajátítása a különbség győzelem és döntetlen között egy gyalogvégjátékban.</string>
+
+    <!--Basic rook endgames lesson strings-->
+    <string name="description_68">Tartsd aktívan bástyádat, ezzel korlátozod az ellenfél király mozgását. Adj sakkokat, hogy az ellenfél királyát a tábla szélére kényszerítsd.</string>
+    <string name="description_69">Helyezd bástyádat az előretolt gyalog mögé, legyen az a tied vagy az ellenfélé.</string>
 </resources>

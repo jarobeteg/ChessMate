@@ -247,25 +247,6 @@
     "lessons": [
       {
         "lessonId": 1,
-        "title": "lesson_key_squares_title",
-        "contentFile": "key_squares_lesson.json",
-        "subLessons": [
-          {
-            "subLessonId": 1,
-            "title": "lesson_num"
-          },
-          {
-            "subLessonId": 2,
-            "title": "lesson_num"
-          },
-          {
-            "subLessonId": 3,
-            "title": "lesson_num"
-          }
-        ]
-      },
-      {
-        "lessonId": 2,
         "title": "lesson_opposition_title",
         "contentFile": "opposition_lesson.json",
         "subLessons": [
@@ -294,25 +275,6 @@
         "lessonId": 1,
         "title": "lesson_basic_rook_endgames_title",
         "contentFile": "basic_rook_endgames_lesson.json",
-        "subLessons": [
-          {
-            "subLessonId": 1,
-            "title": "lesson_num"
-          },
-          {
-            "subLessonId": 2,
-            "title": "lesson_num"
-          },
-          {
-            "subLessonId": 3,
-            "title": "lesson_num"
-          }
-        ]
-      },
-      {
-        "lessonId": 2,
-        "title": "lesson_intermediate_rook_endgames_title",
-        "contentFile": "intermediate_rook_endgames_lesson.json",
         "subLessons": [
           {
             "subLessonId": 1,

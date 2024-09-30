@@ -199,10 +199,8 @@
     <string name="lesson_attraction_title">Attraction</string>
     <string name="lesson_counter_check_title">Counter check</string>
     <string name="lesson_undermining_title">Undermining</string>
-    <string name="lesson_key_squares_title">Key squares</string>
     <string name="lesson_opposition_title">Opposition</string>
     <string name="lesson_basic_rook_endgames_title">Basic rook endgames</string>
-    <string name="lesson_intermediate_rook_endgames_title">Intermediate rook endgames</string>
     <string name="openings_for_white">For White</string>
     <string name="openings_for_black">For Black</string>
     <string name="countdown_timer_text">Time left</string>
@@ -348,8 +346,11 @@
     <string name="description_64">Undermining involves attacking the supporting pieces of your opponent to weaken their position.</string>
     <string name="description_65">Remember, an effective undermining strategy can lead to tactical advantages and material gain.</string>
 
-    <!--Key squares lesson strings-->
     <!--Opposition lesson strings-->
+    <string name="description_66">Opposition is crucial for controlling key squares in king endgames. Move your king to maintain a direct line with your opponent’s king, keeping the opposition.</string>
+    <string name="description_67">The player with the opposition can control the movement and restrict the opponent\'s king. Mastering opposition can be the difference between winning or drawing a pawn endgame.</string>
+
     <!--Basic rook endgames lesson strings-->
-    <!--Intermediate rook endgames lesson strings-->
+    <string name="description_68">Keep your rook active to restrict your opponent\'s king. Use checks to drive the opponent\'s king towards the edge of the board.</string>
+    <string name="description_69">Place your rook behind passed pawns, either yours or your opponent\'s.</string>
 </resources>
