@@ -8,7 +8,6 @@ import com.example.chessmate.R
 import com.example.chessmate.adapter.SectionAdapter
 import com.example.chessmate.ui.activity.AbsThemeActivity
 import com.example.chessmate.util.JSONParser
-import com.example.chessmate.util.Lesson
 import com.example.chessmate.util.Section
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

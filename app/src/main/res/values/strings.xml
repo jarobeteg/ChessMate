@@ -175,7 +175,6 @@
     <string name="lesson_king_title">The king</string>
     <string name="lesson_capture_title">Capture</string>
     <string name="lesson_protection_title">Protection</string>
-    <string name="lesson_combat_title">Combat</string>
     <string name="lesson_check_title">Check</string>
     <string name="lesson_get_out_of_check_title">Get out of check</string>
     <string name="lesson_checkmate_title">Checkmate</string>
@@ -265,4 +264,39 @@
     <!--The king lesson strings-->
     <string name="description_12">The most important piece.</string>
     <string name="description_13">The king can move one square at a time!</string>
+
+    <!--Capture lesson string-->
+    <string name="description_14">Take the opponent pieces!</string>
+
+    <!--Protection lesson string-->
+    <string name="description_15">Keep your pieces safe by escaping attacks.</string>
+    <string name="description_16">Keep your pieces safe by defending.</string>
+
+    <!--Check lesson strings-->
+    <string name="description_17">Attack the king, putting it in check.</string>
+
+    <!--Get out of check lesson strings-->
+    <string name="description_18">Defend your king by escaping the check.</string>
+    <string name="description_19">Defend your king by blocking the check.</string>
+    <string name="description_20">Defend your king by taking the attacking piece.</string>
+
+    <!--Checkmate lesson strings-->
+    <string name="description_21">Attack your opponent\'s king in a way that cannot be defended, delivering a checkmate.</string>
+
+    <!--Castling lesson strings-->
+    <string name="description_22">You can castle king-side!</string>
+    <string name="description_23">You can castle queen-side!</string>
+    <string name="description_24">You cannot castle if the king is in check or would pass through a square under attack.</string>
+
+    <!--En passant lesson strings-->
+    <string name="description_25">En passant can only be performed if your pawn is on the 5th rank (for white) or the 4th rank (for black).</string>
+    <string name="description_26">En passant can only be performed immediately after the opponent moves their pawn.</string>
+
+    <!--Stalemate lesson strings-->
+    <string name="description_27">Stalemate occurs when a player has no legal moves but is not in check.</string>
+
+    <!--Piece value lesson strings-->
+    <string name="description_28">Queen > Rook > Bishop > Knight > Pawn</string>
+    <string name="description_29">Take the piece with the highest value!</string>
+    <string name="description_30">Do not exchange a higher valued piece for a less valuable one.</string>
 </resources>

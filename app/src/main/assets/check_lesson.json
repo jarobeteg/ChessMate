@@ -1,0 +1,31 @@
+[
+  {
+    "type": 1,
+    "sectionId": 2,
+    "lessonId": 3,
+    "subLessonId": 1,
+    "descriptionId": 17,
+    "fen": "4k3/8/2b5/8/8/8/8/R7 w - - 0 1",
+    "solution": "A1 E1 3 12 12 0 0"
+  },
+
+  {
+    "type": 1,
+    "sectionId": 2,
+    "lessonId": 3,
+    "subLessonId": 2,
+    "descriptionId": 17,
+    "fen": "8/2b1q2n/1ppk4/2N5/8/8/8/8 w - - 0 1",
+    "solution": "C5 B7 1 12 12 0 0"
+  },
+
+  {
+    "type": 1,
+    "sectionId": 2,
+    "lessonId": 3,
+    "subLessonId": 3,
+    "descriptionId": 17,
+    "fen": "7r/4k3/8/3n4/4N3/8/2R5/4Q3 w - - 0 1",
+    "solution": "E4 C3 1 12 12 0 0"
+  }
+]

@@ -1,0 +1,21 @@
+[
+  {
+    "type": 1,
+    "sectionId": 3,
+    "lessonId": 2,
+    "subLessonId": 1,
+    "descriptionId": 25,
+    "fen": "rnbqkbnr/pppppppp/8/2P5/8/8/PP1PPPPP/RNBQKBNR b KQkq - 0 1",
+    "solution": "D7 D5 6 12 12 0 0 | C5 D6 0 6 12 0 1"
+  },
+
+  {
+    "type": 1,
+    "sectionId": 3,
+    "lessonId": 2,
+    "subLessonId": 2,
+    "descriptionId": 26,
+    "fen": "rnbqkbnr/ppp1pppp/8/2Pp3P/8/8/PP1PPPP1/RNBQKBNR b KQkq - 0 1",
+    "solution": "G7 G5 6 12 12 0 0 | H5 G6 0 6 12 0 1"
+  }
+]

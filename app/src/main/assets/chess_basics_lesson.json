@@ -151,26 +151,15 @@
           {
             "subLessonId": 3,
             "title": "lesson_num"
+          },
+          {
+            "subLessonId": 4,
+            "title": "lesson_num"
           }
         ]
       },
       {
         "lessonId": 3,
-        "title": "lesson_combat_title",
-        "contentFile": "combat_lesson.json",
-        "subLessons": [
-          {
-            "subLessonId": 1,
-            "title": "lesson_num"
-          },
-          {
-            "subLessonId": 2,
-            "title": "lesson_num"
-          }
-        ]
-      },
-      {
-        "lessonId": 4,
         "title": "lesson_check_title",
         "contentFile": "check_lesson.json",
         "subLessons": [
@@ -181,11 +170,15 @@
           {
             "subLessonId": 2,
             "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
+            "title": "lesson_num"
           }
         ]
       },
       {
-        "lessonId": 5,
+        "lessonId": 4,
         "title": "lesson_get_out_of_check_title",
         "contentFile": "get_out_of_check_lesson.json",
         "subLessons": [
@@ -196,11 +189,15 @@
           {
             "subLessonId": 2,
             "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
+            "title": "lesson_num"
           }
         ]
       },
       {
-        "lessonId": 6,
+        "lessonId": 5,
         "title": "lesson_checkmate_title",
         "contentFile": "checkmate_lesson.json",
         "subLessons": [
@@ -210,6 +207,10 @@
           },
           {
             "subLessonId": 2,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
             "title": "lesson_num"
           }
         ]
@@ -237,10 +238,6 @@
           {
             "subLessonId": 3,
             "title": "lesson_num"
-          },
-          {
-            "subLessonId": 4,
-            "title": "lesson_num"
           }
         ]
       },
@@ -255,10 +252,6 @@
           },
           {
             "subLessonId": 2,
-            "title": "lesson_num"
-          },
-          {
-            "subLessonId": 3,
             "title": "lesson_num"
           }
         ]
@@ -289,29 +282,6 @@
         "lessonId": 1,
         "title": "lesson_piece_value_title",
         "contentFile": "piece_value_lesson.json",
-        "subLessons": [
-          {
-            "subLessonId": 1,
-            "title": "lesson_num"
-          },
-          {
-            "subLessonId": 2,
-            "title": "lesson_num"
-          },
-          {
-            "subLessonId": 3,
-            "title": "lesson_num"
-          },
-          {
-            "subLessonId": 4,
-            "title": "lesson_num"
-          }
-        ]
-      },
-      {
-        "lessonId": 2,
-        "title": "lesson_check_in_two_title",
-        "contentFile": "check_in_two_lesson.json",
         "subLessons": [
           {
             "subLessonId": 1,

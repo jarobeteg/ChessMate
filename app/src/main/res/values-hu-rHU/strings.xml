@@ -159,7 +159,6 @@
     <string name="lesson_king_title">A király</string>
     <string name="lesson_capture_title">Ütés</string>
     <string name="lesson_protection_title">Védelem</string>
-    <string name="lesson_combat_title">Harc</string>
     <string name="lesson_check_title">Sakk</string>
     <string name="lesson_get_out_of_check_title">Sakk elhárítása</string>
     <string name="lesson_checkmate_title">Matt</string>
@@ -245,4 +244,39 @@
     <!--The king lesson strings-->
     <string name="description_12">A legfontosabb figura.</string>
     <string name="description_13">A király egyszerre egy mezőt léphet!</string>
+
+    <!--Capture lesson string-->
+    <string name="description_14">Vedd le az ellenfél figuráit!</string>
+
+    <!--Protection lesson string-->
+    <string name="description_15">Tartsd biztonságban figuráidat a támadások elől menekülve.</string>
+    <string name="description_16">Védekezéssel tartsd biztonságban figuráidat.</string>
+
+    <!--Check lesson strings-->
+    <string name="description_17">Támadd meg a királyt, sakkba téve azt.</string>
+
+    <!--Get out of check lesson strings-->
+    <string name="description_18">Védd meg a királyodat úgy, hogy kilépsz a sakkból.</string>
+    <string name="description_19">Védd meg a királyodat úgy, hogy blokkolod a sakkot.</string>
+    <string name="description_20">Védd meg a királyodat azzal, hogy leütöd a támadó figurát.</string>
+
+    <!--Checkmate lesson strings-->
+    <string name="description_21">Támadd meg úgy a királyt, hogy ne lehessen megvédeni, ezzel sakk-mattot adva."</string>
+
+    <!--Castling lesson strings-->
+    <string name="description_22">Sáncolhatsz királyszárnyra!</string>
+    <string name="description_23">Sáncolhatsz vezérszárnyra!</string>
+    <string name="description_24">Nem tudsz sáncolni, ha a király sakkban van, vagy ha egy támadott mezőn kell áthaladnia.</string>
+
+    <!--En passant lesson strings-->
+    <string name="description_25">En passant csak akkor hajtható végre, ha a gyalogod az 5. (fehérnél) vagy a 4. (feketénél) soron van.</string>
+    <string name="description_26">En passant csak közvetlenül az ellenfél gyalogjának lépése után hajtható végre.</string>
+
+    <!--Stalemate lesson strings-->
+    <string name="description_27">Patt akkor következik be, amikor egy játékosnak nincs szabályos lépése, de nincs sakkban.</string>
+
+    <!--Piece value lesson strings-->
+    <string name="description_28">Vezér > Bástya > Futó > Huszár > Gyalog</string>
+    <string name="description_29">Vedd le a legmagasabb értékű figurát!</string>
+    <string name="description_30">Ne cserélj magasabb értékű figurát kevésbé értékesre.</string>
 </resources>
