@@ -257,10 +257,6 @@
           {
             "subLessonId": 2,
             "title": "lesson_num"
-          },
-          {
-            "subLessonId": 3,
-            "title": "lesson_num"
           }
         ]
       }
@@ -282,10 +278,6 @@
           },
           {
             "subLessonId": 2,
-            "title": "lesson_num"
-          },
-          {
-            "subLessonId": 3,
             "title": "lesson_num"
           }
         ]

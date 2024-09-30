@@ -190,8 +190,8 @@
     <string name="stop_coordinates">Leállítás</string>
     <string name="play_coordinates">Indítás</string>
     <string name="all_lessons_taken_count">Összes: 300-ból %1$d befejezett lecke</string>
-    <string name="chess_basics_lessons_taken_count">Sakk alapok: 300-ból %1$d befejezett lecke</string>
-    <string name="tactical_concepts_lessons_taken_count">Taktikai fogalmak: 300-ból %1$d befejezett lecke</string>
+    <string name="chess_basics_lessons_taken_count">Sakk alapok: 42-ből %1$d befejezett lecke</string>
+    <string name="tactical_concepts_lessons_taken_count">Taktikai fogalmak: 40-ből %1$d befejezett lecke</string>
     <string name="openings_lessons_taken_count">Nyitólépések: 300-ból %1$d befejezett lecke</string>
     <string name="coordinates_lessons_taken_count">Koordináta: %1$d befejezett lecke</string>
     <string name="coordinate_settings_title">Koordináta Beállítások</string>

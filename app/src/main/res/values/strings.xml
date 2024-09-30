@@ -207,8 +207,8 @@
     <string name="stop_coordinates">Stop</string>
     <string name="play_coordinates">Play</string>
     <string name="all_lessons_taken_count">All lessons: %1$d out of 300 taken</string>
-    <string name="chess_basics_lessons_taken_count">Chess basics lessons: %1$d out of 100 taken</string>
-    <string name="tactical_concepts_lessons_taken_count">Tactical concepts lessons: %1$d out of 100 taken</string>
+    <string name="chess_basics_lessons_taken_count">Chess basics lessons: %1$d out of 42 taken</string>
+    <string name="tactical_concepts_lessons_taken_count">Tactical concepts lessons: %1$d out of 40 taken</string>
     <string name="openings_lessons_taken_count">Opening lessons: %1$d out of 100 taken</string>
     <string name="coordinates_lessons_taken_count">Coordinate lessons: %1$d taken</string>
     <string name="coordinate_settings_title">Coordinate Settings</string>
