@@ -1,0 +1,31 @@
+[
+  {
+    "type": 2,
+    "sectionId": 1,
+    "lessonId": 6,
+    "subLessonId": 1,
+    "descriptionId": 46,
+    "fen": "6k1/5pp1/4b1n1/8/8/3BR3/5PPP/6K1 w - - 0 1",
+    "solution": "D3 G6 2 7 12 0 0 | F7 G6 6 2 12 0 0 | E3 E6 3 8 12 0 0"
+  },
+
+  {
+    "type": 2,
+    "sectionId": 1,
+    "lessonId": 6,
+    "subLessonId": 2,
+    "descriptionId": 47,
+    "fen": "3r2k1/1pp4p/p1n1q1p1/2Q5/1P2B3/P3P1Pb/3N1R1P/6K1 b - - 1 1",
+    "solution": "E6 E4 10 2 12 0 0 | C5 F8 4 12 12 0 0 | D8 F8 9 4 12 0 0 | D2 E4 1 10 12 0 0 | F8 F2 9 3 12 0 0 "
+  },
+
+  {
+    "type": 2,
+    "sectionId": 1,
+    "lessonId": 6,
+    "subLessonId": 3,
+    "descriptionId": 48 ,
+    "fen": "3r2k1/pb1r1pp1/1pn2q1p/3B4/6Q1/P4NP1/1P3PP1/3RR1K1 w - - 7 23",
+    "solution": "G4 D7 4 9 12 0 0 | D8 D7 9 4 12 0 0 | E1 E8 3 12 12 0 0 | G8 H7 11 12 12 0 0 | D5 E4 2 12 12 0 0 | G7 G6 6 12 12 0 0 | D1 D7 3 9 12 0 0"
+  }
+]

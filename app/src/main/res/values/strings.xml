@@ -193,8 +193,6 @@
     <string name="lesson_discovered_attacks_title">Discovered attacks</string>
     <string name="lesson_double_check_title">Double check</string>
     <string name="lesson_overloaded_pieces_title">Overloaded pieces</string>
-    <string name="lesson_in_between_moves_title">In-between moves</string>
-    <string name="lesson_x_ray_title">X-ray</string>
     <string name="lesson_zugzwang_title">Being forced to move</string>
     <string name="lesson_interference_title">Interference</string>
     <string name="lesson_greek_gift_sacrifice_title">Greek gift sacrifice</string>
@@ -294,4 +292,49 @@
     <string name="description_28">Queen > Rook > Bishop > Knight > Pawn</string>
     <string name="description_29">Take the piece with the highest value!</string>
     <string name="description_30">Do not exchange a higher valued piece for a less valuable one.</string>
+
+    <!--The pin lesson strings-->
+    <string name="description_31">A pinned piece cannot move without exposing a more valuable piece behind it, often the king or queen.</string>
+    <string name="description_32">Use the pin to attack your opponent\'s pieces, forcing them to protect the pinned piece or lose a more valuable one.</string>
+    <string name="description_33">Look for opportunities to pin your opponent\'s pieces during both your attack and defense.</string>
+
+    <!--The skewer lesson strings-->
+    <string name="description_34">A skewer is an attack upon two pieces in a line and is similar to a pin.</string>
+    <string name="description_35">A skewer is sometimes described as a "reverse pin."</string>
+    <string name="description_36">The difference is that in a skewer, the more valuable piece is in front of the piece of lesser value.</string>
+
+    <!--The fork lesson strings-->
+    <string name="description_37">A fork attacks two or more pieces at once, forcing your opponent into a difficult choice.</string>
+    <string name="description_38">Knights are especially effective at forking due to their unique movement pattern.</string>
+    <string name="description_39">Look for opportunities to fork high-value pieces, such as the king and queen.</string>
+
+    <!--Discovered attacks lesson strings-->
+    <string name="description_40">A discovered attack occurs when you move a piece, revealing an attack by another piece.</string>
+    <string name="description_41">Use discovered attacks to threaten multiple targets simultaneously.</string>
+    <string name="description_42">Look for opportunities where moving one piece will create a dangerous attack.</string>
+
+    <!--Double check lesson strings-->
+    <string name="description_43">A double check occurs when two pieces attack the king simultaneously.</string>
+    <string name="description_44">Double check always forces the king to move—blocking or capturing won\'t help.</string>
+    <string name="description_45">Use a double check to create powerful attacks and limit your opponent\'s responses.</string>
+
+    <!--Overloaded pieces lesson strings-->
+    <string name="description_46">Overloaded pieces are assigned too many defensive tasks at once.</string>
+    <string name="description_47">Identify pieces that are defending multiple important squares or pieces.</string>
+    <string name="description_48">Force an overloaded piece to abandon one of its duties to create a winning tactic.</string>
+
+    <!--Zugzwang lesson strings-->
+    <!--Interference lesson strings-->
+    <!--Greek gift sacrifice lesson strings-->
+    <!--Deflection lesson strings-->
+    <!--Attraction pin lesson strings-->
+    <!--Underpromotion pin lesson strings-->
+    <!--Desperado pin lesson strings-->
+    <!--Counter attack pin lesson strings-->
+    <!--Undermining pin lesson strings-->
+    <!--Clearance pin lesson strings-->
+    <!--Key squares pin lesson strings-->
+    <!--Opposition pin lesson strings-->
+    <!--Basic rook endgames pin lesson strings-->
+    <!--Intermediate rook endgames pin lesson strings-->
 </resources>

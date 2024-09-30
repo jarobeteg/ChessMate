@@ -176,8 +176,6 @@
     <string name="lesson_discovered_attacks_title">Felfedett támadás</string>
     <string name="lesson_double_check_title">Kettős sakk</string>
     <string name="lesson_overloaded_pieces_title">Túlterhelt figurák</string>
-    <string name="lesson_in_between_moves_title">Köztes lépések</string>
-    <string name="lesson_x_ray_title">X-ray</string>
     <string name="lesson_zugzwang_title">Kényszerlépés</string>
     <string name="lesson_interference_title">Interferencia</string>
     <string name="lesson_greek_gift_sacrifice_title">Görög ajándékáldozat</string>
@@ -274,4 +272,34 @@
     <string name="description_28">Vezér > Bástya > Futó > Huszár > Gyalog</string>
     <string name="description_29">Vedd le a legmagasabb értékű figurát!</string>
     <string name="description_30">Ne cserélj magasabb értékű figurát kevésbé értékesre.</string>
+
+    <!--The pin lesson strings-->
+    <string name="description_31">Egy lekötött figura nem léphet anélkül, hogy ne tenné ki veszélynek a mögötte lévő értékesebb figurát, gyakran a királyt vagy a vezért.</string>
+    <string name="description_32">Használj lekötést az ellenfél figuráinak támadására, ezzel kényszerítve őket, hogy védjék a lekötött figurát, vagy elveszítsenek egy értékesebbet.</string>
+    <string name="description_33">Keress lehetőségeket az ellenfél figuráinak lekötésére mind támadás, mind védekezés során.</string>
+
+    <!--The skewer lesson strings-->
+    <string name="description_34">A szúrás két figura egy vonalban történő megtámadása, ez hasonlít a lekötéshez.</string>
+    <string name="description_35">A szúrást néha "fordított lekötésként" említik.</string>
+    <string name="description_36">A különbség az, hogy a szúrásnál az értékesebb figura a kevésbé értékes figura előtt helyezkedik el.</string>
+
+    <!--The fork lesson strings-->
+    <string name="description_37">A kettős támadás (fork) két vagy több figura egyidejű megtámadására szolgál, kényszerítve az ellenfelet egy nehéz választásra</string>
+    <string name="description_38">A huszárok különleges mozgásmintájuk miatt különösen hatékonyak a kettős támadásokban.</string>
+    <string name="description_39">Keress lehetőségeket a nagy értékű figurák, például a király és a vezér kettős támadására.</string>
+
+    <!--Discovered attacks lesson strings-->
+    <string name="description_40">Egy felfedett támadás akkor következik be, amikor egy figurát mozgatunk, felfedve egy másik figura támadását.</string>
+    <string name="description_41">Használj felfedett támadásokat, hogy egyszerre több figurát támadj.</string>
+    <string name="description_42">Keress lehetőségeket, ahol egy figura mozgatása veszélyes támadást hoz létre.</string>
+
+    <!--Double check lesson strings-->
+    <string name="description_43">Kettős sakk akkor következik be, amikor két figura egyszerre támadja meg a királyt.</string>
+    <string name="description_44">A kettős sakk mindig arra kényszeríti a királyt, hogy lépjen – a blokkolás vagy a levétel nem segít.</string>
+    <string name="description_45">Használj kettős sakkot erőteljes támadások létrehozására és az ellenfél válaszainak korlátozására.</string>
+
+    <!--Overloaded pieces lesson strings-->
+    <string name="description_46">A túlterhelt figurák egyszerre túl sok védelmi feladatot kapnak.</string>
+    <string name="description_47">Azonosítsd azokat a figurákat, amelyek több fontos négyzetet vagy figurát védenek.</string>
+    <string name="description_48">Kényszerítsd a túlterhelt figurát, hogy elhagyja feladatát, ezzel nyerő taktikát hozol létre.</string>
 </resources>

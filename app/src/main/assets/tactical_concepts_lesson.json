@@ -57,6 +57,10 @@
           {
             "subLessonId": 2,
             "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
+            "title": "lesson_num"
           }
         ]
       },
@@ -71,6 +75,10 @@
           },
           {
             "subLessonId": 2,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
             "title": "lesson_num"
           }
         ]
@@ -87,6 +95,10 @@
           {
             "subLessonId": 2,
             "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
+            "title": "lesson_num"
           }
         ]
       },
@@ -102,35 +114,9 @@
           {
             "subLessonId": 2,
             "title": "lesson_num"
-          }
-        ]
-      },
-      {
-        "lessonId": 7,
-        "title": "lesson_in_between_moves_title",
-        "contentFile": "in_between_moves_lesson.json",
-        "subLessons": [
-          {
-            "subLessonId": 1,
-            "title": "lesson_num"
           },
           {
-            "subLessonId": 2,
-            "title": "lesson_num"
-          }
-        ]
-      },
-      {
-        "lessonId": 8,
-        "title": "lesson_x_ray_title",
-        "contentFile": "x_ray_lesson.json",
-        "subLessons": [
-          {
-            "subLessonId": 1,
-            "title": "lesson_num"
-          },
-          {
-            "subLessonId": 2,
+            "subLessonId": 3,
             "title": "lesson_num"
           }
         ]
@@ -158,10 +144,6 @@
           {
             "subLessonId": 3,
             "title": "lesson_num"
-          },
-          {
-            "subLessonId": 4,
-            "title": "lesson_num"
           }
         ]
       },
@@ -180,10 +162,6 @@
           },
           {
             "subLessonId": 3,
-            "title": "lesson_num"
-          },
-          {
-            "subLessonId": 4,
             "title": "lesson_num"
           }
         ]
@@ -377,6 +355,10 @@
           },
           {
             "subLessonId": 2,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
             "title": "lesson_num"
           }
         ]
