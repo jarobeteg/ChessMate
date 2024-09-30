@@ -145,7 +145,7 @@
 
     <!--Learn fragment strings-->
     <string name="chess_basics_lessons">Sakk alapok</string>
-    <string name="practice_lessons">Gyakorlás</string>
+    <string name="tactical_concepts_lessons">Taktikai fogalmak</string>
     <string name="openings_lessons">Nyitólépések</string>
     <string name="coordinates_lessons">Koordináták</string>
     <string name="login_to_access_lessons_message">A leckék eléréséhez kérem, jelentkezzen be!</string>
@@ -170,10 +170,9 @@
     <string name="intermediate_tactics_title">Középhaladó taktikák</string>
     <string name="pawn_endgames_title">Gyalogos végjátékok</string>
     <string name="rook_endgame_title">Bástya végjátékok</string>
-    <string name="checkmates_title">Mattok</string>
-    <string name="lesson_the_pin_title">A kötés (pin)</string>
-    <string name="lesson_the_skewer_title">A szúrás (skewer)</string>
-    <string name="lesson_the_fork_title">Kettős támadás (fork)</string>
+    <string name="lesson_pin_title">A kötés (pin)</string>
+    <string name="lesson_skewer_title">A szúrás (skewer)</string>
+    <string name="lesson_fork_title">Kettős támadás (fork)</string>
     <string name="lesson_discovered_attacks_title">Felfedett támadás</string>
     <string name="lesson_double_check_title">Kettős sakk</string>
     <string name="lesson_overloaded_pieces_title">Túlterhelt figurák</string>
@@ -193,19 +192,15 @@
     <string name="lesson_opposition_title">Oppozíció</string>
     <string name="lesson_basic_rook_endgames_title">Alap bástya végjáték</string>
     <string name="lesson_intermediate_rook_endgames_title">Középhaladó bástya végjáték</string>
-    <string name="lesson_checkmate_patterns_i_title">Matt minták felismerése 1</string>
-    <string name="lesson_checkmate_patterns_ii_title">Matt minták felismerése 2</string>
-    <string name="lesson_checkmate_patterns_iii_title">Matt minták felismerése 3</string>
-    <string name="lesson_checkmate_patterns_iv_title">Matt minták felismerése 4</string>
     <string name="openings_for_white">Fehérnek</string>
     <string name="openings_for_black">Feketének</string>
     <string name="countdown_timer_text">Hátralévő idő</string>
     <string name="stop_coordinates">Leállítás</string>
     <string name="play_coordinates">Indítás</string>
     <string name="all_lessons_taken_count">Összes: 300-ból %1$d befejezett lecke</string>
-    <string name="chess_basics_lessons_taken_count">Sakk alapjai: 300-ból %1$d befejezett lecke</string>
-    <string name="practice_lessons_taken_count">Gyakorló: 300-ból %1$d befejezett lecke</string>
-    <string name="openings_lessons_taken_count">Nyitólépés: 300-ból %1$d befejezett lecke</string>
+    <string name="chess_basics_lessons_taken_count">Sakk alapok: 300-ból %1$d befejezett lecke</string>
+    <string name="tactical_concepts_lessons_taken_count">Taktikai fogalmak: 300-ból %1$d befejezett lecke</string>
+    <string name="openings_lessons_taken_count">Nyitólépések: 300-ból %1$d befejezett lecke</string>
     <string name="coordinates_lessons_taken_count">Koordináta: %1$d befejezett lecke</string>
     <string name="coordinate_settings_title">Koordináta Beállítások</string>
     <string name="save">Mentés</string>

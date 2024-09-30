@@ -161,7 +161,7 @@
 
     <!--Learn fragment strings-->
     <string name="chess_basics_lessons">Chess basics</string>
-    <string name="practice_lessons">Practice</string>
+    <string name="tactical_concepts_lessons">Tactical concepts</string>
     <string name="openings_lessons">Openings</string>
     <string name="coordinates_lessons">Coordinates</string>
     <string name="login_to_access_lessons_message">Please log in to access and take lessons!</string>
@@ -187,10 +187,9 @@
     <string name="intermediate_tactics_title">Intermediate Tactics</string>
     <string name="pawn_endgames_title">Pawn Endgames</string>
     <string name="rook_endgame_title">Rook Endgames</string>
-    <string name="checkmates_title">Checkmates</string>
-    <string name="lesson_the_pin_title">The pin</string>
-    <string name="lesson_the_skewer_title">The skewer</string>
-    <string name="lesson_the_fork_title">The fork</string>
+    <string name="lesson_pin_title">The pin</string>
+    <string name="lesson_skewer_title">The skewer</string>
+    <string name="lesson_fork_title">The fork</string>
     <string name="lesson_discovered_attacks_title">Discovered attacks</string>
     <string name="lesson_double_check_title">Double check</string>
     <string name="lesson_overloaded_pieces_title">Overloaded pieces</string>
@@ -210,10 +209,6 @@
     <string name="lesson_opposition_title">Opposition</string>
     <string name="lesson_basic_rook_endgames_title">Basic rook endgames</string>
     <string name="lesson_intermediate_rook_endgames_title">Intermediate rook endgames</string>
-    <string name="lesson_checkmate_patterns_i_title">Recognize checkmate patterns 1</string>
-    <string name="lesson_checkmate_patterns_ii_title">Recognize checkmate patterns 2</string>
-    <string name="lesson_checkmate_patterns_iii_title">Recognize checkmate patterns 3</string>
-    <string name="lesson_checkmate_patterns_iv_title">Recognize checkmate patterns 4</string>
     <string name="openings_for_white">For White</string>
     <string name="openings_for_black">For Black</string>
     <string name="countdown_timer_text">Time left</string>
@@ -221,7 +216,7 @@
     <string name="play_coordinates">Play</string>
     <string name="all_lessons_taken_count">All lessons: %1$d out of 300 taken</string>
     <string name="chess_basics_lessons_taken_count">Chess basics lessons: %1$d out of 100 taken</string>
-    <string name="practice_lessons_taken_count">Practice lessons: %1$d out of 100 taken</string>
+    <string name="tactical_concepts_lessons_taken_count">Tactical concepts lessons: %1$d out of 100 taken</string>
     <string name="openings_lessons_taken_count">Opening lessons: %1$d out of 100 taken</string>
     <string name="coordinates_lessons_taken_count">Coordinate lessons: %1$d taken</string>
     <string name="coordinate_settings_title">Coordinate Settings</string>

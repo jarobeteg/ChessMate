@@ -1,12 +1,12 @@
 [
   {
     "sectionId": 1,
-    "title": "chess_pieces_title",
+    "title": "basic_tactics_title",
     "lessons": [
       {
         "lessonId": 1,
-        "title": "lesson_pawn_title",
-        "contentFile": "pawn_lesson.json",
+        "title": "lesson_pin_title",
+        "contentFile": "pin_lesson.json",
         "subLessons": [
           {
             "subLessonId": 1,
@@ -28,8 +28,8 @@
       },
       {
         "lessonId": 2,
-        "title": "lesson_knight_title",
-        "contentFile": "knight_lesson.json",
+        "title": "lesson_skewer_title",
+        "contentFile": "skewer_lesson.json",
         "subLessons": [
           {
             "subLessonId": 1,
@@ -47,8 +47,8 @@
       },
       {
         "lessonId": 3,
-        "title": "lesson_bishop_title",
-        "contentFile": "bishop_lesson.json",
+        "title": "lesson_fork_title",
+        "contentFile": "fork_lesson.json",
         "subLessons": [
           {
             "subLessonId": 1,
@@ -62,8 +62,8 @@
       },
       {
         "lessonId": 4,
-        "title": "lesson_rook_title",
-        "contentFile": "rook_lesson.json",
+        "title": "lesson_discovered_attacks_title",
+        "contentFile": "discovered_attacks_lesson.json",
         "subLessons": [
           {
             "subLessonId": 1,
@@ -77,8 +77,8 @@
       },
       {
         "lessonId": 5,
-        "title": "lesson_queen_title",
-        "contentFile": "queen_lesson.json",
+        "title": "lesson_double_check_title",
+        "contentFile": "double_check_lesson.json",
         "subLessons": [
           {
             "subLessonId": 1,
@@ -92,8 +92,38 @@
       },
       {
         "lessonId": 6,
-        "title": "lesson_king_title",
-        "contentFile": "king_lesson.json",
+        "title": "lesson_overloaded_pieces_title",
+        "contentFile": "overloaded_pieces_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 7,
+        "title": "lesson_in_between_moves_title",
+        "contentFile": "in_between_moves_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 8,
+        "title": "lesson_x_ray_title",
+        "contentFile": "x_ray_lesson.json",
         "subLessons": [
           {
             "subLessonId": 1,
@@ -110,12 +140,12 @@
 
   {
     "sectionId": 2,
-    "title": "fundamentals_title",
+    "title": "intermediate_tactics_title",
     "lessons": [
       {
         "lessonId": 1,
-        "title": "lesson_capture_title",
-        "contentFile": "capture_lesson.json",
+        "title": "lesson_zugzwang_title",
+        "contentFile": "zugzwang_lesson.json",
         "subLessons": [
           {
             "subLessonId": 1,
@@ -137,8 +167,8 @@
       },
       {
         "lessonId": 2,
-        "title": "lesson_protection_title",
-        "contentFile": "protection_lesson.json",
+        "title": "lesson_interference_title",
+        "contentFile": "interference_lesson.json",
         "subLessons": [
           {
             "subLessonId": 1,
@@ -160,8 +190,8 @@
       },
       {
         "lessonId": 3,
-        "title": "lesson_check_title",
-        "contentFile": "check_lesson.json",
+        "title": "lesson_greek_gift_sacrifice_title",
+        "contentFile": "greek_gift_sacrifice_lesson.json",
         "subLessons": [
           {
             "subLessonId": 1,
@@ -179,8 +209,8 @@
       },
       {
         "lessonId": 4,
-        "title": "lesson_get_out_of_check_title",
-        "contentFile": "get_out_of_check_lesson.json",
+        "title": "lesson_deflection_title",
+        "contentFile": "deflection_lesson.json",
         "subLessons": [
           {
             "subLessonId": 1,
@@ -198,7 +228,102 @@
       },
       {
         "lessonId": 5,
-        "title": "lesson_checkmate_title",
+        "title": "lesson_attraction_title",
+        "contentFile": "attraction_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 6,
+        "title": "lesson_underpromotion_title",
+        "contentFile": "underpromotion_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 7,
+        "title": "lesson_desperado_title",
+        "contentFile": "desperado_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 8,
+        "title": "lesson_counter_check_title",
+        "contentFile": "counter_check_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 9,
+        "title": "lesson_undermining_title",
+        "contentFile": "undermining_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId":10,
+        "title": "lesson_clearance_title",
         "contentFile": "checkmate_lesson.json",
         "subLessons": [
           {
@@ -220,12 +345,12 @@
 
   {
     "sectionId": 3,
-    "title": "intermediate_puzzles",
+    "title": "pawn_endgames_title",
     "lessons": [
       {
         "lessonId": 1,
-        "title": "lesson_castling_title",
-        "contentFile": "castling_lesson.json",
+        "title": "lesson_key_squares_title",
+        "contentFile": "key_squares_lesson.json",
         "subLessons": [
           {
             "subLessonId": 1,
@@ -243,23 +368,8 @@
       },
       {
         "lessonId": 2,
-        "title": "lesson_en_passant_title",
-        "contentFile": "en_passant_lesson.json",
-        "subLessons": [
-          {
-            "subLessonId": 1,
-            "title": "lesson_num"
-          },
-          {
-            "subLessonId": 2,
-            "title": "lesson_num"
-          }
-        ]
-      },
-      {
-        "lessonId": 3,
-        "title": "lesson_stalemate_title",
-        "contentFile": "stalemate_lesson.json",
+        "title": "lesson_opposition_title",
+        "contentFile": "opposition_lesson.json",
         "subLessons": [
           {
             "subLessonId": 1,
@@ -276,12 +386,31 @@
 
   {
     "sectionId": 4,
-    "title": "advanced_puzzles",
+    "title": "rook_endgame_title",
     "lessons": [
       {
         "lessonId": 1,
-        "title": "lesson_piece_value_title",
-        "contentFile": "piece_value_lesson.json",
+        "title": "lesson_basic_rook_endgames_title",
+        "contentFile": "basic_rook_endgames_lesson.json",
+        "subLessons": [
+          {
+            "subLessonId": 1,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 2,
+            "title": "lesson_num"
+          },
+          {
+            "subLessonId": 3,
+            "title": "lesson_num"
+          }
+        ]
+      },
+      {
+        "lessonId": 2,
+        "title": "lesson_intermediate_rook_endgames_title",
+        "contentFile": "intermediate_rook_endgames_lesson.json",
         "subLessons": [
           {
             "subLessonId": 1,

@@ -17,7 +17,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.lessons.PracticeLessonsActivity"
+            android:name=".ui.activity.lessons.TacticalConceptsLessonsActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

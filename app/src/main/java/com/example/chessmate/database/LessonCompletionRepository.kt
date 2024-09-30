@@ -42,10 +42,10 @@ class LessonCompletionRepository(private val context: Context) {
         }
     }
 
-    suspend fun getAllPracticeLessonsId(userID: Long): List<Int> {
+    suspend fun getAllTacticalConceptsLessonsId(userID: Long): List<Int> {
         return try {
             withContext(Dispatchers.IO) {
-                lessonCompletionDAO.getAllTakenPracticeLessonIdsForProfile(userID)
+                lessonCompletionDAO.getAllTakenTacticalConceptsLessonIdsForProfile(userID)
             }
         } catch (_: Exception) {
             emptyList()

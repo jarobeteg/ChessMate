@@ -18,19 +18,19 @@ import com.example.chessmate.database.entity.UserProfile
 import com.example.chessmate.ui.activity.lessons.ChessBasicsLessonsActivity
 import com.example.chessmate.ui.activity.lessons.CoordinatesLessonActivity
 import com.example.chessmate.ui.activity.lessons.OpeningsLessonsActivity
-import com.example.chessmate.ui.activity.lessons.PracticeLessonsActivity
+import com.example.chessmate.ui.activity.lessons.TacticalConceptsLessonsActivity
 import com.example.chessmate.ui.viewmodel.LearnViewModel
 import com.example.chessmate.util.UserProfileManager
 import kotlinx.coroutines.launch
 
 class LearnFragment : Fragment() {
     private lateinit var chessBasicsLessonsButton: Button
-    private lateinit var practiceLessonsButton: Button
+    private lateinit var tacticalConceptsLessonsButton: Button
     private lateinit var openingsLessonsButton: Button
     private lateinit var coordinatesLessonsButton: Button
     private lateinit var allTakenLessonsCount: TextView
     private lateinit var chessBasicsLessonsCount: TextView
-    private lateinit var practiceLessonsCount: TextView
+    private lateinit var tacticalConceptsLessonsCount: TextView
     private lateinit var openingsLessonsCount: TextView
     private lateinit var coordinatesLessonsCount: TextView
     private var userProfile: UserProfile? = null
@@ -49,18 +49,18 @@ class LearnFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_learn, container, false)
 
         chessBasicsLessonsButton = view.findViewById(R.id.chess_basics)
-        practiceLessonsButton = view.findViewById(R.id.practice)
+        tacticalConceptsLessonsButton = view.findViewById(R.id.tactical_concepts)
         openingsLessonsButton = view.findViewById(R.id.openings)
         coordinatesLessonsButton = view.findViewById(R.id.coordinates)
 
         allTakenLessonsCount = view.findViewById(R.id.all_taken_lessons_count)
         chessBasicsLessonsCount = view.findViewById(R.id.chess_basics_lesson_count)
-        practiceLessonsCount = view.findViewById(R.id.practice_lesson_count)
+        tacticalConceptsLessonsCount = view.findViewById(R.id.tactical_concepts_lesson_count)
         openingsLessonsCount = view.findViewById(R.id.openings_lesson_count)
         coordinatesLessonsCount = view.findViewById(R.id.coordinate_lesson_count)
 
         chessBasicsLessonsButton.setOnClickListener { checkLessonButtonLock(chessBasicsLessonsButton, 1) }
-        practiceLessonsButton.setOnClickListener { checkLessonButtonLock(practiceLessonsButton, 2) }
+        tacticalConceptsLessonsButton.setOnClickListener { checkLessonButtonLock(tacticalConceptsLessonsButton, 2) }
         openingsLessonsButton.setOnClickListener { checkLessonButtonLock(openingsLessonsButton, 3) }
         coordinatesLessonsButton.setOnClickListener { checkLessonButtonLock(coordinatesLessonsButton, 4) }
 
@@ -106,7 +106,7 @@ class LearnFragment : Fragment() {
 
         when (id) {
             1 -> openChessBasicsLessons()
-            2 -> openPracticeLessons()
+            2 -> openTacticalConceptsLessons()
             3 -> openOpeningsLessons()
             4 -> openCoordinatesLessons()
         }
@@ -117,9 +117,9 @@ class LearnFragment : Fragment() {
         startActivity(openChessBasicsLessonsIntent)
     }
 
-    private fun openPracticeLessons(){
-        val openPracticeLessonsIntent = Intent(requireContext(), PracticeLessonsActivity::class.java)
-        startActivity(openPracticeLessonsIntent)
+    private fun openTacticalConceptsLessons(){
+        val openTacticalConceptsLessonsIntent = Intent(requireContext(), TacticalConceptsLessonsActivity::class.java)
+        startActivity(openTacticalConceptsLessonsIntent)
     }
 
     private fun openOpeningsLessons(){
@@ -138,13 +138,13 @@ class LearnFragment : Fragment() {
         val lessonCompletionRepository = LessonCompletionRepository(requireContext())
         val allLessonIds = lessonCompletionRepository.getAllTakenLessonsId(userProfile!!.userID)
         val chessBasicsLessonIds = lessonCompletionRepository.getAllChessBasicsLessonsId(userProfile!!.userID)
-        val practiceLessonIds = lessonCompletionRepository.getAllPracticeLessonsId(userProfile!!.userID)
+        val tacticalConceptsLessonIds = lessonCompletionRepository.getAllTacticalConceptsLessonsId(userProfile!!.userID)
         val openingsLessonIds = lessonCompletionRepository.getAllOpeningsLessonsId(userProfile!!.userID)
         val coordinatesCount = lessonCompletionRepository.countCoordinateLessons(userProfile!!.userID)
 
         allTakenLessonsCount.text = getString(R.string.all_lessons_taken_count, allLessonIds.size)
         chessBasicsLessonsCount.text = getString(R.string.chess_basics_lessons_taken_count, chessBasicsLessonIds.size)
-        practiceLessonsCount.text = getString(R.string.practice_lessons_taken_count, practiceLessonIds.size)
+        tacticalConceptsLessonsCount.text = getString(R.string.tactical_concepts_lessons_taken_count, tacticalConceptsLessonIds.size)
         openingsLessonsCount.text = getString(R.string.openings_lessons_taken_count, openingsLessonIds.size)
         coordinatesLessonsCount.text = getString(R.string.coordinates_lessons_taken_count, coordinatesCount)
     }
@@ -153,7 +153,7 @@ class LearnFragment : Fragment() {
         addLessonsButtonLocks()
         if (userProfile?.level != 0) {
             updateLessonsButtonLock(chessBasicsLessonsButton)
-            updateLessonsButtonLock(practiceLessonsButton)
+            updateLessonsButtonLock(tacticalConceptsLessonsButton)
             updateLessonsButtonLock(openingsLessonsButton)
             updateLessonsButtonLock(coordinatesLessonsButton)
         }
@@ -176,7 +176,7 @@ class LearnFragment : Fragment() {
             lockDrawable,
             null
         )
-        practiceLessonsButton.setCompoundDrawablesWithIntrinsicBounds(
+        tacticalConceptsLessonsButton.setCompoundDrawablesWithIntrinsicBounds(
             null,
             null,
             lockDrawable,

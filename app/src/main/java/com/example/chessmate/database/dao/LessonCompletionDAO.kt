@@ -18,7 +18,7 @@ interface LessonCompletionDAO {
     suspend fun getAllTakenChessBasicsLessonIdsForProfile(userID: Long): List<Int>
 
     @Query("SELECT lessonID FROM lessoncompletions WHERE userID = :userID AND type = 2")
-    suspend fun getAllTakenPracticeLessonIdsForProfile(userID: Long): List<Int>
+    suspend fun getAllTakenTacticalConceptsLessonIdsForProfile(userID: Long): List<Int>
 
     @Query("SELECT lessonID FROM lessoncompletions WHERE userID = :userID and type = 3")
     suspend fun getAllTakenOpeningsLessonIdsForProfile(userID: Long): List<Int>
