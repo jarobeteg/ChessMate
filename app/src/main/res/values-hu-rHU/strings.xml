@@ -177,15 +177,11 @@
     <string name="lesson_double_check_title">Kettős sakk</string>
     <string name="lesson_overloaded_pieces_title">Túlterhelt figurák</string>
     <string name="lesson_zugzwang_title">Kényszerlépés</string>
-    <string name="lesson_interference_title">Interferencia</string>
     <string name="lesson_greek_gift_sacrifice_title">Görög ajándékáldozat</string>
     <string name="lesson_deflection_title">Elterelés</string>
     <string name="lesson_attraction_title">Vonzás</string>
-    <string name="lesson_underpromotion_title">Alulpromóció</string>
-    <string name="lesson_desperado_title">Elveszett figura, de még hasznos</string>
-    <string name="lesson_counter_check_title">Ellentámadás</string>
+    <string name="lesson_counter_check_title">Ellen sakk</string>
     <string name="lesson_undermining_title">Aláásás</string>
-    <string name="lesson_clearance_title">Tisztázás</string>
     <string name="lesson_key_squares_title">Kulcsmezők</string>
     <string name="lesson_opposition_title">Oppozíció</string>
     <string name="lesson_basic_rook_endgames_title">Alap bástya végjáték</string>
@@ -302,4 +298,33 @@
     <string name="description_46">A túlterhelt figurák egyszerre túl sok védelmi feladatot kapnak.</string>
     <string name="description_47">Azonosítsd azokat a figurákat, amelyek több fontos négyzetet vagy figurát védenek.</string>
     <string name="description_48">Kényszerítsd a túlterhelt figurát, hogy elhagyja feladatát, ezzel nyerő taktikát hozol létre.</string>
+
+    <!--Zugzwang lesson strings-->
+    <string name="description_49">Használj kényszer lépéseket a játék ütemének diktálására és lehetőségek teremtésére a stratégiádhoz.</string>
+    <string name="description_50">Ismerd fel, mikor az ellenfelednek nincs más választása, mint lépni, ezzel a te javodra fordítva a helyzetet.</string>
+
+    <!--Greek gift sacrifice lesson strings-->
+    <string name="description_51">A Görög ajándékáldozat magában foglalja egy futó feláldozását, hogy felfedje az ellenfél királyát.</string>
+
+    <!--Deflection lesson strings-->
+    <string name="description_52">Az elterlés azt jelenti, hogy kényszeríted az ellenfél figuráját, hogy hagyja el védő pozícióját, így teremtve támadási lehetőséget.</string>
+    <string name="description_53">Keress kulcsfontosságú védőfigurákat, és fontold meg, hogyan csalogathatod el őket a kritikus mezőkről.</string>
+    <string name="description_54">Használj támadásokat vagy leütéseket, hogy elvond az ellenfél figurájának figyelmét, ezzel gyengítve a védelmet.</string>
+    <string name="description_55">A védő elterlése megnyithat támadási vonalakat a figuráid számára, növelve a támadás erősségét.</string>
+
+    <!--Attraction lesson strings-->
+    <string name="description_56">A vonzás azt jelenti, hogy egy ellenfél figuráját egy sebezhetőbb pozícióba tereled, hogy kihasználhasd az új pozícióját.</string>
+    <string name="description_57">Legyél tudatában, hogy az ellenfél figurájának mozgatása hogyan fedheti fel a királyát vagy gyengítheti a védelmét.</string>
+    <string name="description_58">Csalogasd el az ellenfél figuráját egy kedvezőtlen négyzetbe vagy helyzetbe.</string>
+    <string name="description_59">Kombináld a vonzásokat más taktikákkal, hogy erőteljes kombinációkat hozz létre, amelyek kihasználják az ellenfél hibáit.</string>
+
+    <!--Counter attack lesson strings-->
+    <string name="description_60">Egy ellen sakk akkor következik be, amikor azonnal sakkot adsz az ellenfél királyának, miután te magad is sakkban vagy.</string>
+    <string name="description_61">Használj ellen sakkot, hogy a támadást visszafordítsd az ellenfeledre, így potenciálisan előnyt szerezhetsz.</string>
+    <string name="description_62">Ne feledd, hogy egy ellen sakk megzavarhatja az ellenfél terveit, és taktikai előnyöket biztosíthat számodra.</string>
+
+    <!--Undermining lesson strings-->
+    <string name="description_63">Fókuszálj a kulcsfontosságú mezőkre vagy figurák védőire, hogy egyensúlyhiányt hozz létre az ellenfél felállásában.</string>
+    <string name="description_64">Az aláásás azt jelenti, hogy az ellenfél védő figuráit támadod, hogy gyengítsd a pozíciójukat.</string>
+    <string name="description_65">Ne feledd, hogy egy hatékony aláásás taktikai előnyökhöz és anyagi nyereséghez vezethet.</string>
 </resources>

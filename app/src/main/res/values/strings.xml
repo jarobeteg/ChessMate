@@ -194,15 +194,11 @@
     <string name="lesson_double_check_title">Double check</string>
     <string name="lesson_overloaded_pieces_title">Overloaded pieces</string>
     <string name="lesson_zugzwang_title">Being forced to move</string>
-    <string name="lesson_interference_title">Interference</string>
     <string name="lesson_greek_gift_sacrifice_title">Greek gift sacrifice</string>
     <string name="lesson_deflection_title">Deflection</string>
     <string name="lesson_attraction_title">Attraction</string>
-    <string name="lesson_underpromotion_title">Underpromotion</string>
-    <string name="lesson_desperado_title">Lost piece but still useful</string>
     <string name="lesson_counter_check_title">Counter check</string>
     <string name="lesson_undermining_title">Undermining</string>
-    <string name="lesson_clearance_title">Clearance</string>
     <string name="lesson_key_squares_title">Key squares</string>
     <string name="lesson_opposition_title">Opposition</string>
     <string name="lesson_basic_rook_endgames_title">Basic rook endgames</string>
@@ -324,17 +320,36 @@
     <string name="description_48">Force an overloaded piece to abandon one of its duties to create a winning tactic.</string>
 
     <!--Zugzwang lesson strings-->
-    <!--Interference lesson strings-->
+    <string name="description_49">Use forced moves to dictate the game\'s pace and create opportunities for your strategy.</string>
+    <string name="description_50">Recognize when your opponent has no choice but to move, turning the tide in your favor.</string>
+
     <!--Greek gift sacrifice lesson strings-->
+    <string name="description_51">The Greek Gift Sacrifice involves sacrificing a bishop to expose the opponent\'s king.</string>
+
     <!--Deflection lesson strings-->
-    <!--Attraction pin lesson strings-->
-    <!--Underpromotion pin lesson strings-->
-    <!--Desperado pin lesson strings-->
-    <!--Counter attack pin lesson strings-->
-    <!--Undermining pin lesson strings-->
-    <!--Clearance pin lesson strings-->
-    <!--Key squares pin lesson strings-->
-    <!--Opposition pin lesson strings-->
-    <!--Basic rook endgames pin lesson strings-->
-    <!--Intermediate rook endgames pin lesson strings-->
+    <string name="description_52">Deflection involves forcing an opponent\'s piece away from its defending position to create an opportunity.</string>
+    <string name="description_53">Identify key defending pieces and consider how to lure them away from critical squares.</string>
+    <string name="description_54">Use threats, such as attacks or captures, to distract the opponent\'s piece and weaken their defense.</string>
+    <string name="description_55">Deflecting a defender can open up lines for your pieces, increasing your attacking potential.</string>
+
+    <!--Attraction lesson strings-->
+    <string name="description_56">Attraction involves drawing an opponent\'s piece to a more vulnerable position to exploit its new location.</string>
+    <string name="description_57">Be mindful of how moving an opponent\'s piece can expose their king or weaken their defense.</string>
+    <string name="description_58">Use threats to entice the opponent\'s piece into an unfavorable square or situation.</string>
+    <string name="description_59">Combine attractions with other tactics to create powerful combinations that capitalize on your opponent\'s missteps.</string>
+
+    <!--Counter attack lesson strings-->
+    <string name="description_60">A counter check occurs when you check your opponent\'s king immediately after being checked yourself.</string>
+    <string name="description_61">Use a counter check to shift the pressure back to your opponent and potentially gain the initiative.</string>
+    <string name="description_62">Remember, a counter check can disrupt your opponent\'s plans and provide you with tactical advantages.</string>
+
+    <!--Undermining lesson strings-->
+    <string name="description_63">Target the defenders of key squares or pieces to create imbalances in your opponent\'s setup.</string>
+    <string name="description_64">Undermining involves attacking the supporting pieces of your opponent to weaken their position.</string>
+    <string name="description_65">Remember, an effective undermining strategy can lead to tactical advantages and material gain.</string>
+
+    <!--Key squares lesson strings-->
+    <!--Opposition lesson strings-->
+    <!--Basic rook endgames lesson strings-->
+    <!--Intermediate rook endgames lesson strings-->
 </resources>
