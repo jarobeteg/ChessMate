@@ -119,6 +119,10 @@ class Bitboard {
         }
     }
 
+    fun clearBoardStateTracker() {
+        stateTracker.clear()
+    }
+
     fun getLastBoardState(): BoardStateTracker {
         return stateTracker.last()
     }

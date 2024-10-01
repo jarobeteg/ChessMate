@@ -1,6 +1,8 @@
 package com.example.chessmate.ui.activity.lessons
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.MenuItem
@@ -11,6 +13,7 @@ import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.lifecycleScope
 import com.example.chessmate.R
 import com.example.chessmate.database.LessonCompletionRepository
 import com.example.chessmate.database.UserProfileRepository
@@ -27,8 +30,11 @@ import com.example.chessmate.util.chess.bitboard.BitPiece
 import com.example.chessmate.util.chess.bitboard.BitSquare
 import com.example.chessmate.util.chess.bitboard.Bitboard
 import com.example.chessmate.util.chess.bitboard.BitboardManager
+import com.example.chessmate.util.chess.bitboard.BitboardMoveGenerator
 import com.example.chessmate.util.chess.bitboard.BitboardUIMapper
+import com.example.chessmate.util.chess.bitboard.BoardStateTracker
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.launch
 
 class SubLessonLoaderActivity : AbsThemeActivity(), LessonFinishedDialogFragment.OnNextLessonButtonListener {
     private lateinit var lessonCompletionRepository: LessonCompletionRepository
@@ -49,6 +55,7 @@ class SubLessonLoaderActivity : AbsThemeActivity(), LessonFinishedDialogFragment
     private lateinit var lessonRepos: ArrayList<LessonRepo>
     private lateinit var currentLessonRepo: LessonRepo
     private var currentLessonTitle: String = ""
+    private var boardStateIndex: Int = 0
     private var currentIndex: Int = 0
     private var squareSize: Int = 0
     private var isPlayerWhite: Boolean = true
@@ -96,6 +103,8 @@ class SubLessonLoaderActivity : AbsThemeActivity(), LessonFinishedDialogFragment
     }
 
     private fun displayLesson() {
+        turnOnBottomNav()
+        board.clearBoardStateTracker()
         currentLessonRepo = lessonRepos[currentIndex]
         solution = parseSolution(currentLessonRepo.solution)
         val fen = FEN(currentLessonRepo.fen)
@@ -106,6 +115,15 @@ class SubLessonLoaderActivity : AbsThemeActivity(), LessonFinishedDialogFragment
         board.setupFENPosition(fen)
         initializeBitboardUI()
         setupInitialBoardUI()
+
+        preMoveSolution()
+        boardStateIndex = 0
+    }
+
+    private fun preMoveSolution() {
+        for (move in solution) {
+            board.movePiece(move)
+        }
     }
 
     private fun setupTextViews() {
@@ -124,8 +142,17 @@ class SubLessonLoaderActivity : AbsThemeActivity(), LessonFinishedDialogFragment
         return if (resourceId != 0) getString(resourceId) else getString(R.string.string_not_found)
     }
 
+    private fun showLessonFinishedDialog() {
+        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed({
+            val dialog = LessonFinishedDialogFragment()
+            dialog.show(supportFragmentManager, "LessonFinishedDialog")
+        }, 2000)
+    }
+
+
     override fun onNextLessonButtonListener() {
-        TODO("Not yet implemented")
+        nextLesson()
     }
 
     private fun parseSolution(solution: String): MutableList<BitMove> {
@@ -338,21 +365,94 @@ class SubLessonLoaderActivity : AbsThemeActivity(), LessonFinishedDialogFragment
         }
     }
 
+    private fun previousLesson() {
+        if (currentIndex > 0) {
+            currentIndex--
+            displayLesson()
+        } else {
+            currentIndex = lessonRepos.size - 1
+            displayLesson()
+        }
+    }
+
+    private fun nextLesson() {
+        if (currentIndex < lessonRepos.size - 1) {
+            currentIndex++
+            displayLesson()
+        } else {
+            currentIndex = 0
+            displayLesson()
+        }
+    }
+
+    private fun previousStep() {
+        if (boardStateIndex > 0) {
+            boardStateIndex--
+            displayBoardState(board.stateTracker[boardStateIndex])
+        }
+    }
+
+    private fun nextStep() {
+        if (boardStateIndex < board.stateTracker.size - 1) {
+            boardStateIndex++
+            displayBoardState(board.stateTracker[boardStateIndex])
+            if (isLessonFinished()) {
+                lifecycleScope.launch {
+                    updateDatabase()
+                }
+                turnOffBottomNav()
+                showLessonFinishedDialog()
+            }
+        }
+    }
+
+    private fun displayBoardState(state: BoardStateTracker) {
+        removeHighlightMoves()
+        board.updateBoardState(state)
+        val lastMove = state.move
+        val decodedMove = BitboardMoveGenerator.decodeMove(lastMove)
+        if (boardStateIndex != 0) {
+            addHighlightMove(decodedMove.from)
+            addHighlightMove(decodedMove.to)
+        }
+        updateBitboardStateUI()
+    }
+
+    private fun isLessonFinished(): Boolean {
+        return boardStateIndex == board.stateTracker.size - 1
+    }
+
+    private fun turnOnBottomNav() {
+        for (i in 0 until bottomNavigationView.menu.size()) {
+            bottomNavigationView.menu.getItem(i).isEnabled = true
+        }
+    }
+
+    private fun turnOffBottomNav() {
+        for (i in 0 until bottomNavigationView.menu.size()) {
+            bottomNavigationView.menu.getItem(i).isEnabled = false
+        }
+    }
+
     private fun bottomNavItemClicked(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.previous_lesson -> {
+                previousLesson()
                 return true
             }
 
             R.id.previous_step -> {
+                previousStep()
                 return true
             }
 
             R.id.next_step -> {
+                nextStep()
                 return true
             }
 
             R.id.next_lesson -> {
+                nextLesson()
                 return true
             }
 
@@ -362,5 +462,7 @@ class SubLessonLoaderActivity : AbsThemeActivity(), LessonFinishedDialogFragment
 
     private suspend fun updateDatabase() {
         if (userProfile == null) return
+
+
     }
 }
