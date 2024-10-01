@@ -1,5 +1,6 @@
 package com.example.chessmate.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.chessmate.R
 import com.example.chessmate.util.Section
 
-class SectionAdapter(private val sections: List<Section>) : RecyclerView.Adapter<SectionAdapter.SectionViewHolder>() {
+class SectionAdapter(private val sections: List<Section>, private val context: Context) : RecyclerView.Adapter<SectionAdapter.SectionViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -32,8 +33,8 @@ class SectionAdapter(private val sections: List<Section>) : RecyclerView.Adapter
 
         fun bind(section: Section) {
             sectionTitle.text = section.title
-            lessonsRecyclerView.layoutManager = LinearLayoutManager(itemView.context)
-            lessonsRecyclerView.adapter = LessonAdapter(section.lessons)
+            lessonsRecyclerView.layoutManager = LinearLayoutManager(context)
+            lessonsRecyclerView.adapter = LessonAdapter(section.lessons, context)
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.chessmate.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +9,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chessmate.R
+import com.example.chessmate.ui.activity.lessons.SubLessonHolderActivity
 import com.example.chessmate.util.Lesson
 
-class LessonAdapter(private val lessons: List<Lesson>) : RecyclerView.Adapter<LessonAdapter.LessonViewHolder>() {
+class LessonAdapter(private val lessons: List<Lesson>, private val context: Context) : RecyclerView.Adapter<LessonAdapter.LessonViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LessonViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_lesson, parent, false)
         return LessonViewHolder(view)
@@ -36,7 +38,14 @@ class LessonAdapter(private val lessons: List<Lesson>) : RecyclerView.Adapter<Le
 
         fun bind(lesson: Lesson) {
             lessonTitle.text = lesson.title
+            lessonTitle.setOnClickListener { handleLessonClick(lesson) }
         }
+    }
+
+    private fun handleLessonClick(lesson: Lesson) {
+        val intent = Intent(context, SubLessonHolderActivity::class.java)
+        intent.putExtra("lesson", lesson)
+        context.startActivity(intent)
     }
 }
 

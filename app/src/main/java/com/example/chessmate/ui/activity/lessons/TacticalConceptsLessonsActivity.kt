@@ -32,7 +32,7 @@ class TacticalConceptsLessonsActivity : AbsThemeActivity() {
         sectionRecyclerView.layoutManager = LinearLayoutManager(this)
 
         val sections = getSections()
-        sectionAdapter = SectionAdapter(sections)
+        sectionAdapter = SectionAdapter(sections, this)
         sectionRecyclerView.adapter = sectionAdapter
     }
 
