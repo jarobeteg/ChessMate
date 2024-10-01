@@ -72,10 +72,18 @@ class LessonCompletionRepository(private val context: Context) {
         }
     }
 
-    suspend fun isLessonSolved(userID: Long, lessonID: Int): LessonCompletion? {
+    suspend fun isLessonFinished(userID: Long, type: Int, sectionID: Int, lessonID: Int, subLessonIDS: List<Int>): Boolean {
+        return withContext(Dispatchers.IO) {
+            subLessonIDS.all { subLessonID ->
+                isSubLessonFinished(userID, type, sectionID, lessonID, subLessonID) != null
+            }
+        }
+    }
+
+    suspend fun isSubLessonFinished(userID: Long, type: Int, sectionID: Int, lessonID: Int, subLessonID: Int): LessonCompletion? {
         return try {
             withContext(Dispatchers.IO) {
-                lessonCompletionDAO.isLessonTaken(userID, lessonID)
+                lessonCompletionDAO.isSubLessonTaken(userID, type, sectionID, lessonID, subLessonID)
             }
         } catch (_: Exception) {
             null

@@ -20,13 +20,12 @@ interface LessonCompletionDAO {
     @Query("SELECT lessonID FROM lessoncompletions WHERE userID = :userID AND type = 2")
     suspend fun getAllTakenTacticalConceptsLessonIdsForProfile(userID: Long): List<Int>
 
-    @Query("SELECT lessonID FROM lessoncompletions WHERE userID = :userID and type = 3")
+    @Query("SELECT lessonID FROM lessoncompletions WHERE userID = :userID AND type = 3")
     suspend fun getAllTakenOpeningsLessonIdsForProfile(userID: Long): List<Int>
 
     @Query("SELECT COUNT(*) FROM lessoncompletions WHERE userID = :userID AND type = 0")
     suspend fun countCoordinatesLessonForProfile(userID: Long): Int
 
-
-    @Query("SELECT * FROM lessoncompletions WHERE userID = :userID and lessonID = :lessonID LIMIT 1")
-    suspend fun isLessonTaken(userID: Long, lessonID: Int): LessonCompletion?
+    @Query("SELECT * FROM lessoncompletions WHERE userID = :userID AND type = :type AND sectionID = :sectionID AND lessonID = :lessonID AND subLessonID = :subLessonID LIMIT 1")
+    suspend fun isSubLessonTaken(userID: Long, type: Int, sectionID: Int, lessonID: Int, subLessonID: Int): LessonCompletion?
 }
