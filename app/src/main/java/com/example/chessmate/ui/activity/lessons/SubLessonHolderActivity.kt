@@ -10,6 +10,7 @@ import com.example.chessmate.adapter.SubLessonAdapter
 import com.example.chessmate.ui.activity.AbsThemeActivity
 import com.example.chessmate.util.JSONParser
 import com.example.chessmate.util.Lesson
+import com.example.chessmate.util.LessonRepo
 import com.example.chessmate.util.SubLesson
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -38,21 +39,27 @@ class SubLessonHolderActivity : AbsThemeActivity() {
         subLessonRecyclerView = findViewById(R.id.sub_lesson_recycler_view)
         subLessonRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        val subLessons = getSubLessons()
-        subLessonAdapter = SubLessonAdapter(subLessons, this)
-        subLessonRecyclerView.adapter = subLessonAdapter
+        if (lesson != null) {
+            val subLessons = getSubLessons()
+            val lessonRepos = getLessonRepos()
+            subLessonAdapter = SubLessonAdapter(lesson!!.title, subLessons, lessonRepos, this)
+            subLessonRecyclerView.adapter = subLessonAdapter
+            updateTitle()
+        }
+    }
 
-        updateTitle()
+    private fun getLessonRepos(): List<LessonRepo>{
+        val jsonString = jsonParser.loadJSONFromAsset(this, lesson!!.contentFile)
+        val lessonRepos: List<LessonRepo> = Gson().fromJson(jsonString, object : TypeToken<List<LessonRepo>>() {}.type)
+
+        return lessonRepos
     }
 
     private fun updateTitle() {
-        if (lesson == null) return
         lessonTitle.text = lesson!!.title
     }
 
     private fun getSubLessons(): List<SubLesson> {
-        if (lesson == null) return emptyList()
-
         return lesson!!.subLessons.map { subLesson ->
             subLesson.copy(
                 title = getStringFromResourceName(subLesson.title, subLesson.subLessonId)

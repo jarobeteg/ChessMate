@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chessmate.R
+import com.example.chessmate.util.LessonRepo
 import com.example.chessmate.util.SubLesson
 
-class SubLessonAdapter(private val subLessons: List<SubLesson>, private val context: Context) : RecyclerView.Adapter<SubLessonAdapter.SubLessonViewHolder>() {
+class SubLessonAdapter(private val lessonTitle: String, private val subLessons: List<SubLesson>,
+                       private val lessonRepos: List<LessonRepo>, private val context: Context) : RecyclerView.Adapter<SubLessonAdapter.SubLessonViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubLessonViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_sub_lesson, parent, false)
@@ -28,6 +30,11 @@ class SubLessonAdapter(private val subLessons: List<SubLesson>, private val cont
 
         fun bind(subLesson: SubLesson) {
             subLessonTitle.text = subLesson.title
+
+        }
+
+        private fun handleSubLessonClick() {
+
         }
     }
 }

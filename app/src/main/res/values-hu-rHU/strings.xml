@@ -206,6 +206,10 @@
     <string name="go">Rajt!</string>
     <string name="correct_coordinates_found">Helyes koordináták: %1$d</string>
     <string name="lesson_num">Lecke %1$d</string>
+    <string name="previous_lesson">Előző lecke</string>
+    <string name="next_lesson">Következő lecke</string>
+    <string name="previous_step">Előző lépés</string>
+    <string name="next_step">Következő lépés</string>
 
     <!--The pawn lesson strings-->
     <string name="description_1">Csak előre mozog.</string>
