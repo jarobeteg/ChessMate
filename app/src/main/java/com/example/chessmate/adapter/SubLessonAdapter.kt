@@ -1,12 +1,14 @@
 package com.example.chessmate.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chessmate.R
+import com.example.chessmate.ui.activity.lessons.SubLessonLoaderActivity
 import com.example.chessmate.util.LessonRepo
 import com.example.chessmate.util.SubLesson
 
@@ -20,7 +22,7 @@ class SubLessonAdapter(private val lessonTitle: String, private val subLessons: 
 
     override fun onBindViewHolder(holder: SubLessonViewHolder, position: Int) {
         val subLesson = subLessons[position]
-        holder.bind(subLesson)
+        holder.bind(subLesson, position)
     }
 
     override fun getItemCount(): Int = subLessons.size
@@ -28,13 +30,17 @@ class SubLessonAdapter(private val lessonTitle: String, private val subLessons: 
     inner class SubLessonViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val subLessonTitle = itemView.findViewById<TextView>(R.id.sub_lesson_title)
 
-        fun bind(subLesson: SubLesson) {
+        fun bind(subLesson: SubLesson, position: Int) {
             subLessonTitle.text = subLesson.title
-
+            subLessonTitle.setOnClickListener { handleSubLessonClick(position) }
         }
 
-        private fun handleSubLessonClick() {
-
+        private fun handleSubLessonClick(position: Int) {
+            val intent = Intent(context, SubLessonLoaderActivity::class.java)
+            intent.putExtra("lessonRepos", ArrayList(lessonRepos))
+            intent.putExtra("currentIndex", position)
+            intent.putExtra("currentLesson", lessonTitle)
+            context.startActivity(intent)
         }
     }
 }

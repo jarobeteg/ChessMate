@@ -1,4 +1,4 @@
-package com.example.chessmate.util.chess
+package com.example.chessmate.ui.activity.puzzles
 
 import android.content.Context
 import android.os.Bundle

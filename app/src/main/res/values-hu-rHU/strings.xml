@@ -210,6 +210,7 @@
     <string name="next_lesson">Következő lecke</string>
     <string name="previous_step">Előző lépés</string>
     <string name="next_step">Következő lépés</string>
+    <string name="lesson_finished_text">Lecke Vége</string>
 
     <!--The pawn lesson strings-->
     <string name="description_1">Csak előre mozog.</string>

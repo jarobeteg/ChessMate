@@ -28,7 +28,6 @@ import com.example.chessmate.util.chess.FEN
 import com.example.chessmate.util.chess.GameContext
 import com.example.chessmate.util.chess.PieceColor
 import com.example.chessmate.util.chess.Position
-import com.example.chessmate.util.chess.PuzzleSolvedDialogFragment
 import com.example.chessmate.util.chess.bitboard.BitCell
 import com.example.chessmate.util.chess.bitboard.BitMove
 import com.example.chessmate.util.chess.bitboard.BitPiece

@@ -230,6 +230,7 @@
     <string name="next_lesson">Next lesson</string>
     <string name="previous_step">Previous step</string>
     <string name="next_step">Next step</string>
+    <string name="lesson_finished_text">Lesson Finished</string>
 
     <!--The pawn lesson strings-->
     <string name="description_1">It moves forward only.</string>

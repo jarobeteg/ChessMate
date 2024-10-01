@@ -7,7 +7,6 @@ import android.os.Looper
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.MenuItem
-import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.GridLayout
@@ -24,7 +23,6 @@ import com.example.chessmate.database.entity.UserProfile
 import com.example.chessmate.ui.activity.AbsThemeActivity
 import com.example.chessmate.util.ChessThemeUtil
 import com.example.chessmate.util.UserProfileManager
-import com.example.chessmate.util.chess.CoordinateSettingsDialogFragment
 import com.example.chessmate.util.chess.Position
 import com.example.chessmate.util.chess.bitboard.BitCell
 import com.example.chessmate.util.chess.bitboard.BitPiece
