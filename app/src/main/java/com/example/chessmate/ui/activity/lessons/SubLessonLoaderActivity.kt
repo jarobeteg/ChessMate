@@ -466,8 +466,6 @@ class SubLessonLoaderActivity : AbsThemeActivity(), LessonFinishedDialogFragment
 
         val existingCompletion = lessonCompletionRepository.isSubLessonFinished(
             userProfile!!.userID,
-            currentLessonRepo.type,
-            currentLessonRepo.sectionId,
             currentLessonRepo.lessonId,
             currentLessonRepo.subLessonId
             )
@@ -480,7 +478,6 @@ class SubLessonLoaderActivity : AbsThemeActivity(), LessonFinishedDialogFragment
         val lessonCompletion = LessonCompletion (
             userID = userProfile!!.userID,
             type = currentLessonRepo.type,
-            sectionID = currentLessonRepo.sectionId,
             lessonID = currentLessonRepo.lessonId,
             subLessonID = currentLessonRepo.subLessonId,
             isSolved = true

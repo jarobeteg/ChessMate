@@ -113,7 +113,7 @@
     "title": "fundamentals_title",
     "lessons": [
       {
-        "lessonId": 1,
+        "lessonId": 7,
         "title": "lesson_capture_title",
         "contentFile": "capture_lesson.json",
         "subLessons": [
@@ -136,7 +136,7 @@
         ]
       },
       {
-        "lessonId": 2,
+        "lessonId": 8,
         "title": "lesson_protection_title",
         "contentFile": "protection_lesson.json",
         "subLessons": [
@@ -159,7 +159,7 @@
         ]
       },
       {
-        "lessonId": 3,
+        "lessonId": 9,
         "title": "lesson_check_title",
         "contentFile": "check_lesson.json",
         "subLessons": [
@@ -178,7 +178,7 @@
         ]
       },
       {
-        "lessonId": 4,
+        "lessonId": 10,
         "title": "lesson_get_out_of_check_title",
         "contentFile": "get_out_of_check_lesson.json",
         "subLessons": [
@@ -197,7 +197,7 @@
         ]
       },
       {
-        "lessonId": 5,
+        "lessonId": 11,
         "title": "lesson_checkmate_title",
         "contentFile": "checkmate_lesson.json",
         "subLessons": [
@@ -223,7 +223,7 @@
     "title": "intermediate_puzzles",
     "lessons": [
       {
-        "lessonId": 1,
+        "lessonId": 12,
         "title": "lesson_castling_title",
         "contentFile": "castling_lesson.json",
         "subLessons": [
@@ -242,7 +242,7 @@
         ]
       },
       {
-        "lessonId": 2,
+        "lessonId": 13,
         "title": "lesson_en_passant_title",
         "contentFile": "en_passant_lesson.json",
         "subLessons": [
@@ -257,7 +257,7 @@
         ]
       },
       {
-        "lessonId": 3,
+        "lessonId": 14,
         "title": "lesson_stalemate_title",
         "contentFile": "stalemate_lesson.json",
         "subLessons": [
@@ -279,7 +279,7 @@
     "title": "advanced_puzzles",
     "lessons": [
       {
-        "lessonId": 1,
+        "lessonId": 15,
         "title": "lesson_piece_value_title",
         "contentFile": "piece_value_lesson.json",
         "subLessons": [

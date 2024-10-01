@@ -26,6 +26,6 @@ interface LessonCompletionDAO {
     @Query("SELECT COUNT(*) FROM lessoncompletions WHERE userID = :userID AND type = 0")
     suspend fun countCoordinatesLessonForProfile(userID: Long): Int
 
-    @Query("SELECT * FROM lessoncompletions WHERE userID = :userID AND type = :type AND sectionID = :sectionID AND lessonID = :lessonID AND subLessonID = :subLessonID LIMIT 1")
-    suspend fun isSubLessonTaken(userID: Long, type: Int, sectionID: Int, lessonID: Int, subLessonID: Int): LessonCompletion?
+    @Query("SELECT * FROM lessoncompletions WHERE userID = :userID AND lessonID = :lessonID AND subLessonID = :subLessonID LIMIT 1")
+    suspend fun isSubLessonTaken(userID: Long, lessonID: Int, subLessonID: Int): LessonCompletion?
 }

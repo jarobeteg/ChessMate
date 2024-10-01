@@ -11,7 +11,7 @@ import com.example.chessmate.database.entity.LessonCompletion
 import com.example.chessmate.database.entity.PuzzleCompletion
 import com.example.chessmate.database.entity.UserProfile
 
-@Database(entities = [UserProfile::class, PuzzleCompletion::class, LessonCompletion::class], version = 7, exportSchema = false)
+@Database(entities = [UserProfile::class, PuzzleCompletion::class, LessonCompletion::class], version = 8, exportSchema = false)
 abstract class ChessMateDatabase: RoomDatabase() {
     abstract fun userProfileDAO(): UserProfileDAO
     abstract fun puzzleCompletionDAO(): PuzzleCompletionDAO

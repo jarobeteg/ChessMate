@@ -2,7 +2,7 @@
   {
     "type": 2,
     "sectionId": 1,
-    "lessonId": 5,
+    "lessonId": 20,
     "subLessonId": 1,
     "descriptionId": 43,
     "fen": "k1q5/1pp5/8/8/N7/8/8/R5K1 w - - 0 1",
@@ -12,7 +12,7 @@
   {
     "type": 2,
     "sectionId": 1,
-    "lessonId": 5,
+    "lessonId": 20,
     "subLessonId": 2,
     "descriptionId": 44,
     "fen": "rn2kb1r/pp2pp1p/2p2p2/8/8/3Q1N2/qPPB1PPP/2KR3R w kq - 0 13",
@@ -22,7 +22,7 @@
   {
     "type": 2,
     "sectionId": 1,
-    "lessonId": 5,
+    "lessonId": 20,
     "subLessonId": 3,
     "descriptionId": 45,
     "fen": "r4k2/pppb1Pp1/2np3p/2b5/2B2Bnq/2N5/PP2Q1PP/4RR1K w - - 6 17",
