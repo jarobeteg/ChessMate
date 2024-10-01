@@ -74,9 +74,11 @@ class IntermediatePuzzlesActivity : AbsThemeActivity() {
     override fun onResume() {
         super.onResume()
 
-        lifecycleScope.launch {
-            intermediateCompletedPuzzles = preloadCompletedIntermediatePuzzles()
-            adapter.updateCompletedPuzzles(intermediateCompletedPuzzles)
+        if (userProfile != null) {
+            lifecycleScope.launch {
+                intermediateCompletedPuzzles = preloadCompletedIntermediatePuzzles()
+                adapter.updateCompletedPuzzles(intermediateCompletedPuzzles)
+            }
         }
     }
 

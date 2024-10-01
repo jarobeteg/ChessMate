@@ -74,9 +74,11 @@ class BeginnerPuzzlesActivity : AbsThemeActivity() {
     override fun onResume() {
         super.onResume()
 
-        lifecycleScope.launch {
-            beginnerCompletedPuzzles = preloadCompletedBeginnerPuzzles()
-            adapter.updateCompletedPuzzles(beginnerCompletedPuzzles)
+        if (userProfile != null) {
+            lifecycleScope.launch {
+                beginnerCompletedPuzzles = preloadCompletedBeginnerPuzzles()
+                adapter.updateCompletedPuzzles(beginnerCompletedPuzzles)
+            }
         }
     }
 

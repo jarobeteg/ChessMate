@@ -17,6 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.chessmate.R
 import com.example.chessmate.database.LessonCompletionRepository
 import com.example.chessmate.database.UserProfileRepository
+import com.example.chessmate.database.entity.LessonCompletion
 import com.example.chessmate.database.entity.UserProfile
 import com.example.chessmate.ui.activity.AbsThemeActivity
 import com.example.chessmate.util.ChessThemeUtil
@@ -463,6 +464,28 @@ class SubLessonLoaderActivity : AbsThemeActivity(), LessonFinishedDialogFragment
     private suspend fun updateDatabase() {
         if (userProfile == null) return
 
+        val existingCompletion = lessonCompletionRepository.isSubLessonFinished(
+            userProfile!!.userID,
+            currentLessonRepo.type,
+            currentLessonRepo.sectionId,
+            currentLessonRepo.lessonId,
+            currentLessonRepo.subLessonId
+            )
+        userProfileRepository.incrementLessonTaken(userProfile!!.userID)
 
+        if (existingCompletion != null) {
+            return
+        }
+
+        val lessonCompletion = LessonCompletion (
+            userID = userProfile!!.userID,
+            type = currentLessonRepo.type,
+            sectionID = currentLessonRepo.sectionId,
+            lessonID = currentLessonRepo.lessonId,
+            subLessonID = currentLessonRepo.subLessonId,
+            isSolved = true
+        )
+
+        lessonCompletionRepository.insertLessonCompletion(lessonCompletion)
     }
 }
