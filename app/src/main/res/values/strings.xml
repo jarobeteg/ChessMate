@@ -431,13 +431,64 @@
     <string name="description_99">In the Scotch Game, black can counterattack with moves like queen f6 or bishop b4 check, putting pressure on your center. Make sure you stay alert to threats while advancing your own plans.</string>
 
     <string name="title_6">Sicilian Defense</string>
+    <string name="description_title_31">Respond to e4 with c5</string>
+    <string name="description_100">The Sicilian Defense starts with c5, aiming to control the d4 square and create an asymmetrical pawn structure for dynamic play.</string>
+    <string name="description_title_32">Expect an aggressive game</string>
+    <string name="description_101">The Sicilian often leads to tactical and attacking positions, especially from white. Be prepared for sharp play where both sides aim for early attacking chances.</string>
+    <string name="description_title_33">Develop the knights quickly</string>
+    <string name="description_102">Place your knights on c6 and f6 to control the center and prepare for flexible pawn pushes.</string>
+    <string name="description_title_34">Fight for the center with d6</string>
+    <string name="description_103">Play d6 to support your c5 pawn and prepare for development. This move also opens up lines for your light-squared bishop.</string>
+    <string name="description_title_35">Counterattack when possible</string>
+    <string name="description_104">One of the key strengths of the Sicilian is the opportunity for black to counterattack. Moves like a6 and b5 help expand on the queen-side, aiming for counter-play and attacking chances.</string>
 
     <string name="title_7">French Defense</string>
+    <string name="description_title_36">Respond to e4 with e6</string>
+    <string name="description_105">The French Defense begins with e6, preparing to support the d5 pawn push on the next move. This structure aims to create a solid, albeit somewhat passive, position.</string>
+    <string name="description_title_37">Prepare for d5</string>
+    <string name="description_106">After e4 e6, aim to play d5 to challenge white\'s center. This move helps you establish control over the center and sets the stage for your pieces to develop.</string>
+    <string name="description_title_38">Watch your pawn structure</string>
+    <string name="description_107">The French Defense often leads to a locked center with pawns on d5 and e4. Be cautious about the pawn structure and how it affects your piece mobility and plans.</string>
+    <string name="description_title_39">Focus on counterattacking opportunities</string>
+    <string name="description_108">The French Defense is known for its counterattacking potential. Look for chances to challenge white\'s center with moves like c5 and f6, especially when your pieces are well-coordinated.</string>
+    <string name="description_title_40">Develop your bishop</string>
+    <string name="description_109">Your light-squared bishop can become "bad" if it\'s stuck behind your pawns. Consider developing it to b7 or exchange it for white\'s active pieces.</string>
 
     <string name="title_8">Caro-Kann Defense</string>
+    <string name="description_title_41">Respond to e4 with c6</string>
+    <string name="description_110">The Caro-Kann Defense begins with c6, preparing to play d5 on the next move. This setup aims to create a solid pawn structure while allowing for piece development.</string>
+    <string name="description_title_42">Prepare for d5</string>
+    <string name="description_111">Play d5 to challenge white\'s central pawn on e4. This central push helps establish control and creates a foundation for your position.</string>
+    <string name="description_title_43">Develop your pieces</string>
+    <string name="description_112">Focus on developing your pieces efficiently. Bring your knights to f6 and c6, and consider moving your dark-squared bishop to g7 with g6 to increase its activity.</string>
+    <string name="description_title_44">Watch your pawn structure</string>
+    <string name="description_113">The Caro-Kann often leads to a solid pawn structure with pawns on c6 and d5. Be mindful of how this structure influences your piece activity and look for opportunities to break the center with e5 later.</string>
+    <string name="description_title_45">Keep your king safe</string>
+    <string name="description_114">Plan to castle king-side for safety. Ensure that your pawn structure is solid and that there are no potential threats from white before committing to king-side castling.</string>
 
     <string name="title_9">King\'s Indian Defense</string>
+    <string name="description_title_46">Start with knight f6</string>
+    <string name="description_115">The King\'s Indian Defense begins with knight f6, aiming to control the center and prepare for g6 to move your dark-squared bishop to g7.</string>
+    <string name="description_title_47">Prepare bishop g7</string>
+    <string name="description_116">After playing knight f6, plan to play g6 and bishop g7. This setup gives your bishop long-range control over the center and prepares for a solid king-side structure.</string>
+    <string name="description_title_48">Establish your center</string>
+    <string name="description_117">After playing g6, consider advancing your pawns with d6 and e5 to challenge white\'s central control. This setup allows for a dynamic and flexible pawn structure.</string>
+    <string name="description_title_49">Develop your pieces</string>
+    <string name="description_118">Focus on developing your pieces. Bring your knights to f6 and d7, and aim to place your rooks on open files to increase their activity.</string>
+    <string name="description_title_50">Pawn storm</string>
+    <string name="description_119">The King\'s Indian often leads to aggressive pawn storms from white on the king-side. Be prepared to counter these threats and look for opportunities to counterattack.</string>
+    <string name="description_title_51">Counter-play</string>
+    <string name="description_120">While white focuses on the king-side, consider creating counter-play on the queen-side with moves like b5 and c5. This can distract white from their attack and give you play</string>
 
     <string name="title_10">Pirc Defense</string>
-
+    <string name="description_title_52">Start with d6</string>
+    <string name="description_121">The Pirc Defense begins with d6, allowing you to develop your pieces flexibly while inviting white to occupy the center.</string>
+    <string name="description_title_53">Prepare bishop g7</string>
+    <string name="description_122">After playing d6, consider g6 and bishop to g7. This setup provides solid control over the center and helps in king safety.</string>
+    <string name="description_title_54">Challenge the center</string>
+    <string name="description_123">Be prepared to challenge white\'s center with moves like e5 or c5. Timing is crucial. Strike back when white has overextended their pawns.</string>
+    <string name="description_title_55">Develop for a counter-play</string>
+    <string name="description_124">Focus on developing your knights to f6 and d7, and consider bringing your rooks to the center once the pawns are more established. Good development is key to counter-play.</string>
+    <string name="description_title_56">Stay flexible</string>
+    <string name="description_125">The Pirc Defense is a hyper-modern opening, allowing you to adapt to white\'s plans. Pay attention to your opponent\'s setup and adjust your strategy accordingly.</string>
 </resources>

@@ -343,7 +343,7 @@
     <string name="title_1">Ruy Lopez (Spanyol Megnyitás)</string>
     <string name="description_title_1">Irányítsd a középpontot</string>
     <string name="description_70">Kezdj e4 lépéssel, hogy irányítsd a középpontot, ezzel felkészülve gyors fejlődésre.</string>
-    <string name="description_title_2">Aktiváld a futódat</string>
+    <string name="description_title_2">Aktiváld futódat</string>
     <string name="description_71">Hármadik körben lépj b5-re a futóddal, hogy nyomást gyakorolj az ellenfél c6-os huszárára, közvetetten támadva a tábla középpontot</string>
     <string name="description_title_3">Sáncolj korán</string>
     <string name="description_72">A futó aktiválása után célod, hogy gyorsan sáncolj királyszárnyra, ezzel biztosítod királyodat és pozíciód fejlődésedet.</string>
@@ -411,13 +411,64 @@
     <string name="description_99">A Skót Játékban a fekete visszatámadhat olyan lépésekkel, mint a vezér f6 vagy futó b4-es sakk, nyomást gyakorolva a középpontra. Ügyelj a fenyegetésekre, miközben a saját terveidet valósítod meg.</string>
 
     <string name="title_6">Szicíliai Védelem</string>
+    <string name="description_title_31">Válaszolj e4-re c5-tel</string>
+    <string name="description_100">A Szicíliai Védelmet c5-tel kezdjük, hogy szemmel tartsuk a d4 mezőt, és aszimmetrikus gyalogstruktúrát hozzunk létre a dinamikus játékhoz.</string>
+    <string name="description_title_32">Számíts agresszív játékra</string>
+    <string name="description_101">A Szicíliai Védelem gyakran vezet taktikai és támadó állásokhoz, különösen a fehér részéről. Készülj fel egy éles játékra, ahol mindkét fél korai támadási lehetőségekre törekszik.</string>
+    <string name="description_title_33">Gyorsan fejleszd huszáraidat.</string>
+    <string name="description_102">Helyezd a huszárokat c6-ra és f6-ra, hogy urald a középpontot, ezzel felkészülve rugalmas gyalogtolásokra.</string>
+    <string name="description_title_34">Harcolj d6-tal a középpontért</string>
+    <string name="description_103">Játssz d6-ot, hogy segítsd a c5-ös gyalogot és készülj fel a fejlődésre. Ez a lépés megnyitja a világos mezőjű futó számára a vonalakat.</string>
+    <string name="description_title_35">Támadj vissza, amikor csak lehet</string>
+    <string name="description_104">A Szicíliai Védelem egyik ereje a fekete visszatámadási lehetőségei. Lépések, mint az a6 és b5, segítenek a vezérszárnyon teret nyerni az ellentámadásra.</string>
 
     <string name="title_7">Francia Védelem</string>
+    <string name="description_title_36">Válaszolj e4-re e6-tal</string>
+    <string name="description_105">A Francia Védelmet e6-tal kezdjük, felkészülve a d5-ös gyalogtolásra akövetkező körben. Ez a struktúra egy szilárd, bár kissé passzív pozíciót hozz létre.</string>
+    <string name="description_title_37">Készülj d5-re</string>
+    <string name="description_106">Az e4 e6 után, törekedj a d5-re, hogy megtámadd fehér középpontját. Ez a lépés segít a középpont elnyeréséhez, és megalapozza a figuráid fejlődését.</string>
+    <string name="description_title_38">Figyelj a gyalogstruktúrádra</string>
+    <string name="description_107">A Francia Védelem gyakran zárt középpontot eredményez d5-ös és e4-es gyalogokkal. Légy óvatos a gyalogstruktúrával és azzal, hogy ez hogyan befolyásolja a figuráid mozgékonyságát és játék terveidet.</string>
+    <string name="description_title_39">Ellentámadási lehetőségekre fókuszálj</string>
+    <string name="description_108">A Francia Védelem híres az ellentámadási lehetőségeiről. Keresd a lehetőségeket, hogy megtámadd fehér középpontját olyan lépésekkel, mint a c5 és f6, különösen akkor, ha figuráid jól koordináltak.</string>
+    <string name="description_title_40">Aktiváld futódat</string>
+    <string name="description_109">A világos mezőjű futód "rosszá" válhat, ha a gyalogjaid mögött reked. Fontold meg, hogy a b7-re lépj, vagy cseréld le egy aktív figuráért.</string>
 
     <string name="title_8">Caro-Kann Védelem</string>
+    <string name="description_title_41">Válaszolj e4-re c6-tal</string>
+    <string name="description_110">A Caro-Kann Védelem c6-tal kezdődik, előkészítve a d5-öt a következő körben. Ez a felállás egy szilárd gyalogstruktúra létrehozására törekszik, miközben lehetővé teszi a figurák fejlesztését.</string>
+    <string name="description_title_42">Készülj d5-re</string>
+    <string name="description_111">Játssz d5-öt, hogy megtámadd fehér e4-es gyalogosát. Ez a középponti nyomás segít az uralom megszerzésében és alapot teremt a pozíciód számára.</string>
+    <string name="description_title_43">Aktiváld figuráid</string>
+    <string name="description_112">Hozd a huszárokat f6-ra és c6-ra. A sötét mezőjű futódat g7-re mozgasd g6-tal, hogy növeld a tevékenységét.</string>
+    <string name="description_title_44">Figyelj a gyalogstruktúrádra</string>
+    <string name="description_113">A Caro-Kann gyakran szilárd gyalogstruktúrát eredményez a c6 és d5 gyalogokkal. Figyelj arra, hogy ez a struktúra hogyan befolyásolja a figuráid aktivitását, és keress lehetőségeket arra, hogy az e5-tel megtörd a középpontot.</string>
+    <string name="description_title_45">Király biztonsága</string>
+    <string name="description_114">Sáncolj királyszárnyra a király biztonsága érdekében. Győződj meg róla, hogy a gyalogstruktúrád szilárd, és nincsenek potenciális fenyegetések fehér részéről, mielőtt sáncolnál mellett.</string>
 
     <string name="title_9">Királyindiai Védelem</string>
+    <string name="description_title_46">Kezdd az f6-os huszárral</string>
+    <string name="description_115">A Királyindiai Védelem a f6-os huszárral kezdődik, célja a középpont ellenőrzése és a g6 előkészítése, hogy a sötét mezőjű futót g7-re lehessen helyezni.</string>
+    <string name="description_title_47">Készítsd a futót g7-re</string>
+    <string name="description_116">Miután léptél a huszárral f6-ra, lépj g6-ra és a futóval g7-re. Ez a felállás hosszú távú irányítást biztosít a középpontban, és előkészít egy szilárd királyszárnyi struktúrát.</string>
+    <string name="description_title_48">Alakítsd ki a középpontod</string>
+    <string name="description_117">A g6 után, gondold meg gyalogjaid előre lépését d6-al és e5-el, hogy megtámadd a fehér középponti uralmát. Ez a felállás dinamikus és rugalmas gyalogstruktúrát tesz lehetővé.</string>
+    <string name="description_title_49">Aktiváld figuráid</string>
+    <string name="description_118">Hozd huszáraidat f6-ra és d7-re, és törekedj arra, hogy bástyáidat nyitott vonalakon legyenek, ezzel növelve aktivitásukat.</string>
+    <string name="description_title_50">Gyalog roham</string>
+    <string name="description_119">A Királyindiai Védelem gyakran agresszív gyalogrohamokat eredményez fehér részéről a királyszárnyon. Készülj fel a támadások visszaverésére, és keress alkalmakat az ellentámadásra.</string>
+    <string name="description_title_51">Ellentámadás</string>
+    <string name="description_120">Míg fehér a királyszányra összpontosít, fontold meg a ellentámadás kialakítását a vezérszárnyon olyan lépésekkel, mint a b5 és c5. Ez elterelheti fehér figyelmét a támadásáról, és lehetőséget adhat számodra a támadni.</string>
 
     <string name="title_10">Pirc Védelem</string>
-
+    <string name="description_title_52">Kezdj d6-al</string>
+    <string name="description_121">A Pirc Védelem d6-tal kezdődik, lehetővé téve a rugalmasan figura aktivációt, miközben arra ösztönzöd fehért, hogy elfoglalja a központot.</string>
+    <string name="description_title_53">Készítsd a futót g7-re</string>
+    <string name="description_122">A d6 után, fontold meg a g6-ot és futó g7-et. Ez a felállás szilárd uralmat biztosít a központ felett és segít a király biztonságában.</string>
+    <string name="description_title_54">Támadd a központot</string>
+    <string name="description_123">Legyél felkészült arra, hogy megtámadd fehér központját olyan lépésekkel, mint az e5 vagy c5. Az időzítés kulcsfontosságú. Vágj vissza, amikor fehér túllép gyalogjaival.</string>
+    <string name="description_title_55">Aktiváld figuráidat ellentámadáshoz</string>
+    <string name="description_124">Fókuszálj a huszárjaid aktiválására f6-ra és d7-re, és fontold meg a bástyáid középre helyezését, miután a gyalogjaid stabilabban állnak. A jó fejlődés kulcsfontosságú az ellentámadáshoz.</string>
+    <string name="description_title_56">Maradj rugalmas</string>
+    <string name="description_125">A Pirc Védelem egy hiper-modern megnyitó, amely lehetővé teszi, hogy alkalmazkodj a fehér taktikáihoz. Figyelj az ellenfeled felállására, és ennek megfelelően igazítsd a stratégiádat.</string>
 </resources>
