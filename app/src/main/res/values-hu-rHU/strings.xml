@@ -338,4 +338,86 @@
     <!--Basic rook endgames lesson strings-->
     <string name="description_68">Tartsd aktívan bástyádat, ezzel korlátozod az ellenfél király mozgását. Adj sakkokat, hogy az ellenfél királyát a tábla szélére kényszerítsd.</string>
     <string name="description_69">Helyezd bástyádat az előretolt gyalog mögé, legyen az a tied vagy az ellenfélé.</string>
+
+    <!--Opening strings-->
+    <string name="title_1">Ruy Lopez (Spanyol Megnyitás)</string>
+    <string name="description_title_1">Irányítsd a középpontot</string>
+    <string name="description_70">Kezdj e4 lépéssel, hogy irányítsd a középpontot, ezzel felkészülve gyors fejlődésre.</string>
+    <string name="description_title_2">Aktiváld a futódat</string>
+    <string name="description_71">Hármadik körben lépj b5-re a futóddal, hogy nyomást gyakorolj az ellenfél c6-os huszárára, közvetetten támadva a tábla középpontot</string>
+    <string name="description_title_3">Sáncolj korán</string>
+    <string name="description_72">A futó aktiválása után célod, hogy gyorsan sáncolj királyszárnyra, ezzel biztosítod királyodat és pozíciód fejlődésedet.</string>
+    <string name="description_title_4">Kerüld az szükségtelen cseréket</string>
+    <string name="description_73">A Ruy Lopezben kerüld el a b5-ös futó korai cseréjét. Ezzel a figurával nyomás alatt tarthatod fekete pozícióját.</string>
+    <string name="description_title_5">Vigyázz az ellentámadásra</string>
+    <string name="description_74">Vigyázz a fekete a6-os lépésére, amely megpróbálja elzavarni futódat. Ez előkészíti a b5-öt, amivel teret nyer a vezérszárnyon.</string>
+    <string name="description_title_6">Tervezd meg gyalogos áttöréseidet</string>
+    <string name="description_75">Keress lehetőségeket a d4 lépésre, ezzel irányítva a középpontot, de légy óvatos fekete válaszaira.</string>
+
+    <string name="title_2">Olasz Játék</string>
+    <string name="description_title_7">Irányítsd a középpontot korán</string>
+    <string name="description_76">Kezdj e4-el, majd lépj a huszárral f3-ra, hogy megerősítsd a középpontot és felkészülj a gyors fejlődésre.</string>
+    <string name="description_title_8">Aktiváld futódat c4-re</string>
+    <string name="description_77">Harmadik körben lépj c4-re a futóddal, hogy célba vedd az f7-es mezőt, amely egy gyenge pont fekete pozíciójában, különösen a játék elején.</string>
+    <string name="description_title_9">Sáncolj korán</string>
+    <string name="description_78">Miután a futódat és a huszárodat aktiváltad, célod sáncolni királyszárnyra. Ezzel biztosítod királyod védelmét és felkészülsz bástyád aktiválására.</string>
+    <string name="description_title_10">Vigyázz az ellentámadásra</string>
+    <string name="description_79">Vigyázz a fekete huszár g4-es lépésére, amely célba veheti a c4-es futódat, vagy nyomást gyakorolhat a királyszányadra.</string>
+    <string name="description_title_11">Csendes vagy agresszív játék</string>
+    <string name="description_80">Választhatsz, hogy nyugodtan játszol a figurák fejlesztésével, vagy célod lehet egy agresszív gyalogtolás c3 és d4 lépésekkel, hogy megnyisd a középpontot.</string>
+    <string name="description_title_12">Ne siess a cserével</string>
+    <string name="description_81">Az Olasz Játék a figurák aktivitásának fenntartásáról szól. Próbáld meg aktívan tartani a figuráidat, ahelyett, hogy korán cserélnéd őket.</string>
+
+    <string name="title_3">Vezércsel</string>
+    <string name="description_title_13">Irányítsd a középpontot</string>
+    <string name="description_82">A Vezércsel d4-gyel és c4-gyel kezdődik, célja a középpont irányítása és a fekete kihívása egy válaszadásra</string>
+    <string name="description_title_14">Ne aggódj a gyalog miatt</string>
+    <string name="description_83">Ha fekete elveszi a c4-es gyalogot (elfogadott vezércsel), később visszaszerezheted e3 és futó c4 lépésekkel. Fókuszálj a gyors fejlődésre.</string>
+    <string name="description_title_15">Tartsd szerkezeted szilárdan</string>
+    <string name="description_84">Az elhárított változatban a fekete általában e6-ot játszik. Fókuszálj a figuráid fejlesztésére. Lépj a huszárral f3-ra és a futóddal g5-re vagy e2-re, hogy megőrizd a középpontod erősségét.</string>
+    <string name="description_title_16">Gyors figura aktiváció</string>
+    <string name="description_85">Célod legyen, hogy gyorsan aktiváld figuráidat. A huszárokkal lépj c3-ra és f3-ra, a futókkal g5-re és e2-re, hogy irányítsd a táblán álló pozíciót.</string>
+    <string name="description_title_17">Hosszú távra tervek</string>
+    <string name="description_86">A Vezércsel általában a szilárd gyalogstruktúra fenntartásáról és középponti áttörés tervezéséről szól az e4 lépéssel.</string>
+    <string name="description_title_18">Királyszárny biztonsága</string>
+    <string name="description_87">Célod, hogy korán sáncolj királyszárnyra a biztonság érdekében, miközben nyomást gyakorolsz fekete figuráira.</string>
+
+    <string name="title_4">Londoni Megnyitás</string>
+    <string name="description_title_19">Kezdd d4-gyel és futó f4-gyel</string>
+    <string name="description_88">A Londoni Megnyitás könnyen megtanulható, mert következetes felállása van. Játssz d4-et, majd aktiváld futódat f4-re, ezt követően lépj e3-ra, c3-ra, és huszár f3-ra.</string>
+    <string name="description_title_20">Szilárd szerkezet</string>
+    <string name="description_89">A Londoni Megnyitás arról híres, hogy szilárd és nehezen megtörhető. A gyalogstruktúrád (d4, e3, c3) sok stabilitást biztosít.</string>
+    <string name="description_title_21">Ésszerűen aktiváld figuráid</string>
+    <string name="description_90">Miután elhelyezted a gyalogjaidat, aktiváld huszáraidat f3-ra és d2-re. Fontold meg, hogy h3-ra lépj a gyalogoddal, ezzel teret adva a futódnak.</string>
+    <string name="description_title_22">Tartsd aktívan a futót</string>
+    <string name="description_91">A világos mezőjű futó kulcsfontosságú. Tartsd a gyalogláncon kívül, hogy maximalizáld az aktivitását.</string>
+    <string name="description_title_23">Rugalmas játék</string>
+    <string name="description_92">A Londoni Megnyitás sokoldalú, és sokféle fekete válasz ellen játszható. Tartsd fenn az ésszerű fejlődést, és keress lehetőségeket terjeszkedésre a középpontban vagy királyszárnyon.</string>
+    <string name="description_title_24">Ne siess a támadással</string>
+    <string name="description_93">A Londoni Megnyitás inkább a türelemről és egy erős pozíció kiépítéséről szól, mielőtt támadásba lendülnél. Várj a megfelelő pillanatra, amikor a figuráid jó pozícióban vannak.</string>
+
+    <string name="title_5">Skót Játék</string>
+    <string name="description_title_25">Kezdj agresszívan</string>
+    <string name="description_94">A Skót Játék egy agresszív megnyitás a középpont korai támadására. A d4-es gyalog előretolásával azonnali összecsapást kényszerítesz a tábla közepén.</string>
+    <string name="description_title_26">Nyisd meg a pozíciót</string>
+    <string name="description_95">The Scotch Game often leads to an open game, which means faster piece development and attacking chances. Develop your pieces quickly to make the most of the open lines.</string>
+    <string name="description_title_27">Look out for exchanges:</string>
+    <string name="description_96">Be prepared for early pawn exchanges in the center. These trades can open the e-file, allowing your rooks to become active later in the game.</string>
+    <string name="description_title_28">Irányítsd a közepet</string>
+    <string name="description_97">A Skót Játék gyakran nyílt játékhoz vezet, ami gyorsabb figura fejlődést és támadási lehetőségeket jelent. Fejleszd a figuráidat gyorsan, hogy kihasználd a nyílt vonalakat.</string>
+    <string name="description_title_29">Aktiváld figuráidat hatékonyan</string>
+    <string name="description_98">Gyorsan aktiváld huszáraidat és futóidat. Célod legyen a korai sáncolás. A középpont uralma és a gyors fejlődés kombinációja erőteljes támadási lehetőségeket teremthet.</string>
+    <string name="description_title_30">Vigyázz az ellentámadásra</string>
+    <string name="description_99">A Skót Játékban a fekete visszatámadhat olyan lépésekkel, mint a vezér f6 vagy futó b4-es sakk, nyomást gyakorolva a középpontra. Ügyelj a fenyegetésekre, miközben a saját terveidet valósítod meg.</string>
+
+    <string name="title_6">Szicíliai Védelem</string>
+
+    <string name="title_7">Francia Védelem</string>
+
+    <string name="title_8">Caro-Kann Védelem</string>
+
+    <string name="title_9">Királyindiai Védelem</string>
+
+    <string name="title_10">Pirc Védelem</string>
+
 </resources>
