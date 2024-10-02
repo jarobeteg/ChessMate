@@ -1,8 +1,6 @@
 package com.example.chessmate.ui.activity.lessons
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.MenuItem
@@ -37,7 +35,7 @@ import com.example.chessmate.util.chess.bitboard.BoardStateTracker
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 
-class SubLessonLoaderActivity : AbsThemeActivity(), LessonFinishedDialogFragment.OnNextLessonButtonListener {
+class SubLessonLoaderActivity : AbsThemeActivity() {
     private lateinit var lessonCompletionRepository: LessonCompletionRepository
     private lateinit var userProfileRepository: UserProfileRepository
     private var userProfile: UserProfile? = null
@@ -55,6 +53,7 @@ class SubLessonLoaderActivity : AbsThemeActivity(), LessonFinishedDialogFragment
     private lateinit var solution: MutableList<BitMove>
     private lateinit var lessonRepos: ArrayList<LessonRepo>
     private lateinit var currentLessonRepo: LessonRepo
+    private lateinit var lessonTitle: TextView
     private var currentLessonTitle: String = ""
     private var boardStateIndex: Int = 0
     private var currentIndex: Int = 0
@@ -77,6 +76,7 @@ class SubLessonLoaderActivity : AbsThemeActivity(), LessonFinishedDialogFragment
         solution = parseSolution(currentLessonRepo.solution)
 
         bottomNavigationView = findViewById(R.id.sub_lesson_loader_bottom_navigation)
+        lessonTitle = findViewById(R.id.sub_lesson_loader_toolbar_title)
 
         toolbar = findViewById(R.id.sub_lesson_loader_toolbar)
         setSupportActionBar(toolbar)
@@ -104,7 +104,6 @@ class SubLessonLoaderActivity : AbsThemeActivity(), LessonFinishedDialogFragment
     }
 
     private fun displayLesson() {
-        turnOnBottomNav()
         board.clearBoardStateTracker()
         currentLessonRepo = lessonRepos[currentIndex]
         solution = parseSolution(currentLessonRepo.solution)
@@ -128,7 +127,6 @@ class SubLessonLoaderActivity : AbsThemeActivity(), LessonFinishedDialogFragment
     }
 
     private fun setupTextViews() {
-        val lessonTitle = findViewById<TextView>(R.id.sub_lesson_loader_toolbar_title)
         val subLessonTitle = findViewById<TextView>(R.id.current_sub_lesson_title)
         val subLessonDescription = findViewById<TextView>(R.id.sub_lesson_description)
 
@@ -141,19 +139,6 @@ class SubLessonLoaderActivity : AbsThemeActivity(), LessonFinishedDialogFragment
         val resourceName = "description_$id"
         val resourceId = resources.getIdentifier(resourceName, "string", packageName)
         return if (resourceId != 0) getString(resourceId) else getString(R.string.string_not_found)
-    }
-
-    private fun showLessonFinishedDialog() {
-        val handler = Handler(Looper.getMainLooper())
-        handler.postDelayed({
-            val dialog = LessonFinishedDialogFragment()
-            dialog.show(supportFragmentManager, "LessonFinishedDialog")
-        }, 2000)
-    }
-
-
-    override fun onNextLessonButtonListener() {
-        nextLesson()
     }
 
     private fun parseSolution(solution: String): MutableList<BitMove> {
@@ -401,8 +386,7 @@ class SubLessonLoaderActivity : AbsThemeActivity(), LessonFinishedDialogFragment
                 lifecycleScope.launch {
                     updateDatabase()
                 }
-                turnOffBottomNav()
-                showLessonFinishedDialog()
+                displayLessonFinishedTitle()
             }
         }
     }
@@ -423,16 +407,8 @@ class SubLessonLoaderActivity : AbsThemeActivity(), LessonFinishedDialogFragment
         return boardStateIndex == board.stateTracker.size - 1
     }
 
-    private fun turnOnBottomNav() {
-        for (i in 0 until bottomNavigationView.menu.size()) {
-            bottomNavigationView.menu.getItem(i).isEnabled = true
-        }
-    }
-
-    private fun turnOffBottomNav() {
-        for (i in 0 until bottomNavigationView.menu.size()) {
-            bottomNavigationView.menu.getItem(i).isEnabled = false
-        }
+    private fun displayLessonFinishedTitle() {
+        lessonTitle.text = getString(R.string.lesson_finished_text)
     }
 
     private fun bottomNavItemClicked(item: MenuItem): Boolean {
