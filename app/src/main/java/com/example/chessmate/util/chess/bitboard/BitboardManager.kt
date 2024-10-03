@@ -23,7 +23,9 @@ class BitboardManager(private var listener: BitboardListener) {
     var isNavigating = false
     var turnNumber = 1
     private var queuedBotMove: BitMove? = null
-    private var isBotCalculating = false
+    var isBotCalculating = false
+    var wasBotCalculatingBeforePause = false
+    var botCalculation: Job? = null
 
     companion object {
         fun positionToRowCol(position: Long): Position {
@@ -131,8 +133,8 @@ class BitboardManager(private var listener: BitboardListener) {
     }
 
     private fun makeBotMove() {
-        isBotCalculating = true
-        CoroutineScope(Dispatchers.Main).launch {
+        botCalculation = CoroutineScope(Dispatchers.Main).launch {
+            isBotCalculating = true
             val move: BitMove? = withContext(Dispatchers.Default) {
                 bot.findBestMove(bitboard, GameContext.depth, GameContext.botColor == PieceColor.WHITE)
             }
@@ -144,6 +146,7 @@ class BitboardManager(private var listener: BitboardListener) {
                     executeBotMove(move)
                 }
             }
+            isBotCalculating = false
         }
     }
 

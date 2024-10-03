@@ -107,6 +107,25 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         gameManager.startGame()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        if (gameManager.wasBotCalculatingBeforePause) {
+            gameManager.wasBotCalculatingBeforePause = false
+            gameManager.botCalculation?.start()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        if (gameManager.isBotCalculating) {
+            gameManager.wasBotCalculatingBeforePause = true
+            gameManager.botCalculation?.cancel()
+            gameManager.isBotCalculating = false
+        }
+    }
+
     override fun onHomeButtonClicked() {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
