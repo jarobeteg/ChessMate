@@ -128,6 +128,7 @@
     <string name="piece_summary">Személyre szabhatja a figurák megjelenését különböző témák közül választva.</string>
 
     <!--Puzzle fragment strings-->
+    <string name="puzzle_lock_message">Lépj szintet, hogy új rejtvényeket nyithass meg..</string>
     <string name="beginner_puzzles">Kezdő</string>
     <string name="intermediate_puzzles">Középhaladó</string>
     <string name="advanced_puzzles">Haladó</string>
@@ -150,6 +151,7 @@
     <string name="puzzle_solved_text">Rejtvény Megoldva</string>
 
     <!--Learn fragment strings-->
+    <string name="lesson_lock_message">Lépj szintet, hogy új leckéket nyithass meg..</string>
     <string name="chess_basics_lessons">Sakk alapok</string>
     <string name="tactical_concepts_lessons">Taktikai fogalmak</string>
     <string name="openings_lessons">Nyitólépések</string>

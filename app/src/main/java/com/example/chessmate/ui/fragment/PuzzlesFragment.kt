@@ -79,8 +79,10 @@ class PuzzlesFragment : Fragment() {
 
         if (userProfile!!.level == 0) {
             loginToSolvePuzzles()
-        } else {
+        } else if (id <= userProfile!!.level) {
             animateButton(button, id)
+        } else {
+            showLockMessage()
         }
     }
 
@@ -137,10 +139,17 @@ class PuzzlesFragment : Fragment() {
 
     private fun updateLocks() {
         addPuzzleButtonLocks()
-        if (userProfile?.level != 0) {
-            updatePuzzleButtonLock(beginnerPuzzlesButton)
-            updatePuzzleButtonLock(intermediatePuzzlesButton)
-            updatePuzzleButtonLock(advancedPuzzlesButton)
+        when (userProfile?.level) {
+            1 -> updatePuzzleButtonLock(beginnerPuzzlesButton)
+            2 -> {
+                updatePuzzleButtonLock(beginnerPuzzlesButton)
+                updatePuzzleButtonLock(intermediatePuzzlesButton)
+            }
+            3 -> {
+                updatePuzzleButtonLock(beginnerPuzzlesButton)
+                updatePuzzleButtonLock(intermediatePuzzlesButton)
+                updatePuzzleButtonLock(advancedPuzzlesButton)
+            }
         }
     }
 
@@ -176,7 +185,11 @@ class PuzzlesFragment : Fragment() {
     }
 
     private fun loginToSolvePuzzles() {
-        Toast.makeText(requireContext(), getString(R.string.login_to_access_solve_puzzles_message), Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(), getString(R.string.login_to_access_solve_puzzles_message), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showLockMessage() {
+        Toast.makeText(requireContext(), getString(R.string.puzzle_lock_message), Toast.LENGTH_SHORT).show()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

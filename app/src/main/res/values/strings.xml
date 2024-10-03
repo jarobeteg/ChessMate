@@ -144,6 +144,7 @@
     <string name="piece_summary">Customize your pieces appearance by selecting from various themes.</string>
 
     <!--Puzzle fragment strings-->
+    <string name="puzzle_lock_message">Level up to unlock new puzzles.</string>
     <string name="beginner_puzzles">Beginner</string>
     <string name="intermediate_puzzles">Intermediate</string>
     <string name="advanced_puzzles">Advanced</string>
@@ -166,6 +167,7 @@
     <string name="puzzle_solved_text">Puzzle Solved</string>
 
     <!--Learn fragment strings-->
+    <string name="lesson_lock_message">Level up to unlock new lessons.</string>
     <string name="chess_basics_lessons">Chess basics</string>
     <string name="tactical_concepts_lessons">Tactical concepts</string>
     <string name="openings_lessons">Openings</string>

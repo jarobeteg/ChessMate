@@ -85,8 +85,10 @@ class LearnFragment : Fragment() {
 
         if (userProfile!!.level == 0) {
             loginToTakeLessons()
-        } else {
+        } else if (id <= userProfile!!.level || id == 4) {
             animateButton(button, id)
+        } else {
+            showLockMessage()
         }
     }
 
@@ -151,11 +153,22 @@ class LearnFragment : Fragment() {
 
     private fun updateLocks() {
         addLessonsButtonLocks()
-        if (userProfile?.level != 0) {
-            updateLessonsButtonLock(chessBasicsLessonsButton)
-            updateLessonsButtonLock(tacticalConceptsLessonsButton)
-            updateLessonsButtonLock(openingsLessonsButton)
-            updateLessonsButtonLock(coordinatesLessonsButton)
+        when (userProfile?.level) {
+            1 -> {
+                updateLessonsButtonLock(chessBasicsLessonsButton)
+                updateLessonsButtonLock(coordinatesLessonsButton)
+            }
+            2 -> {
+                updateLessonsButtonLock(chessBasicsLessonsButton)
+                updateLessonsButtonLock(tacticalConceptsLessonsButton)
+                updateLessonsButtonLock(coordinatesLessonsButton)
+            }
+            3 -> {
+                updateLessonsButtonLock(chessBasicsLessonsButton)
+                updateLessonsButtonLock(tacticalConceptsLessonsButton)
+                updateLessonsButtonLock(openingsLessonsButton)
+                updateLessonsButtonLock(coordinatesLessonsButton)
+            }
         }
     }
 
@@ -197,7 +210,11 @@ class LearnFragment : Fragment() {
     }
 
     private fun loginToTakeLessons() {
-        Toast.makeText(requireContext(), getString(R.string.login_to_access_lessons_message), Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(), getString(R.string.login_to_access_lessons_message), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showLockMessage() {
+        Toast.makeText(requireContext(), getString(R.string.lesson_lock_message), Toast.LENGTH_SHORT).show()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
