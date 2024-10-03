@@ -1,7 +1,7 @@
 [
   {
     "lessonId": 30,
-    "titleId": 1,
+    "title": "ruy_lopez",
     "descriptionTitleId": [1, 2, 3, 4, 5, 6],
     "descriptionId": [70, 71, 72, 73, 74, 75],
     "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
@@ -10,7 +10,7 @@
 
   {
     "lessonId": 31,
-    "titleId": 2,
+    "title": "italian_game",
     "descriptionTitleId": [7, 8, 9, 10, 11, 12],
     "descriptionId": [76, 77, 78, 79, 80, 81],
     "fen": "",
@@ -19,7 +19,7 @@
 
   {
     "lessonId": 32,
-    "titleId": 3,
+    "title": "queens_gambit",
     "descriptionTitleId": [13, 14, 15, 16, 17, 18],
     "descriptionId": [82, 83, 84, 85, 86, 87],
     "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
@@ -28,7 +28,7 @@
 
   {
     "lessonId": 33,
-    "titleId": 4,
+    "title": "london_system",
     "descriptionTitleId": [19, 20, 21, 22, 23, 24],
     "descriptionId": [88, 89, 90, 91, 92, 93],
     "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
@@ -37,7 +37,7 @@
 
   {
     "lessonId": 34,
-    "titleId": 5,
+    "title": "scotch_game",
     "descriptionTitleId": [25, 26, 27, 28, 29, 30],
     "descriptionId": [94, 95, 96, 97, 98, 99],
     "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
@@ -46,7 +46,7 @@
 
   {
     "lessonId": 35,
-    "titleId": 6,
+    "title": "sicilian_defense",
     "descriptionTitleId": [31, 32, 33, 34, 35],
     "descriptionId": [100, 101, 102, 103, 104],
     "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1",
@@ -55,7 +55,7 @@
 
   {
     "lessonId": 36,
-    "titleId": 7,
+    "title": "french_defense",
     "descriptionTitleId": [36, 37, 38, 39, 40],
     "descriptionId": [105, 106, 107, 108, 109],
     "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1",
@@ -64,7 +64,7 @@
 
   {
     "lessonId": 37,
-    "titleId": 8,
+    "title": "caro_kann_defense",
     "descriptionTitleId": [41, 42, 43, 44, 45],
     "descriptionId": [110, 111, 112, 113, 114],
     "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1",
@@ -73,7 +73,7 @@
 
   {
     "lessonId": 38,
-    "titleId": 9,
+    "title": "kings_indian_defense",
     "descriptionTitleId": [46, 47, 48, 49, 50, 51],
     "descriptionId": [115, 116, 117, 118, 119, 120],
     "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1",
@@ -82,7 +82,7 @@
 
   {
     "lessonId": 39,
-    "titleId": 10,
+    "title": "pirc_defense",
     "descriptionTitleId": [52, 53, 54, 55, 56],
     "descriptionId": [121, 122, 123, 124, 125],
     "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1",

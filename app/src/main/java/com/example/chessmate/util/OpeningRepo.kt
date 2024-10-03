@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class OpeningRepo (
     val lessonId: Int,
-    val titleId: Int,
+    val title: String,
     val descriptionTitleId: List<Int>,
     val descriptionId: List<Int>,
     val fen: String,

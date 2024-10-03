@@ -72,6 +72,16 @@ class LessonCompletionRepository(private val context: Context) {
         }
     }
 
+    suspend fun isOpeningFinished(userID: Long, lessonID: Int): LessonCompletion? {
+        return try {
+            withContext(Dispatchers.IO) {
+                lessonCompletionDAO.isOpeningTaken(userID, lessonID)
+            }
+        } catch (_: Exception) {
+            null
+        }
+    }
+
     suspend fun isLessonFinished(userID: Long, lessonID: Int, subLessonIDS: List<Int>): Boolean {
         return withContext(Dispatchers.IO) {
             subLessonIDS.all { subLessonID ->

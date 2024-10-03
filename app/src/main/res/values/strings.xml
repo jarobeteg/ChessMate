@@ -360,7 +360,7 @@
     <string name="description_69">Place your rook behind passed pawns, either yours or your opponent\'s.</string>
 
     <!--Opening strings-->
-    <string name="title_1">Ruy Lopez (Spanish Opening)</string>
+    <string name="ruy_lopez">Ruy Lopez (Spanish Opening)</string>
     <string name="description_title_1">Control the center</string>
     <string name="description_70">Start by playing e4 to control the center and prepare for quick development.</string>
     <string name="description_title_2">Develop your bishop</string>
@@ -374,7 +374,7 @@
     <string name="description_title_6">Watch out for black\'s counter-play</string>
     <string name="description_75">Watch out for black\'s move a6, which tries to kick your bishop away and possibly prepare b5 to gain queen-side space.</string>
 
-    <string name="title_2">Italian Game</string>
+    <string name="italian_game">Italian Game</string>
     <string name="description_title_7">Control the center early</string>
     <string name="description_76">Start with e4 and then develop your knight to f3 to support the center and prepare for quick development.</string>
     <string name="description_title_8">Develop your bishop to c4</string>
@@ -388,7 +388,7 @@
     <string name="description_title_12">Don\'t rush to exchange</string>
     <string name="description_81">The Italian Game is about maintaining piece activity. Try to keep your pieces active rather than exchanging them early.</string>
 
-    <string name="title_3">Queen\'s Gambit</string>
+    <string name="queens_gambit">Queen\'s Gambit</string>
     <string name="description_title_13">Control the center</string>
     <string name="description_82">The Queen\'s Gambit starts with d4 and c4, aiming to control the center and challenge black to respond.</string>
     <string name="description_title_14">Don\'t worry about the pawn</string>
@@ -402,7 +402,7 @@
     <string name="description_title_18">King-side safety</string>
     <string name="description_87">Aim to castle king-side early for safety while you continue putting pressure on black\'s position.</string>
 
-    <string name="title_4">London System</string>
+    <string name="london_system">London System</string>
     <string name="description_title_19">Start with d4 and bishop f4</string>
     <string name="description_88">The London System is easy to learn because it has a consistent setup-play d4, then develop your bishop to f4, followed by e3, c3, and knight f3.</string>
     <string name="description_title_20">Solid structure</string>
@@ -416,7 +416,7 @@
     <string name="description_title_24">Don\'t rush to attack</string>
     <string name="description_93">The London System is more about patience and building a strong position before launching an attack. Wait for the right moment when your pieces are well-placed.</string>
 
-    <string name="title_5">Scotch Game</string>
+    <string name="scotch_game">Scotch Game</string>
     <string name="description_title_25">Start aggressively</string>
     <string name="description_94">The Scotch Game is an aggressive way to challenge the center early. By pushing the d4 pawn, you force an immediate clash in the middle of the board.</string>
     <string name="description_title_26">Open up the position</string>
@@ -430,7 +430,7 @@
     <string name="description_title_30">Watch out for black\'s counter-play</string>
     <string name="description_99">In the Scotch Game, black can counterattack with moves like queen f6 or bishop b4 check, putting pressure on your center. Make sure you stay alert to threats while advancing your own plans.</string>
 
-    <string name="title_6">Sicilian Defense</string>
+    <string name="sicilian_defense">Sicilian Defense</string>
     <string name="description_title_31">Respond to e4 with c5</string>
     <string name="description_100">The Sicilian Defense starts with c5, aiming to control the d4 square and create an asymmetrical pawn structure for dynamic play.</string>
     <string name="description_title_32">Expect an aggressive game</string>
@@ -442,7 +442,7 @@
     <string name="description_title_35">Counterattack when possible</string>
     <string name="description_104">One of the key strengths of the Sicilian is the opportunity for black to counterattack. Moves like a6 and b5 help expand on the queen-side, aiming for counter-play and attacking chances.</string>
 
-    <string name="title_7">French Defense</string>
+    <string name="french_defense">French Defense</string>
     <string name="description_title_36">Respond to e4 with e6</string>
     <string name="description_105">The French Defense begins with e6, preparing to support the d5 pawn push on the next move. This structure aims to create a solid, albeit somewhat passive, position.</string>
     <string name="description_title_37">Prepare for d5</string>
@@ -454,7 +454,7 @@
     <string name="description_title_40">Develop your bishop</string>
     <string name="description_109">Your light-squared bishop can become "bad" if it\'s stuck behind your pawns. Consider developing it to b7 or exchange it for white\'s active pieces.</string>
 
-    <string name="title_8">Caro-Kann Defense</string>
+    <string name="caro_kann_defense">Caro-Kann Defense</string>
     <string name="description_title_41">Respond to e4 with c6</string>
     <string name="description_110">The Caro-Kann Defense begins with c6, preparing to play d5 on the next move. This setup aims to create a solid pawn structure while allowing for piece development.</string>
     <string name="description_title_42">Prepare for d5</string>
@@ -466,7 +466,7 @@
     <string name="description_title_45">Keep your king safe</string>
     <string name="description_114">Plan to castle king-side for safety. Ensure that your pawn structure is solid and that there are no potential threats from white before committing to king-side castling.</string>
 
-    <string name="title_9">King\'s Indian Defense</string>
+    <string name="kings_indian_game">King\'s Indian Defense</string>
     <string name="description_title_46">Start with knight f6</string>
     <string name="description_115">The King\'s Indian Defense begins with knight f6, aiming to control the center and prepare for g6 to move your dark-squared bishop to g7.</string>
     <string name="description_title_47">Prepare bishop g7</string>
@@ -480,7 +480,7 @@
     <string name="description_title_51">Counter-play</string>
     <string name="description_120">While white focuses on the king-side, consider creating counter-play on the queen-side with moves like b5 and c5. This can distract white from their attack and give you play</string>
 
-    <string name="title_10">Pirc Defense</string>
+    <string name="pirc_defense">Pirc Defense</string>
     <string name="description_title_52">Start with d6</string>
     <string name="description_121">The Pirc Defense begins with d6, allowing you to develop your pieces flexibly while inviting white to occupy the center.</string>
     <string name="description_title_53">Prepare bishop g7</string>

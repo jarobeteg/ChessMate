@@ -340,7 +340,7 @@
     <string name="description_69">Helyezd bástyádat az előretolt gyalog mögé, legyen az a tied vagy az ellenfélé.</string>
 
     <!--Opening strings-->
-    <string name="title_1">Ruy Lopez (Spanyol Megnyitás)</string>
+    <string name="ruy_lopez">Ruy Lopez (Spanyol Megnyitás)</string>
     <string name="description_title_1">Irányítsd a középpontot</string>
     <string name="description_70">Kezdj e4 lépéssel, hogy irányítsd a középpontot, ezzel felkészülve gyors fejlődésre.</string>
     <string name="description_title_2">Aktiváld futódat</string>
@@ -354,7 +354,7 @@
     <string name="description_title_6">Vigyázz az ellentámadásra</string>
     <string name="description_75">Vigyázz a fekete a6-os lépésére, amely megpróbálja elzavarni futódat. Ez előkészíti a b5-öt, amivel teret nyer a vezérszárnyon.</string>
 
-    <string name="title_2">Olasz Játék</string>
+    <string name="italian_game">Olasz Játék</string>
     <string name="description_title_7">Irányítsd a középpontot korán</string>
     <string name="description_76">Kezdj e4-el, majd lépj a huszárral f3-ra, hogy megerősítsd a középpontot és felkészülj a gyors fejlődésre.</string>
     <string name="description_title_8">Aktiváld futódat c4-re</string>
@@ -368,7 +368,7 @@
     <string name="description_title_12">Ne siess a cserével</string>
     <string name="description_81">Az Olasz Játék a figurák aktivitásának fenntartásáról szól. Próbáld meg aktívan tartani a figuráidat, ahelyett, hogy korán cserélnéd őket.</string>
 
-    <string name="title_3">Vezércsel</string>
+    <string name="queens_gambit">Vezércsel</string>
     <string name="description_title_13">Irányítsd a középpontot</string>
     <string name="description_82">A Vezércsel d4-gyel és c4-gyel kezdődik, célja a középpont irányítása és a fekete kihívása egy válaszadásra</string>
     <string name="description_title_14">Ne aggódj a gyalog miatt</string>
@@ -382,7 +382,7 @@
     <string name="description_title_18">Királyszárny biztonsága</string>
     <string name="description_87">Célod, hogy korán sáncolj királyszárnyra a biztonság érdekében, miközben nyomást gyakorolsz fekete figuráira.</string>
 
-    <string name="title_4">Londoni Megnyitás</string>
+    <string name="london_system">Londoni Megnyitás</string>
     <string name="description_title_19">Kezdd d4-gyel és futó f4-gyel</string>
     <string name="description_88">A Londoni Megnyitás könnyen megtanulható, mert következetes felállása van. Játssz d4-et, majd aktiváld futódat f4-re, ezt követően lépj e3-ra, c3-ra, és huszár f3-ra.</string>
     <string name="description_title_20">Szilárd szerkezet</string>
@@ -396,7 +396,7 @@
     <string name="description_title_24">Ne siess a támadással</string>
     <string name="description_93">A Londoni Megnyitás inkább a türelemről és egy erős pozíció kiépítéséről szól, mielőtt támadásba lendülnél. Várj a megfelelő pillanatra, amikor a figuráid jó pozícióban vannak.</string>
 
-    <string name="title_5">Skót Játék</string>
+    <string name="scotch_game">Skót Játék</string>
     <string name="description_title_25">Kezdj agresszívan</string>
     <string name="description_94">A Skót Játék egy agresszív megnyitás a középpont korai támadására. A d4-es gyalog előretolásával azonnali összecsapást kényszerítesz a tábla közepén.</string>
     <string name="description_title_26">Nyisd meg a pozíciót</string>
@@ -410,7 +410,7 @@
     <string name="description_title_30">Vigyázz az ellentámadásra</string>
     <string name="description_99">A Skót Játékban a fekete visszatámadhat olyan lépésekkel, mint a vezér f6 vagy futó b4-es sakk, nyomást gyakorolva a középpontra. Ügyelj a fenyegetésekre, miközben a saját terveidet valósítod meg.</string>
 
-    <string name="title_6">Szicíliai Védelem</string>
+    <string name="sicilian_defense">Szicíliai Védelem</string>
     <string name="description_title_31">Válaszolj e4-re c5-tel</string>
     <string name="description_100">A Szicíliai Védelmet c5-tel kezdjük, hogy szemmel tartsuk a d4 mezőt, és aszimmetrikus gyalogstruktúrát hozzunk létre a dinamikus játékhoz.</string>
     <string name="description_title_32">Számíts agresszív játékra</string>
@@ -422,7 +422,7 @@
     <string name="description_title_35">Támadj vissza, amikor csak lehet</string>
     <string name="description_104">A Szicíliai Védelem egyik ereje a fekete visszatámadási lehetőségei. Lépések, mint az a6 és b5, segítenek a vezérszárnyon teret nyerni az ellentámadásra.</string>
 
-    <string name="title_7">Francia Védelem</string>
+    <string name="french_defense">Francia Védelem</string>
     <string name="description_title_36">Válaszolj e4-re e6-tal</string>
     <string name="description_105">A Francia Védelmet e6-tal kezdjük, felkészülve a d5-ös gyalogtolásra akövetkező körben. Ez a struktúra egy szilárd, bár kissé passzív pozíciót hozz létre.</string>
     <string name="description_title_37">Készülj d5-re</string>
@@ -434,7 +434,7 @@
     <string name="description_title_40">Aktiváld futódat</string>
     <string name="description_109">A világos mezőjű futód "rosszá" válhat, ha a gyalogjaid mögött reked. Fontold meg, hogy a b7-re lépj, vagy cseréld le egy aktív figuráért.</string>
 
-    <string name="title_8">Caro-Kann Védelem</string>
+    <string name="caro_kann_defense">Caro-Kann Védelem</string>
     <string name="description_title_41">Válaszolj e4-re c6-tal</string>
     <string name="description_110">A Caro-Kann Védelem c6-tal kezdődik, előkészítve a d5-öt a következő körben. Ez a felállás egy szilárd gyalogstruktúra létrehozására törekszik, miközben lehetővé teszi a figurák fejlesztését.</string>
     <string name="description_title_42">Készülj d5-re</string>
@@ -446,7 +446,7 @@
     <string name="description_title_45">Király biztonsága</string>
     <string name="description_114">Sáncolj királyszárnyra a király biztonsága érdekében. Győződj meg róla, hogy a gyalogstruktúrád szilárd, és nincsenek potenciális fenyegetések fehér részéről, mielőtt sáncolnál mellett.</string>
 
-    <string name="title_9">Királyindiai Védelem</string>
+    <string name="kings_indian_game">Királyindiai Védelem</string>
     <string name="description_title_46">Kezdd az f6-os huszárral</string>
     <string name="description_115">A Királyindiai Védelem a f6-os huszárral kezdődik, célja a középpont ellenőrzése és a g6 előkészítése, hogy a sötét mezőjű futót g7-re lehessen helyezni.</string>
     <string name="description_title_47">Készítsd a futót g7-re</string>
@@ -460,7 +460,7 @@
     <string name="description_title_51">Ellentámadás</string>
     <string name="description_120">Míg fehér a királyszányra összpontosít, fontold meg a ellentámadás kialakítását a vezérszárnyon olyan lépésekkel, mint a b5 és c5. Ez elterelheti fehér figyelmét a támadásáról, és lehetőséget adhat számodra a támadni.</string>
 
-    <string name="title_10">Pirc Védelem</string>
+    <string name="pirc_defense">Pirc Védelem</string>
     <string name="description_title_52">Kezdj d6-al</string>
     <string name="description_121">A Pirc Védelem d6-tal kezdődik, lehetővé téve a rugalmasan figura aktivációt, miközben arra ösztönzöd fehért, hogy elfoglalja a központot.</string>
     <string name="description_title_53">Készítsd a futót g7-re</string>
