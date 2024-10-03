@@ -91,6 +91,7 @@ class BitboardManager(private var listener: BitboardListener) {
     }
 
     fun startGame() {
+        listener.updateTurnTitle()
         if (GameContext.isBotTurn) {
             makeBotMove()
         }
@@ -118,6 +119,7 @@ class BitboardManager(private var listener: BitboardListener) {
             endGame()
             return
         }
+        listener.updateTurnTitle()
 
         isMoveMadeByWhite = !isMoveMadeByWhite
         if (isMoveMadeByWhite) {

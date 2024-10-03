@@ -9,4 +9,5 @@ interface BitboardListener {
     fun onBotMoveMade(bitboard: Bitboard, move: BitMove)
     fun showEndGameDialog(endGameResult: String)
     fun showPreviousBoardState(bitboard: Bitboard, move: BitMove?)
+    fun updateTurnTitle()
 }

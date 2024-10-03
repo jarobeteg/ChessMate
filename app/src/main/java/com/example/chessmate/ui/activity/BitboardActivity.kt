@@ -36,6 +36,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 
 class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFragment.PromotionDialogListener, EndGameDialogFragment.OnHomeButtonClickListener {
+    private lateinit var turnTitle: TextView
     private lateinit var chessboardLayout: GridLayout
     private lateinit var transparentOverlay: View
     private lateinit var gameManager: BitboardManager
@@ -67,6 +68,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         userProfile = userProfileManager.getUserProfileLiveData().value
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bitboard_bottom_navigation)
+        turnTitle = findViewById(R.id.bitboard_move_tracker_text)
 
         val sharedPreferences = getSharedPreferences("chess_game", Context.MODE_PRIVATE)
         val startingSide = sharedPreferences.getString("starting_side", "white")
@@ -382,6 +384,14 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         updateBitboardStateUI(bitboard)
         updateMoveTrackerToolbar(isPlayerInCheck(), isPlayerCheckMated())
         gameManager.switchTurns()
+    }
+
+    override fun updateTurnTitle() {
+        if (GameContext.isPlayerTurn) {
+            turnTitle.text = getString(R.string.your_turn)
+        } else {
+            turnTitle.text = getString(R.string.bot_turn)
+        }
     }
 
     override fun showEndGameDialog(endGameResult: String) {
