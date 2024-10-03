@@ -51,6 +51,7 @@
     <string name="puzzles_played_title">Puzzles Played</string>
     <string name="lessons_taken_title">Lessons Taken</string>
     <string name="level_no_colon">Level</string>
+    <string name="profile_description">Earn rating points by solving puzzles, taking lessons, and playing against the bot! The more you play and learn, the more rating points you earn, allowing you to level up and unlock more puzzles and lessons.</string>
 
     <!--Home Fragment Strings-->
     <string name="play">Play</string>
@@ -64,7 +65,7 @@
     <string name="profile_change_error">An unexpected error occurred while changing profiles. Please attempt to change it again.</string>
     <string name="profile_delete_error">An unexpected error occurred while deleting profile. Please attempt to delete it again.</string>
 
-    <!--Question and answer strings for profile creation-->
+    <!--Profile creation strings-->
     <string name="create_profile_title">Profile Creation</string>
     <string name="enter_username">Username</string>
     <string name="beginner_level">Beginner</string>
@@ -76,6 +77,9 @@
     <string name="cancel_button">Cancel</string>
     <string name="create_profile_button">Create Profile</string>
     <string name="missing_username">You have to enter your username!</string>
+    <string name="why_choose_beginner">Choose \"Beginner\" if you are just starting out with chess and learning the basic moves and rules.</string>
+    <string name="why_choose_intermediate">Choose \"Intermediate\" if you know the rules and some basic strategies but want to improve your skills.</string>
+    <string name="why_choose_advanced">Choose \"Advanced\" if you know different openings, strategies, and tactics.</string>
 
     <!--ChooseProfile strings-->
     <string name="choose_profile_title">Choose a Profile</string>

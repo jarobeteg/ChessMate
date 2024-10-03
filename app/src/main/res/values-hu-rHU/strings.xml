@@ -46,6 +46,7 @@
     <string name="puzzles_played_title">Rejtvények Száma</string>
     <string name="lessons_taken_title">Leckék Száma</string>
     <string name="level_no_colon">Szint</string>
+    <string name="profile_description">Szerezz értékelési pontokat rejtvények megoldásával, leckék elvégzésével és gép ellen való játékkal! Minél többet játszol és tanulsz, annál több értékelési pontot szerzel, ami lehetővé teszi, hogy szintet lépj, és újabb rejtvényeket és leckéket oldhass meg.</string>
 
     <!--Home Fragment Strings-->
     <string name="play">Játssz</string>
@@ -59,7 +60,7 @@
     <string name="profile_change_error">Váratlan hiba történt profilváltás közben. Kérjük, próbálja meg újra megváltoztatni.</string>
     <string name="profile_delete_error">Váratlan hiba történt a profil törlése közben. Kérjük, próbálja meg újra törölni.</string>
 
-    <!--Question and answer strings for profile creation-->
+    <!--Profile creation strings-->
     <string name="create_profile_title">Profil Létrehozása</string>
     <string name="enter_username">Felhasználónév</string>
     <string name="beginner_level">Kezdő</string>
@@ -71,6 +72,9 @@
     <string name="cancel_button">Mégsem</string>
     <string name="create_profile_button">Profil Létrehozása</string>
     <string name="missing_username">Meg kell adnod a felhasználónevedet!</string>
+    <string name="why_choose_beginner">Válaszd a \"Kezdő\" szintet, ha most ismerkedsz a sakk alapjaival és szabályaival.</string>
+    <string name="why_choose_intermediate">Válaszd a \"Középhaladó\" szintet, ha ismered a szabályokat és néhány alapvető stratégiát.</string>
+    <string name="why_choose_advanced">Válaszd a \"Haladó\" szintet, ha ismersz különböző nyitásokat, stratégiákat és taktikákat.</string>
 
     <!--ChooseProfile strings-->
     <string name="choose_profile_title">Profil Kiválasztása</string>
