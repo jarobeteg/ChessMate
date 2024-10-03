@@ -1,6 +1,7 @@
 package com.example.chessmate.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chessmate.R
+import com.example.chessmate.ui.activity.lessons.OpeningLoaderActivity
 import com.example.chessmate.util.OpeningRepo
 
 class OpeningAdapter(private val openings: List<OpeningRepo>, private var finishedOpenings: List<Int>, private val context: Context) : RecyclerView.Adapter<OpeningAdapter.OpeningViewHolder>() {
@@ -56,7 +58,10 @@ class OpeningAdapter(private val openings: List<OpeningRepo>, private var finish
         }
 
         private fun handleOpeningClick(position: Int) {
-
+            val intent = Intent(context, OpeningLoaderActivity::class.java)
+            intent.putExtra("openingRepos", ArrayList(openings))
+            intent.putExtra("currentIndex", position)
+            context.startActivity(intent)
         }
     }
 }

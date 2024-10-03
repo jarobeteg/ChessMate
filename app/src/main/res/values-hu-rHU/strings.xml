@@ -211,6 +211,9 @@
     <string name="previous_step">Előző lépés</string>
     <string name="next_step">Következő lépés</string>
     <string name="lesson_finished_text">Lecke Vége</string>
+    <string name="previous_opening">Előző megnyitás</string>
+    <string name="next_opening">Következő megnyitás</string>
+    <string name="opening_finished_text">Megnyitás Vége</string>
 
     <!--The pawn lesson strings-->
     <string name="description_1">Csak előre mozog.</string>
@@ -446,7 +449,7 @@
     <string name="description_title_45">Király biztonsága</string>
     <string name="description_114">Sáncolj királyszárnyra a király biztonsága érdekében. Győződj meg róla, hogy a gyalogstruktúrád szilárd, és nincsenek potenciális fenyegetések fehér részéről, mielőtt sáncolnál mellett.</string>
 
-    <string name="kings_indian_game">Királyindiai Védelem</string>
+    <string name="kings_indian_defense">Királyindiai Védelem</string>
     <string name="description_title_46">Kezdd az f6-os huszárral</string>
     <string name="description_115">A Királyindiai Védelem a f6-os huszárral kezdődik, célja a középpont ellenőrzése és a g6 előkészítése, hogy a sötét mezőjű futót g7-re lehessen helyezni.</string>
     <string name="description_title_47">Készítsd a futót g7-re</string>

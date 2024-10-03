@@ -231,6 +231,9 @@
     <string name="previous_step">Previous step</string>
     <string name="next_step">Next step</string>
     <string name="lesson_finished_text">Lesson Finished</string>
+    <string name="previous_opening">Previous opening</string>
+    <string name="next_opening">Next opening</string>
+    <string name="opening_finished_text">Opening Finished</string>
 
     <!--The pawn lesson strings-->
     <string name="description_1">It moves forward only.</string>
@@ -466,7 +469,7 @@
     <string name="description_title_45">Keep your king safe</string>
     <string name="description_114">Plan to castle king-side for safety. Ensure that your pawn structure is solid and that there are no potential threats from white before committing to king-side castling.</string>
 
-    <string name="kings_indian_game">King\'s Indian Defense</string>
+    <string name="kings_indian_defense">King\'s Indian Defense</string>
     <string name="description_title_46">Start with knight f6</string>
     <string name="description_115">The King\'s Indian Defense begins with knight f6, aiming to control the center and prepare for g6 to move your dark-squared bishop to g7.</string>
     <string name="description_title_47">Prepare bishop g7</string>
