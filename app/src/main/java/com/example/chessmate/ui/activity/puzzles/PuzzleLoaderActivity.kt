@@ -714,5 +714,8 @@ class PuzzleLoaderActivity : AbsThemeActivity(), PuzzleSolvedDialogFragment.OnNe
         )
 
         puzzleCompletionRepository.insertPuzzleCompletion(puzzleCompletion)
+
+        val increment = 3
+        userProfileRepository.updateProfileRatingAndLevel(userProfile!!.userID, increment, increment, increment)
     }
 }

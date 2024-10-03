@@ -460,5 +460,14 @@ class SubLessonLoaderActivity : AbsThemeActivity() {
         )
 
         lessonCompletionRepository.insertLessonCompletion(lessonCompletion)
+
+        val increment = when (currentLessonRepo.type) {
+            1 -> 3
+            2 -> 3
+            3 -> 12
+            else -> 0
+        }
+        userProfileRepository.updateProfileRatingAndLevel(userProfile!!.userID, increment, increment, increment)
+
     }
 }

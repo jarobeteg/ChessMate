@@ -162,4 +162,11 @@ class UserProfileRepository(private val context: Context) {
             userProfileDAO.incrementLessonsTaken(userID)
         } catch (_: Exception) {}
     }
+
+    suspend fun updateProfileRatingAndLevel(userID: Long, openingIncrement: Int, midgameIncrement: Int, endgameIncrement: Int) {
+        try {
+            userProfileDAO.updateProfileRating(userID, openingIncrement, midgameIncrement, endgameIncrement)
+            userProfileDAO.updateProfileLevel(userID)
+        } catch (_: Exception) {}
+    }
 }

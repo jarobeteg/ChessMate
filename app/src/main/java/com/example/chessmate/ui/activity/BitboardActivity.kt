@@ -415,7 +415,7 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
 
     override fun showEndGameDialog(endGameResult: String) {
         lifecycleScope.launch {
-            updateDatabase()
+            updateDatabase(endGameResult)
         }
         val endGameDialog = EndGameDialogFragment(endGameResult)
         endGameDialog.show(supportFragmentManager, "EndGameDialog")
@@ -696,9 +696,26 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
         }
     }
 
-    private suspend fun updateDatabase() {
+    private suspend fun updateDatabase(endGameResult: String) {
         if (userProfile == null || userProfile?.level == 0) return
 
         userProfileRepository.incrementGamesPlayed(userProfile!!.userID)
+
+        val increment = when (endGameResult) {
+            "player_checkmated" -> when (GameContext.depth) {
+                in 4..5 -> -3
+                in 6..7 -> -6
+                8 -> -9
+                else -> 0
+            }
+            "bot_checkmated" -> when (GameContext.depth) {
+                in 4..5 -> 2
+                in 6..7 -> 4
+                8 -> 6
+                else -> 0
+            }
+            else -> 0
+        }
+        userProfileRepository.updateProfileRatingAndLevel(userProfile!!.userID, increment, increment, increment)
     }
 }
