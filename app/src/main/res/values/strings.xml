@@ -369,10 +369,10 @@
     <string name="description_72">After developing your bishop, aim to castle on the king-side quickly to secure your king and complete your development.</string>
     <string name="description_title_4">Avoid unnecessary exchanges</string>
     <string name="description_73">In the Ruy Lopez, try to avoid exchanging your bishop on b5 too early. This piece is useful for maintaining pressure on black\'s position.</string>
-    <string name="description_title_5">Watch out for black\'s counter-play</string>
-    <string name="description_74">Watch out for black\'s move a6, which tries to kick your bishop away and possibly prepare b5 to gain queen-side space.</string>
-    <string name="description_title_6">Plan your pawn breaks</string>
-    <string name="description_75">Look for opportunities to play d4 to take control of the center, but be careful of black\'s responses.</string>
+    <string name="description_title_5">Plan your pawn breaks</string>
+    <string name="description_74">Look for opportunities to play d4 to take control of the center, but be careful of black\'s responses.</string>
+    <string name="description_title_6">Watch out for black\'s counter-play</string>
+    <string name="description_75">Watch out for black\'s move a6, which tries to kick your bishop away and possibly prepare b5 to gain queen-side space.</string>
 
     <string name="title_2">Italian Game</string>
     <string name="description_title_7">Control the center early</string>

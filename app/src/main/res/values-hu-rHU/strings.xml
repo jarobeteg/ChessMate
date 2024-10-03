@@ -349,10 +349,10 @@
     <string name="description_72">A futó aktiválása után célod, hogy gyorsan sáncolj királyszárnyra, ezzel biztosítod királyodat és pozíciód fejlődésedet.</string>
     <string name="description_title_4">Kerüld az szükségtelen cseréket</string>
     <string name="description_73">A Ruy Lopezben kerüld el a b5-ös futó korai cseréjét. Ezzel a figurával nyomás alatt tarthatod fekete pozícióját.</string>
-    <string name="description_title_5">Vigyázz az ellentámadásra</string>
-    <string name="description_74">Vigyázz a fekete a6-os lépésére, amely megpróbálja elzavarni futódat. Ez előkészíti a b5-öt, amivel teret nyer a vezérszárnyon.</string>
-    <string name="description_title_6">Tervezd meg gyalogos áttöréseidet</string>
-    <string name="description_75">Keress lehetőségeket a d4 lépésre, ezzel irányítva a középpontot, de légy óvatos fekete válaszaira.</string>
+    <string name="description_title_5">Tervezd meg gyalogos áttöréseidet</string>
+    <string name="description_74">Keress lehetőségeket a d4 lépésre, ezzel irányítva a középpontot, de légy óvatos fekete válaszaira.</string>
+    <string name="description_title_6">Vigyázz az ellentámadásra</string>
+    <string name="description_75">Vigyázz a fekete a6-os lépésére, amely megpróbálja elzavarni futódat. Ez előkészíti a b5-öt, amivel teret nyer a vezérszárnyon.</string>
 
     <string name="title_2">Olasz Játék</string>
     <string name="description_title_7">Irányítsd a középpontot korán</string>
