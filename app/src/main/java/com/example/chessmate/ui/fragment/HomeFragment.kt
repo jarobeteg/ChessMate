@@ -58,17 +58,21 @@ class HomeFragment : Fragment() {
             if (!hasProfiles){
                 createProfileTextView.visibility = View.VISIBLE
                 createProfile.visibility = View.VISIBLE
+            } else {
+                welcomeLayout.visibility = View.GONE
             }
-            if (hasProfiles) welcomeLayout.visibility = View.GONE
         })
 
         //this waits for the CreateProfile activity's result. if the returned value is true it means that a profile has been created
-        val profileCreationLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
-            if (result.resultCode == Activity.RESULT_OK){
+        val profileCreationLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
                 val data: Intent? = result.data
                 val profileCreated = data?.getBooleanExtra("profileCreated", false) ?: false
+
                 if (profileCreated) {
                     viewModel.onProfileCreationInitiated()
+                    sharedPreferences.edit().putBoolean("first_time", false).apply()
+                    welcomeLayout.visibility = View.GONE
                 }
             }
         }

@@ -107,12 +107,4 @@ class MainActivity : AbsThemeActivity(), EndGameDialogFragment.OnHomeButtonClick
         val textView: TextView? = findViewById(R.id.main_toolbar_title)
         textView?.text = newTitle
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("first_time", false)
-        editor.apply()
-    }
 }

@@ -1,6 +1,7 @@
 package com.example.chessmate.ui.activity
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
@@ -60,7 +61,9 @@ class CreateProfile : AbsThemeActivity() {
                 //this will return to the profile fragment with a true result if everything went correctly
                 lifecycleScope.launch {
                     if (createNewUserProfile()) {
-                        setResult(Activity.RESULT_OK)
+                        val resultIntent = Intent()
+                        resultIntent.putExtra("profileCreated", true)
+                        setResult(Activity.RESULT_OK, resultIntent)
                         finish()
                     } else {
                         setResult(Activity.RESULT_CANCELED)
