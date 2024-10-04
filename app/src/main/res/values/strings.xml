@@ -53,6 +53,12 @@
     <string name="level_no_colon">Level</string>
     <string name="profile_description">Earn rating points by solving puzzles, taking lessons, and playing against the bot! The more you play and learn, the more rating points you earn, allowing you to level up and unlock more puzzles and lessons.</string>
 
+    <!--More Fragment Strings-->
+    <string name="chess_com_title" translatable="false">Chess.com</string>
+    <string name="lichess_org_title" translatable="false">Lichess.org</string>
+    <string name="agadmator_title" translatable="false">Agadmator (YouTube)</string>
+    <string name="gotham_chess_title" translatable="false">GothamChess (YouTube)</string>
+
     <!--Home Fragment Strings-->
     <string name="play">Play</string>
     <string name="welcome">Welcome to ChessMate!</string>
