@@ -18,6 +18,7 @@ import com.example.chessmate.R
 import com.example.chessmate.database.UserProfileRepository
 import com.example.chessmate.ui.activity.CreateProfile
 import com.example.chessmate.ui.activity.PlayActivity
+import com.example.chessmate.ui.activity.SettingsActivity
 import com.example.chessmate.ui.viewmodel.HomeViewModel
 import com.example.chessmate.ui.viewmodel.ViewModelFactory
 import com.example.chessmate.util.UserProfileManager
@@ -31,6 +32,8 @@ class HomeFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     private lateinit var userProfileRepository: UserProfileRepository
     private val userProfileManager = UserProfileManager.getInstance()
+    private lateinit var tipsAndTricks: TextView
+    private lateinit var openThemes: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +42,8 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         userProfileRepository = UserProfileRepository(requireContext())
         viewModel = ViewModelProvider(this, ViewModelFactory(userProfileRepository))[HomeViewModel::class.java]
+        tipsAndTricks = view.findViewById(R.id.tips_and_tricks)
+        openThemes = view.findViewById(R.id.open_themes_from_home)
 
         //the welcome to ChessMate text is only shown once. the app keeps a shared preference value of false when the user has already opened the app once
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
@@ -110,6 +115,25 @@ class HomeFragment : Fragment() {
         viewModel.checkProfiles()
 
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        updateTipsAndTricks()
+        openThemes.setOnClickListener { openSettingsActivity() }
+    }
+
+    private fun openSettingsActivity() {
+        val intent = Intent(requireContext(), SettingsActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun updateTipsAndTricks() {
+        val randomNumber = (1..30).random()
+        val resourceName = "tips_and_tricks_$randomNumber"
+        val resourceId = resources.getIdentifier(resourceName, "string", requireContext().packageName)
+        tipsAndTricks.text = if (resourceId != 0) getString(resourceId) else getString(R.string.string_not_found)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

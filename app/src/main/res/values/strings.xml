@@ -57,6 +57,8 @@
     <string name="play">Play</string>
     <string name="welcome">Welcome to ChessMate!</string>
     <string name="create_profile_to_start">Please create a profile. Whether you want to improve your skills or simply enjoy a game, the chessboard is all yours!</string>
+    <string name="check_out_themes">Select from various app, chess and piece themes.</string>
+    <string name="to_settings">To theme settings</string>
 
     <!--UserProfileRepository strings-->
     <string name="failed_to_insert_user">Failed to insert user!</string>
@@ -502,4 +504,36 @@
     <string name="description_124">Focus on developing your knights to f6 and d7, and consider bringing your rooks to the center once the pawns are more established. Good development is key to counter-play.</string>
     <string name="description_title_56">Stay flexible</string>
     <string name="description_125">The Pirc Defense is a hyper-modern opening, allowing you to adapt to white\'s plans. Pay attention to your opponent\'s setup and adjust your strategy accordingly.</string>
+
+    <!--Tips and tricks strings-->
+    <string name="tips_and_tricks_1">Control the center of the board with pawns and pieces.</string>
+    <string name="tips_and_tricks_2">Develop all your pieces before moving the same one repeatedly.</string>
+    <string name="tips_and_tricks_3">Avoid moving your queen too early in the game.</string>
+    <string name="tips_and_tricks_4">Get your knights and bishops out before your rooks and queen.</string>
+    <string name="tips_and_tricks_5">Always think a move ahead—what will your opponent do next?</string>
+    <string name="tips_and_tricks_6">Don\'t forget to castle to keep your king safe.</string>
+    <string name="tips_and_tricks_7">Try not to create weaknesses, such as doubled or isolated pawns.</string>
+    <string name="tips_and_tricks_8">Be mindful of hanging pieces—don\'t leave pieces unprotected.</string>
+    <string name="tips_and_tricks_9">Connect your rooks by getting your pieces off the back rank.</string>
+    <string name="tips_and_tricks_10">Look for forks and other tactical opportunities to win material.</string>
+    <string name="tips_and_tricks_11">Keep your king active in the endgame—it becomes a powerful piece.</string>
+    <string name="tips_and_tricks_12">If in doubt, try to trade pieces when you are ahead in material.</string>
+    <string name="tips_and_tricks_13">Avoid unnecessary pawn moves; they can\'t move backward.</string>
+    <string name="tips_and_tricks_14">Use the pin and skewer tactics to put pressure on your opponent.</string>
+    <string name="tips_and_tricks_15">Develop with a purpose—every move should improve your position.</string>
+    <string name="tips_and_tricks_16">Control open files with your rooks, especially in the endgame.</string>
+    <string name="tips_and_tricks_17">Make sure your pieces are working together rather than isolated.</string>
+    <string name="tips_and_tricks_18">Practice spotting common tactics like pins, forks, and discovered attacks.</string>
+    <string name="tips_and_tricks_19">Develop your pieces toward the center, where they have more control.</string>
+    <string name="tips_and_tricks_20">When attacking, try to bring more pieces into the action.</string>
+    <string name="tips_and_tricks_21">Be careful with your pawn structure; pawns can be both strengths and weaknesses.</string>
+    <string name="tips_and_tricks_22">Use the rule of squares to calculate if a pawn can promote in the endgame.</string>
+    <string name="tips_and_tricks_23">Avoid moving the pawns in front of your castled king without reason.</string>
+    <string name="tips_and_tricks_24">The bishop pair can be very strong in open positions; keep them if possible.</string>
+    <string name="tips_and_tricks_25">Pay attention to weak squares that you or your opponent can control.</string>
+    <string name="tips_and_tricks_26">Look for forcing moves—checks, captures, and threats are often key.</string>
+    <string name="tips_and_tricks_27">Don\'t exchange pieces without a good reason; only trade if it benefits your position.</string>
+    <string name="tips_and_tricks_28">Keep an eye on your opponent\'s threats and counter them effectively.</string>
+    <string name="tips_and_tricks_29">Aim to put your pieces on active squares where they control the most space.</string>
+    <string name="tips_and_tricks_30">Keep learning—study tactics, openings, and endgames to improve.</string>
 </resources>

@@ -52,6 +52,8 @@
     <string name="play">Játssz</string>
     <string name="welcome">Üdvözöljük a ChessMate-ben!</string>
     <string name="create_profile_to_start">Kérjük, hozzon létre egy profilt. Akár fejleszteni akarod a képességeidet, akár csak élvezni a játékot, a sakktábla a tiéd!</string>
+    <string name="check_out_themes">Válassz különféle alkalmazás-, sakk- és figuratémák közül.</string>
+    <string name="to_settings">A témabeállításokhoz</string>
 
     <!--UserProfileRepository strings-->
     <string name="failed_to_insert_user">A felhasználó beillesztése sikertelen!</string>
@@ -482,4 +484,36 @@
     <string name="description_124">Fókuszálj a huszárjaid aktiválására f6-ra és d7-re, és fontold meg a bástyáid középre helyezését, miután a gyalogjaid stabilabban állnak. A jó fejlődés kulcsfontosságú az ellentámadáshoz.</string>
     <string name="description_title_56">Maradj rugalmas</string>
     <string name="description_125">A Pirc Védelem egy hiper-modern megnyitó, amely lehetővé teszi, hogy alkalmazkodj a fehér taktikáihoz. Figyelj az ellenfeled felállására, és ennek megfelelően igazítsd a stratégiádat.</string>
+
+    <!--Tips and tricks strings-->
+    <string name="tips_and_tricks_1">Irányítsd a tábla központját gyalogokkal és egyéb figurákkal.</string>
+    <string name="tips_and_tricks_2">Aktiváld a többi figurádat, mielőtt ugyanazzal újra lépnél.</string>
+    <string name="tips_and_tricks_3">Kerüld a vezér korai mozgatását a játék elején.</string>
+    <string name="tips_and_tricks_4">Hozd ki a huszárokat és a futókat a bástyák és a vezér előtt.</string>
+    <string name="tips_and_tricks_5">Mindig gondolkodj egy lépéssel előre—mit fog az ellenfeled tenni legközelebb?</string>
+    <string name="tips_and_tricks_6">Ne felejts el sáncolni, hogy a királyodat biztonságba helyezd.</string>
+    <string name="tips_and_tricks_7">Próbáld elkerülni a gyenge figurák létrehozását, például a dupla vagy izolált gyalogokat.</string>
+    <string name="tips_and_tricks_8">Figyelj a szabadon hagyott figurákra—ne hagyj védtelenül figurákat.</string>
+    <string name="tips_and_tricks_9">Csatlakoztasd bástyáidat azáltal, hogy a figurákat aktiválod az alapvonalról.</string>
+    <string name="tips_and_tricks_10">Keress kettős támadásokat és más taktikai lehetőségeket, hogy anyagi nyereséghez juss.</string>
+    <string name="tips_and_tricks_11">A végjátékban tartsd aktívan királyodat—ez egy erős figura ilyenkor.</string>
+    <string name="tips_and_tricks_12">Ha bizonytalan vagy, cserélj figurákat, ha előnyben vagy.</string>
+    <string name="tips_and_tricks_13">Kerüld az indokolatlan gyaloglépéseket; a gyalogok nem tudnak visszafelé lépni.</string>
+    <string name="tips_and_tricks_14">Használd a kötést és a szúrást, hogy nyomást gyakorolj az ellenfeled pozíciójára.</string>
+    <string name="tips_and_tricks_15">Fejlessz céllal—minden lépésnek javítania kell pozíciódat.</string>
+    <string name="tips_and_tricks_16">Irányítsd a nyílt vonalakat bástyáiddal, különösen a végjátékban.</string>
+    <string name="tips_and_tricks_17">Gondoskodj arról, hogy a figuráid együttműködjenek. Ne legyen elszigetelt figurád.</string>
+    <string name="tips_and_tricks_18">Gyakorold a taktikák felismerését, mint a kötések, kettős támadások és a felfedett támadások.</string>
+    <string name="tips_and_tricks_19">Fejleszd a figuráidat a központ felé, ahol több területet irányíthatnak.</string>
+    <string name="tips_and_tricks_20">Támadás közben próbálj több figurát bevonni az akcióba.</string>
+    <string name="tips_and_tricks_21">Légy óvatos a gyalogstruktúráddal; a gyalogok lehetnek erősségek és gyengeségek is.</string>
+    <string name="tips_and_tricks_22">Használd a mezők szabályát, hogy kiszámold, hogy egy gyalog elérheti-e a promóciós mezőt a végjátékban.</string>
+    <string name="tips_and_tricks_23">Kerüld el, hogy a sáncolt király előtti gyalogokat mozgasd.</string>
+    <string name="tips_and_tricks_24">A futópár nagyon erős lehet nyitott állásokban; tartsd meg őket, ha lehetséges.</string>
+    <string name="tips_and_tricks_25">Figyelj a gyenge mezőkre, amelyeket te vagy az ellenfeled is irányíthat.</string>
+    <string name="tips_and_tricks_26">Keress kényszerítő lépéseket—sakkok, ütések. Fenyegető támadások gyakran kulcsfontosságúak.</string>
+    <string name="tips_and_tricks_27">Ne cserélj figurákat ok nélkül; csak akkor cserélj, ha az előnyös számodra.</string>
+    <string name="tips_and_tricks_28">Figyelj az ellenfeled fenyegetéseire, és hatékonyan védd ki őket.</string>
+    <string name="tips_and_tricks_29">Törekedj arra, hogy figuráidat aktív mezőkre helyezd, ahol a legtöbb területet irányíthatják.</string>
+    <string name="tips_and_tricks_30">Tanulj folyamatosan—gyakorold a taktikákat, megnyitásokat és a végjátékokat.</string>
 </resources>
