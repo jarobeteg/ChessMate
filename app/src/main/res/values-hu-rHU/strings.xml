@@ -486,6 +486,7 @@
     <string name="description_125">A Pirc Védelem egy hiper-modern megnyitó, amely lehetővé teszi, hogy alkalmazkodj a fehér taktikáihoz. Figyelj az ellenfeled felállására, és ennek megfelelően igazítsd a stratégiádat.</string>
 
     <!--Tips and tricks strings-->
+    <string name="tips_and_tricks_title">Tippek és Trükkök</string>
     <string name="tips_and_tricks_1">Irányítsd a tábla központját gyalogokkal és egyéb figurákkal.</string>
     <string name="tips_and_tricks_2">Aktiváld a többi figurádat, mielőtt ugyanazzal újra lépnél.</string>
     <string name="tips_and_tricks_3">Kerüld a vezér korai mozgatását a játék elején.</string>

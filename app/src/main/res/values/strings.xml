@@ -506,6 +506,7 @@
     <string name="description_125">The Pirc Defense is a hyper-modern opening, allowing you to adapt to white\'s plans. Pay attention to your opponent\'s setup and adjust your strategy accordingly.</string>
 
     <!--Tips and tricks strings-->
+    <string name="tips_and_tricks_title">Tips and Tricks</string>
     <string name="tips_and_tricks_1">Control the center of the board with pawns and pieces.</string>
     <string name="tips_and_tricks_2">Develop all your pieces before moving the same one repeatedly.</string>
     <string name="tips_and_tricks_3">Avoid moving your queen too early in the game.</string>
