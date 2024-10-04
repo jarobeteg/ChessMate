@@ -48,6 +48,9 @@
     <string name="level_no_colon">Szint</string>
     <string name="profile_description">Szerezz értékelési pontokat rejtvények megoldásával, leckék elvégzésével és gép ellen való játékkal! Minél többet játszol és tanulsz, annál több értékelési pontot szerzel, ami lehetővé teszi, hogy szintet lépj, és újabb rejtvényeket és leckéket oldhass meg.</string>
 
+    <!--More Fragment Strings-->
+    <string name="find_me_on_chess_com_title">Keress meg a Chess.com-on</string>
+
     <!--Home Fragment Strings-->
     <string name="play">Játssz</string>
     <string name="welcome">Üdvözöljük a ChessMate-ben!</string>

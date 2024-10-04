@@ -58,6 +58,7 @@
     <string name="lichess_org_title" translatable="false">Lichess.org</string>
     <string name="agadmator_title" translatable="false">Agadmator (YouTube)</string>
     <string name="gotham_chess_title" translatable="false">GothamChess (YouTube)</string>
+    <string name="find_me_on_chess_com_title">Find me on Chess.com</string>Keress meg a Chess.com-on!
 
     <!--Home Fragment Strings-->
     <string name="play">Play</string>

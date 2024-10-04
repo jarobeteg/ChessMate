@@ -43,6 +43,7 @@ class MoreFragment : Fragment() {
             Item(getString(R.string.lichess_org_title), true) { openUrl("https://lichess.org/") },
             Item(getString(R.string.agadmator_title), true) { openUrl("https://www.youtube.com/@agadmator") },
             Item(getString(R.string.gotham_chess_title), true) { openUrl("https://www.youtube.com/@GothamChess") },
+            Item(getString(R.string.find_me_on_chess_com_title), true) { openUrl("https://www.chess.com/member/jarobeteg") }
         )
         val adapter = MoreAdapter(items, requireContext())
         recyclerView.layoutManager = LinearLayoutManager(context)
