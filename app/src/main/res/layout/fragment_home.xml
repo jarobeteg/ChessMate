@@ -5,106 +5,130 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.HomeFragment">
 
-    <LinearLayout
-        android:id="@+id/welcome_layout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/welcome_textview"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/welcome"
-            android:textSize="18sp"
-            android:visibility="gone"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/create_profile_to_start_textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/create_profile_to_start"
-            android:layout_marginTop="8dp"
-            android:textSize="14sp"
-            android:visibility="gone"/>
+            <LinearLayout
+                android:id="@+id/welcome_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/greyTransparent"
+                android:padding="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp">
 
-        <Button
-            android:id="@+id/create_profile_from_home"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/create_profile_button"
-            android:textSize="24sp"
-            android:textColor="@color/white"
-            android:includeFontPadding="false"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/custom_create_new_profile_button"
-            android:visibility="gone" />
+                <TextView
+                    android:id="@+id/welcome_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:text="@string/welcome"
+                    android:visibility="gone"
+                    android:padding="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/custom_rounded_textview"/>
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/create_profile_to_start_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:text="@string/create_profile_to_start"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:visibility="gone"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp">
+                <Button
+                    android:id="@+id/create_profile_from_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/create_profile_button"
+                    android:textSize="24sp"
+                    android:textColor="@color/white"
+                    android:includeFontPadding="false"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_create_new_profile_button"
+                    android:visibility="gone" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:text="@string/tips_and_tricks_title"
-            android:padding="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/custom_rounded_textview"/>
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/tips_and_tricks"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/greyTransparent"
+                android:padding="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?attr/colorAccent"
-            android:layout_marginTop="8dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:text="@string/tips_and_tricks_title"
+                    android:padding="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/custom_rounded_textview"/>
 
-        <TextView
-            android:id="@+id/check_out_themes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:text="@string/check_out_themes"
-            android:layout_marginTop="8dp"/>
+                <TextView
+                    android:id="@+id/tips_and_tricks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp"/>
 
-        <Button
-            android:id="@+id/open_themes_from_home"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/to_settings"
-            android:textSize="24sp"
-            android:textColor="@color/white"
-            android:includeFontPadding="false"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/custom_create_new_profile_button"/>
+            </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?attr/colorAccent"
-            android:layout_marginTop="8dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/greyTransparent"
+                android:padding="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/check_out_themes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:text="@string/check_out_themes"
+                    android:layout_marginBottom="8dp"/>
+
+                <Button
+                    android:id="@+id/open_themes_from_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/to_settings"
+                    android:textSize="24sp"
+                    android:textColor="@color/white"
+                    android:includeFontPadding="false"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_create_new_profile_button"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <Button
         android:id="@+id/playChess"
