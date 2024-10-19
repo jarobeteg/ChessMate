@@ -33,9 +33,7 @@ class ProfileFragment : Fragment() {
     private lateinit var changeProfile: ImageButton
     private lateinit var deleteProfile: ImageButton
     private lateinit var level: TextView
-    private lateinit var openingRating:TextView
-    private lateinit var midgameRating:TextView
-    private lateinit var endgameRating:TextView
+    private lateinit var rating:TextView
     private lateinit var gamesPlayed: TextView
     private lateinit var puzzlesPlayed: TextView
     private lateinit var lessonsTaken: TextView
@@ -62,9 +60,7 @@ class ProfileFragment : Fragment() {
         changeProfile = view.findViewById(R.id.changeProfileButton)
         deleteProfile = view.findViewById(R.id.deleteProfileButton)
         level = view.findViewById(R.id.level)
-        openingRating = view.findViewById(R.id.openingRatingPoint)
-        midgameRating = view.findViewById(R.id.midgameRatingPoint)
-        endgameRating = view.findViewById(R.id.endgameRatingPoint)
+        rating = view.findViewById(R.id.rating)
         gamesPlayed = view.findViewById(R.id.gamesPlayedValue)
         puzzlesPlayed = view.findViewById(R.id.puzzlesPlayedValue)
         lessonsTaken = view.findViewById(R.id.lessonsTakenValue)
@@ -166,9 +162,7 @@ class ProfileFragment : Fragment() {
         userProfile?.let {
             username.text = it.username
             level.text = getLevelText(it.level)
-            openingRating.text = it.openingRating.toString()
-            midgameRating.text = it.midgameRating.toString()
-            endgameRating.text = it.endgameRating.toString()
+            rating.text = getRatingText(it.rating)
             gamesPlayed.text = it.gamesPlayed.toString()
             puzzlesPlayed.text = it.puzzlesPlayed.toString()
             lessonsTaken.text = it.lessonsTaken.toString()
@@ -213,12 +207,18 @@ class ProfileFragment : Fragment() {
     }
 
     private fun getLevelText(level: Int): String {
-        return when (level) {
+        val result = when (level) {
             1 -> getString(R.string.beginner_level)
             2 -> getString(R.string.intermediate_level)
             3 -> getString(R.string.advanced_level)
             else -> getString(R.string.beginner_level)
         }
+
+        return "$result: "
+    }
+
+    private fun getRatingText(rating: Int): String {
+        return "$rating ${getString(R.string.rating_title).lowercase()}"
     }
 
     private fun showProfileDeletionErrorMessage(errorMessage: String){

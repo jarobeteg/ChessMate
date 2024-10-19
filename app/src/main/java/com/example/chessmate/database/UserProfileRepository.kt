@@ -75,9 +75,7 @@ class UserProfileRepository(private val context: Context) {
             } else {
                 val defaultProfile = UserProfile(
                     username = "Guest",
-                    openingRating = 0,
-                    midgameRating = 0,
-                    endgameRating = 0,
+                    rating = 0,
                     level = 0,
                     gamesPlayed = 0,
                     puzzlesPlayed = 0,
@@ -163,9 +161,9 @@ class UserProfileRepository(private val context: Context) {
         } catch (_: Exception) {}
     }
 
-    suspend fun updateProfileRatingAndLevel(userID: Long, openingIncrement: Int, midgameIncrement: Int, endgameIncrement: Int) {
+    suspend fun updateProfileRatingAndLevel(userID: Long, ratingIncrement: Int) {
         try {
-            userProfileDAO.updateProfileRating(userID, openingIncrement, midgameIncrement, endgameIncrement)
+            userProfileDAO.updateProfileRating(userID, ratingIncrement)
             userProfileDAO.updateProfileLevel(userID)
         } catch (_: Exception) {}
     }

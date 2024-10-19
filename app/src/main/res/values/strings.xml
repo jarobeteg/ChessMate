@@ -44,9 +44,7 @@
 
     <!--Profile Fragment Strings-->
     <string name="create_new_profile">Create New Profile</string>
-    <string name="opening_rating_title">Opening</string>
-    <string name="midgame_rating_title">MidGame</string>
-    <string name="endgame_rating_title">EndGame</string>
+    <string name="rating_title">Rating</string>
     <string name="games_played_title">Games Played</string>
     <string name="puzzles_played_title">Puzzles Played</string>
     <string name="lessons_taken_title">Lessons Taken</string>
@@ -80,9 +78,9 @@
     <string name="beginner_level">Beginner</string>
     <string name="intermediate_level">Intermediate</string>
     <string name="advanced_level">Advanced</string>
-    <string name="start_at_beginner">Start at 400 points</string>
-    <string name="start_at_intermediate">Start at 800 points</string>
-    <string name="start_at_advanced">Start at 1200 points</string>
+    <string name="start_at_beginner">Start at 400 rating</string>
+    <string name="start_at_intermediate">Start at 800 rating</string>
+    <string name="start_at_advanced">Start at 1200 rating</string>
     <string name="cancel_button">Cancel</string>
     <string name="create_profile_button">Create Profile</string>
     <string name="missing_username">You have to enter your username!</string>

@@ -74,7 +74,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/choose_profile_opening_rating"
+                android:id="@+id/choose_profile_rating"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
@@ -90,67 +90,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/opening_rating_title"
-                android:textSize="14sp"
-                android:gravity="center"
-                android:layout_marginTop="-40dp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/choose_profile_midgame_rating"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:gravity="center"
-                android:background="@drawable/custom_rounded_textview"
-                android:layout_marginStart="2dp"
-                android:layout_marginEnd="2dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:paddingTop="12dp"
-                android:paddingBottom="32dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/midgame_rating_title"
-                android:textSize="14sp"
-                android:gravity="center"
-                android:layout_marginTop="-40dp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/choose_profile_endgame_rating"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:gravity="center"
-                android:background="@drawable/custom_rounded_textview"
-                android:layout_marginStart="2dp"
-                android:layout_marginEnd="2dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:paddingTop="12dp"
-                android:paddingBottom="32dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/endgame_rating_title"
+                android:text="@string/rating_title"
                 android:textSize="14sp"
                 android:gravity="center"
                 android:layout_marginTop="-40dp"/>

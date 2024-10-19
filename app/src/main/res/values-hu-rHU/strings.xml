@@ -39,9 +39,7 @@
 
     <!--Profile Fragment Strings-->
     <string name="create_new_profile">Új Profil Létrehozása</string>
-    <string name="opening_rating_title">Megnyitás</string>
-    <string name="midgame_rating_title">Középjáték</string>
-    <string name="endgame_rating_title">Végjáték</string>
+    <string name="rating_title">Értékelés</string>
     <string name="games_played_title">Meccsek Száma</string>
     <string name="puzzles_played_title">Rejtvények Száma</string>
     <string name="lessons_taken_title">Leckék Száma</string>
@@ -71,9 +69,9 @@
     <string name="beginner_level">Kezdő</string>
     <string name="intermediate_level">Középhaladó</string>
     <string name="advanced_level">Haladó</string>
-    <string name="start_at_beginner">400 pontról indul</string>
-    <string name="start_at_intermediate">800 pontról indul</string>
-    <string name="start_at_advanced">1200 pontról indul</string>
+    <string name="start_at_beginner">400 értékelésről indul</string>
+    <string name="start_at_intermediate">800 értékelésről indul</string>
+    <string name="start_at_advanced">1200 értékelésről indul</string>
     <string name="cancel_button">Mégsem</string>
     <string name="create_profile_button">Profil Létrehozása</string>
     <string name="missing_username">Meg kell adnod a felhasználónevedet!</string>

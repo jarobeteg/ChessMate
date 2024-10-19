@@ -716,6 +716,6 @@ class BitboardActivity : AbsThemeActivity(), BitboardListener, PromotionDialogFr
             }
             else -> 0
         }
-        userProfileRepository.updateProfileRatingAndLevel(userProfile!!.userID, increment, increment, increment)
+        userProfileRepository.updateProfileRatingAndLevel(userProfile!!.userID, increment)
     }
 }

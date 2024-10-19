@@ -467,7 +467,7 @@ class SubLessonLoaderActivity : AbsThemeActivity() {
             3 -> 12
             else -> 0
         }
-        userProfileRepository.updateProfileRatingAndLevel(userProfile!!.userID, increment, increment, increment)
+        userProfileRepository.updateProfileRatingAndLevel(userProfile!!.userID, increment)
 
     }
 }

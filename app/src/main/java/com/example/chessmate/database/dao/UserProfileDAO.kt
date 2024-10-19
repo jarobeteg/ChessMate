@@ -51,31 +51,21 @@ interface UserProfileDAO {
     @Query("""
     UPDATE userprofile 
     SET 
-        openingRating = CASE 
-            WHEN openingRating + :openingIncrement < 400 THEN 400 
-            WHEN openingRating + :openingIncrement > 1600 THEN 1600 
-            ELSE openingRating + :openingIncrement 
-        END,
-        midgameRating = CASE 
-            WHEN midgameRating + :midgameIncrement < 400 THEN 400 
-            WHEN midgameRating + :midgameIncrement > 1600 THEN 1600 
-            ELSE midgameRating + :midgameIncrement 
-        END,
-        endgameRating = CASE 
-            WHEN endgameRating + :endgameIncrement < 400 THEN 400 
-            WHEN endgameRating + :endgameIncrement > 1600 THEN 1600 
-            ELSE endgameRating + :endgameIncrement 
+        rating = CASE 
+            WHEN rating + :ratingIncrement < 400 THEN 400 
+            WHEN rating + :ratingIncrement > 1600 THEN 1600 
+            ELSE rating + :ratingIncrement 
         END
     WHERE userID = :userID
     """)
-    suspend fun updateProfileRating(userID: Long, openingIncrement: Int, midgameIncrement: Int, endgameIncrement: Int)
+    suspend fun updateProfileRating(userID: Long, ratingIncrement: Int)
 
     @Query("""
     UPDATE userprofile 
     SET 
         level = CASE
-            WHEN openingRating >= 1200 AND midgameRating >= 1200 AND endgameRating >= 1200 THEN 3
-            WHEN openingRating >= 800 AND midgameRating >= 800 AND endgameRating >= 800 THEN 2
+            WHEN rating >= 1200 THEN 3
+            WHEN rating >= 800 THEN 2
             ELSE 1
         END
     WHERE userID = :userID

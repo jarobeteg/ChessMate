@@ -87,16 +87,12 @@ class CreateProfile : AbsThemeActivity() {
         val userRepo = UserProfileRepository(this)
         val newProfileLevel: Pair<Int, Int> = getNewProfileLevel()
         val profileRating = newProfileLevel.first
-        val openingRating = newProfileLevel.second
-        val midgameRating = newProfileLevel.second
-        val endgameRating = newProfileLevel.second
+        val rating = newProfileLevel.second
 
 
         val resultUserProfile = UserProfile(
             username = username,
-            openingRating = openingRating,
-            midgameRating = midgameRating,
-            endgameRating = endgameRating,
+            rating = rating,
             level = profileRating,
             gamesPlayed = 0,
             puzzlesPlayed = 0,

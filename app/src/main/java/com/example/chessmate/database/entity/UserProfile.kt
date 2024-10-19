@@ -8,9 +8,7 @@ data class UserProfile (
     @PrimaryKey(autoGenerate = true)
     val userID: Long = 0L,
     val username: String,
-    var openingRating: Int,
-    var midgameRating: Int,
-    var endgameRating: Int,
+    var rating: Int,
     var level: Int,
     var gamesPlayed: Int,
     var puzzlesPlayed: Int,
