@@ -52,10 +52,10 @@
                 android:background="@drawable/custom_rounded_textview"
                 android:layout_marginStart="2dp"
                 android:layout_marginEnd="2dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:paddingTop="12dp"
-                android:paddingBottom="32dp"/>
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="24dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                 android:text="@string/level_no_colon"
                 android:textSize="14sp"
                 android:gravity="center"
-                android:layout_marginTop="-40dp"/>
+                android:layout_marginTop="-32dp"/>
 
         </LinearLayout>
 
@@ -82,10 +82,10 @@
                 android:background="@drawable/custom_rounded_textview"
                 android:layout_marginStart="2dp"
                 android:layout_marginEnd="2dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:paddingTop="12dp"
-                android:paddingBottom="32dp"/>
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="24dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -93,7 +93,7 @@
                 android:text="@string/rating_title"
                 android:textSize="14sp"
                 android:gravity="center"
-                android:layout_marginTop="-40dp"/>
+                android:layout_marginTop="-32dp"/>
 
         </LinearLayout>
 
