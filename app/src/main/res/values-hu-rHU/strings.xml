@@ -267,7 +267,7 @@
     <string name="description_20">Védd meg a királyodat azzal, hogy leütöd a támadó figurát.</string>
 
     <!--Checkmate lesson strings-->
-    <string name="description_21">Támadd meg úgy a királyt, hogy ne lehessen megvédeni, ezzel sakk-mattot adva."</string>
+    <string name="description_21">Támadd meg úgy a királyt, hogy ne lehessen megvédeni, ezzel sakkmattot adva."</string>
 
     <!--Castling lesson strings-->
     <string name="description_22">Sáncolhatsz királyszárnyra!</string>
