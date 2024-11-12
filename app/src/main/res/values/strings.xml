@@ -127,6 +127,7 @@
     <string name="FEN" translatable="false">FEN</string>
     <string name="invalid_FEN_string">FEN string format is invalid.</string>
     <string name="valid_FEN_string_illegal_position">FEN string format is valid but represents an illegal position or a checkmated player.</string>
+    <string name="illegal_board_position_in_editor">The position is illegal. The FEN string will not be copied onto the clipboard.</string>
 
     <!--Board Editor strings-->
     <string name="board_editor_title">Board Editor</string>

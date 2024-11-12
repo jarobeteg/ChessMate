@@ -14,9 +14,11 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.RadioGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.chessmate.R
 import com.example.chessmate.util.ChessThemeUtil
+import com.example.chessmate.util.chess.FEN
 import com.example.chessmate.util.chess.Position
 import com.example.chessmate.util.chess.bitboard.BitPiece
 import com.example.chessmate.util.chess.bitboard.BitSquare
@@ -208,9 +210,14 @@ class BoardEditorActivity : AbsThemeActivity() {
 
     private fun copyFEN() {
         val fenString = makeFEN()
-        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText("FEN", fenString)
-        clipboard.setPrimaryClip(clip)
+        val fen = FEN(fenString)
+        if (fen.isValid) {
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("FEN", fenString)
+            clipboard.setPrimaryClip(clip)
+        } else {
+            Toast.makeText(this, getString(R.string.illegal_board_position_in_editor), Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun makeFEN(): String {
