@@ -45,6 +45,10 @@
     <string name="lessons_taken_title">Leckék Száma</string>
     <string name="level_no_colon">Szint</string>
     <string name="profile_description">Szerezz értékelési pontokat rejtvények megoldásával, leckék elvégzésével és gép ellen való játékkal! Minél többet játszol és tanulsz, annál több értékelési pontot szerzel, ami lehetővé teszi, hogy szintet lépj, és újabb rejtvényeket és leckéket oldhass meg.</string>
+    <string name="level_rating_dist_title">Értékelési pontszámeloszlás szintenként: </string>
+    <string name="level_beginner_rating_dist">&#8226; A kezdő szint 400 és 800 pont között</string>
+    <string name="level_intermediate_rating_dist">&#8226; A középhaladó szint 800 és 1200 pont között</string>
+    <string name="level_advanced_rating_dist">&#8226; A haladó szint  1200 és 1600 pont között</string>
 
     <!--More Fragment Strings-->
     <string name="find_me_on_chess_com_title">Keress meg a Chess.com-on</string>

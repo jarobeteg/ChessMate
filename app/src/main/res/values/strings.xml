@@ -50,6 +50,10 @@
     <string name="lessons_taken_title">Lessons Taken</string>
     <string name="level_no_colon">Level</string>
     <string name="profile_description">Earn rating points by solving puzzles, taking lessons, and playing against the bot! The more you play and learn, the more rating points you earn, allowing you to level up and unlock more puzzles and lessons.</string>
+    <string name="level_rating_dist_title">Rating point distribution for each level:</string>
+    <string name="level_beginner_rating_dist">&#8226; Beginner level is between 400 and 800 points</string>
+    <string name="level_intermediate_rating_dist">&#8226; Intermediate level is between 800 and 1200 points</string>
+    <string name="level_advanced_rating_dist">&#8226; Advanced level is between 1200 and 1600 points</string>
 
     <!--More Fragment Strings-->
     <string name="chess_com_title" translatable="false">Chess.com</string>
