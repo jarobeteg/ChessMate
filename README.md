@@ -36,24 +36,15 @@
 - **Gradle Version**: 8.6
 
 ## Screenshots
-<table style="border-collapse: collapse; border: none;">
+<table>
   <tr>
-    <td style="border: none; padding-right: 20px;">
-      <a href="https://imgbb.com/"><img src="https://i.ibb.co/YFvnf1PJ/Picture1.png" alt="Picture1" border="0" width="150"></a>
-    </td>
-    <td style="border: none; padding-right: 20px;">
-      <a href="https://imgbb.com/"><img src="https://i.ibb.co/67YHdFHr/Picture2.png" alt="Picture2" border="0" width="150"></a>
-    </td>
-    <td style="border: none; padding-right: 20px;">
-      <a href="https://imgbb.com/"><img src="https://i.ibb.co/G4Hc0ZzM/Picture3.png" alt="Picture3" border="0" width="150"></a>
-    </td>
-    <td style="border: none; padding-right: 20px;">
-      <a href="https://imgbb.com/"><img src="https://i.ibb.co/MKcR55R/Picture4.png" alt="Picture4" border="0" width="150"></a>
-    </td>
-    <td style="border: none;">
-      <a href="https://imgbb.com/"><img src="https://i.ibb.co/7d5krqLJ/Picture5.png" alt="Picture5" border="0" width="150"></a>
-    </td>
+    <td><a href="https://ibb.co/jP703Qbq"><img src="https://i.ibb.co/YFvnf1PJ/Picture1.png" alt="Picture1" border="0" width="150"></a></td>
+    <td><a href="https://ibb.co/1tZrSTr7"><img src="https://i.ibb.co/67YHdFHr/Picture2.png" alt="Picture2" border="0" width="150"></a></td>
+    <td><a href="https://ibb.co/Zp2WVQqg"><img src="https://i.ibb.co/G4Hc0ZzM/Picture3.png" alt="Picture3" border="0" width="150"></a></td>
+    <td><a href="https://ibb.co/Dm97gg7"><img src="https://i.ibb.co/MKcR55R/Picture4.png" alt="Picture4" border="0" width="150"></a></td>
+    <td><a href="https://ibb.co/bMZbNkDg"><img src="https://i.ibb.co/7d5krqLJ/Picture5.png" alt="Picture5" border="0" width="150"></a></td>
   </tr>
 </table>
+
 
 
